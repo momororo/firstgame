@@ -18,7 +18,7 @@
         
         SKLabelNode *myLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
         
-        myLabel.text = @"ゲーム画面";
+        myLabel.text = @"GAME START";
         myLabel.fontSize = 30;
         myLabel.position = CGPointMake(CGRectGetMidX(self.frame),
                                        CGRectGetMidY(self.frame));
@@ -36,7 +36,7 @@
         ground.physicsBody.categoryBitMask = groundCategory;
         ground.physicsBody.collisionBitMask = 0;
         
-      
+    
         
         [self addChild:ground];
         
@@ -54,10 +54,14 @@
         
         
     }
+    
     return self;
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    
+    //ゲームスタートが押されたらボタンを消去する
+    
     
     SKNode *sprite = [self childNodeWithName:kPlayer];
     sprite.physicsBody.velocity = CGVectorMake(0, 500);
@@ -72,6 +76,31 @@
                        ]
      ];
 
+}
+
+-(void)didSimulatePhysics{
+    
+	//プレイヤーが画面外に落ちた時にゲームオーバーとする
+	[self enumerateChildNodesWithName:kPlayer usingBlock:^(SKNode *node, BOOL *stop) {
+		CGPoint pt = [self convertPoint:node.position toNode:self];
+        CGFloat	h = self.size.height;
+        //画面外か判定
+		if(pt.y < -(h) || pt.y > h){
+			//ゲームオーバー
+            
+            SKLabelNode *endLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+            
+            endLabel.text = @"GAME OVER";
+            endLabel.fontSize = 30;
+            endLabel.position = CGPointMake(CGRectGetMidX(self.frame),
+                                           CGRectGetMidY(self.frame));
+            
+            [self addChild:endLabel];
+        }
+    }];
+        
+
+    
 }
 
 @end
