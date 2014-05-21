@@ -6,9 +6,10 @@
 //  Copyright (c) 2014年 sacrew. All rights reserved.
 //
 
-#import "MyScene.h"
+#import "TitleScene.h"
+#import "GameView.h"
 
-@implementation MyScene
+@implementation TitleScene
 
 -(id)initWithSize:(CGSize)size {    
     if (self = [super initWithSize:size]) {
@@ -18,12 +19,26 @@
         
         SKLabelNode *myLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
         
-        myLabel.text = @"Hello, World!";
-        myLabel.fontSize = 30;
-        myLabel.position = CGPointMake(CGRectGetMidX(self.frame),
-                                       CGRectGetMidY(self.frame));
+        myLabel.text = @"タイトル画面";
+        myLabel.fontSize = 10;
+        myLabel.position = CGPointMake(0,200);
         
         [self addChild:myLabel];
+
+        //点滅アクション
+        SKLabelNode *start = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+        start.fontSize = 20;
+        start.text = @"タップでスタート！";
+        start.position = CGPointMake(CGRectGetMidX(self.frame),CGRectGetMidY(self.frame));
+        [self addChild:start];
+        
+        
+        
+        
+        
+        
+        
+        
     }
     return self;
 }
@@ -31,20 +46,11 @@
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     /* Called when a touch begins */
     
-    for (UITouch *touch in touches) {
-        CGPoint location = [touch locationInNode:self];
-        
-        SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithImageNamed:@"Spaceship"];
-        
-        sprite.position = location;
-        
-        SKAction *action = [SKAction rotateByAngle:M_PI duration:1];
-        
-        [sprite runAction:[SKAction repeatActionForever:action]];
-        
-        [self addChild:sprite];
+    if ([_delegate respondsToSelector:@selector(sceneEscape:)]) {
+        [_delegate sceneEscape:self];
     }
 }
+
 
 -(void)update:(CFTimeInterval)currentTime {
     /* Called before each frame is rendered */

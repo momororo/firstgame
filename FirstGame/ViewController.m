@@ -7,26 +7,20 @@
 //
 
 #import "ViewController.h"
-#import "MyScene.h"
+#import "GameView.h"
 
-@implementation ViewController
+@implementation ViewController{
+    __weak GameView* _gameView;
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    // Configure the view.
-    SKView * skView = (SKView *)self.view;
-    skView.showsFPS = YES;
-    skView.showsNodeCount = YES;
-    
-    // Create and configure the scene.
-    SKScene * scene = [MyScene sceneWithSize:skView.bounds.size];
-    scene.scaleMode = SKSceneScaleModeAspectFill;
-    
+    _gameView = (GameView *)self.view;
     // Present the scene.
-    [skView presentScene:scene];
+
 }
+
 
 - (BOOL)shouldAutorotate
 {
