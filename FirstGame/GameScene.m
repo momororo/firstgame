@@ -149,8 +149,11 @@
             retryLabel.fontSize = 20;
             retryLabel.name = @"kRetryLabel";
             //位置調整がうまくいかず。。。。
-            retryLabel.position = CGPointMake(0.0f,0.0f);
+            retryLabel.position = CGPointMake(CGRectGetMinX(self.frame),
+                                              CGRectGetMinY(self.frame));
+            retryLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeLeft;
             [self addChild:retryLabel];
+            
              
             
             
@@ -161,7 +164,10 @@
             topLabel.fontSize = 20;
             topLabel.name = @"kTopLabel";
             //位置調整がうまくいかず。。。。
-            topLabel.position = CGPointMake(0.0f,1.0f);
+            topLabel.position = CGPointMake(CGRectGetMaxX(self.frame),
+                                            CGRectGetMinY(self.frame));
+            topLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeRight;
+
             [self addChild:topLabel];
              
             
