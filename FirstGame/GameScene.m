@@ -148,6 +148,7 @@
             retryLabel.text = @"RETRY";
             retryLabel.fontSize = 20;
             retryLabel.name = @"kRetryLabel";
+            //位置調整がうまくいかず。。。。
             retryLabel.position = CGPointMake(0.0f,0.0f);
             [self addChild:retryLabel];
              
@@ -159,6 +160,7 @@
             topLabel.text = @"TOP";
             topLabel.fontSize = 20;
             topLabel.name = @"kTopLabel";
+            //位置調整がうまくいかず。。。。
             topLabel.position = CGPointMake(0.0f,1.0f);
             [self addChild:topLabel];
              
