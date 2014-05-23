@@ -9,7 +9,9 @@
 #import "GameScene.h"
 #import "GameView.h"
 
-@implementation GameScene
+@implementation GameScene{
+    BOOL _gameStart;
+}
 
 -(id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
@@ -29,9 +31,9 @@
         
         //地面の設定
         SKSpriteNode *ground = [SKSpriteNode spriteNodeWithColor:[SKColor brownColor]
-                                                            size:CGSizeMake(self.frame.size.width, 25)];
+                                                            size:CGSizeMake(self.frame.size.width, 24)];
         ground.name = kGround;
-        ground.position = CGPointMake(CGRectGetMidX(self.frame),ground.size.height/2);
+        ground.position = CGPointMake(CGRectGetMidX(self.frame)-self.frame.size.width/2,ground.size.height/2);
         
         ground.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(ground.size.width, ground.size.height)];
         ground.physicsBody.affectedByGravity = NO;
@@ -54,7 +56,9 @@
         player.physicsBody.collisionBitMask = groundCategory;
         player.physicsBody.contactTestBitMask = groundCategory;
         
-        
+        //次の地面をランダムで配置する
+        SKAction *nextGround = [SKAction sequence:@[[SKAction performSelector:@selector(nextGround) onTarget:self],[SKAction waitForDuration:1.5 withRange:1.0]]];
+        [self runAction:[SKAction repeatActionForever:nextGround]];
     }
     
     return self;
@@ -70,14 +74,12 @@
     //スタートラベルがノードにあるときだけ入る処理
     if([self childNodeWithName:@"kStartLabel"]){
         if ([startLabel containsPoint:location]) {
+            //スタートボタンがタップされたら、地面が移動する
+            _gameStart = YES;
             SKNode *sprite2 = [self childNodeWithName:kGround];
             [sprite2 runAction:[SKAction repeatActionForever:
-                                [SKAction sequence:@[[SKAction moveToX:-100 duration:1.0],
-                                                 [SKAction moveToX:600 duration:0.0]
-                                                 ]
-                             ]
-                            ]
-             ];
+                                [SKAction sequence:@[[SKAction moveToX:-200 duration:1.0],
+                                                     [SKAction removeFromParent]]]]];
             [startLabel removeFromParent];
             return;
         }
@@ -149,7 +151,7 @@
             retryLabel.fontSize = 20;
             retryLabel.name = @"kRetryLabel";
             //位置調整がうまくいかず。。。。
-            retryLabel.position = CGPointMake(0.0f,0.0f);
+            retryLabel.position = CGPointMake(CGRectGetMidX(self.frame),CGRectGetMidY(self.frame)-20);
             [self addChild:retryLabel];
              
             
@@ -161,7 +163,7 @@
             topLabel.fontSize = 20;
             topLabel.name = @"kTopLabel";
             //位置調整がうまくいかず。。。。
-            topLabel.position = CGPointMake(0.0f,1.0f);
+            topLabel.position = CGPointMake(CGRectGetMinX(self.frame), CGRectGetMinY(self.frame));
             [self addChild:topLabel];
              
             
@@ -172,6 +174,13 @@
         
 
     
+}
+
+-(void)nextGround{
+    if (_gameStart == YES) {
+        SKSpriteNode *nextGround = [SKSpriteNode spriteNodeWithColor:[SKColor brownColor] size:]
+    }
+
 }
 
 @end
