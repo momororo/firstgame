@@ -20,10 +20,6 @@
     return scene;
 }
 
-+(ResultScene *)resultScene:(CGSize)size{
-    ResultScene *scene = [[ResultScene alloc]initWithSize:size];
-    return scene;
-}
 
 //シーンの変更
 +(void)sceneCange:(SKView *)view

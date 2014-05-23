@@ -10,13 +10,11 @@
 #import <SpriteKit/SpriteKit.h>
 #import "TitleScene.h"
 #import "GameScene.h"
-#import "ResultScene.h"
 
 @interface SceneManager : NSObject
 
 +(TitleScene *)titleScene:(CGSize)size;
 +(GameScene *)gameScene:(CGSize)size;
-+(ResultScene *)resultScene:(CGSize)size;
 
 +(void)sceneCange:(SKView *)view New:(SKScene *)newScene Duration:(NSTimeInterval)sec;
 

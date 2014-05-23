@@ -46,12 +46,6 @@
 }
 
 //結果
--(void)switchingResultScene{
-    ResultScene *scene = [SceneManager resultScene:self.bounds.size];
-    scene.delegate = self;
-    scene.scaleMode = SKSceneScaleModeAspectFill;
-    [SceneManager sceneCange:self New:scene Duration:0.5];
-}
 
 #pragma mark - sceneEscapeProtocol
 
