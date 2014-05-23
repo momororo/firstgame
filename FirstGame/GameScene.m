@@ -66,6 +66,7 @@
     UITouch *touch = [touches anyObject];
     CGPoint location = [touch locationInNode:self];
     
+    //スタートラベルがある時だけ入るように変更
     if([self childNodeWithName:@"kStartLabel"]){
         if ([startLabel containsPoint:location]) {
             SKNode *sprite2 = [self childNodeWithName:kGround];
@@ -77,7 +78,9 @@
                             ]
              ];
             [startLabel removeFromParent];
+            return;
         }
+        return;
     }
     
     
