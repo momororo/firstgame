@@ -17,6 +17,7 @@
     if (self = [super initWithSize:size]) {
         /* Setup your scene here */
         
+        //メイン画面
         self.backgroundColor = [SKColor greenColor];
         
         startLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
@@ -56,9 +57,6 @@
         player.physicsBody.collisionBitMask = groundCategory;
         player.physicsBody.contactTestBitMask = groundCategory;
         
-        //次の地面をランダムで配置する
-        SKAction *nextGround = [SKAction sequence:@[[SKAction performSelector:@selector(nextGround) onTarget:self],[SKAction waitForDuration:1.5 withRange:1.0]]];
-        [self runAction:[SKAction repeatActionForever:nextGround]];
     }
     
     return self;
@@ -78,9 +76,10 @@
             _gameStart = YES;
             SKNode *sprite2 = [self childNodeWithName:kGround];
             [sprite2 runAction:[SKAction repeatActionForever:
-                                [SKAction sequence:@[[SKAction moveToX:-200 duration:1.0],
+                                [SKAction sequence:@[[SKAction moveToX:-300 duration:1.0],
                                                      [SKAction removeFromParent]]]]];
             [startLabel removeFromParent];
+            [self nextGround];
             return;
         }
         return;
@@ -178,9 +177,41 @@
 
 -(void)nextGround{
     if (_gameStart == YES) {
-        SKSpriteNode *nextGround = [SKSpriteNode spriteNodeWithColor:[SKColor brownColor] size:]
+        SKSpriteNode *nextGround = [SKSpriteNode spriteNodeWithColor:[SKColor brownColor] size:CGSizeMake(100, 24)];
+        nextGround.userData = [@{@"tekito":@(skRand(400,800))}mutableCopy];
+        nextGround.position = CGPointMake(CGRectGetMaxX(self.frame)+nextGround.frame.size.width/2, skRand(100,200));
+        [self addChild:nextGround];
+        nextGround.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(100, 24)];
+        nextGround.physicsBody.affectedByGravity = NO;
+        
+        [nextGround runAction:[SKAction repeatActionForever:
+                            [SKAction sequence:@[[SKAction moveToX:-300 duration:2.0],
+                                                 [SKAction moveToX:self.frame.size.width duration:0.0]]]]];
+        
+        
+        //接触設定
+        //カテゴリー（その他の車）
+        nextGround.physicsBody.categoryBitMask = groundCategory;
+        //接触できるオブジェクト
+        nextGround.physicsBody.collisionBitMask =  0;
+        //ヒットテストするオブジェクト
+        nextGround.physicsBody.contactTestBitMask = 0;
+        
+        
+        
     }
-
 }
+
+static inline CGFloat skRand(CGFloat low,CGFloat high){
+    CGFloat res = skRandf() * ((high - low) + low);
+    return  res;
+}
+
+static inline CGFloat skRandf(){
+    return rand() / (CGFloat) RAND_MAX;
+}
+
+
+
 
 @end
