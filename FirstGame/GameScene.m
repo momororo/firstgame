@@ -9,7 +9,12 @@
 #import "GameScene.h"
 #import "GameView.h"
 
-@implementation GameScene
+@implementation GameScene{
+
+//ジャンプ可否フラグ(YESでジャンプ可能)
+bool jumpFlag;
+
+}
 
 -(id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
@@ -78,7 +83,11 @@
                              ]
                             ]
              ];
+            //スタートラベルを除去する
             [startLabel removeFromParent];
+            //ジャンプ可能フラグをオンに
+            jumpFlag = YES;
+            
             return;
         }
         return;
@@ -106,12 +115,47 @@
 
     
     
-    
-    SKNode *sprite = [self childNodeWithName:kPlayer];
-    sprite.physicsBody.velocity = CGVectorMake(0, 500);
+    if(jumpFlag == YES){
+        
+        //ジャンプ処理
+        SKNode *sprite = [self childNodeWithName:kPlayer];
+        sprite.physicsBody.velocity = CGVectorMake(0, 500);
+        
+        //ジャンプ可能フラグをNOにする
+        jumpFlag = NO;
+    }
 
 }
 
+//オブジェクト同士が衝突した場合に動く処理
+- (void)didBeginContact:(SKPhysicsContact *)contact
+{
+    //地面を格納する変数
+    SKPhysicsBody *ground;
+    //プレイヤーを格納する変数
+    SKPhysicsBody *player;
+    
+    //ビットマスクの処理がちょっと微妙、、、、
+	//カテゴリビットマスクからオブジェクトを判定
+    if(contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask){
+        ground = contact.bodyA;
+        player = contact.bodyB;
+    }else{
+        ground = contact.bodyB;
+        player = contact.bodyB;
+    }
+    
+
+    //ground、playerのy座標を取得する処理を行う
+    /*イメージ
+     if(プレイヤー位置のy座標-(プレイヤーのコンテンツ領域のy座標/2) > 地面位置のy座標+(地面のコンテンツ領域のy座標/2)){
+        ジャンプ可能フラグをオンにする
+     }
+    */
+    
+}
+
+//1フレーム毎に動作するメソッド
 -(void)didSimulatePhysics{
     
 	//プレイヤーが画面外に落ちた時にゲームオーバーとする
