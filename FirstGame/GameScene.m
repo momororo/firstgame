@@ -148,9 +148,7 @@
             retryLabel.text = @"RETRY";
             retryLabel.fontSize = 20;
             retryLabel.name = @"kRetryLabel";
-            retryLabel.verticalAlignmentMode = SKLabelVerticalAlignmentModeBottom;
-            retryLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeLeft;
-            
+            retryLabel.position = CGPointMake(0.0f,0.0f);
             [self addChild:retryLabel];
              
             
@@ -161,9 +159,7 @@
             topLabel.text = @"TOP";
             topLabel.fontSize = 20;
             topLabel.name = @"kTopLabel";
-            topLabel.verticalAlignmentMode = SKLabelVerticalAlignmentModeBaseline;
-            topLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeLeft;
-            
+            topLabel.position = CGPointMake(0.0f,1.0f);
             [self addChild:topLabel];
              
             
