@@ -60,9 +60,7 @@
     if ([scene isKindOfClass:[TitleScene class]]) {
         [self switchingGameScene];
     }else if ([scene isKindOfClass:[GameScene class]]){
-        [self switchingResultScene];
-    }else if ([scene isKindOfClass:[ResultScene class]]){
-        [self switchingTitleScene];
+        [self switchingGameScene];
     }
 }
 

@@ -7,6 +7,7 @@
 //
 
 #import "GameScene.h"
+#import "GameView.h"
 
 @implementation GameScene
 
@@ -121,12 +122,13 @@
             
             //地面のスクロールをストップ
             SKNode *sprite = [self childNodeWithName:kGround];
-            //親ノードから削除
-            [sprite removeFromParent];
             //アクションを削除
             [sprite removeAllActions];
-            //親ノードに追加
-            [self addChild:sprite];
+            
+            //結果画面へ飛ぶ
+            if ([_delegate respondsToSelector:@selector(sceneEscape:)]) {
+                [_delegate sceneEscape:self];
+            }
             
             
         }
