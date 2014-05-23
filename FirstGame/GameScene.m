@@ -16,14 +16,14 @@
         
         self.backgroundColor = [SKColor greenColor];
         
-        SKLabelNode *myLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+        startLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
         
-        myLabel.text = @"GAME START";
-        myLabel.fontSize = 30;
-        myLabel.position = CGPointMake(CGRectGetMidX(self.frame),
+        startLabel.text = @"GAME START";
+        startLabel.fontSize = 30;
+        startLabel.position = CGPointMake(CGRectGetMidX(self.frame),
                                        CGRectGetMidY(self.frame));
         
-        [self addChild:myLabel];
+        [self addChild:startLabel];
         
         //地面の設定
         SKSpriteNode *ground = [SKSpriteNode spriteNodeWithColor:[SKColor brownColor]
@@ -62,19 +62,30 @@
     
     //ゲームスタートが押されたらボタンを消去する
     
+    UITouch *touch = [touches anyObject];
+    CGPoint location = [touch locationInNode:self];
+    
+    if ([startLabel containsPoint:location]) {
+        SKNode *sprite2 = [self childNodeWithName:kGround];
+        [sprite2 runAction:[SKAction repeatActionForever:
+                            [SKAction sequence:@[[SKAction moveToX:-100 duration:1.0],
+                                                 [SKAction moveToX:600 duration:0.0]
+                                                 ]
+                             ]
+                            ]
+         ];
+        [startLabel removeFromParent];
+    }
+    
     
     SKNode *sprite = [self childNodeWithName:kPlayer];
     sprite.physicsBody.velocity = CGVectorMake(0, 500);
     
     
-    SKNode *sprite2 = [self childNodeWithName:kGround];
-    [sprite2 runAction:[SKAction repeatActionForever:
-                        [SKAction sequence:@[[SKAction moveToX:-100 duration:1.0],
-                                            [SKAction moveToX:600 duration:0.0]
-                                            ]
-                        ]
-                       ]
-     ];
+    
+                                            
+                        
+            
 
 }
 
