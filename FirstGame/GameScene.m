@@ -20,6 +20,7 @@
         
         startLabel.text = @"GAME START";
         startLabel.fontSize = 30;
+        startLabel.name = @"kStartLabel";
         startLabel.position = CGPointMake(CGRectGetMidX(self.frame),
                                        CGRectGetMidY(self.frame));
         
@@ -65,16 +66,18 @@
     UITouch *touch = [touches anyObject];
     CGPoint location = [touch locationInNode:self];
     
-    if ([startLabel containsPoint:location]) {
-        SKNode *sprite2 = [self childNodeWithName:kGround];
-        [sprite2 runAction:[SKAction repeatActionForever:
-                            [SKAction sequence:@[[SKAction moveToX:-100 duration:1.0],
+    if([self childNodeWithName:@"kStartLabel"]){
+        if ([startLabel containsPoint:location]) {
+            SKNode *sprite2 = [self childNodeWithName:kGround];
+            [sprite2 runAction:[SKAction repeatActionForever:
+                                [SKAction sequence:@[[SKAction moveToX:-100 duration:1.0],
                                                  [SKAction moveToX:600 duration:0.0]
                                                  ]
                              ]
                             ]
-         ];
-        [startLabel removeFromParent];
+             ];
+            [startLabel removeFromParent];
+        }
     }
     
     
