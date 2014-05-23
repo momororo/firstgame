@@ -13,7 +13,6 @@
 -(void)setUpGameView;
 -(void)switchingTitleScene;
 -(void)switchingGameScene;
--(void)switchingResultScene;
 
 @end
 
