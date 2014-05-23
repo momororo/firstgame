@@ -50,11 +50,19 @@
 #pragma mark - sceneEscapeProtocol
 
 //デリゲートメソッド
--(void)sceneEscape:(SKScene *)scene{
+-(void)sceneEscape:(SKScene *)scene identifier:(NSString *)identifier{
     if ([scene isKindOfClass:[TitleScene class]]) {
+
         [self switchingGameScene];
+        
     }else if ([scene isKindOfClass:[GameScene class]]){
-        [self switchingGameScene];
+        if([identifier isEqualToString:@"retry"]){
+            [self switchingGameScene];
+        }
+        if([identifier isEqualToString:@"top"]){
+            [self switchingTitleScene];
+        }
+
     }
 }
 

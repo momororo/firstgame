@@ -18,6 +18,6 @@
 
 @protocol SceneEscapeProtocol <NSObject>
 
--(void)sceneEscape:(SKScene *)scene;
+-(void)sceneEscape:(SKScene *)scene identifier:(NSString *)identifier;
 
 @end

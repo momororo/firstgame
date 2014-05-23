@@ -67,7 +67,7 @@
     UITouch *touch = [touches anyObject];
     CGPoint location = [touch locationInNode:self];
     
-    //スタートラベルがある時だけ入るように変更
+    //スタートラベルがノードにあるときだけ入る処理
     if([self childNodeWithName:@"kStartLabel"]){
         if ([startLabel containsPoint:location]) {
             SKNode *sprite2 = [self childNodeWithName:kGround];
@@ -84,15 +84,31 @@
         return;
     }
     
+    //GameOverラベルがノードにあるときだけ入る処理
+    if([self childNodeWithName:@"kGameOver"]){
+        
+        //
+            if ([[self childNodeWithName:@"kRetryLabel"] containsPoint:location]) {
+                //ゲームシーン画面に飛ぶ
+                if ([_delegate respondsToSelector:@selector(sceneEscape:identifier:)]) {
+                    [_delegate sceneEscape:self identifier:@"retry"];
+                }
+            }
+           
+           if ([[self childNodeWithName:@"kTopLabel"] containsPoint:location]) {
+               //ゲームシーン画面に飛ぶ
+               if ([_delegate respondsToSelector:@selector(sceneEscape:identifier:)]) {
+                [_delegate sceneEscape:self identifier:@"top"];
+               }
+           }
+        return;
+    }
+
+    
+    
     
     SKNode *sprite = [self childNodeWithName:kPlayer];
     sprite.physicsBody.velocity = CGVectorMake(0, 500);
-    
-    
-    
-                                            
-                        
-            
 
 }
 
@@ -110,6 +126,7 @@
             
             endLabel.text = @"GAME OVER";
             endLabel.fontSize = 30;
+            endLabel.name = @"kGameOver";
             endLabel.position = CGPointMake(CGRectGetMidX(self.frame),
                                            CGRectGetMidY(self.frame));
             
@@ -125,11 +142,32 @@
             //アクションを削除
             [sprite removeAllActions];
             
-            //結果画面へ飛ぶ
-            if ([_delegate respondsToSelector:@selector(sceneEscape:)]) {
-                [_delegate sceneEscape:self];
-            }
             
+            //リトライボタンの追加
+            SKLabelNode *retryLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+            retryLabel.text = @"RETRY";
+            retryLabel.fontSize = 20;
+            retryLabel.name = @"kRetryLabel";
+            retryLabel.verticalAlignmentMode = SKLabelVerticalAlignmentModeBottom;
+            retryLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeLeft;
+            
+            [self addChild:retryLabel];
+             
+            
+            
+            //トップ画面の追加
+            SKLabelNode *topLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+            
+            topLabel.text = @"TOP";
+            topLabel.fontSize = 20;
+            topLabel.name = @"kTopLabel";
+            topLabel.verticalAlignmentMode = SKLabelVerticalAlignmentModeBaseline;
+            topLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeLeft;
+            
+            [self addChild:topLabel];
+             
+            
+
             
         }
     }];

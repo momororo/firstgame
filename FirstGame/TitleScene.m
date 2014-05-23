@@ -46,8 +46,8 @@
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     /* Called when a touch begins */
     
-    if ([_delegate respondsToSelector:@selector(sceneEscape:)]) {
-        [_delegate sceneEscape:self];
+    if ([_delegate respondsToSelector:@selector(sceneEscape:identifier:)]) {
+        [_delegate sceneEscape:self identifier:nil];
     }
 }
 
