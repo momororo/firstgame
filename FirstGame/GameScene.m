@@ -112,7 +112,23 @@
             endLabel.position = CGPointMake(CGRectGetMidX(self.frame),
                                            CGRectGetMidY(self.frame));
             
+            //ラベル追加
             [self addChild:endLabel];
+            
+            //キャラクターの削除
+            [node removeFromParent];
+            
+            
+            //地面のスクロールをストップ
+            SKNode *sprite = [self childNodeWithName:kGround];
+            //親ノードから削除
+            [sprite removeFromParent];
+            //アクションを削除
+            [sprite removeAllActions];
+            //親ノードに追加
+            [self addChild:sprite];
+            
+            
         }
     }];
         
