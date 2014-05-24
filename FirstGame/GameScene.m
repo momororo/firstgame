@@ -59,7 +59,7 @@
         
         //いけるかな？
         SKAction *makeGround = [SKAction sequence: @[[SKAction performSelector:@selector(nextGround) onTarget:self],
-                                                      [SKAction waitForDuration:1.5 withRange:1.4]]];
+                                                      [SKAction waitForDuration:5 withRange:1]]];
         [self runAction: [SKAction repeatActionForever:makeGround]];
         
     }
@@ -114,7 +114,7 @@
     
     
     SKNode *sprite = [self childNodeWithName:kPlayer];
-    sprite.physicsBody.velocity = CGVectorMake(0, 700);
+    sprite.physicsBody.velocity = CGVectorMake(0, 500);
 
 }
 
@@ -180,6 +180,7 @@
     
 }
 
+//地面を次々に呼ぶ
 -(void)nextGround{
     if (_gameStart == YES) {
         SKSpriteNode *nextGround = [SKSpriteNode spriteNodeWithColor:[SKColor brownColor] size:CGSizeMake(100, 24)];
@@ -191,10 +192,10 @@
         
         [nextGround runAction:[SKAction repeatActionForever:
                             [SKAction sequence:@[[SKAction moveToX:-300 duration:2.0],
-                                                 [SKAction moveToX:self.frame.size.width duration:0.0]]]]];
+                                                 [SKAction moveToX:(self.frame.size.width + nextGround.size.width/2) duration:0.0]]]]];
 
         //接触設定
-        //カテゴリー（その他の車）
+        //カテゴリー
         nextGround.physicsBody.categoryBitMask = groundCategory;
         //接触できるオブジェクト
         nextGround.physicsBody.collisionBitMask =  0;
