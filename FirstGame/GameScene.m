@@ -46,8 +46,8 @@
         [self addChild:ground];
         
         //プレイキャラの設定
-        SKSpriteNode *player = [SKSpriteNode spriteNodeWithColor:[SKColor blueColor]
-                                                            size:CGSizeMake(20, 40)];
+        SKSpriteNode *player = [SKSpriteNode spriteNodeWithImageNamed:@"mario.png"];
+        player.size = CGSizeMake(player.size.width/2, player.size.height/2);
         player.name = kPlayer;
         player.position = CGPointMake(CGRectGetMidX(self.frame)/2, 100 );
         [self addChild:player];
@@ -56,6 +56,11 @@
         player.physicsBody.categoryBitMask = playerCategory;
         player.physicsBody.collisionBitMask = groundCategory;
         player.physicsBody.contactTestBitMask = groundCategory;
+        
+        //いけるかな？
+        SKAction *makeGround = [SKAction sequence: @[[SKAction performSelector:@selector(nextGround) onTarget:self],
+                                                      [SKAction waitForDuration:1.5 withRange:1.4]]];
+        [self runAction: [SKAction repeatActionForever:makeGround]];
         
     }
     
@@ -109,7 +114,7 @@
     
     
     SKNode *sprite = [self childNodeWithName:kPlayer];
-    sprite.physicsBody.velocity = CGVectorMake(0, 500);
+    sprite.physicsBody.velocity = CGVectorMake(0, 700);
 
 }
 
@@ -187,8 +192,7 @@
         [nextGround runAction:[SKAction repeatActionForever:
                             [SKAction sequence:@[[SKAction moveToX:-300 duration:2.0],
                                                  [SKAction moveToX:self.frame.size.width duration:0.0]]]]];
-        
-        
+
         //接触設定
         //カテゴリー（その他の車）
         nextGround.physicsBody.categoryBitMask = groundCategory;
