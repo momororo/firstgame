@@ -10,9 +10,12 @@
 #import "GameView.h"
 
 @implementation GameScene{
+    BOOL _gameStart;
+
 
 //ジャンプ可否フラグ(YESでジャンプ可能)
 bool jumpFlag;
+
 
 }
 
@@ -37,13 +40,13 @@ bool jumpFlag;
         SKSpriteNode *ground = [SKSpriteNode spriteNodeWithColor:[SKColor brownColor]
                                                             size:CGSizeMake(self.frame.size.width, 24)];
         ground.name = kGround;
-        ground.position = CGPointMake(CGRectGetMidX(self.frame)-self.frame.size.width/2,ground.size.height/2);
+        ground.position = CGPointMake(CGRectGetMidX(self.frame)/*-self.frame.size.width/2*/,ground.size.height/2);
         
         ground.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(ground.size.width, ground.size.height)];
         ground.physicsBody.affectedByGravity = NO;
         ground.physicsBody.categoryBitMask = groundCategory;
         ground.physicsBody.collisionBitMask = 0;
-        
+        ground.physicsBody.contactTestBitMask = 0;
     
         
         [self addChild:ground];
@@ -65,6 +68,9 @@ bool jumpFlag;
                                                       [SKAction waitForDuration:5 withRange:1]]];
         [self runAction: [SKAction repeatActionForever:makeGround]];
         
+        //接触デリゲート
+        self.physicsWorld.contactDelegate = self;
+        
     }
     
     return self;
@@ -84,13 +90,8 @@ bool jumpFlag;
             _gameStart = YES;
             SKNode *sprite2 = [self childNodeWithName:kGround];
             [sprite2 runAction:[SKAction repeatActionForever:
-                                [SKAction sequence:@[[SKAction moveToX:-100 duration:1.0],
-                                                 [SKAction moveToX:600 duration:0.0]
-                                                 ]
-                             ]
-                            ]
-             ];
-            //スタートラベルを除去する
+                                [SKAction sequence:@[[SKAction moveToX:-300 duration:2.0],
+                                                     [SKAction removeFromParent]]]]];
             [startLabel removeFromParent];
             //ジャンプ可能フラグをオンに
             jumpFlag = YES;
@@ -142,7 +143,7 @@ bool jumpFlag;
     //プレイヤーを格納する変数
     SKPhysicsBody *player;
     
-    //ビットマスクの処理がちょっと微妙、、、、
+    //ビットマスクの処理がちょっと微妙、、、、(一旦これで妥協、、、)
 	//カテゴリビットマスクからオブジェクトを判定
     if(contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask){
         ground = contact.bodyA;
@@ -151,6 +152,14 @@ bool jumpFlag;
         ground = contact.bodyB;
         player = contact.bodyB;
     }
+    
+    //プレイヤーのy座標-プレイヤーの高さ/2→プレイヤーの足元のy座標
+    //道路のy座標+道路の高さ/2→道路の表面のy座標
+    if((player.node.position.y) - ([player.node calculateAccumulatedFrame].size.height/2) >= (ground.node.position.y) + ([ground.node calculateAccumulatedFrame].size.height/2)){
+           jumpFlag = YES;
+       }
+    
+ //   if((player.node.position.y-))
     
 
     //ground、playerのy座標を取得する処理を行う
