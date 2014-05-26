@@ -20,6 +20,7 @@ bool jumpFlag;
     if (self = [super initWithSize:size]) {
         /* Setup your scene here */
         
+        //メイン画面
         self.backgroundColor = [SKColor greenColor];
         
         startLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
@@ -34,9 +35,9 @@ bool jumpFlag;
         
         //地面の設定
         SKSpriteNode *ground = [SKSpriteNode spriteNodeWithColor:[SKColor brownColor]
-                                                            size:CGSizeMake(self.frame.size.width, 25)];
+                                                            size:CGSizeMake(self.frame.size.width, 24)];
         ground.name = kGround;
-        ground.position = CGPointMake(CGRectGetMidX(self.frame),ground.size.height/2);
+        ground.position = CGPointMake(CGRectGetMidX(self.frame)-self.frame.size.width/2,ground.size.height/2);
         
         ground.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(ground.size.width, ground.size.height)];
         ground.physicsBody.affectedByGravity = NO;
@@ -48,8 +49,8 @@ bool jumpFlag;
         [self addChild:ground];
         
         //プレイキャラの設定
-        SKSpriteNode *player = [SKSpriteNode spriteNodeWithColor:[SKColor blueColor]
-                                                            size:CGSizeMake(20, 40)];
+        SKSpriteNode *player = [SKSpriteNode spriteNodeWithImageNamed:@"mario.png"];
+        player.size = CGSizeMake(player.size.width/2, player.size.height/2);
         player.name = kPlayer;
         player.position = CGPointMake(CGRectGetMidX(self.frame)/2, 100 );
         [self addChild:player];
@@ -59,6 +60,10 @@ bool jumpFlag;
         player.physicsBody.collisionBitMask = groundCategory;
         player.physicsBody.contactTestBitMask = groundCategory;
         
+        //いけるかな？
+        SKAction *makeGround = [SKAction sequence: @[[SKAction performSelector:@selector(nextGround) onTarget:self],
+                                                      [SKAction waitForDuration:5 withRange:1]]];
+        [self runAction: [SKAction repeatActionForever:makeGround]];
         
     }
     
@@ -75,6 +80,8 @@ bool jumpFlag;
     //スタートラベルがノードにあるときだけ入る処理
     if([self childNodeWithName:@"kStartLabel"]){
         if ([startLabel containsPoint:location]) {
+            //スタートボタンがタップされたら、地面が移動する
+            _gameStart = YES;
             SKNode *sprite2 = [self childNodeWithName:kGround];
             [sprite2 runAction:[SKAction repeatActionForever:
                                 [SKAction sequence:@[[SKAction moveToX:-100 duration:1.0],
@@ -223,5 +230,44 @@ bool jumpFlag;
 
     
 }
+
+//地面を次々に呼ぶ
+-(void)nextGround{
+    if (_gameStart == YES) {
+        SKSpriteNode *nextGround = [SKSpriteNode spriteNodeWithColor:[SKColor brownColor] size:CGSizeMake(100, 24)];
+        nextGround.userData = [@{@"tekito":@(skRand(400,800))}mutableCopy];
+        nextGround.position = CGPointMake(CGRectGetMaxX(self.frame)+nextGround.frame.size.width/2, skRand(100,200));
+        [self addChild:nextGround];
+        nextGround.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(100, 24)];
+        nextGround.physicsBody.affectedByGravity = NO;
+        
+        [nextGround runAction:[SKAction repeatActionForever:
+                            [SKAction sequence:@[[SKAction moveToX:-300 duration:2.0],
+                                                 [SKAction moveToX:(self.frame.size.width + nextGround.size.width/2) duration:0.0]]]]];
+
+        //接触設定
+        //カテゴリー
+        nextGround.physicsBody.categoryBitMask = groundCategory;
+        //接触できるオブジェクト
+        nextGround.physicsBody.collisionBitMask =  0;
+        //ヒットテストするオブジェクト
+        nextGround.physicsBody.contactTestBitMask = 0;
+        
+        
+        
+    }
+}
+
+static inline CGFloat skRand(CGFloat low,CGFloat high){
+    CGFloat res = skRandf() * ((high - low) + low);
+    return  res;
+}
+
+static inline CGFloat skRandf(){
+    return rand() / (CGFloat) RAND_MAX;
+}
+
+
+
 
 @end
