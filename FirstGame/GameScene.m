@@ -68,7 +68,7 @@ bool jumpFlag;
         
         //いけるかな？
         SKAction *makeGround = [SKAction sequence: @[[SKAction performSelector:@selector(nextGround) onTarget:self],
-                                                      [SKAction waitForDuration:2 withRange:0.5]]];
+                                                      [SKAction waitForDuration:2 withRange:0.2]]];
         [self runAction: [SKAction repeatActionForever:makeGround]];
         
         //接触デリゲート
@@ -158,7 +158,7 @@ bool jumpFlag;
     
     //プレイヤーのy座標-プレイヤーの高さ/2→プレイヤーの足元のy座標
     //道路のy座標+道路の高さ/2→道路の表面のy座標
-    if((player.node.position.y) - ([player.node calculateAccumulatedFrame].size.height/2) >= (ground.node.position.y) + ([ground.node calculateAccumulatedFrame].size.height/2)){
+    if((player.node.position.y) - ([player.node calculateAccumulatedFrame].size.height/2) + 2 >= (ground.node.position.y) + ([ground.node calculateAccumulatedFrame].size.height/2) - 2){
            jumpFlag = YES;
        }
     
@@ -169,14 +169,26 @@ bool jumpFlag;
 - (void)didEndContact:(SKPhysicsContact *)contact
 {
 
-//キャラクターがバウンドしている間はジャンプフラグをオフにする処理
-    //オブジェクトの何れかがキャラクターか判定
-    if(contact.bodyA.categoryBitMask == playerCategory || contact.bodyB.categoryBitMask == playerCategory){
-        //ジャンプフラグをオフにする
-        jumpFlag = NO;
-        
+    //地面を格納する変数
+    SKPhysicsBody *ground;
+    //プレイヤーを格納する変数
+    SKPhysicsBody *player;
+    
+    //ビットマスクの処理がちょっと微妙、、、、(一旦これで妥協、、、)
+	//カテゴリビットマスクからオブジェクトを判定
+    if(contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask){
+        ground = contact.bodyA;
+        player = contact.bodyB;
+    }else{
+        ground = contact.bodyB;
+        player = contact.bodyA;
     }
-
+    
+    //プレイヤーのy座標-プレイヤーの高さ/2→プレイヤーの足元のy座標
+    //道路のy座標+道路の高さ/2→道路の表面のy座標
+    if((player.node.position.y) - ([player.node calculateAccumulatedFrame].size.height/2) + 2 >= (ground.node.position.y) + ([ground.node calculateAccumulatedFrame].size.height/2) ){
+        jumpFlag = YES;
+    }
     
 }
 
@@ -187,8 +199,9 @@ bool jumpFlag;
 	[self enumerateChildNodesWithName:kPlayer usingBlock:^(SKNode *node, BOOL *stop) {
 		CGPoint pt = [self convertPoint:node.position toNode:self];
         CGFloat	h = self.size.height;
+        CGFloat	w = self.size.width;
         //画面外か判定
-		if(pt.y < -(h) || pt.y > h){
+		if(pt.y < -(h) || pt.x < -(w)){
 			//ゲームオーバー
             
             SKLabelNode *endLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
