@@ -68,7 +68,7 @@ bool jumpFlag;
         
         //いけるかな？
         SKAction *makeGround = [SKAction sequence: @[[SKAction performSelector:@selector(nextGround) onTarget:self],
-                                                      [SKAction waitForDuration:2 withRange:0.2]]];
+                                                      [SKAction waitForDuration:1.0 withRange:0.8]]];
         [self runAction: [SKAction repeatActionForever:makeGround]];
         
         //接触デリゲート
@@ -158,7 +158,7 @@ bool jumpFlag;
     
     //プレイヤーのy座標-プレイヤーの高さ/2→プレイヤーの足元のy座標
     //道路のy座標+道路の高さ/2→道路の表面のy座標
-    if((player.node.position.y) - ([player.node calculateAccumulatedFrame].size.height/2) + 2 >= (ground.node.position.y) + ([ground.node calculateAccumulatedFrame].size.height/2) - 2){
+    if((player.node.position.y) - ([player.node calculateAccumulatedFrame].size.height/2)  >= (ground.node.position.y) + ([ground.node calculateAccumulatedFrame].size.height/2) - 2){
            jumpFlag = YES;
        }
     
@@ -169,25 +169,8 @@ bool jumpFlag;
 - (void)didEndContact:(SKPhysicsContact *)contact
 {
 
-    //地面を格納する変数
-    SKPhysicsBody *ground;
-    //プレイヤーを格納する変数
-    SKPhysicsBody *player;
-    
-    //ビットマスクの処理がちょっと微妙、、、、(一旦これで妥協、、、)
-	//カテゴリビットマスクからオブジェクトを判定
-    if(contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask){
-        ground = contact.bodyA;
-        player = contact.bodyB;
-    }else{
-        ground = contact.bodyB;
-        player = contact.bodyA;
-    }
-    
-    //プレイヤーのy座標-プレイヤーの高さ/2→プレイヤーの足元のy座標
-    //道路のy座標+道路の高さ/2→道路の表面のy座標
-    if((player.node.position.y) - ([player.node calculateAccumulatedFrame].size.height/2) + 2 >= (ground.node.position.y) + ([ground.node calculateAccumulatedFrame].size.height/2) ){
-        jumpFlag = YES;
+    if(contact.bodyA.categoryBitMask == playerCategory ||contact.bodyB.categoryBitMask == playerCategory){
+        jumpFlag = NO;
     }
     
 }
@@ -265,9 +248,9 @@ bool jumpFlag;
 //地面を次々に呼ぶ
 -(void)nextGround{
     if (_gameStart == YES) {
-        SKSpriteNode *nextGround = [SKSpriteNode spriteNodeWithColor:[SKColor brownColor] size:CGSizeMake(400, 24)];
+        SKSpriteNode *nextGround = [SKSpriteNode spriteNodeWithColor:[SKColor brownColor] size:CGSizeMake(self.frame.size.width/2, 24)];
         nextGround.userData = [@{@"tekito":@(skRand(400,800))}mutableCopy];
-        nextGround.position = CGPointMake(CGRectGetMaxX(self.frame)+nextGround.frame.size.width/2, skRand(50,130));
+        nextGround.position = CGPointMake(CGRectGetMaxX(self.frame)+nextGround.frame.size.width/2, skRand(50,100));
         [self addChild:nextGround];
  
         nextGround.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(nextGround.size.width, nextGround.size.height)];
@@ -275,8 +258,8 @@ bool jumpFlag;
         nextGround.physicsBody.affectedByGravity = NO;
 
         [nextGround runAction:[SKAction repeatActionForever:
-                            [SKAction sequence:@[[SKAction moveToX:-300 duration:2.5],
-                                                 [SKAction moveToX:(self.frame.size.width + nextGround.size.width/2) duration:0.0]]]]];
+                            [SKAction sequence:@[[SKAction moveToX: -(nextGround.size.width/2) duration:2.0],
+                                                 [SKAction removeFromParent]]]]];
 
         //接触設定
         //カテゴリー
