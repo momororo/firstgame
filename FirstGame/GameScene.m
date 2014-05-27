@@ -53,13 +53,14 @@
         [self addChild:player];
         player.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:player.size];
         player.physicsBody.allowsRotation = NO;
+        player.physicsBody.restitution = 0.0;
         player.physicsBody.categoryBitMask = playerCategory;
         player.physicsBody.collisionBitMask = groundCategory;
         player.physicsBody.contactTestBitMask = groundCategory;
         
         //いけるかな？
         SKAction *makeGround = [SKAction sequence: @[[SKAction performSelector:@selector(nextGround) onTarget:self],
-                                                      [SKAction waitForDuration:5 withRange:1]]];
+                                                      [SKAction waitForDuration:1.0 withRange:0.8]]];
         [self runAction: [SKAction repeatActionForever:makeGround]];
         
     }
@@ -183,16 +184,17 @@
 //地面を次々に呼ぶ
 -(void)nextGround{
     if (_gameStart == YES) {
-        SKSpriteNode *nextGround = [SKSpriteNode spriteNodeWithColor:[SKColor brownColor] size:CGSizeMake(100, 24)];
+        SKSpriteNode *nextGround = [SKSpriteNode spriteNodeWithColor:[SKColor brownColor] size:CGSizeMake(self.frame.size.width/2, 24)];
         nextGround.userData = [@{@"tekito":@(skRand(400,800))}mutableCopy];
-        nextGround.position = CGPointMake(CGRectGetMaxX(self.frame)+nextGround.frame.size.width/2, skRand(100,200));
+        nextGround.position = CGPointMake(CGRectGetMaxX(self.frame)+nextGround.frame.size.width/2, skRand(50,100));
         [self addChild:nextGround];
-        nextGround.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(100, 24)];
+        nextGround.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(nextGround.size.width, nextGround.size.height)];
         nextGround.physicsBody.affectedByGravity = NO;
+        nextGround.physicsBody.restitution = 0.0;
         
         [nextGround runAction:[SKAction repeatActionForever:
-                            [SKAction sequence:@[[SKAction moveToX:-300 duration:2.0],
-                                                 [SKAction moveToX:(self.frame.size.width + nextGround.size.width/2) duration:0.0]]]]];
+                            [SKAction sequence:@[[SKAction moveToX: -(nextGround.size.width/2) duration:2.0],
+                                                 [SKAction removeFromParent]]]]];
 
         //接触設定
         //カテゴリー
