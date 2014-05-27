@@ -150,7 +150,7 @@ bool jumpFlag;
         player = contact.bodyB;
     }else{
         ground = contact.bodyB;
-        player = contact.bodyB;
+        player = contact.bodyA;
     }
     
     //プレイヤーのy座標-プレイヤーの高さ/2→プレイヤーの足元のy座標
