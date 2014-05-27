@@ -161,6 +161,22 @@ bool jumpFlag;
     
 }
 
+
+//オブジェクト同士が離れた際の処理
+- (void)didEndContact:(SKPhysicsContact *)contact
+{
+
+//キャラクターがバウンドしている間はジャンプフラグをオフにする処理
+    //オブジェクトの何れかがキャラクターか判定
+    if(contact.bodyA.categoryBitMask == playerCategory || contact.bodyB.categoryBitMask == playerCategory){
+        //ジャンプフラグをオフにする
+        jumpFlag = NO;
+        
+    }
+
+    
+}
+
 //1フレーム毎に動作するメソッド
 -(void)didSimulatePhysics{
     
