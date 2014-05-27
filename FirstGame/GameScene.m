@@ -16,11 +16,11 @@
 //ジャンプ可否フラグ(YESでジャンプ可能)
 bool jumpFlag;
 
-
 }
 
 -(id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
+                
         /* Setup your scene here */
         
         //メイン画面
@@ -38,12 +38,13 @@ bool jumpFlag;
         
         //地面の設定
         SKSpriteNode *ground = [SKSpriteNode spriteNodeWithColor:[SKColor brownColor]
-                                                            size:CGSizeMake(self.frame.size.width, 24)];
+                                                            size:CGSizeMake(self.frame.size.width*3, 24)];
         ground.name = kGround;
-        ground.position = CGPointMake(CGRectGetMidX(self.frame)/*-self.frame.size.width/2*/,ground.size.height/2);
+        ground.position = CGPointMake(CGRectGetMidX(self.frame),ground.size.height/2);
         
         ground.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(ground.size.width, ground.size.height)];
         ground.physicsBody.affectedByGravity = NO;
+        ground.physicsBody.restitution = 0;
         ground.physicsBody.categoryBitMask = groundCategory;
         ground.physicsBody.collisionBitMask = 0;
         ground.physicsBody.contactTestBitMask = 0;
@@ -59,13 +60,15 @@ bool jumpFlag;
         [self addChild:player];
         player.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:player.size];
         player.physicsBody.allowsRotation = NO;
+        player.physicsBody.affectedByGravity = YES;
+        player.physicsBody.mass = player.physicsBody.mass * 10;
         player.physicsBody.categoryBitMask = playerCategory;
         player.physicsBody.collisionBitMask = groundCategory;
         player.physicsBody.contactTestBitMask = groundCategory;
         
         //いけるかな？
         SKAction *makeGround = [SKAction sequence: @[[SKAction performSelector:@selector(nextGround) onTarget:self],
-                                                      [SKAction waitForDuration:5 withRange:1]]];
+                                                      [SKAction waitForDuration:2 withRange:0.5]]];
         [self runAction: [SKAction repeatActionForever:makeGround]];
         
         //接触デリゲート
@@ -127,7 +130,7 @@ bool jumpFlag;
         
         //ジャンプ処理
         SKNode *sprite = [self childNodeWithName:kPlayer];
-        sprite.physicsBody.velocity = CGVectorMake(0, 500);
+        sprite.physicsBody.velocity = CGVectorMake(0, 700);
         
         //ジャンプ可能フラグをNOにする
         jumpFlag = NO;
@@ -249,15 +252,17 @@ bool jumpFlag;
 //地面を次々に呼ぶ
 -(void)nextGround{
     if (_gameStart == YES) {
-        SKSpriteNode *nextGround = [SKSpriteNode spriteNodeWithColor:[SKColor brownColor] size:CGSizeMake(100, 24)];
+        SKSpriteNode *nextGround = [SKSpriteNode spriteNodeWithColor:[SKColor brownColor] size:CGSizeMake(400, 24)];
         nextGround.userData = [@{@"tekito":@(skRand(400,800))}mutableCopy];
-        nextGround.position = CGPointMake(CGRectGetMaxX(self.frame)+nextGround.frame.size.width/2, skRand(100,200));
+        nextGround.position = CGPointMake(CGRectGetMaxX(self.frame)+nextGround.frame.size.width/2, skRand(50,130));
         [self addChild:nextGround];
-        nextGround.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(100, 24)];
+ 
+        nextGround.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(nextGround.size.width, nextGround.size.height)];
+        nextGround.physicsBody.restitution = skRandBound();
         nextGround.physicsBody.affectedByGravity = NO;
-        
+
         [nextGround runAction:[SKAction repeatActionForever:
-                            [SKAction sequence:@[[SKAction moveToX:-300 duration:2.0],
+                            [SKAction sequence:@[[SKAction moveToX:-300 duration:2.5],
                                                  [SKAction moveToX:(self.frame.size.width + nextGround.size.width/2) duration:0.0]]]]];
 
         //接触設定
@@ -281,6 +286,16 @@ static inline CGFloat skRand(CGFloat low,CGFloat high){
 static inline CGFloat skRandf(){
     return rand() / (CGFloat) RAND_MAX;
 }
+
+static inline CGFloat skRandBound()
+{
+    
+    CGFloat rand = (CGFloat)arc4random_uniform(101)/100;
+    return rand;
+}
+
+
+
 
 
 
