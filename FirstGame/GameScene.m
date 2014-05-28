@@ -25,7 +25,7 @@ bool jumpFlag;
 //スタートのラベル
 SKLabelNode *startLabel;
 
-//グラウンドID
+//グラウンドID(属性の割り振りに使用するよう)
 int groundID;
     
 //スコアのラベル
@@ -126,6 +126,8 @@ SKLabelNode *scoreLabel;
                                 [SKAction sequence:@[[SKAction moveToX:-300 duration:2.0],
                                                      [SKAction removeFromParent]]]]];
             [startLabel removeFromParent];
+            
+            
             //ジャンプ可能フラグをオンに
             jumpFlag = YES;
             //秒数を記録
@@ -306,7 +308,10 @@ SKLabelNode *scoreLabel;
 
             
         }
+        
     }];
+    
+    
         
 
     
@@ -357,9 +362,11 @@ static inline CGFloat skRand(CGFloat low,CGFloat high){
 }
 */
 
+/*使用していないためコメント化（最終的に消します）
 static inline CGFloat skRandf(){
     return rand() / (CGFloat) RAND_MAX;
 }
+*/
 
 /*
 static inline CGFloat skRandBound()
