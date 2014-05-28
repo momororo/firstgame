@@ -17,7 +17,7 @@ BOOL gameStart;
 //ジャンプ可否フラグ(YESでジャンプ可能)
 bool jumpFlag;
     
-//突っ込むフラグ
+//ジャンプ中突進するフラグ
     BOOL smashFlag;
 //ゲームスタートの時間を記録する変数
     NSDate *startTime;
@@ -166,7 +166,19 @@ SKLabelNode *scoreLabel;
         
         //ジャンプ可能フラグをNOにする
         jumpFlag = NO;
+        //突進可能フラグをYESにする
         smashFlag = YES;
+        return;
+    }
+    
+    if (jumpFlag == NO && smashFlag == YES) {
+        
+        //突進処理
+        SKNode *sprite = [self childNodeWithName:kPlayer];
+
+        sprite.physicsBody.velocity = CGVectorMake(0, -500);
+        smashFlag = NO;
+        return;
     }
     
     
@@ -214,6 +226,7 @@ SKLabelNode *scoreLabel;
     //ここはもう少し甘くしたい、、、、
     if(contact.bodyA.categoryBitMask == playerCategory ||contact.bodyB.categoryBitMask == playerCategory){
         jumpFlag = NO;
+        smashFlag = YES;
     }
     
 }
