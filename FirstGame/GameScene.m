@@ -229,7 +229,7 @@ SKLabelNode *scoreLabel;
     
 //SCOREの更新
     if(gameStart == YES){
-    scoreLabel.text = [NSString stringWithFormat:@"SCORE = %.1fm",(float)[[NSDate date] timeIntervalSinceDate:startTime] * 20];
+    scoreLabel.text = [NSString stringWithFormat:@"SCORE = %.1fm",(float)[[NSDate date] timeIntervalSinceDate:startTime] * 2];
     }
 
     
