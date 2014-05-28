@@ -15,6 +15,9 @@
 
 //ジャンプ可否フラグ(YESでジャンプ可能)
 bool jumpFlag;
+    
+//突っ込むフラグ
+    BOOL smashFlag;
 
 }
 
@@ -40,7 +43,7 @@ bool jumpFlag;
         SKSpriteNode *ground = [SKSpriteNode spriteNodeWithColor:[SKColor brownColor]
                                                             size:CGSizeMake(self.frame.size.width, 24)];
         ground.name = kGround;
-        ground.position = CGPointMake(CGRectGetMidX(self.frame),ground.size.height/2);
+        ground.position = CGPointMake(ground.size.width/2,ground.size.height/2);
         
         ground.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(ground.size.width, ground.size.height)];
         ground.physicsBody.affectedByGravity = NO;
@@ -55,7 +58,7 @@ bool jumpFlag;
         
         //プレイキャラの設定
         SKSpriteNode *player = [SKSpriteNode spriteNodeWithImageNamed:@"mario.png"];
-        player.size = CGSizeMake(player.size.width/2, player.size.height/2);
+        player.size = CGSizeMake(player.size.width/3, player.size.height/3);
         player.name = kPlayer;
         player.position = CGPointMake(CGRectGetMidX(self.frame)/2, 100 );
         [self addChild:player];
@@ -135,6 +138,7 @@ bool jumpFlag;
         
         //ジャンプ可能フラグをNOにする
         jumpFlag = NO;
+        smashFlag = YES;
     }
 
 }
@@ -257,13 +261,21 @@ bool jumpFlag;
 //地面を次々に呼ぶ
 -(void)nextGround{
     if (_gameStart == YES) {
-        SKSpriteNode *nextGround = [SKSpriteNode spriteNodeWithColor:[SKColor brownColor] size:CGSizeMake(self.frame.size.width/2, 24)];
-        nextGround.userData = [@{@"tekito":@(skRand(400,800))}mutableCopy];
+        
+        NSArray *ground = @[@"ground1",@"ground2",@"groud3"];
+        
+        groundID = arc4random()%3;
+        SKSpriteNode *nextGround = [SKSpriteNode spriteNodeWithImageNamed:ground[groundID]];
+        
+       // nextGround.userData = [@{@"tekito":@(skRand(400,800))}mutableCopy];
+        
         nextGround.position = CGPointMake(CGRectGetMaxX(self.frame)+nextGround.frame.size.width/2, skRand(50,100));
+        
         [self addChild:nextGround];
  
         nextGround.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(nextGround.size.width, nextGround.size.height)];
-        nextGround.physicsBody.restitution = skRandBound();
+        nextGround.physicsBody.restitution = 0;
+        //nextGround.physicsBody.restitution = skRandBound();
         nextGround.physicsBody.affectedByGravity = NO;
 
         [nextGround runAction:[SKAction repeatActionForever:
@@ -292,12 +304,14 @@ static inline CGFloat skRandf(){
     return rand() / (CGFloat) RAND_MAX;
 }
 
+/*
 static inline CGFloat skRandBound()
 {
     
     CGFloat rand = (CGFloat)arc4random_uniform(51)/100;
     return rand;
 }
+*/
 
 
 

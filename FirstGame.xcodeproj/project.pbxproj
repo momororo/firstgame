@@ -28,6 +28,9 @@
 		A4A1BAA4192B44D300805339 /* SceneManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A4A1BAA3192B44D300805339 /* SceneManager.m */; };
 		A4A1BAA7192B44E800805339 /* GameView.m in Sources */ = {isa = PBXBuildFile; fileRef = A4A1BAA6192B44E800805339 /* GameView.m */; };
 		A4F633FC1930785B00187BED /* mario.png in Resources */ = {isa = PBXBuildFile; fileRef = A4F633FB1930785B00187BED /* mario.png */; };
+		A4F634061935C42500187BED /* ground2.png in Resources */ = {isa = PBXBuildFile; fileRef = A4F634031935C42500187BED /* ground2.png */; };
+		A4F634071935C42500187BED /* ground1.png in Resources */ = {isa = PBXBuildFile; fileRef = A4F634041935C42500187BED /* ground1.png */; };
+		A4F634081935C42500187BED /* groud3.png in Resources */ = {isa = PBXBuildFile; fileRef = A4F634051935C42500187BED /* groud3.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +74,9 @@
 		A4A1BAA5192B44E800805339 /* GameView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameView.h; sourceTree = "<group>"; };
 		A4A1BAA6192B44E800805339 /* GameView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameView.m; sourceTree = "<group>"; };
 		A4F633FB1930785B00187BED /* mario.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mario.png; sourceTree = "<group>"; };
+		A4F634031935C42500187BED /* ground2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ground2.png; sourceTree = "<group>"; };
+		A4F634041935C42500187BED /* ground1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ground1.png; sourceTree = "<group>"; };
+		A4F634051935C42500187BED /* groud3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = groud3.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +152,9 @@
 				A4A1BA9A192B43E400805339 /* GameScene.m */,
 				A4A1BAA2192B44D300805339 /* SceneManager.h */,
 				A4A1BAA3192B44D300805339 /* SceneManager.m */,
+				A4F634031935C42500187BED /* ground2.png */,
+				A4F634041935C42500187BED /* ground1.png */,
+				A4F634051935C42500187BED /* groud3.png */,
 				A4A1BA7A192B43BB00805339 /* Spaceship.png */,
 				A4A1BA7C192B43BB00805339 /* Images.xcassets */,
 				A4A1BA66192B43BB00805339 /* Supporting Files */,
@@ -259,6 +268,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				A4A1BA6A192B43BB00805339 /* InfoPlist.strings in Resources */,
+				A4F634081935C42500187BED /* groud3.png in Resources */,
+				A4F634071935C42500187BED /* ground1.png in Resources */,
+				A4F634061935C42500187BED /* ground2.png in Resources */,
 				A4A1BA7D192B43BB00805339 /* Images.xcassets in Resources */,
 				A4F633FC1930785B00187BED /* mario.png in Resources */,
 				A4A1BA7B192B43BB00805339 /* Spaceship.png in Resources */,
