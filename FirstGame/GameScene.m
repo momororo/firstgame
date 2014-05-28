@@ -15,6 +15,9 @@
 
 //ジャンプ可否フラグ(YESでジャンプ可能)
 bool jumpFlag;
+    
+//突っ込むフラグ
+    BOOL smashFlag;
 
 }
 
@@ -38,9 +41,9 @@ bool jumpFlag;
         
         //地面の設定
         SKSpriteNode *ground = [SKSpriteNode spriteNodeWithColor:[SKColor brownColor]
-                                                            size:CGSizeMake(self.frame.size.width*3, 24)];
+                                                            size:CGSizeMake(self.frame.size.width, 24)];
         ground.name = kGround;
-        ground.position = CGPointMake(CGRectGetMidX(self.frame),ground.size.height/2);
+        ground.position = CGPointMake(ground.size.width/2,ground.size.height/2);
         
         ground.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(ground.size.width, ground.size.height)];
         ground.physicsBody.affectedByGravity = NO;
@@ -54,7 +57,7 @@ bool jumpFlag;
         
         //プレイキャラの設定
         SKSpriteNode *player = [SKSpriteNode spriteNodeWithImageNamed:@"mario.png"];
-        player.size = CGSizeMake(player.size.width/2, player.size.height/2);
+        player.size = CGSizeMake(player.size.width/3, player.size.height/3);
         player.name = kPlayer;
         player.position = CGPointMake(CGRectGetMidX(self.frame)/2, 100 );
         [self addChild:player];
@@ -62,7 +65,7 @@ bool jumpFlag;
         player.physicsBody.allowsRotation = NO;
         player.physicsBody.affectedByGravity = YES;
         player.physicsBody.restitution = 0;
-       // player.physicsBody.mass = player.physicsBody.mass * 10;
+        //player.physicsBody.mass = 0;
         player.physicsBody.categoryBitMask = playerCategory;
         player.physicsBody.collisionBitMask = groundCategory;
         player.physicsBody.contactTestBitMask = groundCategory;
@@ -135,6 +138,7 @@ bool jumpFlag;
         
         //ジャンプ可能フラグをNOにする
         jumpFlag = NO;
+        smashFlag = YES;
     }
 
 }
