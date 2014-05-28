@@ -320,8 +320,8 @@ SKLabelNode *scoreLabel;
         
        // nextGround.userData = [@{@"tekito":@(skRand(400,800))}mutableCopy];
         
-        nextGround.position = CGPointMake(CGRectGetMaxX(self.frame)+nextGround.frame.size.width/2, skRand(50,100));
-        
+        nextGround.position = CGPointMake(CGRectGetMaxX(self.frame)+nextGround.frame.size.width/2,0); //skRand(50,100));
+        nextGround.size = CGSizeMake(100+arc4random()%300,50+arc4random()%100 );
         [self addChild:nextGround];
  
         nextGround.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(nextGround.size.width, nextGround.size.height)];
