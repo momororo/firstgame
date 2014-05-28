@@ -38,13 +38,14 @@ bool jumpFlag;
         
         //地面の設定
         SKSpriteNode *ground = [SKSpriteNode spriteNodeWithColor:[SKColor brownColor]
-                                                            size:CGSizeMake(self.frame.size.width*3, 24)];
+                                                            size:CGSizeMake(self.frame.size.width, 24)];
         ground.name = kGround;
         ground.position = CGPointMake(CGRectGetMidX(self.frame),ground.size.height/2);
         
         ground.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(ground.size.width, ground.size.height)];
         ground.physicsBody.affectedByGravity = NO;
         ground.physicsBody.restitution = 0;
+
         ground.physicsBody.categoryBitMask = groundCategory;
         ground.physicsBody.collisionBitMask = 0;
         ground.physicsBody.contactTestBitMask = 0;
@@ -61,7 +62,7 @@ bool jumpFlag;
         player.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:player.size];
         player.physicsBody.allowsRotation = NO;
         player.physicsBody.affectedByGravity = YES;
-        player.physicsBody.mass = player.physicsBody.mass * 10;
+//        player.physicsBody.mass = player.physicsBody.mass = ;
         player.physicsBody.categoryBitMask = playerCategory;
         player.physicsBody.collisionBitMask = groundCategory;
         player.physicsBody.contactTestBitMask = groundCategory;
@@ -130,7 +131,7 @@ bool jumpFlag;
         
         //ジャンプ処理
         SKNode *sprite = [self childNodeWithName:kPlayer];
-        sprite.physicsBody.velocity = CGVectorMake(0, 700);
+        sprite.physicsBody.velocity = CGVectorMake(0, 500);
         
         //ジャンプ可能フラグをNOにする
         jumpFlag = NO;
@@ -158,8 +159,15 @@ bool jumpFlag;
     
     //プレイヤーのy座標-プレイヤーの高さ/2→プレイヤーの足元のy座標
     //道路のy座標+道路の高さ/2→道路の表面のy座標
-    if((player.node.position.y) - ([player.node calculateAccumulatedFrame].size.height/2)  >= (ground.node.position.y) + ([ground.node calculateAccumulatedFrame].size.height/2) - 2){
+    if((player.node.position.y) - ([player.node calculateAccumulatedFrame].size.height/2) + 1 >= (ground.node.position.y) + ([ground.node calculateAccumulatedFrame].size.height/2) ){
            jumpFlag = YES;
+        
+/*今後改良したい        //くっつく
+        SKPhysicsJointFixed *joint;
+        joint = [SKPhysicsJointFixed jointWithBodyA:contact.bodyA bodyB:contact.bodyB anchor:CGPointMake(ground.node.position.x,ground.node.position.y)];
+        [self.physicsWorld addJoint:joint];
+ 
+*/
        }
     
 }
@@ -169,6 +177,7 @@ bool jumpFlag;
 - (void)didEndContact:(SKPhysicsContact *)contact
 {
 
+    //ここはもう少し甘くしたい、、、、
     if(contact.bodyA.categoryBitMask == playerCategory ||contact.bodyB.categoryBitMask == playerCategory){
         jumpFlag = NO;
     }
@@ -184,7 +193,7 @@ bool jumpFlag;
         CGFloat	h = self.size.height;
         CGFloat	w = self.size.width;
         //画面外か判定
-		if(pt.y < -(h) || pt.x < -(w)){
+		if(pt.y < -(h) || pt.x < (-(w)/2)){
 			//ゲームオーバー
             
             SKLabelNode *endLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
@@ -286,7 +295,7 @@ static inline CGFloat skRandf(){
 static inline CGFloat skRandBound()
 {
     
-    CGFloat rand = (CGFloat)arc4random_uniform(101)/100;
+    CGFloat rand = (CGFloat)arc4random_uniform(51)/100;
     return rand;
 }
 
