@@ -329,7 +329,7 @@ SKLabelNode *scoreLabel;
         nextGround.physicsBody.restitution = 0;
         //nextGround.physicsBody.restitution = skRandBound();
         nextGround.physicsBody.affectedByGravity = NO;
-        nextGround.physicsBody.friction = 1;
+        nextGround.physicsBody.friction = 0;
 
         [nextGround runAction:[SKAction repeatActionForever:
                             [SKAction sequence:@[[SKAction moveToX: -(nextGround.size.width/2) duration:2.0],
