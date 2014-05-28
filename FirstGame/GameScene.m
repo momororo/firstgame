@@ -30,7 +30,9 @@ int groundID;
     
 //スコアのラベル
 SKLabelNode *scoreLabel;
-
+    
+//フレームのカウント
+int frameCount;
 
 }
 
@@ -97,10 +99,10 @@ SKLabelNode *scoreLabel;
         player.physicsBody.contactTestBitMask = groundCategory;
         
         //いけるかな？
-        SKAction *makeGround = [SKAction sequence: @[[SKAction performSelector:@selector(nextGround) onTarget:self],
+    /*    SKAction *makeGround = [SKAction sequence: @[[SKAction performSelector:@selector(nextGround) onTarget:self],
                                                       [SKAction waitForDuration:1.0 withRange:0.8]]];
         [self runAction: [SKAction repeatActionForever:makeGround]];
-        
+      */
         //接触デリゲート
         self.physicsWorld.contactDelegate = self;
         
@@ -130,7 +132,9 @@ SKLabelNode *scoreLabel;
             jumpFlag = YES;
             //秒数を記録
             startTime = [NSDate date];
-            
+            //フレームカウンターを０にする
+            frameCount = 0;
+        
             return;
         }
         return;
@@ -233,6 +237,8 @@ SKLabelNode *scoreLabel;
 //SCOREの更新
     if(gameStart == YES){
     scoreLabel.text = [NSString stringWithFormat:@"SCORE = %.1fm",(float)[[NSDate date] timeIntervalSinceDate:startTime] * 2];
+        
+        frameCount++;
     }
 
     
@@ -307,8 +313,15 @@ SKLabelNode *scoreLabel;
             
         }
     }];
-        
+    
+  
 
+    if (frameCount == 7) {
+        SKAction *makeGround = [SKAction sequence: @[[SKAction performSelector:@selector(nextGround) onTarget:self]]];
+        [self runAction:makeGround];
+        NSLog(@"%d",frameCount);
+        frameCount = 0;
+    }
     
 }
 
@@ -319,12 +332,13 @@ SKLabelNode *scoreLabel;
         //NSArray *ground = @[@"ground1",@"ground2",@"groud3"];
         
         //groundID = arc4random()%2;
-        SKSpriteNode *nextGround = [SKSpriteNode spriteNodeWithImageNamed:@"ground1"];
+        SKSpriteNode *nextGround = [SKSpriteNode spriteNodeWithImageNamed:@"ground2"];
         
        // nextGround.userData = [@{@"tekito":@(skRand(400,800))}mutableCopy];
         
-        nextGround.position = CGPointMake(CGRectGetMaxX(self.frame)+nextGround.frame.size.width/2,0); //skRand(50,100));
-        nextGround.size = CGSizeMake(100+arc4random()%300,50+arc4random()%100 );
+        //skRand(50,100));
+        nextGround.size = CGSizeMake(100 + arc4random_uniform(301),50+arc4random_uniform(101));
+        nextGround.position = CGPointMake((self.frame.size.width + 200),0);
         [self addChild:nextGround];
  
         nextGround.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(nextGround.size.width, nextGround.size.height)];
@@ -333,9 +347,7 @@ SKLabelNode *scoreLabel;
         nextGround.physicsBody.affectedByGravity = NO;
         nextGround.physicsBody.friction = 0;
 
-        [nextGround runAction:[SKAction repeatActionForever:
-                            [SKAction sequence:@[[SKAction moveToX: -(nextGround.size.width/2) duration:2.0],
-                                                 [SKAction removeFromParent]]]]];
+        [nextGround runAction:[SKAction sequence:@[[SKAction moveToX: -200 duration:2.0],[SKAction removeFromParent]]]];
 
         //接触設定
         //カテゴリー
@@ -356,11 +368,12 @@ static inline CGFloat skRand(CGFloat low,CGFloat high){
     return  res;
 }
 */
+/*
 
 static inline CGFloat skRandf(){
     return rand() / (CGFloat) RAND_MAX;
 }
-
+*/
 /*
 static inline CGFloat skRandBound()
 {
