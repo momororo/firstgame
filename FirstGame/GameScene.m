@@ -61,7 +61,8 @@ bool jumpFlag;
         player.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:player.size];
         player.physicsBody.allowsRotation = NO;
         player.physicsBody.affectedByGravity = YES;
-        player.physicsBody.mass = player.physicsBody.mass * 10;
+        player.physicsBody.restitution = 0;
+       // player.physicsBody.mass = player.physicsBody.mass * 10;
         player.physicsBody.categoryBitMask = playerCategory;
         player.physicsBody.collisionBitMask = groundCategory;
         player.physicsBody.contactTestBitMask = groundCategory;
@@ -248,13 +249,21 @@ bool jumpFlag;
 //地面を次々に呼ぶ
 -(void)nextGround{
     if (_gameStart == YES) {
-        SKSpriteNode *nextGround = [SKSpriteNode spriteNodeWithColor:[SKColor brownColor] size:CGSizeMake(self.frame.size.width/2, 24)];
-        nextGround.userData = [@{@"tekito":@(skRand(400,800))}mutableCopy];
+        
+        NSArray *ground = @[@"ground1",@"ground2",@"groud3"];
+        
+        groundID = arc4random()%3;
+        SKSpriteNode *nextGround = [SKSpriteNode spriteNodeWithImageNamed:ground[groundID]];
+        
+       // nextGround.userData = [@{@"tekito":@(skRand(400,800))}mutableCopy];
+        
         nextGround.position = CGPointMake(CGRectGetMaxX(self.frame)+nextGround.frame.size.width/2, skRand(50,100));
+        
         [self addChild:nextGround];
  
         nextGround.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(nextGround.size.width, nextGround.size.height)];
-        nextGround.physicsBody.restitution = skRandBound();
+        nextGround.physicsBody.restitution = 0;
+        //nextGround.physicsBody.restitution = skRandBound();
         nextGround.physicsBody.affectedByGravity = NO;
 
         [nextGround runAction:[SKAction repeatActionForever:
@@ -283,12 +292,14 @@ static inline CGFloat skRandf(){
     return rand() / (CGFloat) RAND_MAX;
 }
 
+/*
 static inline CGFloat skRandBound()
 {
     
     CGFloat rand = (CGFloat)arc4random_uniform(101)/100;
     return rand;
 }
+*/
 
 
 

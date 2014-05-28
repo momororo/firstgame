@@ -18,6 +18,7 @@ static const uint32_t playerCategory = 0x1 << 1;
 @interface GameScene : SKScene <SKPhysicsContactDelegate>
 {
     SKLabelNode *startLabel;
+    int groundID;
 }
 @property (weak,nonatomic)id delegate;
 @end
