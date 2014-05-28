@@ -16,7 +16,7 @@
 //ジャンプ可否フラグ(YESでジャンプ可能)
 bool jumpFlag;
     
-//突っ込むフラグ
+//ジャンプ中突進するフラグ
     BOOL smashFlag;
 
 }
@@ -134,11 +134,23 @@ bool jumpFlag;
         
         //ジャンプ処理
         SKNode *sprite = [self childNodeWithName:kPlayer];
-        sprite.physicsBody.velocity = CGVectorMake(0, 700);
+        sprite.physicsBody.velocity = CGVectorMake(0, 600);
         
         //ジャンプ可能フラグをNOにする
         jumpFlag = NO;
+        //突進可能フラグをYESにする
         smashFlag = YES;
+        return;
+    }
+    
+    if (jumpFlag == NO && smashFlag == YES) {
+        
+        //突進処理
+        SKNode *sprite = [self childNodeWithName:kPlayer];
+
+        sprite.physicsBody.velocity = CGVectorMake(0, -500);
+        smashFlag = NO;
+        return;
     }
 
 }
@@ -165,6 +177,7 @@ bool jumpFlag;
     //道路のy座標+道路の高さ/2→道路の表面のy座標
     if((player.node.position.y) - ([player.node calculateAccumulatedFrame].size.height/2)  >= (ground.node.position.y) + ([ground.node calculateAccumulatedFrame].size.height/2) - 2){
            jumpFlag = YES;
+            smashFlag = NO;
        }
     
 }
@@ -176,6 +189,7 @@ bool jumpFlag;
 
     if(contact.bodyA.categoryBitMask == playerCategory ||contact.bodyB.categoryBitMask == playerCategory){
         jumpFlag = NO;
+        smashFlag = YES;
     }
     
 }
