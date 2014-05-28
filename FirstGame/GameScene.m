@@ -206,6 +206,7 @@ SKLabelNode *scoreLabel;
     if((player.node.position.y) - ([player.node calculateAccumulatedFrame].size.height/2) + 1 >= (ground.node.position.y) + ([ground.node calculateAccumulatedFrame].size.height/2) ){
            jumpFlag = YES;
             smashFlag = NO;
+        return;
        }
     
 }
@@ -313,10 +314,10 @@ SKLabelNode *scoreLabel;
 -(void)nextGround{
     if (gameStart == YES) {
         
-        NSArray *ground = @[@"ground1",@"ground2",@"groud3"];
+        //NSArray *ground = @[@"ground1",@"ground2",@"groud3"];
         
-        groundID = arc4random()%3;
-        SKSpriteNode *nextGround = [SKSpriteNode spriteNodeWithImageNamed:ground[groundID]];
+        //groundID = arc4random()%2;
+        SKSpriteNode *nextGround = [SKSpriteNode spriteNodeWithImageNamed:@"ground1"];
         
        // nextGround.userData = [@{@"tekito":@(skRand(400,800))}mutableCopy];
         
@@ -328,6 +329,7 @@ SKLabelNode *scoreLabel;
         nextGround.physicsBody.restitution = 0;
         //nextGround.physicsBody.restitution = skRandBound();
         nextGround.physicsBody.affectedByGravity = NO;
+        nextGround.physicsBody.friction = 1;
 
         [nextGround runAction:[SKAction repeatActionForever:
                             [SKAction sequence:@[[SKAction moveToX: -(nextGround.size.width/2) duration:2.0],
