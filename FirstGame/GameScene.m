@@ -203,7 +203,7 @@ SKLabelNode *scoreLabel;
     
     //プレイヤーのy座標-プレイヤーの高さ/2→プレイヤーの足元のy座標
     //道路のy座標+道路の高さ/2→道路の表面のy座標
-    if((player.node.position.y) - ([player.node calculateAccumulatedFrame].size.height/2) + 1 >= (ground.node.position.y) + ([ground.node calculateAccumulatedFrame].size.height/2) ){
+    if((player.node.position.y) - ([player.node calculateAccumulatedFrame].size.height/2) + 2 >= (ground.node.position.y) + ([ground.node calculateAccumulatedFrame].size.height/2) ){
            jumpFlag = YES;
             smashFlag = NO;
         return;
@@ -216,11 +216,13 @@ SKLabelNode *scoreLabel;
 - (void)didEndContact:(SKPhysicsContact *)contact
 {
 
-    //ここはもう少し甘くしたい、、、、
+    //挙動が不安なのでコメント化
+    /*
     if(contact.bodyA.categoryBitMask == playerCategory ||contact.bodyB.categoryBitMask == playerCategory){
         jumpFlag = NO;
         smashFlag = YES;
     }
+    */
     
 }
 
@@ -348,10 +350,12 @@ SKLabelNode *scoreLabel;
     }
 }
 
+/*使用していないためコメント化（最終的に消します）
 static inline CGFloat skRand(CGFloat low,CGFloat high){
     CGFloat res = skRandf() * ((high - low) + low);
     return  res;
 }
+*/
 
 static inline CGFloat skRandf(){
     return rand() / (CGFloat) RAND_MAX;
