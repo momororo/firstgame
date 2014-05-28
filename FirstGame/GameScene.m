@@ -55,7 +55,7 @@ SKLabelNode *scoreLabel;
         scoreLabel.text = @"SCORE = 0";
         scoreLabel.fontSize = 20;
         scoreLabel.name = @"kScoreLabel";
-        scoreLabel.position = CGPointMake(CGRectGetMinX(self.frame), CGRectGetMaxY(self.frame)-30);
+        scoreLabel.position = CGPointMake(CGRectGetMinX(self.frame), CGRectGetMaxY(self.frame)-(CGRectGetMaxY(self.frame)/10));
         scoreLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeLeft;
         scoreLabel.verticalAlignmentMode = SKLabelVerticalAlignmentModeTop;
                                           
@@ -162,7 +162,7 @@ SKLabelNode *scoreLabel;
         
         //ジャンプ処理
         SKNode *sprite = [self childNodeWithName:kPlayer];
-        sprite.physicsBody.velocity = CGVectorMake(0, 500);
+        sprite.physicsBody.velocity = CGVectorMake(0, 600);
         
         //ジャンプ可能フラグをNOにする
         jumpFlag = NO;
@@ -180,8 +180,6 @@ SKLabelNode *scoreLabel;
         smashFlag = NO;
         return;
     }
-    
-    
 
 }
 
@@ -207,13 +205,7 @@ SKLabelNode *scoreLabel;
     //道路のy座標+道路の高さ/2→道路の表面のy座標
     if((player.node.position.y) - ([player.node calculateAccumulatedFrame].size.height/2) + 1 >= (ground.node.position.y) + ([ground.node calculateAccumulatedFrame].size.height/2) ){
            jumpFlag = YES;
-        
-/*今後改良したい        //くっつく
-        SKPhysicsJointFixed *joint;
-        joint = [SKPhysicsJointFixed jointWithBodyA:contact.bodyA bodyB:contact.bodyB anchor:CGPointMake(ground.node.position.x,ground.node.position.y)];
-        [self.physicsWorld addJoint:joint];
- 
-*/
+            smashFlag = NO;
        }
     
 }
