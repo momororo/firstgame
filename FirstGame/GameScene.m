@@ -82,7 +82,7 @@ SKLabelNode *scoreLabel;
         [self addChild:ground];
         
         //プレイキャラの設定
-        SKSpriteNode *player = [SKSpriteNode spriteNodeWithImageNamed:@"mario.png"];
+        SKSpriteNode *player = [SKSpriteNode spriteNodeWithImageNamed:@"pengin.png"];
         player.size = CGSizeMake(player.size.width/3, player.size.height/3);
         player.name = kPlayer;
         player.position = CGPointMake(CGRectGetMidX(self.frame)/2, 100 );
