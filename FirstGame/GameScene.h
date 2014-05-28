@@ -11,14 +11,12 @@
 #define     kPlayer     @"Player"
 #define     kGround     @"Ground"
 
+
 static const uint32_t groundCategory = 0x1 << 0;
 static const uint32_t playerCategory = 0x1 << 1;
 
 
 @interface GameScene : SKScene <SKPhysicsContactDelegate>
-{
-    SKLabelNode *startLabel;
-    int groundID;
-}
+
 @property (weak,nonatomic)id delegate;
 @end

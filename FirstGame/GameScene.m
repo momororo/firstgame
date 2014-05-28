@@ -10,14 +10,27 @@
 #import "GameView.h"
 
 @implementation GameScene{
-    BOOL _gameStart;
-
+    
+//ゲームスタートのフラグ
+BOOL gameStart;
 
 //ジャンプ可否フラグ(YESでジャンプ可能)
 bool jumpFlag;
     
 //突っ込むフラグ
     BOOL smashFlag;
+//ゲームスタートの時間を記録する変数
+    NSDate *startTime;
+    
+//スタートのラベル
+SKLabelNode *startLabel;
+
+//グラウンドID
+int groundID;
+    
+//スコアのラベル
+SKLabelNode *scoreLabel;
+
 
 }
 
@@ -37,6 +50,18 @@ bool jumpFlag;
         startLabel.position = CGPointMake(CGRectGetMidX(self.frame),
                                        CGRectGetMidY(self.frame));
         
+        //スコアラベル
+        scoreLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+        scoreLabel.text = @"SCORE = 0";
+        scoreLabel.fontSize = 20;
+        scoreLabel.name = @"kScoreLabel";
+        scoreLabel.position = CGPointMake(CGRectGetMinX(self.frame), CGRectGetMaxY(self.frame)-30);
+        scoreLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeLeft;
+        scoreLabel.verticalAlignmentMode = SKLabelVerticalAlignmentModeTop;
+                                          
+        
+        
+        [self addChild:scoreLabel];
         [self addChild:startLabel];
         
         //地面の設定
@@ -65,7 +90,8 @@ bool jumpFlag;
         player.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:player.size];
         player.physicsBody.allowsRotation = NO;
         player.physicsBody.affectedByGravity = YES;
-//        player.physicsBody.mass = player.physicsBody.mass = ;
+        player.physicsBody.restitution = 0;
+        //player.physicsBody.mass = 0;
         player.physicsBody.categoryBitMask = playerCategory;
         player.physicsBody.collisionBitMask = groundCategory;
         player.physicsBody.contactTestBitMask = groundCategory;
@@ -94,7 +120,7 @@ bool jumpFlag;
     if([self childNodeWithName:@"kStartLabel"]){
         if ([startLabel containsPoint:location]) {
             //スタートボタンがタップされたら、地面が移動する
-            _gameStart = YES;
+            gameStart = YES;
             SKNode *sprite2 = [self childNodeWithName:kGround];
             [sprite2 runAction:[SKAction repeatActionForever:
                                 [SKAction sequence:@[[SKAction moveToX:-300 duration:2.0],
@@ -102,6 +128,8 @@ bool jumpFlag;
             [startLabel removeFromParent];
             //ジャンプ可能フラグをオンに
             jumpFlag = YES;
+            //秒数を記録
+            startTime = [NSDate date];
             
             return;
         }
@@ -140,6 +168,8 @@ bool jumpFlag;
         jumpFlag = NO;
         smashFlag = YES;
     }
+    
+    
 
 }
 
@@ -191,14 +221,25 @@ bool jumpFlag;
 //1フレーム毎に動作するメソッド
 -(void)didSimulatePhysics{
     
-	//プレイヤーが画面外に落ちた時にゲームオーバーとする
+    
+//SCOREの更新
+    if(gameStart == YES){
+    scoreLabel.text = [NSString stringWithFormat:@"SCORE = %.1fm",(float)[[NSDate date] timeIntervalSinceDate:startTime] * 20];
+    }
+
+    
+//プレイヤーが画面外に落ちた時にゲームオーバーとする処理
 	[self enumerateChildNodesWithName:kPlayer usingBlock:^(SKNode *node, BOOL *stop) {
 		CGPoint pt = [self convertPoint:node.position toNode:self];
         CGFloat	h = self.size.height;
         CGFloat	w = self.size.width;
+       
         //画面外か判定
 		if(pt.y < -(h) || pt.x < (-(w)/2)){
-			//ゲームオーバー
+			//ゲームスタートのフラグをオフにする
+            gameStart = NO;
+            
+            //ゲームオーバー
             
             SKLabelNode *endLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
             
@@ -247,6 +288,11 @@ bool jumpFlag;
             topLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeRight;
 
             [self addChild:topLabel];
+            
+            //SCOREを記録する処理を追記すること
+            
+            return;
+            
              
             
 
@@ -260,7 +306,7 @@ bool jumpFlag;
 
 //地面を次々に呼ぶ
 -(void)nextGround{
-    if (_gameStart == YES) {
+    if (gameStart == YES) {
         
         NSArray *ground = @[@"ground1",@"ground2",@"groud3"];
         
