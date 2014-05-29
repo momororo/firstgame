@@ -30,9 +30,6 @@ int groundID;
     
 //スコアのラベル
 SKLabelNode *scoreLabel;
-    
-//フレームのカウント
-int frameCount;
 
 }
 
@@ -60,11 +57,26 @@ int frameCount;
         scoreLabel.position = CGPointMake(CGRectGetMinX(self.frame), CGRectGetMaxY(self.frame)-(CGRectGetMaxY(self.frame)/10));
         scoreLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeLeft;
         scoreLabel.verticalAlignmentMode = SKLabelVerticalAlignmentModeTop;
-                                          
-        
         
         [self addChild:scoreLabel];
         [self addChild:startLabel];
+        
+        //透明のオブジェクトを生成(センサー)
+        SKSpriteNode *sensor = [SKSpriteNode spriteNodeWithColor:[SKColor clearColor] size:CGSizeMake(1,self.frame.size.height)];
+        
+        sensor.name = @"kSensor";
+        sensor.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
+        sensor.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(sensor.size.width,sensor.size.height )];
+        
+        sensor.physicsBody.affectedByGravity = NO;
+        
+        sensor.physicsBody.categoryBitMask = sensorCategory;
+        sensor.physicsBody.collisionBitMask = 0;
+        sensor.physicsBody.contactTestBitMask = groundCategory;
+        
+
+        
+        [self addChild:sensor];
         
         //地面の設定
         SKSpriteNode *ground = [SKSpriteNode spriteNodeWithColor:[SKColor brownColor]
@@ -134,8 +146,6 @@ int frameCount;
             jumpFlag = YES;
             //秒数を記録
             startTime = [NSDate date];
-            //フレームカウンターを０にする
-            frameCount = 0;
         
             return;
         }
@@ -198,14 +208,17 @@ int frameCount;
     SKPhysicsBody *player;
     
     //ビットマスクの処理がちょっと微妙、、、、(一旦これで妥協、、、)
-	//カテゴリビットマスクからオブジェクトを判定
-    if(contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask){
-        ground = contact.bodyA;
-        player = contact.bodyB;
-    }else{
-        ground = contact.bodyB;
-        player = contact.bodyA;
+	//プレイヤーと地面の衝突を検知
+    if((playerCategory == contact.bodyA.categoryBitMask || playerCategory == contact.bodyB.categoryBitMask) && (groundCategory == contact.bodyA.categoryBitMask || groundCategory == contact.bodyB.categoryBitMask)){
+            if(contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask){
+                ground = contact.bodyA;
+                player = contact.bodyB;
+            }else{
+                ground = contact.bodyB;
+                player = contact.bodyA;
+        }
     }
+    
     
     //プレイヤーのy座標-プレイヤーの高さ/2→プレイヤーの足元のy座標
     //道路のy座標+道路の高さ/2→道路の表面のy座標
@@ -222,13 +235,23 @@ int frameCount;
 - (void)didEndContact:(SKPhysicsContact *)contact
 {
 
-    //挙動が不安なのでコメント化
-    /*
+
     if(contact.bodyA.categoryBitMask == playerCategory ||contact.bodyB.categoryBitMask == playerCategory){
         jumpFlag = NO;
         smashFlag = YES;
     }
-    */
+    
+    
+    //地面とセンサーが離れるのを検知
+    if((sensorCategory == contact.bodyA.categoryBitMask || sensorCategory == contact.bodyB.categoryBitMask) && (groundCategory == contact.bodyA.categoryBitMask || groundCategory == contact.bodyB.categoryBitMask)){
+        
+            SKAction *makeGround = [SKAction sequence: @[[SKAction performSelector:@selector(nextGround) onTarget:self]]];
+            [self runAction:makeGround];
+        
+        
+        
+    }
+
     
 }
 
@@ -239,8 +262,7 @@ int frameCount;
 //SCOREの更新
     if(gameStart == YES){
     scoreLabel.text = [NSString stringWithFormat:@"SCORE = %.1fm",(float)[[NSDate date] timeIntervalSinceDate:startTime] * 2];
-        
-        frameCount++;
+ 
     }
 
     
@@ -320,12 +342,7 @@ int frameCount;
     
         
 
-    if (frameCount == 7) {
-        SKAction *makeGround = [SKAction sequence: @[[SKAction performSelector:@selector(nextGround) onTarget:self]]];
-        [self runAction:makeGround];
-        NSLog(@"%d",frameCount);
-        frameCount = 0;
-    }
+
     
 }
 
@@ -341,8 +358,11 @@ int frameCount;
        // nextGround.userData = [@{@"tekito":@(skRand(400,800))}mutableCopy];
         
         //skRand(50,100));
-        nextGround.size = CGSizeMake(100 + arc4random_uniform(301),50+arc4random_uniform(101));
-        nextGround.position = CGPointMake((self.frame.size.width + 200),0);
+        nextGround.size = CGSizeMake(100 + arc4random_uniform(151),50+arc4random_uniform(101));
+        
+
+        nextGround.position = CGPointMake((self.frame.size.width + (nextGround.size.width/2) ),0);
+        
         [self addChild:nextGround];
  
         nextGround.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(nextGround.size.width, nextGround.size.height)];
@@ -350,8 +370,11 @@ int frameCount;
         //nextGround.physicsBody.restitution = skRandBound();
         nextGround.physicsBody.affectedByGravity = NO;
         nextGround.physicsBody.friction = 0;
+        
+        [nextGround runAction:[SKAction sequence:@[[SKAction moveToX: -200 + (nextGround.size.width/2)duration:2.0],[SKAction removeFromParent]]]];
 
-        [nextGround runAction:[SKAction sequence:@[[SKAction moveToX: -200 duration:2.0],[SKAction removeFromParent]]]];
+        
+        
 
         //接触設定
         //カテゴリー

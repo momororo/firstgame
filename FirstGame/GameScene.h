@@ -14,6 +14,7 @@
 
 static const uint32_t groundCategory = 0x1 << 0;
 static const uint32_t playerCategory = 0x1 << 1;
+static const uint32_t sensorCategory = 0x1 << 2;
 
 
 @interface GameScene : SKScene <SKPhysicsContactDelegate>
