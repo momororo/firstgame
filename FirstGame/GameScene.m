@@ -34,6 +34,11 @@ SKLabelNode *scoreLabel;
 //効果音
 SKAction *jumpSE;
 
+/******* パラパラアニメの実験 ******/
+SKTexture *_pengin1;
+SKTexture *_pengin2;
+/******* パラパラアニメの実験 ******/
+    
 }
 
 -(id)initWithSize:(CGSize)size {
@@ -99,8 +104,8 @@ SKAction *jumpSE;
         [self addChild:ground];
         
         //プレイキャラの設定
-        SKSpriteNode *player = [SKSpriteNode spriteNodeWithImageNamed:@"pengin.png"];
-        player.size = CGSizeMake(player.size.width/3, player.size.height/3);
+        SKSpriteNode *player = [SKSpriteNode spriteNodeWithImageNamed:@"pengin1.png"];
+        player.size = CGSizeMake(player.size.width/4, player.size.height/4);
         player.name = kPlayer;
         player.position = CGPointMake(CGRectGetMidX(self.frame)/2, 100 );
         [self addChild:player];
@@ -148,6 +153,20 @@ SKAction *jumpSE;
             [startLabel removeFromParent];
             
             
+            
+            
+            /******* パラパラアニメの実験 ******/
+            SKNode *player = [self childNodeWithName:kPlayer];
+            SKTexture *pengin1 = [SKTexture textureWithImageNamed:@"pengin1"];
+            SKTexture *pengin2 = [SKTexture textureWithImageNamed:@"pengin2"];
+            SKAction *walkPengin = [SKAction animateWithTextures:@[pengin1,pengin2] timePerFrame:0.1];
+            SKAction *walkAction = [SKAction repeatActionForever:walkPengin];
+            [player runAction:walkAction];
+            
+            /******* パラパラアニメの実験 ******/
+            
+            
+            
             //ジャンプ可能フラグをオンに
             jumpFlag = YES;
             //秒数を記録
@@ -185,6 +204,19 @@ SKAction *jumpSE;
         //ジャンプ処理
         SKNode *sprite = [self childNodeWithName:kPlayer];
         sprite.physicsBody.velocity = CGVectorMake(0, 600);
+        
+        /******* パラパラアニメの実験 ******/
+        SKNode *player = [self childNodeWithName:kPlayer];
+        SKTexture *pengin3 = [SKTexture textureWithImageNamed:@"pengin3"];
+        SKTexture *pengin4 = [SKTexture textureWithImageNamed:@"pengin4"];
+        SKAction *jumpPengin = [SKAction animateWithTextures:@[pengin3,pengin4] timePerFrame:0.1];
+        SKAction *jumpAction = [SKAction repeatActionForever:jumpPengin];
+        [player runAction:jumpAction];
+        
+        /******* パラパラアニメの実験 ******/
+        
+        
+        
         [self runAction:jumpSE];
         
         //ジャンプ可能フラグをNOにする
@@ -230,6 +262,16 @@ SKAction *jumpSE;
         if((player.node.position.y) - ([player.node calculateAccumulatedFrame].size.height/2) + 2 >= (ground.node.position.y) + ([ground.node calculateAccumulatedFrame].size.height/2) ){
             jumpFlag = YES;
             smashFlag = NO;
+            
+            /******* パラパラアニメの実験 ******/
+            SKNode *player = [self childNodeWithName:kPlayer];
+            SKTexture *pengin1 = [SKTexture textureWithImageNamed:@"pengin1"];
+            SKTexture *pengin2 = [SKTexture textureWithImageNamed:@"pengin2"];
+            SKAction *walkPengin = [SKAction animateWithTextures:@[pengin1,pengin2] timePerFrame:0.1];
+            SKAction *walkAction = [SKAction repeatActionForever:walkPengin];
+            [player runAction:walkAction];
+            
+            /******* パラパラアニメの実験 ******/
             return;
         }
     }
@@ -401,7 +443,7 @@ static inline CGFloat skRand(CGFloat low,CGFloat high){
     return  res;
 }
 */
-/*
+
 
 /*使用していないためコメント化（最終的に消します）
 static inline CGFloat skRandf(){

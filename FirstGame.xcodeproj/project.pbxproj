@@ -28,7 +28,10 @@
 		A4A1BA9B192B43E400805339 /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = A4A1BA9A192B43E400805339 /* GameScene.m */; };
 		A4A1BAA4192B44D300805339 /* SceneManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A4A1BAA3192B44D300805339 /* SceneManager.m */; };
 		A4A1BAA7192B44E800805339 /* GameView.m in Sources */ = {isa = PBXBuildFile; fileRef = A4A1BAA6192B44E800805339 /* GameView.m */; };
-		A4D25D311935DB2700D533F8 /* pengin.png in Resources */ = {isa = PBXBuildFile; fileRef = A4D25D301935DB2700D533F8 /* pengin.png */; };
+		A4AB062319376463001FFB69 /* pengin2.png in Resources */ = {isa = PBXBuildFile; fileRef = A4AB062219376463001FFB69 /* pengin2.png */; };
+		A4AB0625193769B2001FFB69 /* pengin1.png in Resources */ = {isa = PBXBuildFile; fileRef = A4AB0624193769B2001FFB69 /* pengin1.png */; };
+		A4AB0628193777C0001FFB69 /* pengin3.png in Resources */ = {isa = PBXBuildFile; fileRef = A4AB0626193777C0001FFB69 /* pengin3.png */; };
+		A4AB0629193777C0001FFB69 /* pengin4.png in Resources */ = {isa = PBXBuildFile; fileRef = A4AB0627193777C0001FFB69 /* pengin4.png */; };
 		A4F633FC1930785B00187BED /* mario.png in Resources */ = {isa = PBXBuildFile; fileRef = A4F633FB1930785B00187BED /* mario.png */; };
 		A4F634061935C42500187BED /* ground2.png in Resources */ = {isa = PBXBuildFile; fileRef = A4F634031935C42500187BED /* ground2.png */; };
 		A4F634071935C42500187BED /* ground1.png in Resources */ = {isa = PBXBuildFile; fileRef = A4F634041935C42500187BED /* ground1.png */; };
@@ -76,7 +79,10 @@
 		A4A1BAA3192B44D300805339 /* SceneManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneManager.m; sourceTree = "<group>"; };
 		A4A1BAA5192B44E800805339 /* GameView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameView.h; sourceTree = "<group>"; };
 		A4A1BAA6192B44E800805339 /* GameView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameView.m; sourceTree = "<group>"; };
-		A4D25D301935DB2700D533F8 /* pengin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pengin.png; sourceTree = "<group>"; };
+		A4AB062219376463001FFB69 /* pengin2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pengin2.png; sourceTree = "<group>"; };
+		A4AB0624193769B2001FFB69 /* pengin1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pengin1.png; sourceTree = "<group>"; };
+		A4AB0626193777C0001FFB69 /* pengin3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pengin3.png; sourceTree = "<group>"; };
+		A4AB0627193777C0001FFB69 /* pengin4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pengin4.png; sourceTree = "<group>"; };
 		A4F633FB1930785B00187BED /* mario.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mario.png; sourceTree = "<group>"; };
 		A4F634031935C42500187BED /* ground2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ground2.png; sourceTree = "<group>"; };
 		A4F634041935C42500187BED /* ground1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ground1.png; sourceTree = "<group>"; };
@@ -157,7 +163,10 @@
 				0454A58719374B07002403B5 /* jump.wav */,
 				A4A1BAA2192B44D300805339 /* SceneManager.h */,
 				A4A1BAA3192B44D300805339 /* SceneManager.m */,
-				A4D25D301935DB2700D533F8 /* pengin.png */,
+				A4AB0624193769B2001FFB69 /* pengin1.png */,
+				A4AB062219376463001FFB69 /* pengin2.png */,
+				A4AB0626193777C0001FFB69 /* pengin3.png */,
+				A4AB0627193777C0001FFB69 /* pengin4.png */,
 				A4F634031935C42500187BED /* ground2.png */,
 				A4F634041935C42500187BED /* ground1.png */,
 				A4F634051935C42500187BED /* groud3.png */,
@@ -273,15 +282,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4AB0629193777C0001FFB69 /* pengin4.png in Resources */,
 				0454A58819374B07002403B5 /* jump.wav in Resources */,
 				A4A1BA6A192B43BB00805339 /* InfoPlist.strings in Resources */,
 				A4F634081935C42500187BED /* groud3.png in Resources */,
 				A4F634071935C42500187BED /* ground1.png in Resources */,
 				A4F634061935C42500187BED /* ground2.png in Resources */,
+				A4AB062319376463001FFB69 /* pengin2.png in Resources */,
+				A4AB0628193777C0001FFB69 /* pengin3.png in Resources */,
 				A4A1BA7D192B43BB00805339 /* Images.xcassets in Resources */,
 				A4F633FC1930785B00187BED /* mario.png in Resources */,
+				A4AB0625193769B2001FFB69 /* pengin1.png in Resources */,
 				A4A1BA7B192B43BB00805339 /* Spaceship.png in Resources */,
-				A4D25D311935DB2700D533F8 /* pengin.png in Resources */,
 				A4A1BA73192B43BB00805339 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
