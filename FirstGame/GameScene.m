@@ -30,6 +30,9 @@ int groundID;
     
 //スコアのラベル
 SKLabelNode *scoreLabel;
+    
+//効果音
+SKAction *jumpSE;
 
 }
 
@@ -118,6 +121,9 @@ SKLabelNode *scoreLabel;
         //接触デリゲート
         self.physicsWorld.contactDelegate = self;
         
+        //効果音の初期設定
+        jumpSE = [SKAction playSoundFileNamed:@"jump.wav" waitForCompletion:NO];
+        
     }
     
     return self;
@@ -179,6 +185,7 @@ SKLabelNode *scoreLabel;
         //ジャンプ処理
         SKNode *sprite = [self childNodeWithName:kPlayer];
         sprite.physicsBody.velocity = CGVectorMake(0, 600);
+        [self runAction:jumpSE];
         
         //ジャンプ可能フラグをNOにする
         jumpFlag = NO;
@@ -217,16 +224,15 @@ SKLabelNode *scoreLabel;
                 ground = contact.bodyB;
                 player = contact.bodyA;
         }
-    }
-    
-    
-    //プレイヤーのy座標-プレイヤーの高さ/2→プレイヤーの足元のy座標
-    //道路のy座標+道路の高さ/2→道路の表面のy座標
-    if((player.node.position.y) - ([player.node calculateAccumulatedFrame].size.height/2) + 2 >= (ground.node.position.y) + ([ground.node calculateAccumulatedFrame].size.height/2) ){
-           jumpFlag = YES;
+        
+        //プレイヤーのy座標-プレイヤーの高さ/2→プレイヤーの足元のy座標
+        //道路のy座標+道路の高さ/2→道路の表面のy座標
+        if((player.node.position.y) - ([player.node calculateAccumulatedFrame].size.height/2) + 2 >= (ground.node.position.y) + ([ground.node calculateAccumulatedFrame].size.height/2) ){
+            jumpFlag = YES;
             smashFlag = NO;
-        return;
-       }
+            return;
+        }
+    }
     
 }
 
