@@ -263,12 +263,9 @@ SKTexture *_pengin2;
                 player = contact.bodyA;
         }
         
-        NSLog(@"キャラクター %f",(player.node.position.y) - ([player.node calculateAccumulatedFrame].size.height/2));
-        NSLog(@"地面 %f",(ground.node.position.y) + ([ground.node calculateAccumulatedFrame].size.height/2));
-        
         //プレイヤーのy座標-プレイヤーの高さ/2→プレイヤーの足元のy座標
         //道路のy座標+道路の高さ/2→道路の表面のy座標
-        if((player.node.position.y) - ([player.node calculateAccumulatedFrame].size.height/2) + 3 >= (ground.node.position.y) + ([ground.node calculateAccumulatedFrame].size.height/2) ){
+        if((player.node.position.y) - ([player.node calculateAccumulatedFrame].size.height/2) + 2 >= (ground.node.position.y) + ([ground.node calculateAccumulatedFrame].size.height/2) ){
             jumpFlag = YES;
             smashFlag = NO;
             

@@ -10,19 +10,15 @@
 #import "GameView.h"
 
 @implementation ViewController{
-   GameView* gameView;
+    __weak GameView* _gameView;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
- 
-}
+    _gameView = (GameView *)self.view;
+     //Present the scene.
 
-- (void)viewWillLayoutSubviews{
-    [super viewWillLayoutSubviews];
-    gameView = (GameView *)self.view;
-    // Present the scene.
 }
 
 
