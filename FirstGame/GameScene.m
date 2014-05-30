@@ -159,7 +159,7 @@ SKTexture *_pengin2;
             SKNode *player = [self childNodeWithName:kPlayer];
             SKTexture *pengin1 = [SKTexture textureWithImageNamed:@"pengin1"];
             SKTexture *pengin2 = [SKTexture textureWithImageNamed:@"pengin2"];
-            SKAction *walkPengin = [SKAction animateWithTextures:@[pengin1,pengin2] timePerFrame:0.1];
+            SKAction *walkPengin = [SKAction animateWithTextures:@[pengin1,pengin2] timePerFrame:0.2];
             SKAction *walkAction = [SKAction repeatActionForever:walkPengin];
             [player runAction:walkAction];
             
@@ -206,12 +206,11 @@ SKTexture *_pengin2;
         sprite.physicsBody.velocity = CGVectorMake(0, 600);
         
         /******* パラパラアニメの実験 ******/
-        SKNode *player = [self childNodeWithName:kPlayer];
         SKTexture *pengin3 = [SKTexture textureWithImageNamed:@"pengin3"];
         SKTexture *pengin4 = [SKTexture textureWithImageNamed:@"pengin4"];
         SKAction *jumpPengin = [SKAction animateWithTextures:@[pengin3,pengin4] timePerFrame:0.1];
         SKAction *jumpAction = [SKAction repeatActionForever:jumpPengin];
-        [player runAction:jumpAction];
+        [sprite runAction:jumpAction];
         
         /******* パラパラアニメの実験 ******/
         
@@ -267,7 +266,7 @@ SKTexture *_pengin2;
             SKNode *player = [self childNodeWithName:kPlayer];
             SKTexture *pengin1 = [SKTexture textureWithImageNamed:@"pengin1"];
             SKTexture *pengin2 = [SKTexture textureWithImageNamed:@"pengin2"];
-            SKAction *walkPengin = [SKAction animateWithTextures:@[pengin1,pengin2] timePerFrame:0.1];
+            SKAction *walkPengin = [SKAction animateWithTextures:@[pengin1,pengin2] timePerFrame:0.2];
             SKAction *walkAction = [SKAction repeatActionForever:walkPengin];
             [player runAction:walkAction];
             
