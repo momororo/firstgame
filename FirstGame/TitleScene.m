@@ -21,7 +21,9 @@
         
         myLabel.text = @"タイトル画面";
         myLabel.fontSize = 10;
-        myLabel.position = CGPointMake(0,200);
+        myLabel.position = CGPointMake(CGRectGetMinX(self.frame),CGRectGetMinY(self.frame));
+        myLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeLeft;
+        
         
         [self addChild:myLabel];
 

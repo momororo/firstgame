@@ -11,7 +11,9 @@
 
 @implementation GameView
 
--(id)initWithFrame:(CGRect)frame{
+
+- (id)initWithFrame:(CGRect)frame
+{
     self = [super initWithFrame:frame];
     if (self) {
         [self setUpGameView];
@@ -19,9 +21,11 @@
     return self;
 }
 
+
 -(void)awakeFromNib{
     [self setUpGameView];
 }
+ 
 
 -(void)setUpGameView{
     self.showsFPS = YES;
@@ -32,6 +36,7 @@
 //タイトル
 -(void)switchingTitleScene{
     TitleScene *scene = [SceneManager titleScene:self.bounds.size];
+    NSLog(@"%f %f",self.bounds.size.width,self.bounds.size.height);
     scene.delegate = self;
     scene.scaleMode = SKSceneScaleModeAspectFill;
     [SceneManager sceneCange:self New:scene Duration:0.5];
@@ -40,6 +45,7 @@
 //ゲーム
 -(void)switchingGameScene{
     GameScene *scene = [SceneManager gameScene:self.bounds.size];
+    NSLog(@"%f %f",self.bounds.size.width,self.bounds.size.height);
     scene.delegate = self;
     scene.scaleMode = SKSceneScaleModeAspectFill;
     [SceneManager sceneCange:self New:scene Duration:0.5];
