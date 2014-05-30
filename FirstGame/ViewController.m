@@ -17,7 +17,7 @@
 {
     [super viewDidLoad];
     _gameView = (GameView *)self.view;
-    // Present the scene.
+     //Present the scene.
 
 }
 
@@ -35,6 +35,8 @@
         return UIInterfaceOrientationMaskAll;
     }
 }
+
+
 
 - (void)didReceiveMemoryWarning
 {
