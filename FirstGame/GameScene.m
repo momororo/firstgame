@@ -237,7 +237,10 @@ SKTexture *_pengin2;
         
         
         smashFlag = NO;
+        
+        //突進用のビットマスクに変更
         sprite.physicsBody.categoryBitMask = flyingPlayerCategory;
+        sprite.physicsBody.collisionBitMask = groundCategory;
         sprite.physicsBody.contactTestBitMask = wallCategory | groundCategory;
         return;
     }
@@ -247,14 +250,16 @@ SKTexture *_pengin2;
 //オブジェクト同士が衝突した場合に動く処理
 - (void)didBeginContact:(SKPhysicsContact *)contact
 {
-    //地面を格納する変数
-    SKPhysicsBody *ground;
-    //プレイヤーを格納する変数
-    SKPhysicsBody *player;
     
     //ビットマスクの処理がちょっと微妙、、、、(一旦これで妥協、、、)
 	//プレイヤーと地面の衝突を検知
     if((playerCategory == contact.bodyA.categoryBitMask || playerCategory == contact.bodyB.categoryBitMask) && (groundCategory == contact.bodyA.categoryBitMask || groundCategory == contact.bodyB.categoryBitMask)){
+        
+        //地面を格納する変数
+        SKPhysicsBody *ground;
+        //プレイヤーを格納する変数
+        SKPhysicsBody *player;
+        
             if(contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask){
                 ground = contact.bodyA;
                 player = contact.bodyB;
@@ -290,6 +295,51 @@ SKTexture *_pengin2;
         }
     }
     //地面とプレイヤーの条件分岐終わり
+
+    //地面と飛行キャラクターとの条件分岐
+	//プレイヤーと地面の衝突を検知
+    if((flyingPlayerCategory == contact.bodyA.categoryBitMask || flyingPlayerCategory == contact.bodyB.categoryBitMask) && (groundCategory == contact.bodyA.categoryBitMask || groundCategory == contact.bodyB.categoryBitMask)){
+        
+        //地面を格納する変数
+        SKPhysicsBody *ground;
+        //プレイヤーを格納する変数
+        SKPhysicsBody *player;
+
+        if(flyingPlayerCategory == contact.bodyA.categoryBitMask){
+            player = contact.bodyA;
+            ground = contact.bodyB;
+        }else{
+            player = contact.bodyB;
+            ground = contact.bodyA;
+            
+        }
+        
+        //プレイヤーのy座標-プレイヤーの高さ/2→プレイヤーの足元のy座標
+        //道路のy座標+道路の高さ/2→道路の表面のy座標
+        if((player.node.position.y) - ([player.node calculateAccumulatedFrame].size.height/2) + 2 >= (ground.node.position.y) + ([ground.node calculateAccumulatedFrame].size.height/2) ){
+            jumpFlag = YES;
+            smashFlag = NO;
+            
+            //ビットマスクをもとに戻す
+            player.node.physicsBody.categoryBitMask = playerCategory;
+            player.node.physicsBody.contactTestBitMask = wallCategory;
+            
+                
+                /******* パラパラアニメの実験 ******/
+                SKNode *player = [self childNodeWithName:kPlayer];
+                SKTexture *pengin1 = [SKTexture textureWithImageNamed:@"pengin1"];
+                SKTexture *pengin2 = [SKTexture textureWithImageNamed:@"pengin2"];
+                SKAction *walkPengin = [SKAction animateWithTextures:@[pengin1,pengin2] timePerFrame:0.1];
+                SKAction *walkAction = [SKAction repeatActionForever:walkPengin];
+                [player runAction:walkAction];
+                
+                /******* パラパラアニメの実験 ******/
+                return;
+            }
+        }
+    
+    //地面と飛行プレイヤーの条件分岐終わり
+
     
     //壁とプレイヤーの条件分岐
        if((flyingPlayerCategory == contact.bodyA.categoryBitMask || flyingPlayerCategory == contact.bodyB.categoryBitMask) && (wallCategory == contact.bodyA.categoryBitMask || wallCategory == contact.bodyB.categoryBitMask)){
@@ -319,7 +369,8 @@ SKTexture *_pengin2;
            
            //ビットマスクをもとに戻す
            player.physicsBody.categoryBitMask = playerCategory;
-           player.physicsBody.contactTestBitMask = wallCategory;
+           player.physicsBody.collisionBitMask = groundCategory | wallCategory;
+           player.physicsBody.contactTestBitMask = groundCategory;
 
            return;
 
