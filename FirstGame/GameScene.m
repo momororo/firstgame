@@ -203,7 +203,7 @@ SKTexture *_pengin2;
         
         //ジャンプ処理
         SKNode *sprite = [self childNodeWithName:kPlayer];
-        sprite.physicsBody.velocity = CGVectorMake(0, 600);
+        sprite.physicsBody.velocity = CGVectorMake(0, 500);
         
         /******* パラパラアニメの実験 ******/
         SKTexture *pengin3 = [SKTexture textureWithImageNamed:@"pengin3"];
@@ -229,8 +229,14 @@ SKTexture *_pengin2;
         
         //突進処理
         SKNode *sprite = [self childNodeWithName:kPlayer];
-
         sprite.physicsBody.velocity = CGVectorMake(0, -500);
+        
+        SKTexture *pengin5 = [SKTexture textureWithImageNamed:@"pengin5"];
+        SKAction *smashPengin = [SKAction animateWithTextures:@[pengin5] timePerFrame:0.1];
+        SKAction *smashAction = [SKAction repeatActionForever:smashPengin];
+        [sprite runAction:smashAction];
+        
+        
         smashFlag = NO;
         return;
     }
@@ -421,7 +427,6 @@ SKTexture *_pengin2;
         nextGround.physicsBody.restitution = 0;
         //nextGround.physicsBody.restitution = skRandBound();
         nextGround.physicsBody.affectedByGravity = NO;
-        nextGround.physicsBody.friction = 0;
         
         [nextGround runAction:[SKAction sequence:@[[SKAction moveToX: -300 + (nextGround.size.width/2)duration:2.0],[SKAction removeFromParent]]]];
 
