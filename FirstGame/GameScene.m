@@ -159,7 +159,7 @@ SKTexture *_pengin2;
             SKNode *player = [self childNodeWithName:kPlayer];
             SKTexture *pengin1 = [SKTexture textureWithImageNamed:@"pengin1"];
             SKTexture *pengin2 = [SKTexture textureWithImageNamed:@"pengin2"];
-            SKAction *walkPengin = [SKAction animateWithTextures:@[pengin1,pengin2] timePerFrame:0.2];
+            SKAction *walkPengin = [SKAction animateWithTextures:@[pengin1,pengin2] timePerFrame:0.1];
             SKAction *walkAction = [SKAction repeatActionForever:walkPengin];
             [player runAction:walkAction];
             
@@ -262,16 +262,21 @@ SKTexture *_pengin2;
             jumpFlag = YES;
             smashFlag = NO;
             
-            /******* パラパラアニメの実験 ******/
-            SKNode *player = [self childNodeWithName:kPlayer];
-            SKTexture *pengin1 = [SKTexture textureWithImageNamed:@"pengin1"];
-            SKTexture *pengin2 = [SKTexture textureWithImageNamed:@"pengin2"];
-            SKAction *walkPengin = [SKAction animateWithTextures:@[pengin1,pengin2] timePerFrame:0.2];
-            SKAction *walkAction = [SKAction repeatActionForever:walkPengin];
-            [player runAction:walkAction];
+            //スタートラベルがある時は走らないように条件分岐
+            if([self childNodeWithName:@"kStartLabel"] == nil){
+
             
-            /******* パラパラアニメの実験 ******/
-            return;
+                /******* パラパラアニメの実験 ******/
+                SKNode *player = [self childNodeWithName:kPlayer];
+                SKTexture *pengin1 = [SKTexture textureWithImageNamed:@"pengin1"];
+                SKTexture *pengin2 = [SKTexture textureWithImageNamed:@"pengin2"];
+                SKAction *walkPengin = [SKAction animateWithTextures:@[pengin1,pengin2] timePerFrame:0.1];
+                SKAction *walkAction = [SKAction repeatActionForever:walkPengin];
+                [player runAction:walkAction];
+            
+                /******* パラパラアニメの実験 ******/
+                return;
+            }
         }
     }
     
