@@ -148,7 +148,7 @@ SKTexture *_pengin2;
             gameStart = YES;
             SKNode *sprite2 = [self childNodeWithName:kGround];
             [sprite2 runAction:[SKAction repeatActionForever:
-                                [SKAction sequence:@[[SKAction moveToX:-300 duration:2.0],
+                                [SKAction sequence:@[[SKAction moveToX:-300 - (self.frame.size.width / 2) duration:2.0],
                                                      [SKAction removeFromParent]]]]];
             [startLabel removeFromParent];
             
@@ -423,7 +423,7 @@ SKTexture *_pengin2;
         nextGround.physicsBody.affectedByGravity = NO;
         nextGround.physicsBody.friction = 0;
         
-        [nextGround runAction:[SKAction sequence:@[[SKAction moveToX: -200 + (nextGround.size.width/2)duration:2.0],[SKAction removeFromParent]]]];
+        [nextGround runAction:[SKAction sequence:@[[SKAction moveToX: -300 + (nextGround.size.width/2)duration:2.0],[SKAction removeFromParent]]]];
 
         
         
