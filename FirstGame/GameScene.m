@@ -43,7 +43,6 @@ SKTexture *_pengin2;
 
 -(id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
-                
         /* Setup your scene here */
         
         //メイン画面
@@ -115,7 +114,7 @@ SKTexture *_pengin2;
         player.physicsBody.restitution = 0;
         //player.physicsBody.mass = 0;
         player.physicsBody.categoryBitMask = playerCategory;
-        player.physicsBody.collisionBitMask = groundCategory;
+        player.physicsBody.collisionBitMask = groundCategory | wallCategory;
         player.physicsBody.contactTestBitMask = groundCategory;
         
         //いけるかな？
@@ -229,7 +228,7 @@ SKTexture *_pengin2;
         
         //突進処理
         SKNode *sprite = [self childNodeWithName:kPlayer];
-        sprite.physicsBody.velocity = CGVectorMake(0, -500);
+        sprite.physicsBody.velocity = CGVectorMake(0, -300);
         
         SKTexture *pengin5 = [SKTexture textureWithImageNamed:@"pengin5"];
         SKAction *smashPengin = [SKAction animateWithTextures:@[pengin5] timePerFrame:0.1];
@@ -238,6 +237,8 @@ SKTexture *_pengin2;
         
         
         smashFlag = NO;
+        sprite.physicsBody.categoryBitMask = flyingPlayerCategory;
+        sprite.physicsBody.contactTestBitMask = wallCategory | groundCategory;
         return;
     }
 
@@ -271,6 +272,9 @@ SKTexture *_pengin2;
             jumpFlag = YES;
             smashFlag = NO;
             
+            //ビットマスクを通常状態に
+            player.node.physicsBody.categoryBitMask = playerCategory;
+            
             //スタートラベルがある時は走らないように条件分岐
             if([self childNodeWithName:@"kStartLabel"] == nil){
 
@@ -288,6 +292,42 @@ SKTexture *_pengin2;
             }
         }
     }
+    //地面とプレイヤーの条件分岐終わり
+    
+    //壁とプレイヤーの条件分岐
+       if((flyingPlayerCategory == contact.bodyA.categoryBitMask || flyingPlayerCategory == contact.bodyB.categoryBitMask) && (wallCategory == contact.bodyA.categoryBitMask || wallCategory == contact.bodyB.categoryBitMask)){
+           
+           //壁の消滅
+           if(wallCategory == contact.bodyA.categoryBitMask){
+               [contact.bodyA.node removeFromParent];
+               
+           }else{
+               [contact.bodyB.node removeFromParent];
+
+           }
+
+           
+           //ジャンプフラグをON
+           jumpFlag = YES;
+           
+           /******* パラパラアニメの実験 ******/
+           SKNode *player = [self childNodeWithName:kPlayer];
+           SKTexture *pengin1 = [SKTexture textureWithImageNamed:@"pengin1"];
+           SKTexture *pengin2 = [SKTexture textureWithImageNamed:@"pengin2"];
+           SKAction *walkPengin = [SKAction animateWithTextures:@[pengin1,pengin2] timePerFrame:0.1];
+           SKAction *walkAction = [SKAction repeatActionForever:walkPengin];
+           [player runAction:walkAction];
+           
+           /******* パラパラアニメの実験 ******/
+           
+           //ビットマスクをもとに戻す
+           player.physicsBody.categoryBitMask = playerCategory;
+           player.physicsBody.contactTestBitMask = wallCategory;
+
+           return;
+
+           
+       }
     
 }
 
@@ -432,10 +472,7 @@ SKTexture *_pengin2;
         nextGround.physicsBody.affectedByGravity = NO;
         
         [nextGround runAction:[SKAction sequence:@[[SKAction moveToX: -300 + (nextGround.size.width/2)duration:2.0],[SKAction removeFromParent]]]];
-
         
-        
-
         //接触設定
         //カテゴリー
         nextGround.physicsBody.categoryBitMask = groundCategory;
@@ -443,6 +480,49 @@ SKTexture *_pengin2;
         nextGround.physicsBody.collisionBitMask =  0;
         //ヒットテストするオブジェクト
         nextGround.physicsBody.contactTestBitMask = 0;
+        
+        
+        /****************************************************/
+        SKSpriteNode *wall = [SKSpriteNode spriteNodeWithImageNamed:@"groud3"];
+        wall.size = CGSizeMake(10, 100);
+        
+        int tmp;
+        if(arc4random_uniform(2) == 0){
+        tmp = arc4random_uniform(nextGround.size.width/2);
+        }else{
+        tmp = -(arc4random_uniform(nextGround.size.width/2));
+        }
+        
+        wall.position = CGPointMake((self.frame.size.width + nextGround.size.width/2) -(tmp), (nextGround.size.height/2) + (wall.size.height/2));
+        [self addChild:wall];
+        
+        wall.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(wall.size.width, wall.size.height)];
+        wall.physicsBody.restitution = 0;
+        [wall runAction:[SKAction sequence:@[[SKAction moveToX: -300 + (nextGround.size.width/2) - (tmp)duration:2.0],[SKAction removeFromParent]]]];
+        
+        wall.physicsBody.categoryBitMask = wallCategory;
+        wall.physicsBody.collisionBitMask = groundCategory | playerCategory;
+        wall.physicsBody.contactTestBitMask = 0;
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        /****************************************************/
+        
+        
+        
+        
+        
+        
+        
+        
         
         
         

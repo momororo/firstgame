@@ -35,7 +35,7 @@
         [self addChild:start];
         
         
-        
+        NSLog(@"%@",NSStringFromCGSize(self.frame.size));
         
         
         
