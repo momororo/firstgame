@@ -32,7 +32,7 @@
 		A4AB0625193769B2001FFB69 /* pengin1.png in Resources */ = {isa = PBXBuildFile; fileRef = A4AB0624193769B2001FFB69 /* pengin1.png */; };
 		A4AB063619387568001FFB69 /* pengin3.png in Resources */ = {isa = PBXBuildFile; fileRef = A4AB063419387568001FFB69 /* pengin3.png */; };
 		A4AB063719387568001FFB69 /* pengin4.png in Resources */ = {isa = PBXBuildFile; fileRef = A4AB063519387568001FFB69 /* pengin4.png */; };
-		A4AB0639193887E8001FFB69 /* pengin5.png in Resources */ = {isa = PBXBuildFile; fileRef = A4AB0638193887E8001FFB69 /* pengin5.png */; };
+		A4AB063B1939AC4A001FFB69 /* pengin5.png in Resources */ = {isa = PBXBuildFile; fileRef = A4AB063A1939AC4A001FFB69 /* pengin5.png */; };
 		A4F633FC1930785B00187BED /* mario.png in Resources */ = {isa = PBXBuildFile; fileRef = A4F633FB1930785B00187BED /* mario.png */; };
 		A4F634061935C42500187BED /* ground2.png in Resources */ = {isa = PBXBuildFile; fileRef = A4F634031935C42500187BED /* ground2.png */; };
 		A4F634071935C42500187BED /* ground1.png in Resources */ = {isa = PBXBuildFile; fileRef = A4F634041935C42500187BED /* ground1.png */; };
@@ -84,7 +84,7 @@
 		A4AB0624193769B2001FFB69 /* pengin1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pengin1.png; sourceTree = "<group>"; };
 		A4AB063419387568001FFB69 /* pengin3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pengin3.png; sourceTree = "<group>"; };
 		A4AB063519387568001FFB69 /* pengin4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pengin4.png; sourceTree = "<group>"; };
-		A4AB0638193887E8001FFB69 /* pengin5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pengin5.png; sourceTree = "<group>"; };
+		A4AB063A1939AC4A001FFB69 /* pengin5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pengin5.png; sourceTree = "<group>"; };
 		A4F633FB1930785B00187BED /* mario.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mario.png; sourceTree = "<group>"; };
 		A4F634031935C42500187BED /* ground2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ground2.png; sourceTree = "<group>"; };
 		A4F634041935C42500187BED /* ground1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ground1.png; sourceTree = "<group>"; };
@@ -169,7 +169,7 @@
 				A4AB062219376463001FFB69 /* pengin2.png */,
 				A4AB063419387568001FFB69 /* pengin3.png */,
 				A4AB063519387568001FFB69 /* pengin4.png */,
-				A4AB0638193887E8001FFB69 /* pengin5.png */,
+				A4AB063A1939AC4A001FFB69 /* pengin5.png */,
 				A4F634031935C42500187BED /* ground2.png */,
 				A4F634041935C42500187BED /* ground1.png */,
 				A4F634051935C42500187BED /* groud3.png */,
@@ -297,7 +297,7 @@
 				A4F633FC1930785B00187BED /* mario.png in Resources */,
 				A4AB0625193769B2001FFB69 /* pengin1.png in Resources */,
 				A4A1BA7B192B43BB00805339 /* Spaceship.png in Resources */,
-				A4AB0639193887E8001FFB69 /* pengin5.png in Resources */,
+				A4AB063B1939AC4A001FFB69 /* pengin5.png in Resources */,
 				A4A1BA73192B43BB00805339 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

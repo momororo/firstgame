@@ -535,11 +535,11 @@ SKTexture *_pengin2;
         wall.size = CGSizeMake(10, 100);
         
         int tmp;
-        if(arc4random_uniform(2) == 0){
+     //   if(arc4random_uniform(2) == 0){
         tmp = arc4random_uniform(nextGround.size.width/2);
-        }else{
-        tmp = -(arc4random_uniform(nextGround.size.width/2));
-        }
+       // }else{
+       // tmp = -(arc4random_uniform(nextGround.size.width/2));
+       // }
         
         wall.position = CGPointMake((self.frame.size.width + nextGround.size.width/2) -(tmp), (nextGround.size.height/2) + (wall.size.height/2));
         [self addChild:wall];
