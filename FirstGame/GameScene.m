@@ -38,6 +38,15 @@ SKAction *jumpSE;
 SKTexture *_pengin1;
 SKTexture *_pengin2;
 /******* パラパラアニメの実験 ******/
+
+//パーティクル（炎）
+SKEmitterNode *_particleFire;
+//パーティクル（スパーク）
+SKEmitterNode *_particleSpark;
+//パーティクル（ボム）
+SKEmitterNode *_particleBom;
+//パーティクル（スモーク）
+SKEmitterNode *_particleSmoke;
     
 }
 
@@ -46,7 +55,10 @@ SKTexture *_pengin2;
         /* Setup your scene here */
         
         //メイン画面
-        self.backgroundColor = [SKColor greenColor];
+        SKSpriteNode *haikei = [SKSpriteNode spriteNodeWithImageNamed:@"haikei.png"];
+        haikei.size = CGSizeMake(haikei.size.width, haikei.size.height);
+        haikei.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame) + 10);
+        [self addChild:haikei];
         
         startLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
         
@@ -65,8 +77,14 @@ SKTexture *_pengin2;
         scoreLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeLeft;
         scoreLabel.verticalAlignmentMode = SKLabelVerticalAlignmentModeTop;
         
+        //海
+        SKSpriteNode *umi = [SKSpriteNode spriteNodeWithImageNamed:@"umi.png"];
+        umi.position = CGPointMake(CGRectGetMidX(self.frame),umi.frame.size.height/2);
+        
+        [self addChild:umi];
         [self addChild:scoreLabel];
         [self addChild:startLabel];
+        
         
         //透明のオブジェクトを生成(センサー)
         SKSpriteNode *sensor = [SKSpriteNode spriteNodeWithColor:[SKColor clearColor] size:CGSizeMake(1,self.frame.size.height)];
@@ -101,6 +119,7 @@ SKTexture *_pengin2;
     
         
         [self addChild:ground];
+        
         
         //プレイキャラの設定
         SKSpriteNode *player = [SKSpriteNode spriteNodeWithImageNamed:@"pengin1.png"];
@@ -147,7 +166,7 @@ SKTexture *_pengin2;
             gameStart = YES;
             SKNode *sprite2 = [self childNodeWithName:kGround];
             [sprite2 runAction:[SKAction repeatActionForever:
-                                [SKAction sequence:@[[SKAction moveToX:-300 - (self.frame.size.width / 2) duration:2.0],
+                                [SKAction sequence:@[[SKAction moveToX:-300 - (self.frame.size.width / 2) duration:3.0],
                                                      [SKAction removeFromParent]]]]];
             [startLabel removeFromParent];
             
@@ -202,7 +221,7 @@ SKTexture *_pengin2;
         
         //ジャンプ処理
         SKNode *sprite = [self childNodeWithName:kPlayer];
-        sprite.physicsBody.velocity = CGVectorMake(0, 600);
+        sprite.physicsBody.velocity = CGVectorMake(0, 700);
         
         /******* パラパラアニメの実験 ******/
         SKTexture *pengin3 = [SKTexture textureWithImageNamed:@"pengin3"];
@@ -234,14 +253,19 @@ SKTexture *_pengin2;
         SKAction *smashPengin = [SKAction animateWithTextures:@[pengin5] timePerFrame:0.1];
         SKAction *smashAction = [SKAction repeatActionForever:smashPengin];
         [sprite runAction:smashAction];
-        
-        
         smashFlag = NO;
         
         //突進用のビットマスクに変更
         sprite.physicsBody.categoryBitMask = flyingPlayerCategory;
         sprite.physicsBody.collisionBitMask = groundCategory;
         sprite.physicsBody.contactTestBitMask = wallCategory | groundCategory;
+        
+        //炎のパーティクルを出す
+        //処理が重いため保留
+        //[self makeFireParticle:sprite.position];
+        
+
+         
         return;
     }
 
@@ -347,10 +371,10 @@ SKTexture *_pengin2;
            //壁の消滅
            if(wallCategory == contact.bodyA.categoryBitMask){
                [contact.bodyA.node removeFromParent];
-               
+               [self makeSparkParticle:contact.contactPoint];
            }else{
                [contact.bodyB.node removeFromParent];
-
+               [self makeSparkParticle:contact.contactPoint];
            }
 
            
@@ -507,8 +531,11 @@ SKTexture *_pengin2;
        // nextGround.userData = [@{@"tekito":@(skRand(400,800))}mutableCopy];
         
         //skRand(50,100));
-        nextGround.size = CGSizeMake(100 + arc4random_uniform(151),50+arc4random_uniform(101));
         
+        //床の長さ調整実験
+        //nextGround.size = CGSizeMake(100 + arc4random_uniform(151),50+arc4random_uniform(101));
+        nextGround.size = CGSizeMake(300 + arc4random_uniform(551),50+arc4random_uniform(101));
+
 
         nextGround.position = CGPointMake((self.frame.size.width + (nextGround.size.width/2) ),0);
         
@@ -519,7 +546,13 @@ SKTexture *_pengin2;
         //nextGround.physicsBody.restitution = skRandBound();
         nextGround.physicsBody.affectedByGravity = NO;
         
-        [nextGround runAction:[SKAction sequence:@[[SKAction moveToX: -300 + (nextGround.size.width/2)duration:2.0],[SKAction removeFromParent]]]];
+        
+        
+        //[nextGround runAction:[SKAction sequence:@[[SKAction moveToX: -300 + (nextGround.size.width/2)duration:3.0],[SKAction removeFromParent]]]];
+        [nextGround runAction:[SKAction sequence:@[[SKAction moveToX: -800 + (nextGround.size.width/2)duration:4.0],[SKAction removeFromParent]]]];
+        
+        
+        
         
         //接触設定
         //カテゴリー
@@ -531,8 +564,8 @@ SKTexture *_pengin2;
         
         
         /****************************************************/
-        SKSpriteNode *wall = [SKSpriteNode spriteNodeWithImageNamed:@"groud3"];
-        wall.size = CGSizeMake(10, 100);
+        SKSpriteNode *wall = [SKSpriteNode spriteNodeWithImageNamed:@"hyouzan"];
+        wall.size = CGSizeMake(wall.frame.size.width/2,wall.frame.size.height/2);
         
         int tmp;
      //   if(arc4random_uniform(2) == 0){
@@ -541,15 +574,18 @@ SKTexture *_pengin2;
        // tmp = -(arc4random_uniform(nextGround.size.width/2));
        // }
         
-        wall.position = CGPointMake((self.frame.size.width + nextGround.size.width/2) -(tmp), (nextGround.size.height/2) + (wall.size.height/2));
+        wall.position = CGPointMake((self.frame.size.width + nextGround.size.width/2) -(tmp), ((nextGround.size.height/2) + (wall.size.height/2)));
         [self addChild:wall];
         
-        wall.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(wall.size.width, wall.size.height)];
+        wall.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(wall.size.width/3.5, wall.size.height)];
         wall.physicsBody.restitution = 0;
-        [wall runAction:[SKAction sequence:@[[SKAction moveToX: -300 + (nextGround.size.width/2) - (tmp)duration:2.0],[SKAction removeFromParent]]]];
+       // [wall runAction:[SKAction sequence:@[[SKAction moveToX: -300 + (nextGround.size.width/2) - (tmp)duration:3.0],[SKAction removeFromParent]]]];
+        
+        [wall runAction:[SKAction sequence:@[[SKAction moveToX: -800 + (nextGround.size.width/2) - (tmp)duration:4.0],[SKAction removeFromParent]]]];
+        
         
         wall.physicsBody.categoryBitMask = wallCategory;
-        wall.physicsBody.collisionBitMask = groundCategory | playerCategory;
+        wall.physicsBody.collisionBitMask = groundCategory;// | playerCategory;
         wall.physicsBody.contactTestBitMask = 0;
         
         
@@ -599,6 +635,36 @@ static inline CGFloat skRandBound()
     return rand;
 }
 */
+
+
+/***************** パーティクルの設定 *******************/
+//炎パーティクルの作成
+-(void)makeFireParticle:(CGPoint)point{
+    if (_particleFire == nil) {
+        NSString *path = [[NSBundle mainBundle]pathForResource:@"Fire" ofType:@"sks"];
+        _particleFire = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
+        _particleFire.numParticlesToEmit = 50;
+        [self addChild:_particleFire];
+    }else{
+        [_particleFire resetSimulation];
+    }
+    _particleFire.position = point;
+}
+
+//スパークパーティクルの作成
+-(void)makeSparkParticle:(CGPoint)point{
+    if (_particleSpark == nil) {
+        NSString *path = [[NSBundle mainBundle]pathForResource:@"Spark" ofType:@"sks"];
+        _particleSpark = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
+        _particleSpark.numParticlesToEmit = 50;
+        [self addChild:_particleSpark];
+    }else{
+        [_particleSpark resetSimulation];
+    }
+    _particleSpark.position = point;
+}
+
+
 
 
 
