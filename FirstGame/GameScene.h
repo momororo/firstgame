@@ -11,6 +11,7 @@
 #import "Ground.h"
 #import "Wall.h"
 #import "Sensor.h"
+#import "Sea.h"
 
 #define     kPlayer     @"Player"
 #define     kGround     @"Ground"

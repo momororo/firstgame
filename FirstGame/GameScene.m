@@ -51,6 +51,8 @@ SKEmitterNode *_particleSmoke;
         startLabel.name = @"kStartLabel";
         startLabel.position = CGPointMake(CGRectGetMidX(self.frame),
                                        CGRectGetMidY(self.frame));
+        [self addChild:startLabel];
+
         
         //スコアラベル
         scoreLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
@@ -60,14 +62,13 @@ SKEmitterNode *_particleSmoke;
         scoreLabel.position = CGPointMake(CGRectGetMinX(self.frame), CGRectGetMaxY(self.frame)-(CGRectGetMaxY(self.frame)/10));
         scoreLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeLeft;
         scoreLabel.verticalAlignmentMode = SKLabelVerticalAlignmentModeTop;
+        [self addChild:scoreLabel];
+
         
         //海
-        SKSpriteNode *umi = [SKSpriteNode spriteNodeWithImageNamed:@"umi.png"];
-        umi.position = CGPointMake(CGRectGetMidX(self.frame),umi.frame.size.height/2);
+        [Sea setSeaFrame:self.frame];
+        [self addChild:[Sea getSea]];
         
-        [self addChild:umi];
-        [self addChild:scoreLabel];
-        [self addChild:startLabel];
         
         
         //透明のオブジェクトを生成(センサー)
@@ -341,11 +342,9 @@ SKEmitterNode *_particleSmoke;
         
         return;
         
-        
-        
-        
-        
     }
+    
+    /*配列に追加している部分を毎フレーム削除判定するかは検討中*/
 
 
 }
