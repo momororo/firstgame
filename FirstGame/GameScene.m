@@ -194,16 +194,12 @@ SKEmitterNode *_particleSmoke;
 	//プレイヤーと地面の衝突を検知
     if([ObjectBitMask playerAndGround:contact]){
         
-        //プレイヤーを格納する変数
-        SKPhysicsBody *player = [ObjectBitMask getPlayerFromContact:contact];
 
         //地面を格納する変数
-        SKPhysicsBody *ground = [ObjectBitMask getGroundFromContact:contact];
+        SKNode *ground = [ObjectBitMask getGroundFromContact:contact];
         
-        //プレイヤーのy座標-プレイヤーの高さ/2→プレイヤーの足元のy座標
-        //道路のy座標+道路の高さ/2→道路の表面のy座標
-        if((player.node.position.y) - ([player.node calculateAccumulatedFrame].size.height/2) + 2 >= (ground.node.position.y) + ([ground.node calculateAccumulatedFrame].size.height/2) ){
-            
+        //接触位置 + 2 >= 地面の上面
+        if( contact.contactPoint.y + 2 >= (ground.position.y) + ([ground calculateAccumulatedFrame].size.height/2) ){
             
             //player歩行動作
                 [Player walkAction];
@@ -215,49 +211,34 @@ SKEmitterNode *_particleSmoke;
     
     //地面とプレイヤーの条件分岐終わり
 
+
     //地面と飛行キャラクターとの条件分岐
-	//プレイヤーと地面の衝突を検知
-    if((flyingPlayerCategory == contact.bodyA.categoryBitMask || flyingPlayerCategory == contact.bodyB.categoryBitMask) && (groundCategory == contact.bodyA.categoryBitMask || groundCategory == contact.bodyB.categoryBitMask)){
+    if([ObjectBitMask flyingPlayerAndGround:contact]){
         
         //地面を格納する変数
-        SKPhysicsBody *ground;
-        //プレイヤーを格納する変数
-        SKPhysicsBody *player;
-
-        if(flyingPlayerCategory == contact.bodyA.categoryBitMask){
-            player = contact.bodyA;
-            ground = contact.bodyB;
-        }else{
-            player = contact.bodyB;
-            ground = contact.bodyA;
-            
-        }
+        SKNode *ground = [ObjectBitMask getGroundFromContact:contact];
         
-        //プレイヤーのy座標-プレイヤーの高さ/2→プレイヤーの足元のy座標
-        //道路のy座標+道路の高さ/2→道路の表面のy座標
-        if((player.node.position.y) - ([player.node calculateAccumulatedFrame].size.height/2) + 2 >= (ground.node.position.y) + ([ground.node calculateAccumulatedFrame].size.height/2) ){
-
+        //接触位置 + 2 >= 地面の上面
+        if(contact.contactPoint.y + 2 >= (ground.position.y) + ([ground calculateAccumulatedFrame].size.height/2) ){
+            
             //player歩行動作
             [Player walkAction];
             
             return;
-            }
         }
+        
+    }
     
     //地面と飛行プレイヤーの条件分岐終わり
 
     
-    //壁とプレイヤーの条件分岐
-       if((flyingPlayerCategory == contact.bodyA.categoryBitMask || flyingPlayerCategory == contact.bodyB.categoryBitMask) && (wallCategory == contact.bodyA.categoryBitMask || wallCategory == contact.bodyB.categoryBitMask)){
+    //プレイヤーと壁の衝突判定
+       if([ObjectBitMask playerAndWall:contact]){
            
            //壁の消滅
-           if(wallCategory == contact.bodyA.categoryBitMask){
-               [contact.bodyA.node removeFromParent];
-               [self makeSparkParticle:contact.contactPoint];
-           }else{
-               [contact.bodyB.node removeFromParent];
-               [self makeSparkParticle:contact.contactPoint];
-           }
+            [[ObjectBitMask getWallFromContact:contact] removeFromParent];
+           //パーティクルの発生
+            [self makeSparkParticle:contact.contactPoint];
 
 
            //player歩行動作
