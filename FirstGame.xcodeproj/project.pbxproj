@@ -10,6 +10,7 @@
 		0454A58819374B07002403B5 /* jump.wav in Resources */ = {isa = PBXBuildFile; fileRef = 0454A58719374B07002403B5 /* jump.wav */; };
 		04B85443193C73DE00F000A8 /* ObjectBitMask.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B85442193C73DE00F000A8 /* ObjectBitMask.m */; };
 		04B85446193C73F500F000A8 /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B85445193C73F500F000A8 /* Player.m */; };
+		04B85449193C80A600F000A8 /* Ground.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B85448193C80A600F000A8 /* Ground.m */; };
 		A4A1BA5E192B43BB00805339 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4A1BA5D192B43BB00805339 /* Foundation.framework */; };
 		A4A1BA60192B43BB00805339 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4A1BA5F192B43BB00805339 /* CoreGraphics.framework */; };
 		A4A1BA62192B43BB00805339 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4A1BA61192B43BB00805339 /* UIKit.framework */; };
@@ -65,6 +66,8 @@
 		04B85442193C73DE00F000A8 /* ObjectBitMask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ObjectBitMask.m; path = ../ObjectBitMask.m; sourceTree = "<group>"; };
 		04B85444193C73F500F000A8 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Player.h; path = ../Player.h; sourceTree = "<group>"; };
 		04B85445193C73F500F000A8 /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Player.m; path = ../Player.m; sourceTree = "<group>"; };
+		04B85447193C80A600F000A8 /* Ground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ground.h; sourceTree = "<group>"; };
+		04B85448193C80A600F000A8 /* Ground.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ground.m; sourceTree = "<group>"; };
 		A4A1BA5A192B43BB00805339 /* FirstGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FirstGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4A1BA5D192B43BB00805339 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A4A1BA5F192B43BB00805339 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -172,6 +175,8 @@
 		A4A1BA65192B43BB00805339 /* FirstGame */ = {
 			isa = PBXGroup;
 			children = (
+				04B85447193C80A600F000A8 /* Ground.h */,
+				04B85448193C80A600F000A8 /* Ground.m */,
 				04B85444193C73F500F000A8 /* Player.h */,
 				04B85445193C73F500F000A8 /* Player.m */,
 				04B85441193C73DE00F000A8 /* ObjectBitMask.h */,
@@ -365,6 +370,7 @@
 				A4A1BA9B192B43E400805339 /* GameScene.m in Sources */,
 				04B85443193C73DE00F000A8 /* ObjectBitMask.m in Sources */,
 				A4A1BA70192B43BB00805339 /* AppDelegate.m in Sources */,
+				04B85449193C80A600F000A8 /* Ground.m in Sources */,
 				A4A1BA6C192B43BB00805339 /* main.m in Sources */,
 				04B85446193C73F500F000A8 /* Player.m in Sources */,
 				A4A1BAA4192B44D300805339 /* SceneManager.m in Sources */,

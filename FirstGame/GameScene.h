@@ -8,6 +8,7 @@
 
 #import <SpriteKit/SpriteKit.h>
 #import "Player.h"
+#import "Ground.h"
 
 #define     kPlayer     @"Player"
 #define     kGround     @"Ground"

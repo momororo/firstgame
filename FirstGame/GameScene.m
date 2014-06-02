@@ -19,9 +19,6 @@ BOOL gameStart;
     
 //スタートのラベル
 SKLabelNode *startLabel;
-
-//グラウンドID(属性の割り振りに使用するよう)
-int groundID;
     
 //スコアのラベル
 SKLabelNode *scoreLabel;
@@ -91,21 +88,8 @@ SKEmitterNode *_particleSmoke;
         [self addChild:sensor];
         
         //地面の設定
-        SKSpriteNode *ground = [SKSpriteNode spriteNodeWithColor:[SKColor brownColor]
-                                                            size:CGSizeMake(self.frame.size.width, 24)];
-        ground.name = kGround;
-        ground.position = CGPointMake(ground.size.width/2,ground.size.height/2);
-        
-        ground.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(ground.size.width, ground.size.height)];
-        ground.physicsBody.affectedByGravity = NO;
-        ground.physicsBody.restitution = 0;
-
-        ground.physicsBody.categoryBitMask = groundCategory;
-        ground.physicsBody.collisionBitMask = 0;
-        ground.physicsBody.contactTestBitMask = 0;
-    
-        
-        [self addChild:ground];
+        [Ground setGroundSizeX:self.frame.size.width sizeY:24];
+        [self addChild:[Ground getGround]];
         
         
         //プレイキャラの設定
@@ -131,14 +115,15 @@ SKEmitterNode *_particleSmoke;
     //スタートラベルがノードにあるときだけ入る処理
     if([self childNodeWithName:@"kStartLabel"]){
         if ([startLabel containsPoint:location]) {
+            
             //スタートボタンがタップされたら、地面が移動する
-            gameStart = YES;
-            SKNode *sprite2 = [self childNodeWithName:kGround];
-            [sprite2 runAction:[SKAction repeatActionForever:
-                                [SKAction sequence:@[[SKAction moveToX:-300 - (self.frame.size.width / 2) duration:3.0],
-                                                     [SKAction removeFromParent]]]]];
+            [Ground moveGroundToX:(-300 - (self.frame.size.width / 2)) duration:3.0];
+
+            //スタートラベルの削除
             [startLabel removeFromParent];
             
+            //ゲームスタートフラグをYESに
+            gameStart = YES;
             
             
             
@@ -185,13 +170,15 @@ SKEmitterNode *_particleSmoke;
 //オブジェクト同士が衝突した場合に動く処理
 - (void)didBeginContact:(SKPhysicsContact *)contact
 {
+    
     //スタートラベルがある時は処理を飛ばす
     if([self childNodeWithName:@"kStartLabel"] != nil){
         return;
     }
 
     
-	//プレイヤーと地面の衝突を検知
+    
+	/**********プレイヤーと地面の衝突を検知**********/
     if([ObjectBitMask playerAndGround:contact]){
         
 
@@ -209,10 +196,11 @@ SKEmitterNode *_particleSmoke;
         
     }
     
-    //地面とプレイヤーの条件分岐終わり
+	/**********プレイヤーと地面の衝突を検知終了**********/
 
+    
 
-    //地面と飛行キャラクターとの条件分岐
+    /**********地面と飛行キャラクターの衝突を検知**********/
     if([ObjectBitMask flyingPlayerAndGround:contact]){
         
         //地面を格納する変数
@@ -229,10 +217,10 @@ SKEmitterNode *_particleSmoke;
         
     }
     
-    //地面と飛行プレイヤーの条件分岐終わり
+    /**********地面と飛行キャラクターの衝突を検知終了**********/
 
     
-    //プレイヤーと壁の衝突判定
+    /**********プレイヤーと壁の衝突を検知**********/
        if([ObjectBitMask playerAndWall:contact]){
            
            //壁の消滅
@@ -249,6 +237,8 @@ SKEmitterNode *_particleSmoke;
            
        }
     
+    /**********プレイヤーと壁の衝突を検知終了**********/
+    
 }
 
 
@@ -258,15 +248,16 @@ SKEmitterNode *_particleSmoke;
 
     
     
-    //地面とセンサーが離れるのを検知
-    if((sensorCategory == contact.bodyA.categoryBitMask || sensorCategory == contact.bodyB.categoryBitMask) && (groundCategory == contact.bodyA.categoryBitMask || groundCategory == contact.bodyB.categoryBitMask)){
+    /**********センサーと地面が離れるのを検知**********/
+    if([ObjectBitMask sensorAndGround:contact]){
         
             SKAction *makeGround = [SKAction sequence: @[[SKAction performSelector:@selector(nextGround) onTarget:self]]];
             [self runAction:makeGround];
-        
-        
-        
+
     }
+    
+    /**********センサーと地面が離れるのを検知終了**********/
+
 
     
 }
