@@ -14,8 +14,11 @@ NSMutableArray *walls;
 
 @interface Wall : NSObject
 
+//壁のノードを返す
 +(SKSpriteNode *)getWall;
+//壁の生成を行う
 +(void)setWallFromNextGround:(SKSpriteNode *) nextGround;
+//壁の移動を行う
 +(void)moveWallGroundDuration:(float)duration;
 
 

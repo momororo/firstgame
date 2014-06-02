@@ -234,8 +234,13 @@ SKEmitterNode *_particleSmoke;
 //オブジェクト同士が離れた際の処理
 - (void)didEndContact:(SKPhysicsContact *)contact
 {
-
     
+    /**********プレイヤーと地面が離れるのを検知**********/
+    if([ObjectBitMask playerAndGround:contact]){
+        [Player setJumpFlagOff];
+    }
+    /**********プレイヤーと地面が離れるのを検知終了**********/
+
     
     /**********センサーと地面が離れるのを検知**********/
     if([ObjectBitMask sensorAndGround:contact]){
@@ -345,60 +350,6 @@ SKEmitterNode *_particleSmoke;
 
 }
 
-//地面を次々に呼ぶ
-//-(void)nextGround{
-
-    /****************************************************/
-    /*
-    SKSpriteNode *wall = [SKSpriteNode spriteNodeWithImageNamed:@"hyouzan"];
-    wall.size = CGSizeMake(wall.frame.size.width/2,wall.frame.size.height/2);
-    
-    int tmp;
-    //   if(arc4random_uniform(2) == 0){
-    tmp = arc4random_uniform(nextGround.size.width/2);
-    // }else{
-    // tmp = -(arc4random_uniform(nextGround.size.width/2));
-    // }
-    
-    wall.position = CGPointMake((self.frame.size.width + nextGround.size.width/2) -(tmp), ((nextGround.size.height/2) + (wall.size.height/2)));
-    [self addChild:wall];
-    
-    wall.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(wall.size.width/3.5, wall.size.height)];
-    wall.physicsBody.restitution = 0;
-    // [wall runAction:[SKAction sequence:@[[SKAction moveToX: -300 + (nextGround.size.width/2) - (tmp)duration:3.0],[SKAction removeFromParent]]]];
-    
-    [wall runAction:[SKAction sequence:@[[SKAction moveToX: -800 + (nextGround.size.width/2) - (tmp)duration:4.0],[SKAction removeFromParent]]]];
-    
-    
-    wall.physicsBody.categoryBitMask = wallCategory;
-    wall.physicsBody.collisionBitMask = groundCategory;// | playerCategory;
-    wall.physicsBody.contactTestBitMask = 0;
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-        /****************************************************/
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-/*
-    }
-}
-*/
 
 
 /***************** パーティクルの設定 *******************/

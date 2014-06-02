@@ -18,10 +18,16 @@ NSMutableArray *nextGrounds;
 
 @interface Ground : NSObject
 
+//Groundのノードを返す
 +(SKSpriteNode *)getGround;
+//nextGroundのノードを返す
 +(SKSpriteNode *)getNextGround;
+//nextGroundを作る。
 +(void)setNextGroundPositionX:(float)positionX;
+//Groundを作る
 +(void)setGroundSizeX:(float)sizeX sizeY:(float)sizeY;
+//Groundの動作を行う
 +(void)moveGroundToX:(float)x duration:(float)duration;
+//nextGroundの動作を行う
 +(void)moveNextGroundDuration:(float)duration;
 @end

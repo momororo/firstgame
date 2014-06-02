@@ -14,7 +14,9 @@ SKSpriteNode *sensor;
 
 @interface Sensor : NSObject
 
+//センサーのノードを返す
 +(SKSpriteNode *)getSensor;
+//センサーの生成をする
 +(void)setSensoFrame:(CGRect)frame;
 
 @end

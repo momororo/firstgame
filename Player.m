@@ -121,5 +121,8 @@
     return player.position;
 }
 
++(void)setJumpFlagOff{
+    jumpFlag = NO;
+}
 
 @end

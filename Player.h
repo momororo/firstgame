@@ -26,12 +26,21 @@ SKAction *jumpSE;
 
 @interface Player : NSObject
 
+//プレイヤーのノードを返す
 +(SKSpriteNode *)getPlayer;
+//プレイヤーを生成する
 +(void)setPlayerPositionX:(float)positionX positionY:(float)positionY;
+//歩く動作を行う
 +(void)walkAction;
+//ジャンプ(ジャンプ中はスマッシュ)動作を行う
 +(void)jumpOrSmashAction;
+//physicsBodyを通常時に設定する
 +(void)setNormalPhysicsBody;
+//physicsBodyをスマッシュ時に設定する
 +(void)setSmashPhysicsBody;
+//プレイヤーの位置情報を取得する
 +(CGPoint)getPlayerPosition;
+//ジャンプフラグをオフに(床からジャンプしなかった場合の処理)
++(void)setJumpFlagOff;
 
 @end
