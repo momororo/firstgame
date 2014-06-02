@@ -32,5 +32,6 @@ SKAction *jumpSE;
 +(void)jumpOrSmashAction;
 +(void)setNormalPhysicsBody;
 +(void)setSmashPhysicsBody;
++(CGPoint)getPlayerPosition;
 
 @end

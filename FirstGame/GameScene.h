@@ -10,6 +10,7 @@
 #import "Player.h"
 #import "Ground.h"
 #import "Wall.h"
+#import "Sensor.h"
 
 #define     kPlayer     @"Player"
 #define     kGround     @"Ground"

@@ -71,21 +71,8 @@ SKEmitterNode *_particleSmoke;
         
         
         //透明のオブジェクトを生成(センサー)
-        SKSpriteNode *sensor = [SKSpriteNode spriteNodeWithColor:[SKColor clearColor] size:CGSizeMake(1,self.frame.size.height)];
-        
-        sensor.name = @"kSensor";
-        sensor.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
-        sensor.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(sensor.size.width,sensor.size.height )];
-        
-        sensor.physicsBody.affectedByGravity = NO;
-        
-        sensor.physicsBody.categoryBitMask = sensorCategory;
-        sensor.physicsBody.collisionBitMask = 0;
-        sensor.physicsBody.contactTestBitMask = groundCategory;
-        
-
-        
-        [self addChild:sensor];
+        [Sensor setSensoFrame:self.frame];
+        [self addChild:[Sensor getSensor]];
         
         //地面の設定
         [Ground setGroundSizeX:self.frame.size.width sizeY:24];
@@ -252,6 +239,7 @@ SKEmitterNode *_particleSmoke;
     
     /**********センサーと地面が離れるのを検知**********/
     if([ObjectBitMask sensorAndGround:contact]){
+        
         //nextGroundの生成
         [Ground setNextGroundPositionX:self.frame.size.width];
         [self addChild:[Ground getNextGround]];
@@ -277,6 +265,10 @@ SKEmitterNode *_particleSmoke;
 //1フレーム毎に動作するメソッド
 -(void)didSimulatePhysics{
     
+    if(gameStart == NO){
+        return;
+    }
+    
     
 //SCOREの更新
     if(gameStart == YES){
@@ -286,83 +278,71 @@ SKEmitterNode *_particleSmoke;
 
     
 //プレイヤーが画面外に落ちた時にゲームオーバーとする処理
-	[self enumerateChildNodesWithName:kPlayer usingBlock:^(SKNode *node, BOOL *stop) {
-		CGPoint pt = [self convertPoint:node.position toNode:self];
-        CGFloat	h = self.size.height;
-        CGFloat	w = self.size.width;
-       
-        //画面外か判定
-		if(pt.y < -(h) || pt.x < (-(w)/2)){
-			//ゲームスタートのフラグをオフにする
-            gameStart = NO;
-            
-            //ゲームオーバー
-            
-            SKLabelNode *endLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-            
-            endLabel.text = @"GAME OVER";
-            endLabel.fontSize = 30;
-            endLabel.name = @"kGameOver";
-            endLabel.position = CGPointMake(CGRectGetMidX(self.frame),
-                                           CGRectGetMidY(self.frame));
-            
-            //ラベル追加
-            [self addChild:endLabel];
-            
-            //キャラクターの削除
-            [node removeFromParent];
-            
-            
-            //地面のスクロールをストップ
-            SKNode *sprite = [self childNodeWithName:kGround];
-            //アクションを削除
-            [sprite removeAllActions];
-            
-            
-            //リトライボタンの追加
-            SKLabelNode *retryLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-            retryLabel.text = @"RETRY";
-            retryLabel.fontSize = 20;
-            retryLabel.name = @"kRetryLabel";
-            //位置調整がうまくいかず。。。。
-            retryLabel.position = CGPointMake(CGRectGetMinX(self.frame),
-                                              CGRectGetMinY(self.frame));
-            retryLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeLeft;
-            [self addChild:retryLabel];
-            
-             
-            
-            
-            //トップ画面の追加
-            SKLabelNode *topLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-            
-            topLabel.text = @"TOP";
-            topLabel.fontSize = 20;
-            topLabel.name = @"kTopLabel";
-            //位置調整がうまくいかず。。。。
-            topLabel.position = CGPointMake(CGRectGetMaxX(self.frame),
-                                            CGRectGetMinY(self.frame));
-            topLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeRight;
+    if([self convertPoint:[Player getPlayerPosition] toNode:self].y < -(self.size.height) ||[self convertPoint:[Player getPlayerPosition] toNode:self].x < (-(self.size.width)/2)){
 
-            [self addChild:topLabel];
-            
-            //SCOREを記録する処理を追記すること
-            
-            return;
-            
-             
-            
-
-            
-        }
+        //ゲームスタートのフラグをオフにする
+        gameStart = NO;
         
-    }];
-    
-    
+        //ゲームオーバー
         
+        SKLabelNode *endLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+        
+        endLabel.text = @"GAME OVER";
+        endLabel.fontSize = 30;
+        endLabel.name = @"kGameOver";
+        endLabel.position = CGPointMake(CGRectGetMidX(self.frame),
+                                        CGRectGetMidY(self.frame));
+        
+        //ラベル追加
+        [self addChild:endLabel];
+        
+        //キャラクターの削除
+        [[Player getPlayer] removeFromParent];
+        
+        
+        //アクションを削除
+        [[Ground getNextGround] removeAllActions];
+        [[Wall getWall] removeAllActions];
+        
+        
+        //リトライボタンの追加
+        SKLabelNode *retryLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+        retryLabel.text = @"RETRY";
+        retryLabel.fontSize = 20;
+        retryLabel.name = @"kRetryLabel";
+        //位置調整がうまくいかず。。。。
+        retryLabel.position = CGPointMake(CGRectGetMinX(self.frame),
+                                          CGRectGetMinY(self.frame));
+        retryLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeLeft;
+        [self addChild:retryLabel];
+        
+        
+        
+        
+        //トップ画面の追加
+        SKLabelNode *topLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+        
+        topLabel.text = @"TOP";
+        topLabel.fontSize = 20;
+        topLabel.name = @"kTopLabel";
+        //位置調整がうまくいかず。。。。
+        topLabel.position = CGPointMake(CGRectGetMaxX(self.frame),
+                                        CGRectGetMinY(self.frame));
+        topLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeRight;
+        
+        [self addChild:topLabel];
+        
+        //SCOREを記録する処理を追記すること
+        
+        return;
+        
+        
+        
+        
+        
+    }
 
 
-    
 }
 
 //地面を次々に呼ぶ

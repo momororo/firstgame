@@ -22,6 +22,9 @@
     player.position = CGPointMake(positionX, positionY);
     [self setNormalPhysicsBody];
     
+    //ジャンプフラグをNoに
+    jumpFlag = NO;
+    
     //効果音の初期設定
     jumpSE = [SKAction playSoundFileNamed:@"jump.wav" waitForCompletion:NO];
 
@@ -39,6 +42,9 @@
     
     //ジャンプ可能フラグをオンに
         jumpFlag = YES;
+        
+    //PhysicsBodyを通常時に
+        [self setNormalPhysicsBody];
     }
     
 }
@@ -110,5 +116,10 @@
 
     
 }
+
++(CGPoint)getPlayerPosition{
+    return player.position;
+}
+
 
 @end
