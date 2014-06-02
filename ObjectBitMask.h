@@ -22,6 +22,11 @@ static const uint32_t flyingPlayerCategory   = 0x1 << 4;
 +(BOOL)flyingPlayerAndGround:(SKPhysicsContact *)contact;
 +(BOOL)flyingPlayerAndWall:(SKPhysicsContact *)contact;
 +(BOOL)sensorAndGround:(SKPhysicsContact *)contact;
++(SKNode *)getPlayerFromContact:(SKPhysicsContact *)contact;
++(SKNode *)getFlyingPlayerFromContact:(SKPhysicsContact *)contact;
++(SKNode *)getGroundFromContact:(SKPhysicsContact *)contact;
++(SKNode *)getWallFromContact:(SKPhysicsContact *)contact;
++(SKNode *)getSensorFromContact:(SKPhysicsContact *)contact;
 
 
 

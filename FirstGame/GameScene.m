@@ -185,39 +185,34 @@ SKEmitterNode *_particleSmoke;
 //オブジェクト同士が衝突した場合に動く処理
 - (void)didBeginContact:(SKPhysicsContact *)contact
 {
+    //スタートラベルがある時は処理を飛ばす
+    if([self childNodeWithName:@"kStartLabel"] != nil){
+        return;
+    }
+
     
-    //ビットマスクの処理がちょっと微妙、、、、(一旦これで妥協、、、)
 	//プレイヤーと地面の衝突を検知
-    if((playerCategory == contact.bodyA.categoryBitMask || playerCategory == contact.bodyB.categoryBitMask) && (groundCategory == contact.bodyA.categoryBitMask || groundCategory == contact.bodyB.categoryBitMask)){
+    if([ObjectBitMask playerAndGround:contact]){
         
-        //地面を格納する変数
-        SKPhysicsBody *ground;
         //プレイヤーを格納する変数
-        SKPhysicsBody *player;
-        
-            if(contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask){
-                ground = contact.bodyA;
-                player = contact.bodyB;
-            }else{
-                ground = contact.bodyB;
-                player = contact.bodyA;
-        }
+        SKPhysicsBody *player = [ObjectBitMask getPlayerFromContact:contact];
+
+        //地面を格納する変数
+        SKPhysicsBody *ground = [ObjectBitMask getGroundFromContact:contact];
         
         //プレイヤーのy座標-プレイヤーの高さ/2→プレイヤーの足元のy座標
         //道路のy座標+道路の高さ/2→道路の表面のy座標
         if((player.node.position.y) - ([player.node calculateAccumulatedFrame].size.height/2) + 2 >= (ground.node.position.y) + ([ground.node calculateAccumulatedFrame].size.height/2) ){
             
-            //スタートラベルがある時は走らないように条件分岐
-            if([self childNodeWithName:@"kStartLabel"] == nil){
-
-                
+            
             //player歩行動作
                 [Player walkAction];
                 
                 return;
-            }
         }
+        
     }
+    
     //地面とプレイヤーの条件分岐終わり
 
     //地面と飛行キャラクターとの条件分岐
