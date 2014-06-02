@@ -26,6 +26,7 @@ SKAction *jumpSE;
 
 @interface Player : NSObject
 
++(SKSpriteNode *)getPlayer;
 +(void)setPlayerPositionX:(float)positionX positionY:(float)positionY;
 +(void)walkAction;
 +(void)jumpOrSmashAction;

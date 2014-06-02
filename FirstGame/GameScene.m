@@ -14,11 +14,6 @@
 //ゲームスタートのフラグ
 BOOL gameStart;
 
-//ジャンプ可否フラグ(YESでジャンプ可能)
-bool jumpFlag;
-    
-//ジャンプ中突進するフラグ
-    BOOL smashFlag;
 //ゲームスタートの時間を記録する変数
     NSDate *startTime;
     
@@ -31,14 +26,6 @@ int groundID;
 //スコアのラベル
 SKLabelNode *scoreLabel;
     
-//効果音
-SKAction *jumpSE;
-
-/******* パラパラアニメの実験 ******/
-SKTexture *_pengin1;
-SKTexture *_pengin2;
-/******* パラパラアニメの実験 ******/
-
 //パーティクル（炎）
 SKEmitterNode *_particleFire;
 //パーティクル（スパーク）
@@ -122,30 +109,12 @@ SKEmitterNode *_particleSmoke;
         
         
         //プレイキャラの設定
-        SKSpriteNode *player = [SKSpriteNode spriteNodeWithImageNamed:@"pengin1.png"];
-        player.size = CGSizeMake(player.size.width/4, player.size.height/4);
-        player.name = kPlayer;
-        player.position = CGPointMake(CGRectGetMidX(self.frame)/2, 100 );
-        [self addChild:player];
-        player.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:player.size];
-        player.physicsBody.allowsRotation = NO;
-        player.physicsBody.affectedByGravity = YES;
-        player.physicsBody.restitution = 0;
-        //player.physicsBody.mass = 0;
-        player.physicsBody.categoryBitMask = playerCategory;
-        player.physicsBody.collisionBitMask = groundCategory | wallCategory;
-        player.physicsBody.contactTestBitMask = groundCategory;
-        
-        //いけるかな？
-    /*    SKAction *makeGround = [SKAction sequence: @[[SKAction performSelector:@selector(nextGround) onTarget:self],
-                                                      [SKAction waitForDuration:1.0 withRange:0.8]]];
-        [self runAction: [SKAction repeatActionForever:makeGround]];
-      */
+        [Player setPlayerPositionX:CGRectGetMidX(self.frame)/2 positionY:100];
+        [self addChild:[Player getPlayer]];
+
         //接触デリゲート
         self.physicsWorld.contactDelegate = self;
         
-        //効果音の初期設定
-        jumpSE = [SKAction playSoundFileNamed:@"jump.wav" waitForCompletion:NO];
         
     }
     
@@ -173,20 +142,9 @@ SKEmitterNode *_particleSmoke;
             
             
             
-            /******* パラパラアニメの実験 ******/
-            SKNode *player = [self childNodeWithName:kPlayer];
-            SKTexture *pengin1 = [SKTexture textureWithImageNamed:@"pengin1"];
-            SKTexture *pengin2 = [SKTexture textureWithImageNamed:@"pengin2"];
-            SKAction *walkPengin = [SKAction animateWithTextures:@[pengin1,pengin2] timePerFrame:0.1];
-            SKAction *walkAction = [SKAction repeatActionForever:walkPengin];
-            [player runAction:walkAction];
+           //プレイヤー歩行開始
+            [Player walkAction];
             
-            /******* パラパラアニメの実験 ******/
-            
-            
-            
-            //ジャンプ可能フラグをオンに
-            jumpFlag = YES;
             //秒数を記録
             startTime = [NSDate date];
         
@@ -194,6 +152,7 @@ SKEmitterNode *_particleSmoke;
         }
         return;
     }
+    
     
     //GameOverラベルがノードにあるときだけ入る処理
     if([self childNodeWithName:@"kGameOver"]){
@@ -217,58 +176,10 @@ SKEmitterNode *_particleSmoke;
 
     
     
-    if(jumpFlag == YES){
-        
-        //ジャンプ処理
-        SKNode *sprite = [self childNodeWithName:kPlayer];
-        sprite.physicsBody.velocity = CGVectorMake(0, 700);
-        
-        /******* パラパラアニメの実験 ******/
-        SKTexture *pengin3 = [SKTexture textureWithImageNamed:@"pengin3"];
-        SKTexture *pengin4 = [SKTexture textureWithImageNamed:@"pengin4"];
-        SKAction *jumpPengin = [SKAction animateWithTextures:@[pengin3,pengin4] timePerFrame:0.1];
-        SKAction *jumpAction = [SKAction repeatActionForever:jumpPengin];
-        [sprite runAction:jumpAction];
-        
-        /******* パラパラアニメの実験 ******/
-        
-        
-        
-        [self runAction:jumpSE];
-        
-        //ジャンプ可能フラグをNOにする
-        jumpFlag = NO;
-        //突進可能フラグをYESにする
-        smashFlag = YES;
-        return;
-    }
+
+    //ジャンプ or スマッシュ
+    [Player jumpOrSmashAction];
     
-    if (jumpFlag == NO && smashFlag == YES) {
-        
-        //突進処理
-        SKNode *sprite = [self childNodeWithName:kPlayer];
-        sprite.physicsBody.velocity = CGVectorMake(0, -300);
-        
-        SKTexture *pengin5 = [SKTexture textureWithImageNamed:@"pengin5"];
-        SKAction *smashPengin = [SKAction animateWithTextures:@[pengin5] timePerFrame:0.1];
-        SKAction *smashAction = [SKAction repeatActionForever:smashPengin];
-        [sprite runAction:smashAction];
-        smashFlag = NO;
-        
-        //突進用のビットマスクに変更
-        sprite.physicsBody.categoryBitMask = flyingPlayerCategory;
-        sprite.physicsBody.collisionBitMask = groundCategory;
-        sprite.physicsBody.contactTestBitMask = wallCategory | groundCategory;
-        
-        //炎のパーティクルを出す
-        //処理が重いため保留
-        //[self makeFireParticle:sprite.position];
-        
-
-         
-        return;
-    }
-
 }
 
 //オブジェクト同士が衝突した場合に動く処理
@@ -295,25 +206,14 @@ SKEmitterNode *_particleSmoke;
         //プレイヤーのy座標-プレイヤーの高さ/2→プレイヤーの足元のy座標
         //道路のy座標+道路の高さ/2→道路の表面のy座標
         if((player.node.position.y) - ([player.node calculateAccumulatedFrame].size.height/2) + 2 >= (ground.node.position.y) + ([ground.node calculateAccumulatedFrame].size.height/2) ){
-            jumpFlag = YES;
-            smashFlag = NO;
-            
-            //ビットマスクを通常状態に
-            player.node.physicsBody.categoryBitMask = playerCategory;
             
             //スタートラベルがある時は走らないように条件分岐
             if([self childNodeWithName:@"kStartLabel"] == nil){
 
-            
-                /******* パラパラアニメの実験 ******/
-                SKNode *player = [self childNodeWithName:kPlayer];
-                SKTexture *pengin1 = [SKTexture textureWithImageNamed:@"pengin1"];
-                SKTexture *pengin2 = [SKTexture textureWithImageNamed:@"pengin2"];
-                SKAction *walkPengin = [SKAction animateWithTextures:@[pengin1,pengin2] timePerFrame:0.1];
-                SKAction *walkAction = [SKAction repeatActionForever:walkPengin];
-                [player runAction:walkAction];
-            
-                /******* パラパラアニメの実験 ******/
+                
+            //player歩行動作
+                [Player walkAction];
+                
                 return;
             }
         }
@@ -341,24 +241,11 @@ SKEmitterNode *_particleSmoke;
         //プレイヤーのy座標-プレイヤーの高さ/2→プレイヤーの足元のy座標
         //道路のy座標+道路の高さ/2→道路の表面のy座標
         if((player.node.position.y) - ([player.node calculateAccumulatedFrame].size.height/2) + 2 >= (ground.node.position.y) + ([ground.node calculateAccumulatedFrame].size.height/2) ){
-            jumpFlag = YES;
-            smashFlag = NO;
+
+            //player歩行動作
+            [Player walkAction];
             
-            //ビットマスクをもとに戻す
-            player.node.physicsBody.categoryBitMask = playerCategory;
-            player.node.physicsBody.contactTestBitMask = wallCategory;
-            
-                
-                /******* パラパラアニメの実験 ******/
-                SKNode *player = [self childNodeWithName:kPlayer];
-                SKTexture *pengin1 = [SKTexture textureWithImageNamed:@"pengin1"];
-                SKTexture *pengin2 = [SKTexture textureWithImageNamed:@"pengin2"];
-                SKAction *walkPengin = [SKAction animateWithTextures:@[pengin1,pengin2] timePerFrame:0.1];
-                SKAction *walkAction = [SKAction repeatActionForever:walkPengin];
-                [player runAction:walkAction];
-                
-                /******* パラパラアニメの実験 ******/
-                return;
+            return;
             }
         }
     
@@ -377,25 +264,10 @@ SKEmitterNode *_particleSmoke;
                [self makeSparkParticle:contact.contactPoint];
            }
 
-           
-           //ジャンプフラグをON
-           jumpFlag = YES;
-           
-           /******* パラパラアニメの実験 ******/
-           SKNode *player = [self childNodeWithName:kPlayer];
-           SKTexture *pengin1 = [SKTexture textureWithImageNamed:@"pengin1"];
-           SKTexture *pengin2 = [SKTexture textureWithImageNamed:@"pengin2"];
-           SKAction *walkPengin = [SKAction animateWithTextures:@[pengin1,pengin2] timePerFrame:0.1];
-           SKAction *walkAction = [SKAction repeatActionForever:walkPengin];
-           [player runAction:walkAction];
-           
-           /******* パラパラアニメの実験 ******/
-           
-           //ビットマスクをもとに戻す
-           player.physicsBody.categoryBitMask = playerCategory;
-           player.physicsBody.collisionBitMask = groundCategory | wallCategory;
-           player.physicsBody.contactTestBitMask = groundCategory;
 
+           //player歩行動作
+           [Player walkAction];
+           
            return;
 
            
@@ -408,11 +280,6 @@ SKEmitterNode *_particleSmoke;
 - (void)didEndContact:(SKPhysicsContact *)contact
 {
 
-
-    if(contact.bodyA.categoryBitMask == playerCategory ||contact.bodyB.categoryBitMask == playerCategory){
-        jumpFlag = NO;
-        smashFlag = YES;
-    }
     
     
     //地面とセンサーが離れるのを検知
