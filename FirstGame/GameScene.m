@@ -15,7 +15,7 @@
 BOOL gameStart;
 
 //ゲームスタートの時間を記録する変数
-    NSDate *startTime;
+NSDate *startTime;
     
 //スタートのラベル
 SKLabelNode *startLabel;
