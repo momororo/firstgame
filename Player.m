@@ -10,4 +10,20 @@
 
 @implementation Player
 
++(void)setPlayerPositionX:(float)positionX positionY:(float)positionY{
+    
+}
++(void)walkAction{
+    
+}
++(void)jumpOrSmashAction{
+    
+}
++(void)setNormalPhysicsBody{
+    
+}
++(void)setSmashPhysicsBody{
+    
+}
+
 @end
