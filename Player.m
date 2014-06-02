@@ -100,6 +100,14 @@
     player.physicsBody.contactTestBitMask = groundCategory;
 }
 +(void)setSmashPhysicsBody{
+    player.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:player.size];
+    player.physicsBody.allowsRotation = NO;
+    player.physicsBody.affectedByGravity = YES;
+    player.physicsBody.restitution = 0;
+    player.physicsBody.categoryBitMask = flyingPlayerCategory;
+    player.physicsBody.collisionBitMask = groundCategory;
+    player.physicsBody.contactTestBitMask = groundCategory;
+
     
 }
 

@@ -112,6 +112,8 @@ SKEmitterNode *_particleSmoke;
     UITouch *touch = [touches anyObject];
     CGPoint location = [touch locationInNode:self];
     
+    
+    
     //スタートラベルがノードにあるときだけ入る処理
     if([self childNodeWithName:@"kStartLabel"]){
         if ([startLabel containsPoint:location]) {
@@ -250,9 +252,19 @@ SKEmitterNode *_particleSmoke;
     
     /**********センサーと地面が離れるのを検知**********/
     if([ObjectBitMask sensorAndGround:contact]){
+        //nextGroundの生成
+        [Ground setNextGroundPositionX:self.frame.size.width];
+        [self addChild:[Ground getNextGround]];
         
-            SKAction *makeGround = [SKAction sequence: @[[SKAction performSelector:@selector(nextGround) onTarget:self]]];
-            [self runAction:makeGround];
+        //nextGroundを基に壁を生成
+        [Wall setWallFromNextGround:[Ground getNextGround]];
+        [self addChild:[Wall getWall]];
+        
+        //nextGroundの動作
+        [Ground moveNextGroundDuration:4.0];
+        //wallの動作
+        [Wall moveWallGroundDuration:4.0];
+        
 
     }
     
@@ -354,119 +366,57 @@ SKEmitterNode *_particleSmoke;
 }
 
 //地面を次々に呼ぶ
--(void)nextGround{
-    if (gameStart == YES) {
-        
-        //NSArray *ground = @[@"ground1",@"ground2",@"groud3"];
-        
-        //groundID = arc4random()%2;
-        SKSpriteNode *nextGround = [SKSpriteNode spriteNodeWithImageNamed:@"ground2"];
-        
-       // nextGround.userData = [@{@"tekito":@(skRand(400,800))}mutableCopy];
-        
-        //skRand(50,100));
-        
-        //床の長さ調整実験
-        //nextGround.size = CGSizeMake(100 + arc4random_uniform(151),50+arc4random_uniform(101));
-        nextGround.size = CGSizeMake(300 + arc4random_uniform(551),50+arc4random_uniform(101));
+//-(void)nextGround{
 
-
-        nextGround.position = CGPointMake((self.frame.size.width + (nextGround.size.width/2) ),0);
-        
-        [self addChild:nextGround];
- 
-        nextGround.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(nextGround.size.width, nextGround.size.height)];
-        nextGround.physicsBody.restitution = 0;
-        //nextGround.physicsBody.restitution = skRandBound();
-        nextGround.physicsBody.affectedByGravity = NO;
-        
-        
-        
-        //[nextGround runAction:[SKAction sequence:@[[SKAction moveToX: -300 + (nextGround.size.width/2)duration:3.0],[SKAction removeFromParent]]]];
-        [nextGround runAction:[SKAction sequence:@[[SKAction moveToX: -800 + (nextGround.size.width/2)duration:4.0],[SKAction removeFromParent]]]];
-        
-        
-        
-        
-        //接触設定
-        //カテゴリー
-        nextGround.physicsBody.categoryBitMask = groundCategory;
-        //接触できるオブジェクト
-        nextGround.physicsBody.collisionBitMask =  0;
-        //ヒットテストするオブジェクト
-        nextGround.physicsBody.contactTestBitMask = 0;
-        
-        
-        /****************************************************/
-        SKSpriteNode *wall = [SKSpriteNode spriteNodeWithImageNamed:@"hyouzan"];
-        wall.size = CGSizeMake(wall.frame.size.width/2,wall.frame.size.height/2);
-        
-        int tmp;
-     //   if(arc4random_uniform(2) == 0){
-        tmp = arc4random_uniform(nextGround.size.width/2);
-       // }else{
-       // tmp = -(arc4random_uniform(nextGround.size.width/2));
-       // }
-        
-        wall.position = CGPointMake((self.frame.size.width + nextGround.size.width/2) -(tmp), ((nextGround.size.height/2) + (wall.size.height/2)));
-        [self addChild:wall];
-        
-        wall.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(wall.size.width/3.5, wall.size.height)];
-        wall.physicsBody.restitution = 0;
-       // [wall runAction:[SKAction sequence:@[[SKAction moveToX: -300 + (nextGround.size.width/2) - (tmp)duration:3.0],[SKAction removeFromParent]]]];
-        
-        [wall runAction:[SKAction sequence:@[[SKAction moveToX: -800 + (nextGround.size.width/2) - (tmp)duration:4.0],[SKAction removeFromParent]]]];
-        
-        
-        wall.physicsBody.categoryBitMask = wallCategory;
-        wall.physicsBody.collisionBitMask = groundCategory;// | playerCategory;
-        wall.physicsBody.contactTestBitMask = 0;
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        /****************************************************/
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-    }
-}
-
-/*使用していないためコメント化（最終的に消します）
-static inline CGFloat skRand(CGFloat low,CGFloat high){
-    CGFloat res = skRandf() * ((high - low) + low);
-    return  res;
-}
-*/
-
-
-/*使用していないためコメント化（最終的に消します）
-static inline CGFloat skRandf(){
-    return rand() / (CGFloat) RAND_MAX;
-}
-*/
-
-/*
-static inline CGFloat skRandBound()
-{
+    /****************************************************/
+    /*
+    SKSpriteNode *wall = [SKSpriteNode spriteNodeWithImageNamed:@"hyouzan"];
+    wall.size = CGSizeMake(wall.frame.size.width/2,wall.frame.size.height/2);
     
-    CGFloat rand = (CGFloat)arc4random_uniform(51)/100;
-    return rand;
+    int tmp;
+    //   if(arc4random_uniform(2) == 0){
+    tmp = arc4random_uniform(nextGround.size.width/2);
+    // }else{
+    // tmp = -(arc4random_uniform(nextGround.size.width/2));
+    // }
+    
+    wall.position = CGPointMake((self.frame.size.width + nextGround.size.width/2) -(tmp), ((nextGround.size.height/2) + (wall.size.height/2)));
+    [self addChild:wall];
+    
+    wall.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(wall.size.width/3.5, wall.size.height)];
+    wall.physicsBody.restitution = 0;
+    // [wall runAction:[SKAction sequence:@[[SKAction moveToX: -300 + (nextGround.size.width/2) - (tmp)duration:3.0],[SKAction removeFromParent]]]];
+    
+    [wall runAction:[SKAction sequence:@[[SKAction moveToX: -800 + (nextGround.size.width/2) - (tmp)duration:4.0],[SKAction removeFromParent]]]];
+    
+    
+    wall.physicsBody.categoryBitMask = wallCategory;
+    wall.physicsBody.collisionBitMask = groundCategory;// | playerCategory;
+    wall.physicsBody.contactTestBitMask = 0;
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        /****************************************************/
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+/*
+    }
 }
 */
 

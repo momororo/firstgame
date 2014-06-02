@@ -11,10 +11,16 @@
 @implementation Ground
 
 
+//グラウンドのNodeを返す
 +(SKSpriteNode *)getGround{
     return ground;
 }
 
++(SKSpriteNode *)getNextGround{
+    return nextGrounds[nextGrounds.count-1];
+}
+
+//グラウンドの初期設定
 +(void)setGroundSizeX:(float)sizeX sizeY:(float)sizeY{
 
     
@@ -34,14 +40,54 @@
     
 }
 
+//グラウンドの動作を設定
 +(void)moveGroundToX:(float)x duration:(float)duration{
-    
+
     [ground runAction:[SKAction repeatActionForever:
                         [SKAction sequence:@[[SKAction moveToX:x duration:duration],
                                              [SKAction removeFromParent]]]]];
 
     
 }
+
+//
++(void)setNextGroundPositionX:(float)positionX{
+
+    if(nextGrounds == nil){
+        nextGrounds = [NSMutableArray new];
+    }
+    
+    SKSpriteNode *nextGround = [SKSpriteNode spriteNodeWithImageNamed:@"ground2"];
+    
+
+    //床の長さ
+    nextGround.size = CGSizeMake(300 + arc4random_uniform(551),50+arc4random_uniform(101));
+    
+    nextGround.position =CGPointMake (positionX + (nextGround.size.width/2),0);
+    
+    nextGround.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(nextGround.size.width, nextGround.size.height)];
+    nextGround.physicsBody.restitution = 0;
+    nextGround.physicsBody.affectedByGravity = NO;
+    
+    //カテゴリー
+    nextGround.physicsBody.categoryBitMask = groundCategory;
+    //接触できるオブジェクト
+    nextGround.physicsBody.collisionBitMask =  0;
+    //ヒットテストするオブジェクト
+    nextGround.physicsBody.contactTestBitMask = 0;
+    
+    [nextGrounds addObject:nextGround];
+    
+    
+}
+
++(void)moveNextGroundDuration:(float)duration{
+    SKSpriteNode *nextGround = nextGrounds[nextGrounds.count-1];
+    [nextGround
+     runAction:[SKAction sequence:@[[SKAction moveToX: -800 + (nextGround.size.width/2)duration:duration],[SKAction removeFromParent]]]];
+}
+
+
 
 
 @end
