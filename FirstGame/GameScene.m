@@ -211,7 +211,7 @@ SKEmitterNode *_particleSmoke;
 
     
     /**********プレイヤーと壁の衝突を検知**********/
-       if([ObjectBitMask playerAndWall:contact]){
+       if([ObjectBitMask flyingPlayerAndWall:contact]){
            
            //壁の消滅
             [[ObjectBitMask getWallFromContact:contact] removeFromParent];
