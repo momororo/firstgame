@@ -177,6 +177,9 @@ SKEmitterNode *_particleSmoke;
         
         //接触位置 + 2 >= 地面の上面
         if( contact.contactPoint.y + 2 >= (ground.position.y) + ([ground calculateAccumulatedFrame].size.height/2) ){
+            NSLog(@"%f",contact.contactPoint.y);
+            NSLog(@"%f",(ground.position.y) + ([ground calculateAccumulatedFrame].size.height/2));
+            
             
             //player歩行動作
                 [Player walkAction];
