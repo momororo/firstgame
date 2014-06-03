@@ -11,6 +11,8 @@
 #import "ObjectBitMask.h"
 
 NSMutableArray *walls;
+//効果音
+SKAction *bombSE;
 
 @interface Wall : NSObject
 
@@ -20,6 +22,10 @@ NSMutableArray *walls;
 +(void)setWallFromNextGround:(SKSpriteNode *) nextGround;
 //壁の移動を行う
 +(void)moveWallGroundDuration:(float)duration;
-
-
+//壁の初期化
++(void)initWalls;
+//アクションを終えた壁の削除
++(void)removeOldWall;
+//攻撃を受けた壁の削除
++(void)removeAttackedWall:(SKNode *)AttackedWall;
 @end

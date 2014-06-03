@@ -22,6 +22,12 @@ SKLabelNode *startLabel;
     
 //スコアのラベル
 SKLabelNode *scoreLabel;
+
+//飛行時間のラベル
+SKLabelNode *flyingLabel;
+    
+//飛行開始のラベル
+SKLabelNode *startFlyingLabel;
     
 //パーティクル（炎）
 SKEmitterNode *_particleFire;
@@ -78,6 +84,9 @@ SKEmitterNode *_particleSmoke;
         //地面の設定
         [Ground setGroundSizeX:self.frame.size.width sizeY:24];
         [self addChild:[Ground getGround]];
+        
+        //壁の設定(初期化)
+        [Wall initWalls];
         
         
         //プレイキャラの設定
@@ -177,9 +186,6 @@ SKEmitterNode *_particleSmoke;
         
         //接触位置 + 2 >= 地面の上面
         if( contact.contactPoint.y + 2 >= (ground.position.y) + ([ground calculateAccumulatedFrame].size.height/2) ){
-            NSLog(@"%f",contact.contactPoint.y);
-            NSLog(@"%f",(ground.position.y) + ([ground calculateAccumulatedFrame].size.height/2));
-            
             
             //player歩行動作
                 [Player walkAction];
@@ -217,13 +223,15 @@ SKEmitterNode *_particleSmoke;
        if([ObjectBitMask flyingPlayerAndWall:contact]){
            
            //壁の消滅
-            [[ObjectBitMask getWallFromContact:contact] removeFromParent];
+            [Wall removeAttackedWall:[ObjectBitMask getWallFromContact:contact]];
            //パーティクルの発生
             [self makeSparkParticle:contact.contactPoint];
 
 
            //player歩行動作
            [Player walkAction];
+           //カウントアップ
+           [Player countUpFlyPoint];
            
            return;
 
@@ -283,6 +291,46 @@ SKEmitterNode *_particleSmoke;
     if(gameStart == YES){
     scoreLabel.text = [NSString stringWithFormat:@"SCORE = %.1fm",(float)[[NSDate date] timeIntervalSinceDate:startTime] * 2];
  
+    }
+    
+//FlyinFlagがYesの際に行う処理
+    if([Player getFlyFlag]  == YES){
+        
+        //フライングラベルを生成
+        if([Player getFlyPoint] == 500){
+            
+            //フライングスタートのラベルを生成
+            startFlyingLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+            startFlyingLabel.text = [NSString stringWithFormat:@"I can fly!!"];
+            startFlyingLabel.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
+            [self addChild:startFlyingLabel];
+            
+            //飛行時間の表示
+            flyingLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+            flyingLabel.text = [NSString stringWithFormat:@"%d",[Player getFlyPoint]];
+            flyingLabel.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)/2);
+            [self addChild:flyingLabel];
+            
+
+        }
+        
+        //フライングスタートラベルの削除
+        if([Player getFlyPoint] == 400){
+            [startFlyingLabel removeFromParent];
+        }
+        
+        //飛行時間のカウントダウン
+        [Player countDownFlyPoint];
+        
+        //時間の更新
+        flyingLabel.text = [NSString stringWithFormat:@"%d",[Player getFlyPoint]];
+        
+        if([Player getFlyFlag] == NO){
+            [flyingLabel removeFromParent];
+        }
+        
+        
+        
     }
 
     
@@ -347,7 +395,11 @@ SKEmitterNode *_particleSmoke;
         
     }
     
-    /*配列に追加している部分を毎フレーム削除判定するかは検討中*/
+    
+    //アクションを終えたオブジェクトを削除していく
+    [Ground removeOldNextGround];
+    [Wall removeOldWall];
+    
 
 
 }

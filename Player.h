@@ -21,8 +21,15 @@ SKPhysicsBody *smashPhyicsBody;
 BOOL jumpFlag;
 //スマッシュフラグ
 BOOL smashFlag;
+//flyポイント
+int flyPoint;
+//flyフラグ
+BOOL flyFlag;
+
+
 //ジャンプ音
 SKAction *jumpSE;
+
 
 @interface Player : NSObject
 
@@ -42,5 +49,15 @@ SKAction *jumpSE;
 +(CGPoint)getPlayerPosition;
 //ジャンプフラグをオフに(床からジャンプしなかった場合の処理)
 +(void)setJumpFlagOff;
+//フライトポイントを100ずつ足し算
++(void)countUpFlyPoint;
+//フライポイントの減算を行う(0になった場合はYESを返す)
++(BOOL)countDownFlyPoint;
+//フライポイントを返す
++(int)getFlyPoint;
+//フライフラグを返す
++(BOOL)getFlyFlag;
+//プレイヤーの初期化
++(void)initPlayer;
 
 @end

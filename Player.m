@@ -22,8 +22,8 @@
     player.position = CGPointMake(positionX, positionY);
     [self setNormalPhysicsBody];
     
-    //ジャンプフラグをNoに
-    jumpFlag = NO;
+    //フラグ等の初期化
+    [self initPlayer];
     
     //効果音の初期設定
     jumpSE = [SKAction playSoundFileNamed:@"jump.wav" waitForCompletion:NO];
@@ -93,6 +93,17 @@
         
         return;
     }
+    
+    //フライングモード
+    if(flyFlag == YES && jumpFlag == NO && smashFlag == NO){
+        player.physicsBody.velocity = CGVectorMake(0, 500);
+        
+        SKTexture *pengin3 = [SKTexture textureWithImageNamed:@"pengin3"];
+        SKTexture *pengin4 = [SKTexture textureWithImageNamed:@"pengin4"];
+        SKAction *jumpPengin = [SKAction animateWithTextures:@[pengin3,pengin4] timePerFrame:0.1];
+        [player runAction:[SKAction repeatActionForever:jumpPengin]];
+
+    }
 
     
 }
@@ -124,5 +135,57 @@
 +(void)setJumpFlagOff{
     jumpFlag = NO;
 }
+
++(void)countUpFlyPoint{
+    
+    //飛んでいないときのみカウントアップ
+    if(flyFlag == NO){
+        flyPoint = flyPoint + 100;
+    }
+
+    if (flyPoint == 500) {
+        flyFlag = YES;
+        jumpFlag = NO;
+        smashFlag = NO;
+    }
+    
+}
+
+//フライポイントの減算を行う(0になった場合はYESを返す)
++(BOOL)countDownFlyPoint{
+    
+    flyPoint--;
+    
+    
+    if(flyPoint == 0){
+        flyFlag = NO;
+        return YES;
+    }
+    
+    return NO;
+}
+
+//フライポイントを返す
++(int)getFlyPoint{
+    return flyPoint;
+    
+}
+
+//フライフラグを返す
++(BOOL)getFlyFlag{
+    return flyFlag;
+}
+
+//プレイヤーの初期化
++(void)initPlayer{
+    
+    jumpFlag = NO;
+    smashFlag = NO;
+    flyPoint = NO;
+    flyFlag = 0;
+}
+
+
+
 
 @end

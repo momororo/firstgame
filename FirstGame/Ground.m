@@ -36,6 +36,9 @@
     ground.physicsBody.categoryBitMask = groundCategory;
     ground.physicsBody.collisionBitMask = 0;
     ground.physicsBody.contactTestBitMask = 0;
+    
+    //ネクストグラウンドの初期化
+    [self initGounds];
 
     
 }
@@ -50,7 +53,7 @@
     
 }
 
-//
+//ネクストグラウンドの設定
 +(void)setNextGroundPositionX:(float)positionX{
 
     if(nextGrounds == nil){
@@ -86,6 +89,28 @@
     [nextGround
      runAction:[SKAction sequence:@[[SKAction moveToX: -800 + (nextGround.size.width/2)duration:duration],[SKAction removeFromParent]]]];
 }
+
+
+//グラウンドクラスの初期化
+//グラウンド配列のみ
++(void)initGounds{
+    nextGrounds = nil;
+}
+
+//アクションを終えたネクストグラウンドの削除
++(void)removeOldNextGround{
+    
+    if([nextGrounds[0] hasActions] == NO){
+        [nextGrounds removeObjectAtIndex:0];
+        
+        //配列が0になった後に床が生成されると落ちる可能性があるため、念のため
+        if(nextGrounds.count == 0){
+            nextGrounds = nil;
+        }
+    }
+    
+}
+
 
 
 

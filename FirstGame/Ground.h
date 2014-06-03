@@ -30,4 +30,9 @@ NSMutableArray *nextGrounds;
 +(void)moveGroundToX:(float)x duration:(float)duration;
 //nextGroundの動作を行う
 +(void)moveNextGroundDuration:(float)duration;
+//グラウンドの初期化
++(void)initGounds;
+//アクションを終えたネクストグラウンドの削除
++(void)removeOldNextGround;
+
 @end
