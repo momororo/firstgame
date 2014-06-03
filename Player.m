@@ -102,7 +102,7 @@
         SKTexture *pengin4 = [SKTexture textureWithImageNamed:@"pengin4"];
         SKAction *jumpPengin = [SKAction animateWithTextures:@[pengin3,pengin4] timePerFrame:0.1];
         [player runAction:[SKAction repeatActionForever:jumpPengin]];
-
+        
     }
 
     
