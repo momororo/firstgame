@@ -74,12 +74,31 @@
         
         [player runAction:jumpSE];
         
-        //ジャンプ可能フラグをNOにする
-        jumpFlag = NO;
-        //突進可能フラグをYESにする
-        smashFlag = YES;
         
+        //スマッシュフラグがオフのとき
+        if(flyFlag == NO){
+        //ジャンプ可能フラグをNOにする
+            jumpFlag = NO;
+        //突進可能フラグをYESにする
+            smashFlag = YES;
+            
         return;
+
+        }
+        
+        //スマッシュフラグがオンのとき
+        //フライング時はスマッシュできないようにフラグを調整する。
+        if(smashFlag == YES){
+            //ジャンプ可能フラグをNOにする
+            jumpFlag = NO;
+            //突進可能フラグをNOにする
+            smashFlag = NO;
+            
+            return;
+        }
+        
+        
+        
     }
     
     if (jumpFlag == NO && smashFlag == YES) {
