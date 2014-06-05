@@ -10,10 +10,17 @@
 
 @implementation Player
 
+//プレイヤーのノードを返す
 +(SKSpriteNode *)getPlayer{
     return player;
 }
 
+//フライングフラグを返す
++(BOOL)getFlyFlag{
+    return flyFlag;
+}
+
+//プレイヤーの初期配置
 +(void)setPlayerPositionX:(float)positionX positionY:(float)positionY{
     //プレイキャラの設定
     player = [SKSpriteNode spriteNodeWithImageNamed:@"pengin1.png"];
@@ -30,6 +37,8 @@
 
     
 }
+
+//歩行動作
 +(void)walkAction{
     
     if(jumpFlag == NO){
@@ -49,7 +58,7 @@
     
 }
 
-
+//ジャンプ(スマッシュ)アクション(フラグで分岐)
 +(void)jumpOrSmashAction{
     
     if(jumpFlag == YES){
@@ -96,6 +105,10 @@
     
     //フライングモード
     if(flyFlag == YES && jumpFlag == NO && smashFlag == NO){
+        //氷を壊すことがあるので都度都度通常状態に戻す
+        //この処理をvelocity設定の後に行うと、velocityが初期化され、飛べなくなる。
+        [self setNormalPhysicsBody];
+        
         player.physicsBody.velocity = CGVectorMake(0, 500);
         
         SKTexture *pengin3 = [SKTexture textureWithImageNamed:@"pengin3"];
@@ -107,6 +120,8 @@
 
     
 }
+
+//physicsBodyを通常状態にする
 +(void)setNormalPhysicsBody{
     player.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:player.size];
     player.physicsBody.allowsRotation = NO;
@@ -116,6 +131,8 @@
     player.physicsBody.collisionBitMask = groundCategory | wallCategory;
     player.physicsBody.contactTestBitMask = groundCategory;
 }
+
+//physicsBodyをスマッシュ状態にする
 +(void)setSmashPhysicsBody{
     player.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:player.size];
     player.physicsBody.allowsRotation = NO;
@@ -128,14 +145,17 @@
     
 }
 
+//プレイヤーのポジションを返す
 +(CGPoint)getPlayerPosition{
     return player.position;
 }
 
+//ジャンプフラグをオフにする
 +(void)setJumpFlagOff{
     jumpFlag = NO;
 }
 
+//フライポイントをカウントアップにする
 +(void)countUpFlyPoint{
     
     //飛んでいないときのみカウントアップ
@@ -172,7 +192,7 @@
 }
 
 //フライフラグを返す
-+(BOOL)getFlyFlag{
++(BOOL)getFlylag{
     return flyFlag;
 }
 
@@ -184,8 +204,6 @@
     flyPoint = NO;
     flyFlag = 0;
 }
-
-
 
 
 @end

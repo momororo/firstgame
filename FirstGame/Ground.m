@@ -84,6 +84,7 @@
     
 }
 
+//nextGroundを移動する
 +(void)moveNextGroundDuration:(float)duration{
     SKSpriteNode *nextGround = nextGrounds[nextGrounds.count-1];
     [nextGround
