@@ -33,11 +33,7 @@ SKLabelNode *startFlyingLabel;
 SKEmitterNode *_particleFire;
 //パーティクル（スパーク）
 SKEmitterNode *_particleSpark;
-//パーティクル（ボム）
-SKEmitterNode *_particleBom;
-//パーティクル（スモーク）
-SKEmitterNode *_particleSmoke;
-    
+
 }
 
 -(id)initWithSize:(CGSize)size {
@@ -92,6 +88,9 @@ SKEmitterNode *_particleSmoke;
         //プレイキャラの設定
         [Player setPlayerPositionX:CGRectGetMidX(self.frame)/2 positionY:100];
         [self addChild:[Player getPlayer]];
+        
+        //魚の設定
+        [Fish setFishPositionX:CGRectGetMaxX(self.frame)+fish.size.width positionY:arc4random_uniform(200)];
 
         //接触デリゲート
         self.physicsWorld.contactDelegate = self;
@@ -218,7 +217,7 @@ SKEmitterNode *_particleSmoke;
     
     /**********地面と飛行キャラクターの衝突を検知終了**********/
 
-    
+
     /**********プレイヤーと壁の衝突を検知**********/
        if([ObjectBitMask flyingPlayerAndWall:contact]){
            
@@ -311,8 +310,6 @@ SKEmitterNode *_particleSmoke;
             flyingLabel.text = [NSString stringWithFormat:@"%d",[Player getFlyPoint]];
             flyingLabel.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)/2);
             [self addChild:flyingLabel];
-            
-
         }
         
         //フライングスタートラベルの削除

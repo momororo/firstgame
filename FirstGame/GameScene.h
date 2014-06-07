@@ -12,11 +12,12 @@
 #import "Wall.h"
 #import "Sensor.h"
 #import "Sea.h"
+#import "Fish.h"
 
 #define     kPlayer     @"Player"
 #define     kGround     @"Ground"
 #define     kWall       @"Wall"
-
+#define     kFish       @"Fish"
 
 
 @interface GameScene : SKScene <SKPhysicsContactDelegate>
