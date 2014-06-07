@@ -11,18 +11,24 @@
 #import "ObjectBitMask.h"
 #import "Player.h"
 
-//魚のノード
-SKSpriteNode *fish;
+//魚のノード配列
+NSMutableArray *fishes;
 
 @interface Fish : NSObject
 
-//fishのノードを返す
-+(SKSpriteNode *)getFish;
+//fishのノード配列を返す
++(NSMutableArray *)getFishes;
 
-//fishを作る
+//fish配列を作る
 +(void)setFishPositionX:(float)positionX PositionY:(float)positionY;
 
-+(void)removeFish:(SKNode *)goodbyFish;
+//fishの動きを設定する
++(void)moveFish;
 
+//画面外のfishノードの削除
++(void)removeFish;
+
+//食べられた魚の削除
++(void)removeEatenFish:(SKNode *)EatenFish;
 
 @end

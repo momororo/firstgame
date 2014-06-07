@@ -90,11 +90,8 @@ SKEmitterNode *_particleSpark;
         //プレイキャラの設定
         [Player setPlayerPositionX:CGRectGetMidX(self.frame)/2 positionY:100];
         [self addChild:[Player getPlayer]];
-        
-        //魚の設定
-        [Fish setFishPositionX:(CGRectGetMaxX(self.frame) + fish.size.width) PositionY:arc4random_uniform(300)];
-        SKAction *makeFish = [SKAction sequence: @[[SKAction performSelector:@selector(addFish) onTarget:self],[SKAction waitForDuration:0.8 withRange:0.6]]];
-        [self runAction: [SKAction repeatActionForever:makeFish]];
+
+
         
         
         //接触デリゲート
@@ -249,7 +246,7 @@ SKEmitterNode *_particleSpark;
     /**********プレイヤーと魚の衝突を検知**************/
     if ([ObjectBitMask playerAndFish:contact]) {
         //魚の消滅
-        [Fish removeFish:[ObjectBitMask getFishFromContact:contact]];
+        [Fish removeEatenFish:[ObjectBitMask getFishFromContact:contact]];
         return;
     }
     
@@ -281,7 +278,7 @@ SKEmitterNode *_particleSpark;
         //nextGroundの動作
         [Ground moveNextGroundDuration:4.0];
         //wallの動作
-        [Wall moveWallGroundDuration:4.0];
+        [Wall moveWallDuration:4.0];
         
 
     }
@@ -340,6 +337,20 @@ SKEmitterNode *_particleSpark;
             [flyingLabel removeFromParent];
         }
         
+        if([Player getFlyPoint] % 50 == 0){
+            //魚の生成
+            [Fish setFishPositionX:CGRectGetMaxX(self.frame)  PositionY:arc4random_uniform(300)];
+
+            //魚の配列をget
+            NSMutableArray * fishes = [Fish getFishes];
+            //魚の配列をノードに追加する
+            for(int tmp = 0 ;tmp < fishes.count ; tmp++){
+                [self addChild:fishes[tmp]];
+            }
+            
+            //魚を動かす
+            [Fish moveFish];
+        }
         
         
     }
@@ -411,6 +422,8 @@ SKEmitterNode *_particleSpark;
     [Ground removeOldNextGround];
     [Wall removeOldWall];
     
+    //画面外のオブジェクトを削除していく
+    [Fish removeFish];
 
 
 }
@@ -443,38 +456,6 @@ SKEmitterNode *_particleSpark;
     }
     _particleSpark.position = point;
 }
-
-
--(void)addFish{
-    if ([Player getFlyFlag] == YES) {
-        
-        [self addChild:[Fish getFish]];
-        
-        /*
-        SKSpriteNode *fish;
-        fish = [SKSpriteNode spriteNodeWithTexture:_fishTexture];
-        fish.position = CGPointMake((self.frame.size.width + fish.size.width/2),arc4random_uniform(300));
-        fish.name = kFish;
-        
-        //物理シュミレーション
-        fish.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:fish.size];
-        [self addChild:fish];
-        
-        //接触設定
-        //カテゴリー(隕石)
-        fish.physicsBody.categoryBitMask = fishCategory;
-        //ヒットテストするオブジェクト(宇宙船/ミサイル)
-        fish.physicsBody.contactTestBitMask = playerCategory;
-        //接触できるオブジェクト(宇宙船/ミサイル)
-        fish.physicsBody.collisionBitMask = playerCategory;
-        //下方向に回転させて発射
-        fish.physicsBody.velocity = CGVectorMake(-800,500);
-        [fish.physicsBody applyTorque:0.04];      //回転
-*/
-    }
-}
-
-
 
 
 

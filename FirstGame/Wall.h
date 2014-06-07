@@ -21,7 +21,7 @@ SKAction *bombSE;
 //壁の生成を行う
 +(void)setWallFromNextGround:(SKSpriteNode *) nextGround;
 //壁の移動を行う
-+(void)moveWallGroundDuration:(float)duration;
++(void)moveWallDuration:(float)duration;
 //壁の初期化
 +(void)initWalls;
 //アクションを終えた壁の削除
