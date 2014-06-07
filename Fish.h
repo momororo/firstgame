@@ -8,19 +8,21 @@
 
 #import <Foundation/Foundation.h>
 #import <SpriteKit/SpriteKit.h>
+#import "ObjectBitMask.h"
+#import "Player.h"
 
-//魚ノード
+//魚のノード
 SKSpriteNode *fish;
-
 
 @interface Fish : NSObject
 
-//魚ノードを返す
+//fishのノードを返す
 +(SKSpriteNode *)getFish;
-//魚を作成する
-+(void)setFishPositionX:(float)positionX positionY:(float)positionY;
-//跳ねる動作を行う
-+(void)hopFish;
+
+//fishを作る
++(void)setFishPositionX:(float)positionX PositionY:(float)positionY;
+
++(void)removeFish:(SKNode *)goodbyFish;
 
 
 @end

@@ -70,6 +70,15 @@
     
 }
 
+//プレイヤーと魚か判定する
++(BOOL)playerAndFish:(SKPhysicsContact *)contact{
+    if((playerCategory == contact.bodyA.categoryBitMask || playerCategory == contact.bodyB.categoryBitMask) && (fishCategory == contact.bodyA.categoryBitMask || fishCategory == contact.bodyB.categoryBitMask)){
+        return YES;
+    }
+    
+    return NO;
+}
+
 //以下、contactからget○○From部のノードを返すメソッド
 +(SKNode *)getPlayerFromContact:(SKPhysicsContact *)contact{
     if(playerCategory == contact.bodyA.categoryBitMask){
@@ -114,6 +123,14 @@
     }
 
     
+}
+
++(SKNode *)getFishFromContact:(SKPhysicsContact *)contact{
+    if (fishCategory == contact.bodyA.categoryBitMask) {
+        return contact.bodyA.node;
+    }else{
+        return contact.bodyB.node;
+    }
 }
 
 

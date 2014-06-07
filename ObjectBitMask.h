@@ -21,6 +21,8 @@ static const uint32_t fishCategory   = 0x1 << 5;
 +(BOOL)playerAndGround:(SKPhysicsContact *)contact;
 //プレイヤーと壁の衝突判定をする
 +(BOOL)playerAndWall:(SKPhysicsContact *)contact;
+//プレイヤーと魚の衝突判定をする
++(BOOL)playerAndFish:(SKPhysicsContact *)contact;
 //スマッシュプレイヤーと地面の衝突判定をする
 +(BOOL)flyingPlayerAndGround:(SKPhysicsContact *)contact;
 //スマッシュプレイヤーと壁の衝突判定をする
@@ -37,7 +39,7 @@ static const uint32_t fishCategory   = 0x1 << 5;
 +(SKNode *)getWallFromContact:(SKPhysicsContact *)contact;
 //受け取ったコンタクトからセンサーのノードを返す
 +(SKNode *)getSensorFromContact:(SKPhysicsContact *)contact;
-
-
+//受け取ったコンタクトから魚のノードを返す
++(SKNode *)getFishFromContact:(SKPhysicsContact *)contact;
 
 @end

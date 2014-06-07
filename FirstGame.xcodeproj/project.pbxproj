@@ -15,8 +15,8 @@
 		04B8544F193CA30D00F000A8 /* Sensor.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B8544E193CA30D00F000A8 /* Sensor.m */; };
 		04B85452193CAB9400F000A8 /* Sea.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B85451193CAB9400F000A8 /* Sea.m */; };
 		A471A28C1942FB28002E1EAD /* bakuhatu.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A471A28B1942FB28002E1EAD /* bakuhatu.mp3 */; };
-		A471A28F1942FE14002E1EAD /* Fish.m in Sources */ = {isa = PBXBuildFile; fileRef = A471A28E1942FE14002E1EAD /* Fish.m */; };
 		A471A29119430B16002E1EAD /* Fish.png in Resources */ = {isa = PBXBuildFile; fileRef = A471A29019430B16002E1EAD /* Fish.png */; };
+		A4A1049019434F19003182DD /* Fish.m in Sources */ = {isa = PBXBuildFile; fileRef = A4A1048F19434F19003182DD /* Fish.m */; };
 		A4A1BA5E192B43BB00805339 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4A1BA5D192B43BB00805339 /* Foundation.framework */; };
 		A4A1BA60192B43BB00805339 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4A1BA5F192B43BB00805339 /* CoreGraphics.framework */; };
 		A4A1BA62192B43BB00805339 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4A1BA61192B43BB00805339 /* UIKit.framework */; };
@@ -81,9 +81,9 @@
 		04B85450193CAB9400F000A8 /* Sea.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sea.h; sourceTree = "<group>"; };
 		04B85451193CAB9400F000A8 /* Sea.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Sea.m; sourceTree = "<group>"; };
 		A471A28B1942FB28002E1EAD /* bakuhatu.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bakuhatu.mp3; sourceTree = "<group>"; };
-		A471A28D1942FE14002E1EAD /* Fish.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fish.h; sourceTree = "<group>"; };
-		A471A28E1942FE14002E1EAD /* Fish.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Fish.m; sourceTree = "<group>"; };
 		A471A29019430B16002E1EAD /* Fish.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Fish.png; sourceTree = "<group>"; };
+		A4A1048E19434F19003182DD /* Fish.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Fish.h; path = ../Fish.h; sourceTree = "<group>"; };
+		A4A1048F19434F19003182DD /* Fish.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Fish.m; path = ../Fish.m; sourceTree = "<group>"; };
 		A4A1BA5A192B43BB00805339 /* FirstGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FirstGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4A1BA5D192B43BB00805339 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A4A1BA5F192B43BB00805339 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -193,8 +193,8 @@
 			children = (
 				04B85447193C80A600F000A8 /* Ground.h */,
 				04B85448193C80A600F000A8 /* Ground.m */,
-				A471A28D1942FE14002E1EAD /* Fish.h */,
-				A471A28E1942FE14002E1EAD /* Fish.m */,
+				A4A1048E19434F19003182DD /* Fish.h */,
+				A4A1048F19434F19003182DD /* Fish.m */,
 				04B85444193C73F500F000A8 /* Player.h */,
 				04B85445193C73F500F000A8 /* Player.m */,
 				04B8544D193CA30D00F000A8 /* Sensor.h */,
@@ -393,7 +393,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A4A1BA79192B43BB00805339 /* TitleScene.m in Sources */,
-				A471A28F1942FE14002E1EAD /* Fish.m in Sources */,
+				A4A1049019434F19003182DD /* Fish.m in Sources */,
 				A4A1BAA7192B44E800805339 /* GameView.m in Sources */,
 				A4A1BA76192B43BB00805339 /* ViewController.m in Sources */,
 				04B8544C193C93FF00F000A8 /* Wall.m in Sources */,

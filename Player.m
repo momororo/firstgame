@@ -148,7 +148,7 @@
     player.physicsBody.restitution = 0;
     player.physicsBody.categoryBitMask = playerCategory;
     player.physicsBody.collisionBitMask = groundCategory | wallCategory;
-    player.physicsBody.contactTestBitMask = groundCategory;
+    player.physicsBody.contactTestBitMask = groundCategory | fishCategory;
 }
 
 //physicsBodyをスマッシュ状態にする

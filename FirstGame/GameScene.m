@@ -33,6 +33,8 @@ SKLabelNode *startFlyingLabel;
 SKEmitterNode *_particleFire;
 //パーティクル（スパーク）
 SKEmitterNode *_particleSpark;
+    
+    //SKTexture *_fishTexture;
 
 }
 
@@ -90,8 +92,11 @@ SKEmitterNode *_particleSpark;
         [self addChild:[Player getPlayer]];
         
         //魚の設定
-        [Fish setFishPositionX:CGRectGetMaxX(self.frame)+fish.size.width positionY:arc4random_uniform(200)];
-
+        [Fish setFishPositionX:(CGRectGetMaxX(self.frame) + fish.size.width) PositionY:arc4random_uniform(300)];
+        SKAction *makeFish = [SKAction sequence: @[[SKAction performSelector:@selector(addFish) onTarget:self],[SKAction waitForDuration:0.8 withRange:0.6]]];
+        [self runAction: [SKAction repeatActionForever:makeFish]];
+        
+        
         //接触デリゲート
         self.physicsWorld.contactDelegate = self;
         
@@ -239,6 +244,14 @@ SKEmitterNode *_particleSpark;
        }
     
     /**********プレイヤーと壁の衝突を検知終了**********/
+    
+    
+    /**********プレイヤーと魚の衝突を検知**************/
+    if ([ObjectBitMask playerAndFish:contact]) {
+        //魚の消滅
+        [Fish removeFish:[ObjectBitMask getFishFromContact:contact]];
+        return;
+    }
     
 }
 
@@ -432,8 +445,34 @@ SKEmitterNode *_particleSpark;
 }
 
 
-
-
+-(void)addFish{
+    if ([Player getFlyFlag] == YES) {
+        
+        [self addChild:[Fish getFish]];
+        
+        /*
+        SKSpriteNode *fish;
+        fish = [SKSpriteNode spriteNodeWithTexture:_fishTexture];
+        fish.position = CGPointMake((self.frame.size.width + fish.size.width/2),arc4random_uniform(300));
+        fish.name = kFish;
+        
+        //物理シュミレーション
+        fish.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:fish.size];
+        [self addChild:fish];
+        
+        //接触設定
+        //カテゴリー(隕石)
+        fish.physicsBody.categoryBitMask = fishCategory;
+        //ヒットテストするオブジェクト(宇宙船/ミサイル)
+        fish.physicsBody.contactTestBitMask = playerCategory;
+        //接触できるオブジェクト(宇宙船/ミサイル)
+        fish.physicsBody.collisionBitMask = playerCategory;
+        //下方向に回転させて発射
+        fish.physicsBody.velocity = CGVectorMake(-800,500);
+        [fish.physicsBody applyTorque:0.04];      //回転
+*/
+    }
+}
 
 
 
