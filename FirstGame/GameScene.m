@@ -223,9 +223,10 @@ SKEmitterNode *_particleSmoke;
        if([ObjectBitMask flyingPlayerAndWall:contact]){
            
            //壁の消滅
-            [Wall removeAttackedWall:[ObjectBitMask getWallFromContact:contact]];
+           [Wall removeAttackedWall:[ObjectBitMask getWallFromContact:contact]];
            //パーティクルの発生
-            [self makeSparkParticle:contact.contactPoint];
+           [self makeSparkParticle:contact.contactPoint];
+           [self runAction:bombSE];
 
 
            //player歩行動作
