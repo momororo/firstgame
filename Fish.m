@@ -25,8 +25,8 @@
     }
     
     
-    //乱数で生成する数を決める
-    int fishValue = arc4random_uniform(30);
+    //乱数で生成する数を決める。0が出たらどうなるかわからないので1プラスしてます。
+    int fishValue = arc4random_uniform(30) + 1;
     
     for(int tmp = 0 ; tmp < fishValue ; tmp++){
        SKSpriteNode *fish = [SKSpriteNode spriteNodeWithImageNamed:@"Fish.png"];
