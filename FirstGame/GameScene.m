@@ -33,9 +33,11 @@ SKLabelNode *startFlyingLabel;
 SKEmitterNode *_particleFire;
 //パーティクル（スパーク）
 SKEmitterNode *_particleSpark;
-    
-    //SKTexture *_fishTexture;
 
+//魚追加中のフラグ
+BOOL fishAdd;
+    
+    
 }
 
 -(id)initWithSize:(CGSize)size {
@@ -340,6 +342,9 @@ SKEmitterNode *_particleSpark;
         if([Player getFlyPoint] % 50 == 0){
             //魚の生成
             [Fish setFishPositionX:CGRectGetMaxX(self.frame)  PositionY:arc4random_uniform(300)];
+            
+            //魚の追加処理開始
+            fishAdd = YES;
 
             //魚の配列をget
             NSMutableArray * fishes = [Fish getFishes];
@@ -352,6 +357,9 @@ SKEmitterNode *_particleSpark;
             
             //魚を動かす
             [Fish moveFish];
+            
+            //魚の追加処理終了
+            fishAdd = NO;
         }
         
         
@@ -425,7 +433,9 @@ SKEmitterNode *_particleSpark;
     [Wall removeOldWall];
     
     //画面外のオブジェクトを削除していく
-    [Fish removeFish];
+    if (fishAdd == NO) {
+        [Fish removeFish];
+    }
 
 
 }

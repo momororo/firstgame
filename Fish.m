@@ -40,7 +40,7 @@
     for(int tmp = 0 ; tmp < fishQuantity ; tmp++){
        SKSpriteNode *fish = [SKSpriteNode spriteNodeWithImageNamed:@"Fish.png"];
         //出現位置を乱数で少しずらす
-        fish.position = CGPointMake(positionX + fish.size.width + arc4random_uniform(200),positionY + arc4random_uniform(90));
+        fish.position = CGPointMake(positionX + fish.size.width + arc4random_uniform(300),positionY + arc4random_uniform(130));
         
         fish.name = @"kFish";
         
