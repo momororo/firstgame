@@ -14,10 +14,16 @@
 //魚のノード配列
 NSMutableArray *fishes;
 
+//登録した魚の数を返す
+int fishQuantity;
+
 @interface Fish : NSObject
 
 //fishのノード配列を返す
 +(NSMutableArray *)getFishes;
+
+//追加した魚の数量を返す
++(int)getFishQuantity;
 
 //fish配列を作る
 +(void)setFishPositionX:(float)positionX PositionY:(float)positionY;

@@ -37,7 +37,7 @@
     wall.physicsBody.contactTestBitMask = flyingPlayerCategory;
     
     //効果音の初期設定
-    bombSE = [SKAction playSoundFileNamed:@"bakuhatu.mp3" waitForCompletion:NO];
+    bombSE = [SKAction playSoundFileNamed:@"attackedWall.mp3" waitForCompletion:NO];
     
     [walls addObject:wall];
     
@@ -79,6 +79,10 @@
     for (int i = 0; i < walls.count; i++) {
         
         if(AttackedWall == walls[i]){
+            
+            //壁の爆発音
+            [walls[i] runAction:bombSE];
+
             //親ノードから削除
             [walls[i] removeFromParent];
             //配列から削除

@@ -343,9 +343,11 @@ SKEmitterNode *_particleSpark;
 
             //魚の配列をget
             NSMutableArray * fishes = [Fish getFishes];
+            //魚の数量をget
+            int fishQuantity = [Fish getFishQuantity];
             //魚の配列をノードに追加する
-            for(int tmp = 0 ;tmp < fishes.count ; tmp++){
-                [self addChild:fishes[tmp]];
+            for(int tmp = 0;tmp < fishQuantity ; tmp++){
+                [self addChild:fishes[fishes.count - tmp - 1]];
             }
             
             //魚を動かす

@@ -12,9 +12,18 @@
 
 @implementation Fish
 
+//魚のノードを返す
 +(NSMutableArray *)getFishes{
     return fishes;
 }
+
+//追加した魚の数量を返す
++(int)getFishQuantity{
+    
+    return fishQuantity;
+}
+
+
 
 +(void)setFishPositionX:(float)positionX PositionY:(float)positionY{
     
@@ -26,9 +35,9 @@
     
     
     //乱数で生成する数を決める。0が出たらどうなるかわからないので1プラスしてます。
-    int fishValue = arc4random_uniform(30) + 1;
+    fishQuantity = arc4random_uniform(30) + 1;
     
-    for(int tmp = 0 ; tmp < fishValue ; tmp++){
+    for(int tmp = 0 ; tmp < fishQuantity ; tmp++){
        SKSpriteNode *fish = [SKSpriteNode spriteNodeWithImageNamed:@"Fish.png"];
         //出現位置を乱数で少しずらす
         fish.position = CGPointMake(positionX + fish.size.width + arc4random_uniform(200),positionY + arc4random_uniform(90));
