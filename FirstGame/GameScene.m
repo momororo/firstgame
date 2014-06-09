@@ -22,6 +22,9 @@ SKLabelNode *startLabel;
     
 //スコアのラベル
 SKLabelNode *scoreLabel;
+    
+//魚を食べた時の加点
+int fishPoint;
 
 //飛行時間のラベル
 SKLabelNode *flyingLabel;
@@ -61,6 +64,7 @@ BOOL fishAdd;
 
         
         //スコアラベル
+        fishPoint = 0;
         scoreLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
         scoreLabel.text = @"SCORE = 0";
         scoreLabel.fontSize = 20;
@@ -249,6 +253,8 @@ BOOL fishAdd;
     if ([ObjectBitMask playerAndFish:contact]) {
         //魚の消滅
         [Fish removeEatenFish:[ObjectBitMask getFishFromContact:contact]];
+        //魚加点
+        fishPoint = fishPoint + 10;
         return;
     }
     
@@ -301,7 +307,7 @@ BOOL fishAdd;
     
 //SCOREの更新
     if(gameStart == YES){
-    scoreLabel.text = [NSString stringWithFormat:@"SCORE = %.1fm",(float)[[NSDate date] timeIntervalSinceDate:startTime] * 2];
+    scoreLabel.text = [NSString stringWithFormat:@"SCORE = %.1f",(float)[[NSDate date] timeIntervalSinceDate:startTime] * 2 + fishPoint];
  
     }
     
