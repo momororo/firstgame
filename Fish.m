@@ -40,7 +40,7 @@
     for(int tmp = 0 ; tmp < fishQuantity ; tmp++){
        SKSpriteNode *fish = [SKSpriteNode spriteNodeWithImageNamed:@"Fish.png"];
         //出現位置を乱数で少しずらす
-        fish.position = CGPointMake(positionX + fish.size.width + arc4random_uniform(50) - arc4random_uniform(50),positionY + arc4random_uniform(30) - arc4random_uniform(30));
+        fish.position = CGPointMake(positionX,positionY);
         
         fish.name = @"kFish";
         
@@ -71,8 +71,8 @@
 
 +(void)moveFish{
     
-    for(int tmp; tmp < fishes.count;tmp++){
-        SKSpriteNode *fish = fishes[tmp];
+    for(int tmp = 0; tmp < fishQuantity;tmp++){
+        SKSpriteNode *fish = fishes[fishes.count - tmp - 1];
         fish.physicsBody.velocity = CGVectorMake(-800,500);
         [fish.physicsBody applyTorque:0.04];      //回転
     }
