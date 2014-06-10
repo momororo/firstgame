@@ -347,7 +347,7 @@ BOOL fishAdd;
         
         if([Player getFlyPoint] % 50 == 0){
             //魚の生成
-            [Fish setFishPositionX:CGRectGetMaxX(self.frame)+ 200  PositionY:arc4random_uniform(300)+100];
+            [Fish setFishPositionX:CGRectGetMaxX(self.frame) PositionY:CGRectGetMaxY(self.frame)];
             
             //魚の追加処理開始
             fishAdd = YES;
@@ -359,6 +359,7 @@ BOOL fishAdd;
             //魚の配列をノードに追加する
             for(int tmp = 0;tmp < fishQuantity ; tmp++){
                 [self addChild:fishes[fishes.count - tmp - 1]];
+
             }
             
             //魚を動かす
