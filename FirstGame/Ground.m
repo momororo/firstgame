@@ -65,9 +65,9 @@
 
     //床の長さ
     //nextGround.size = CGSizeMake(300 + arc4random_uniform(551),50+arc4random_uniform(101));
-    nextGround.size = CGSizeMake(nextGround.size.width,nextGround.size.height);
+    nextGround.size = CGSizeMake(nextGround.size.width/2,nextGround.size.height/2);
     
-    nextGround.position =CGPointMake (positionX + (nextGround.size.width/2),10);
+    nextGround.position =CGPointMake (positionX + (nextGround.size.width/2),0);
     
     nextGround.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(nextGround.size.width, nextGround.size.height/2)];
     nextGround.physicsBody.restitution = 0;
