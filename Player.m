@@ -24,7 +24,7 @@
 +(void)setPlayerPositionX:(float)positionX positionY:(float)positionY{
     //プレイキャラの設定
     player = [SKSpriteNode spriteNodeWithImageNamed:@"pengin1.png"];
-    player.size = CGSizeMake(player.size.width/4, player.size.height/4);
+    player.size = CGSizeMake(player.size.width/5, player.size.height/5);
     player.name = @"kPlayer";
     player.position = CGPointMake(positionX, positionY);
     [self setNormalPhysicsBody];
@@ -64,7 +64,7 @@
     if(jumpFlag == YES){
         
         //ジャンプ処理
-        player.physicsBody.velocity = CGVectorMake(0, 700);
+        player.physicsBody.velocity = CGVectorMake(0, 600);
         
         //ジャンプモーション
         SKTexture *pengin3 = [SKTexture textureWithImageNamed:@"pengin3"];
