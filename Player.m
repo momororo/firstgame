@@ -64,7 +64,7 @@
     if(jumpFlag == YES){
         
         //ジャンプ処理
-        player.physicsBody.velocity = CGVectorMake(0, 600);
+        player.physicsBody.velocity = CGVectorMake(0, 650);
         
         //ジャンプモーション
         SKTexture *pengin3 = [SKTexture textureWithImageNamed:@"pengin3"];
