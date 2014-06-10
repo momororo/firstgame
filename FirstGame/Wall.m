@@ -29,6 +29,8 @@
     rand = arc4random_uniform(nextGround.size.width/2);
     
     wall.position = CGPointMake(nextGround.position.x -(rand), ((nextGround.size.height/2) + (wall.size.height/2)));
+    wall.zPosition = 50;
+    
     wall.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(wall.size.width/3.5, wall.size.height)];
     wall.physicsBody.restitution = 0;
     

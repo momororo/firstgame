@@ -68,6 +68,7 @@
     nextGround.size = CGSizeMake(nextGround.size.width/2,nextGround.size.height/2);
     
     nextGround.position =CGPointMake (positionX + (nextGround.size.width/2),0);
+    nextGround.zPosition = 40;
     
     nextGround.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(nextGround.size.width, nextGround.size.height/2)];
     nextGround.physicsBody.restitution = 0;

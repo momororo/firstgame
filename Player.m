@@ -27,6 +27,7 @@
     player.size = CGSizeMake(player.size.width/4, player.size.height/4);
     player.name = @"kPlayer";
     player.position = CGPointMake(positionX, positionY);
+    player.zPosition = 50;
     [self setNormalPhysicsBody];
     
     //フラグ等の初期化
@@ -149,6 +150,7 @@
     player.physicsBody.categoryBitMask = playerCategory;
     player.physicsBody.collisionBitMask = groundCategory | wallCategory;
     player.physicsBody.contactTestBitMask = groundCategory | fishCategory;
+    
 }
 
 //physicsBodyをスマッシュ状態にする
