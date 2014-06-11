@@ -181,7 +181,7 @@ BOOL fishAdd;
     if([self childNodeWithName:@"kStartLabel"] != nil){
         return;
     }
-
+    
     
     
 	/**********プレイヤーと地面の衝突を検知**********/
@@ -192,7 +192,7 @@ BOOL fishAdd;
         SKNode *ground = [ObjectBitMask getGroundFromContact:contact];
         
         //接触位置 + 2 >= 地面の上面
-        if( contact.contactPoint.y + 2 >= (ground.position.y) + ([ground calculateAccumulatedFrame].size.height/2) ){
+        if( contact.contactPoint.y + 2 >= (ground.position.y) + ([ground calculateAccumulatedFrame].size.height/8) ){
             
             //player歩行動作
                 [Player walkAction];
@@ -213,7 +213,7 @@ BOOL fishAdd;
         SKNode *ground = [ObjectBitMask getGroundFromContact:contact];
         
         //接触位置 + 2 >= 地面の上面
-        if(contact.contactPoint.y + 2 >= (ground.position.y) + ([ground calculateAccumulatedFrame].size.height/2) ){
+        if( contact.contactPoint.y + 2 >= (ground.position.y) + ([ground calculateAccumulatedFrame].size.height/8) ){
             
             //player歩行動作
             [Player walkAction];

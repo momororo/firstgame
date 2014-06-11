@@ -60,12 +60,30 @@
         nextGrounds = [NSMutableArray new];
     }
     
-    SKSpriteNode *nextGround = [SKSpriteNode spriteNodeWithImageNamed:@"ground2"];
+    SKSpriteNode *nextGround;
+    
+    switch (arc4random_uniform(4)) {
+        case 0 :
+            nextGround = [SKSpriteNode spriteNodeWithImageNamed:@"ground1"];
+            break;
+        case 1:
+            nextGround = [SKSpriteNode spriteNodeWithImageNamed:@"ground2"];
+            break;
+        case 2:
+            nextGround = [SKSpriteNode spriteNodeWithImageNamed:@"ground3"];
+            break;
+        case 3:
+            nextGround = [SKSpriteNode spriteNodeWithImageNamed:@"ground3"];
+            break;
+    }
+    
     
 
     //床の長さ
     //nextGround.size = CGSizeMake(300 + arc4random_uniform(551),50+arc4random_uniform(101));
     nextGround.size = CGSizeMake(nextGround.size.width/2,nextGround.size.height/2);
+    nextGround.name = @"kGround";
+
     
     nextGround.position =CGPointMake (positionX + (nextGround.size.width/2),0);
     nextGround.zPosition = 40;
