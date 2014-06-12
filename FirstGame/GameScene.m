@@ -76,8 +76,8 @@ BOOL fishAdd;
 
         
         //海
-        [Sea setSeaFrame:self.frame];
-        [self addChild:[Sea getSea]];
+        //[Sea setSeaFrame:self.frame];
+        //[self addChild:[Sea getSea]];
         
         
         
