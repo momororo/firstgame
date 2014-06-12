@@ -24,12 +24,14 @@
 +(void)setGroundSizeX:(float)sizeX sizeY:(float)sizeY{
 
     
-    ground = [SKSpriteNode spriteNodeWithColor:[SKColor brownColor]
-                                                        size:CGSizeMake(sizeX,sizeY)];
+    //ground = [SKSpriteNode spriteNodeWithColor:[SKColor brownColor]
+    //                                                    size:CGSizeMake(sizeX,sizeY)];
+    ground = [SKSpriteNode spriteNodeWithImageNamed:@"ground4.png"];
+    ground.size = CGSizeMake(ground.size.width/2, ground.size.height/4);
     ground.name = @"kGround";
     ground.position = CGPointMake(ground.size.width/2,ground.size.height/2);
     
-    ground.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(ground.size.width, ground.size.height)];
+    ground.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(ground.size.width, ground.size.height/2)];
     ground.physicsBody.affectedByGravity = NO;
     ground.physicsBody.restitution = 0;
     
@@ -73,7 +75,7 @@
             nextGround = [SKSpriteNode spriteNodeWithImageNamed:@"ground3"];
             break;
         case 3:
-            nextGround = [SKSpriteNode spriteNodeWithImageNamed:@"ground3"];
+            nextGround = [SKSpriteNode spriteNodeWithImageNamed:@"ground4"];
             break;
     }
     

@@ -86,7 +86,7 @@ BOOL fishAdd;
         [self addChild:[Sensor getSensor]];
         
         //地面の設定
-        [Ground setGroundSizeX:self.frame.size.width sizeY:24];
+        [Ground setGroundSizeX:ground.size.width sizeY:ground.size.height];
         [self addChild:[Ground getGround]];
         
         //壁の設定(初期化)
