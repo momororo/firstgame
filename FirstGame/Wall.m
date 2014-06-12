@@ -25,10 +25,12 @@
     SKSpriteNode *wall = [SKSpriteNode spriteNodeWithImageNamed:@"hyouzan"];
     wall.size = CGSizeMake(wall.frame.size.width/2,wall.frame.size.height/2);
     
-    int rand;
-    rand = arc4random_uniform(nextGround.size.width/2);
+    randam = arc4random_uniform(nextGround.size.width/2);
     
-    wall.position = CGPointMake(nextGround.position.x -(rand), ((nextGround.size.height/2) + (wall.size.height/2)));
+    //移動に使う変数に保存
+    nextGroundWidth = nextGround.size.width;
+    
+    wall.position = CGPointMake(nextGround.position.x -(randam), ((nextGround.size.height/2) + (wall.size.height/2)));
     wall.zPosition = 50;
     
     wall.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(wall.size.width/3.5, wall.size.height)];
@@ -49,7 +51,7 @@
 +(void)moveWallDuration:(float)duration{
         SKSpriteNode *wall = walls[walls.count-1];
         [wall
-         runAction:[SKAction sequence:@[[SKAction moveToX: -800 + (wall.size.width/2)duration:duration],[SKAction removeFromParent]]]];
+         runAction:[SKAction sequence:@[[SKAction moveToX: -800 + (nextGroundWidth/2) - randam duration:duration],[SKAction removeFromParent]]]];
     
 }
 

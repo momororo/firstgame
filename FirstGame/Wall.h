@@ -13,6 +13,10 @@
 NSMutableArray *walls;
 //効果音
 SKAction *bombSE;
+//ランダム係数(位置調整)
+int randam;
+//newGroundの幅(位置調整)
+int nextGroundWidth;
 
 @interface Wall : NSObject
 
