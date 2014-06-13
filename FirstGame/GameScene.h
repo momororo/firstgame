@@ -13,6 +13,7 @@
 #import "Sensor.h"
 #import "Sea.h"
 #import "Fish.h"
+#import "Island.h"
 
 
 #define     kPlayer     @"Player"

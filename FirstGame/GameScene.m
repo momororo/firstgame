@@ -76,8 +76,14 @@ BOOL fishAdd;
 
         
         //海
-        //[Sea setSeaFrame:self.frame];
-        //[self addChild:[Sea getSea]];
+        [Sea setSeaFrame:self.frame];
+        [self addChild:[Sea getSea]];
+        
+        //背景の島
+        [Island setIsland1Frame:self.frame];
+        [self addChild:[Island getIsland1]];
+        [Island setIsland2Frame:self.frame];
+        [self addChild:[Island getIsland2]];
         
         
         
@@ -124,6 +130,8 @@ BOOL fishAdd;
             
             //スタートボタンがタップされたら、地面が移動する
             [Ground moveGroundToX:(-300 - (self.frame.size.width / 2)) duration:3.0];
+            [Island moveIsland1];
+            [Island moveIsland2];
 
             //スタートラベルの削除
             [startLabel removeFromParent];
