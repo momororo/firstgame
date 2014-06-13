@@ -85,6 +85,12 @@ BOOL fishAdd;
         [self addChild:islands[0]];
         [self addChild:islands[1]];
         
+        //背景の雲
+        [Cloud setCloudInitFrame:self.frame];
+        NSMutableArray *clouds = [Cloud getCloudInit];
+        [self addChild:clouds[0]];
+        [self addChild:clouds[1]];
+        
         
         //透明のオブジェクトを生成(センサー)
         [Sensor setSensoFrame:self.frame];
@@ -130,6 +136,7 @@ BOOL fishAdd;
             //スタートボタンがタップされたら、地面が移動する
             [Ground moveGroundToX:(-300 - (self.frame.size.width / 2)) duration:3.0];
             [Island moveIslandInit];
+            [Cloud moveCloudInit];
 
             //スタートラベルの削除
             [startLabel removeFromParent];
@@ -451,6 +458,13 @@ BOOL fishAdd;
         [self addChild:[Island getIslands]];
         [Island moveIsland];
         
+    }
+    
+    if ([Cloud removeCloud] == YES) {
+        //背景画像の更新
+        [Cloud setCloudInitFrame:self.frame];
+        [self addChild:[Cloud getClouds]];
+        [Cloud moveCloud];
     }
     
     

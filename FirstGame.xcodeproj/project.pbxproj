@@ -31,6 +31,8 @@
 		A4A104DD1949E549003182DD /* Island.m in Sources */ = {isa = PBXBuildFile; fileRef = A4A104DC1949E549003182DD /* Island.m */; };
 		A4A104E41949EA9E003182DD /* Island2.png in Resources */ = {isa = PBXBuildFile; fileRef = A4A104E21949EA9E003182DD /* Island2.png */; };
 		A4A104E51949EA9E003182DD /* Island1.png in Resources */ = {isa = PBXBuildFile; fileRef = A4A104E31949EA9E003182DD /* Island1.png */; };
+		A4A104E8194B252F003182DD /* Cloud.m in Sources */ = {isa = PBXBuildFile; fileRef = A4A104E7194B252F003182DD /* Cloud.m */; };
+		A4A104EA194B2C1F003182DD /* nami.png in Resources */ = {isa = PBXBuildFile; fileRef = A4A104E9194B2C1F003182DD /* nami.png */; };
 		A4A1BA5E192B43BB00805339 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4A1BA5D192B43BB00805339 /* Foundation.framework */; };
 		A4A1BA60192B43BB00805339 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4A1BA5F192B43BB00805339 /* CoreGraphics.framework */; };
 		A4A1BA62192B43BB00805339 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4A1BA61192B43BB00805339 /* UIKit.framework */; };
@@ -106,6 +108,9 @@
 		A4A104DC1949E549003182DD /* Island.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Island.m; sourceTree = "<group>"; };
 		A4A104E21949EA9E003182DD /* Island2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Island2.png; sourceTree = "<group>"; };
 		A4A104E31949EA9E003182DD /* Island1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Island1.png; sourceTree = "<group>"; };
+		A4A104E6194B252F003182DD /* Cloud.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cloud.h; sourceTree = "<group>"; };
+		A4A104E7194B252F003182DD /* Cloud.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cloud.m; sourceTree = "<group>"; };
+		A4A104E9194B2C1F003182DD /* nami.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nami.png; sourceTree = "<group>"; };
 		A4A1BA5A192B43BB00805339 /* FirstGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FirstGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4A1BA5D192B43BB00805339 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A4A1BA5F192B43BB00805339 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -227,6 +232,8 @@
 				04B85451193CAB9400F000A8 /* Sea.m */,
 				A4A104DB1949E549003182DD /* Island.h */,
 				A4A104DC1949E549003182DD /* Island.m */,
+				A4A104E6194B252F003182DD /* Cloud.h */,
+				A4A104E7194B252F003182DD /* Cloud.m */,
 				04B8544A193C93FF00F000A8 /* Wall.h */,
 				04B8544B193C93FF00F000A8 /* Wall.m */,
 				A4A1BA77192B43BB00805339 /* TitleScene.h */,
@@ -267,6 +274,7 @@
 				A4A104C81949CD75003182DD /* cloud2.png */,
 				A4A104C91949CD75003182DD /* cloud1.png */,
 				A4A104CA1949CD75003182DD /* cloud4.png */,
+				A4A104E9194B2C1F003182DD /* nami.png */,
 				A4A104D91949E4EC003182DD /* umi.png */,
 				A4A104E21949EA9E003182DD /* Island2.png */,
 				A4A104E31949EA9E003182DD /* Island1.png */,
@@ -389,6 +397,7 @@
 				A4A1BA6A192B43BB00805339 /* InfoPlist.strings in Resources */,
 				A4D7F4F01939F4BE005225B6 /* spark.png in Resources */,
 				A4A104DA1949E4EC003182DD /* umi.png in Resources */,
+				A4A104EA194B2C1F003182DD /* nami.png in Resources */,
 				A4AB062319376463001FFB69 /* pengin2.png in Resources */,
 				A4AB063619387568001FFB69 /* pengin3.png in Resources */,
 				A4A1BA7D192B43BB00805339 /* Images.xcassets in Resources */,
@@ -430,6 +439,7 @@
 				A4A104DD1949E549003182DD /* Island.m in Sources */,
 				04B8544F193CA30D00F000A8 /* Sensor.m in Sources */,
 				04B85443193C73DE00F000A8 /* ObjectBitMask.m in Sources */,
+				A4A104E8194B252F003182DD /* Cloud.m in Sources */,
 				A4A1BA70192B43BB00805339 /* AppDelegate.m in Sources */,
 				04B85452193CAB9400F000A8 /* Sea.m in Sources */,
 				04B85449193C80A600F000A8 /* Ground.m in Sources */,

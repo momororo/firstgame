@@ -14,6 +14,7 @@
 #import "Sea.h"
 #import "Fish.h"
 #import "Island.h"
+#import "Cloud.h"
 
 
 #define     kPlayer     @"Player"
