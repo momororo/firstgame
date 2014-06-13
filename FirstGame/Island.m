@@ -46,7 +46,7 @@
     
     SKSpriteNode *island;
     
-    if (arc4random_uniform(1) == 0) {
+    if (arc4random_uniform(2) == 0) {
         island = [SKSpriteNode spriteNodeWithImageNamed:@"Island1.png"];
         island.position = CGPointMake(CGRectGetMaxX(frame) + island.size.width / 2 ,sea.size.height);
         
