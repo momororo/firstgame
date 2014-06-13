@@ -7,7 +7,6 @@
 //
 
 #import "Cloud.h"
-#import "Sea.h"
 
 @implementation Cloud
 
@@ -28,10 +27,10 @@
     clouds = [NSMutableArray new];
     
     SKSpriteNode *cloud1 = [SKSpriteNode spriteNodeWithImageNamed:@"Cloud1.png"];
-    cloud1.position = CGPointMake(CGRectGetMidX(frame)/2,sea.size.height*2);
+    cloud1.position = CGPointMake(CGRectGetMidX(frame)/2,arc4random_uniform(150)+150);
     [clouds addObject:cloud1];
     SKSpriteNode *cloud2 = [SKSpriteNode spriteNodeWithImageNamed:@"Cloud2.png"];
-    cloud2.position = CGPointMake(CGRectGetMidX(frame)*3/2,sea.size.height*2);
+    cloud2.position = CGPointMake(CGRectGetMidX(frame)*3/2,arc4random_uniform(150)+150);
     [clouds addObject:cloud2];
     
 }
@@ -48,23 +47,23 @@
     switch(arc4random_uniform(4)) {
         case 0:
             cloud = [SKSpriteNode spriteNodeWithImageNamed:@"Cloud1.png"];
-            cloud.position = CGPointMake(CGRectGetMaxX(frame) + cloud.size.width / 2 ,sea.size.height);
+            cloud.position = CGPointMake(CGRectGetMaxX(frame) + cloud.size.width / 2 ,arc4random_uniform(150)+150);
             break;
             
         case 1:
             cloud = [SKSpriteNode spriteNodeWithImageNamed:@"Cloud2.png"];
-            cloud.position = CGPointMake(CGRectGetMaxX(frame) + cloud.size.width / 2,sea.size.height);
+            cloud.position = CGPointMake(CGRectGetMaxX(frame) + cloud.size.width / 2,arc4random_uniform(150)+150);
             break;
         case 2:
             cloud = [SKSpriteNode spriteNodeWithImageNamed:@"Cloud3.png"];
-            cloud.position = CGPointMake(CGRectGetMaxX(frame) + cloud.size.width / 2,sea.size.height);
+            cloud.position = CGPointMake(CGRectGetMaxX(frame) + cloud.size.width / 2,arc4random_uniform(150)+150);
             break;
         case 3:
             cloud = [SKSpriteNode spriteNodeWithImageNamed:@"Cloud4.png"];
-            cloud.position = CGPointMake(CGRectGetMaxX(frame) + cloud.size.width / 2,sea.size.height);
+            cloud.position = CGPointMake(CGRectGetMaxX(frame) + cloud.size.width / 2,arc4random_uniform(150)+150);
             break;
-            [clouds addObject:cloud];
     }
+    [clouds addObject:cloud];
 }
 
 

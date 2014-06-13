@@ -462,7 +462,7 @@ BOOL fishAdd;
     
     if ([Cloud removeCloud] == YES) {
         //背景画像の更新
-        [Cloud setCloudInitFrame:self.frame];
+        [Cloud setCloudFrame:self.frame];
         [self addChild:[Cloud getClouds]];
         [Cloud moveCloud];
     }
