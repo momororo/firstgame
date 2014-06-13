@@ -33,6 +33,8 @@
 		A4A104E51949EA9E003182DD /* Island1.png in Resources */ = {isa = PBXBuildFile; fileRef = A4A104E31949EA9E003182DD /* Island1.png */; };
 		A4A104E8194B252F003182DD /* Cloud.m in Sources */ = {isa = PBXBuildFile; fileRef = A4A104E7194B252F003182DD /* Cloud.m */; };
 		A4A104EA194B2C1F003182DD /* nami.png in Resources */ = {isa = PBXBuildFile; fileRef = A4A104E9194B2C1F003182DD /* nami.png */; };
+		A4A104EC194B33AE003182DD /* backmusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A4A104EB194B33AE003182DD /* backmusic.mp3 */; };
+		A4A104F1194B37DC003182DD /* gameover.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A4A104F0194B37DC003182DD /* gameover.mp3 */; };
 		A4A1BA5E192B43BB00805339 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4A1BA5D192B43BB00805339 /* Foundation.framework */; };
 		A4A1BA60192B43BB00805339 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4A1BA5F192B43BB00805339 /* CoreGraphics.framework */; };
 		A4A1BA62192B43BB00805339 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4A1BA61192B43BB00805339 /* UIKit.framework */; };
@@ -111,6 +113,8 @@
 		A4A104E6194B252F003182DD /* Cloud.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cloud.h; sourceTree = "<group>"; };
 		A4A104E7194B252F003182DD /* Cloud.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cloud.m; sourceTree = "<group>"; };
 		A4A104E9194B2C1F003182DD /* nami.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nami.png; sourceTree = "<group>"; };
+		A4A104EB194B33AE003182DD /* backmusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = backmusic.mp3; sourceTree = "<group>"; };
+		A4A104F0194B37DC003182DD /* gameover.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = gameover.mp3; sourceTree = "<group>"; };
 		A4A1BA5A192B43BB00805339 /* FirstGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FirstGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4A1BA5D192B43BB00805339 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A4A1BA5F192B43BB00805339 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -253,6 +257,8 @@
 			children = (
 				0454A58719374B07002403B5 /* jump.wav */,
 				A471A28B1942FB28002E1EAD /* attackedWall.mp3 */,
+				A4A104EB194B33AE003182DD /* backmusic.mp3 */,
+				A4A104F0194B37DC003182DD /* gameover.mp3 */,
 				A4F633FB1930785B00187BED /* mario.png */,
 				A4D7F4EB1939F489005225B6 /* Smoke.sks */,
 				A4D7F4ED1939F4BE005225B6 /* Fire.sks */,
@@ -404,7 +410,9 @@
 				A4D7F4EF1939F4BE005225B6 /* Fire.sks in Resources */,
 				A4F633FC1930785B00187BED /* mario.png in Resources */,
 				A4AB0625193769B2001FFB69 /* pengin1.png in Resources */,
+				A4A104EC194B33AE003182DD /* backmusic.mp3 in Resources */,
 				A4A104C5194983DB003182DD /* ground3.png in Resources */,
+				A4A104F1194B37DC003182DD /* gameover.mp3 in Resources */,
 				A4A104D81949E4E7003182DD /* haikei.png in Resources */,
 				A4A1BA7B192B43BB00805339 /* Spaceship.png in Resources */,
 				A4AB063B1939AC4A001FFB69 /* pengin5.png in Resources */,

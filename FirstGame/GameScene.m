@@ -9,7 +9,16 @@
 #import "GameScene.h"
 #import "GameView.h"
 
+@import AVFoundation;
+
+
+
 @implementation GameScene{
+//@property (nonatomic, strong) AVAudioPlayer * musicPlayer1;
+
+AVAudioPlayer * musicPlayer1;
+    AVAudioPlayer * musicPlayer2;
+
     
 //ゲームスタートのフラグ
 BOOL gameStart;
@@ -151,6 +160,15 @@ BOOL fishAdd;
             
             //秒数を記録
             startTime = [NSDate date];
+            
+            
+            //BGM再生
+            NSError *error;
+            NSURL *url1 = [[NSBundle mainBundle] URLForResource:@"backmusic" withExtension:@"mp3"];
+            self->musicPlayer1 = [[AVAudioPlayer alloc] initWithContentsOfURL:url1 error:&error];
+            self->musicPlayer1.numberOfLoops = -1;
+            [musicPlayer1 prepareToPlay];
+            [self->musicPlayer1 play];
         
             return;
         }
@@ -166,6 +184,8 @@ BOOL fishAdd;
                 //ゲームシーン画面に飛ぶ
                 if ([_delegate respondsToSelector:@selector(sceneEscape:identifier:)]) {
                     [_delegate sceneEscape:self identifier:@"retry"];
+                    [self->musicPlayer2 stop];
+
                 }
             }
            
@@ -173,6 +193,7 @@ BOOL fishAdd;
                //ゲームシーン画面に飛ぶ
                if ([_delegate respondsToSelector:@selector(sceneEscape:identifier:)]) {
                 [_delegate sceneEscape:self identifier:@"top"];
+                   [self->musicPlayer2 stop];
                }
            }
         return;
@@ -442,6 +463,18 @@ BOOL fishAdd;
         [self addChild:topLabel];
         
         //SCOREを記録する処理を追記すること
+        
+        //BGMの停止
+        [self->musicPlayer1 stop];
+        
+        //ゲームオーバー用のBGM
+        NSError *error;
+        NSURL *url2 = [[NSBundle mainBundle] URLForResource:@"gameover" withExtension:@"mp3"];
+        self->musicPlayer2 = [[AVAudioPlayer alloc] initWithContentsOfURL:url2 error:&error];
+        self->musicPlayer2.numberOfLoops = -1;
+        [musicPlayer2 prepareToPlay];
+        [self->musicPlayer2 play];
+
         
         return;
         
