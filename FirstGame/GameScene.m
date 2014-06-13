@@ -80,11 +80,10 @@ BOOL fishAdd;
         [self addChild:[Sea getSea]];
         
         //背景の島
-        [Island setIsland1Frame:self.frame];
-        [self addChild:[Island getIsland1]];
-        [Island setIsland2Frame:self.frame];
-        [self addChild:[Island getIsland2]];
-        
+        [Island setIslandInitFrame:self.frame];
+        NSMutableArray *islands = [Island getIslandInit];
+        [self addChild:islands[0]];
+        [self addChild:islands[1]];
         
         
         //透明のオブジェクトを生成(センサー)
@@ -130,8 +129,7 @@ BOOL fishAdd;
             
             //スタートボタンがタップされたら、地面が移動する
             [Ground moveGroundToX:(-300 - (self.frame.size.width / 2)) duration:3.0];
-            [Island moveIsland1];
-            [Island moveIsland2];
+            [Island moveIslandInit];
 
             //スタートラベルの削除
             [startLabel removeFromParent];
@@ -446,6 +444,15 @@ BOOL fishAdd;
     //アクションを終えたオブジェクトを削除していく
     [Ground removeOldNextGround];
     [Wall removeOldWall];
+    
+    if([Island removeIsland] == YES){
+        //背景画像の更新
+        [Island setIslandFrame:self.frame];
+        [self addChild:[Island getIslands]];
+        [Island moveIsland];
+        
+    }
+    
     
     //画面外のオブジェクトを削除していく
     if (fishAdd == NO) {

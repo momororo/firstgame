@@ -9,22 +9,27 @@
 #import <Foundation/Foundation.h>
 #import <SpriteKit/SpriteKit.h>
 
-SKSpriteNode *island1;
-SKSpriteNode *island2;
+
+//島の配列
+NSMutableArray *islands;
 
 
 @interface Island : NSObject
 
+//初期設定時使用
++(NSMutableArray *)getIslandInit;
 //島のノードを返す
-+(SKSpriteNode *)getIsland1;
-+(SKSpriteNode *)getIsland2;
++(SKSpriteNode *)getIslands;
+//初期設定時使用
++(void)setIslandInitFrame:(CGRect)frame;
+//島の配置
++(void)setIslandFrame:(CGRect)frame;
+//初期設定時使用
++(void)moveIslandInit;
+//島が動く
++(void)moveIsland;
+//不要な島の削除
++(BOOL)removeIsland;
 
-//島の作成
-+(void)setIsland1Frame:(CGRect)frame;
-+(void)setIsland2Frame:(CGRect)frame;
-
-//島の移動
-+(void)moveIsland1;
-+(void)moveIsland2;
 
 @end
