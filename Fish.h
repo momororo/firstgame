@@ -14,6 +14,9 @@
 //魚のノード配列
 NSMutableArray *fishes;
 
+//魚のテクスチャ
+SKTexture *fishTexture;
+
 //登録した魚の数を返す
 int fishQuantity;
 
@@ -36,5 +39,10 @@ int fishQuantity;
 
 //食べられた魚の削除
 +(void)removeEatenFish:(SKNode *)EatenFish;
+
+//魚のテクスチャの生成
++(void)initTexture;
+
+
 
 @end

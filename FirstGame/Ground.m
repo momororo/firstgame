@@ -20,13 +20,28 @@
     return nextGrounds[nextGrounds.count-1];
 }
 
+//グラウンドのテクスチャの生成
++(void)initGroundTexture{
+    SKTextureAtlas *grounds = [SKTextureAtlas atlasNamed:@"ground"];
+    SKTexture *ground1 = [grounds textureNamed:@"ground1"];
+    SKTexture *ground2 = [grounds textureNamed:@"ground2"];
+    SKTexture *ground3 = [grounds textureNamed:@"ground3"];
+    SKTexture *ground4 = [grounds textureNamed:@"ground4"];
+    nextGroundTexture = [NSMutableArray new];
+    [nextGroundTexture addObject:ground1];
+    [nextGroundTexture addObject:ground2];
+    [nextGroundTexture addObject:ground3];
+    [nextGroundTexture addObject:ground4];
+
+}
+
 //グラウンドの初期設定
 +(void)setGroundSizeX:(float)sizeX sizeY:(float)sizeY{
 
     
     //ground = [SKSpriteNode spriteNodeWithColor:[SKColor brownColor]
     //                                                    size:CGSizeMake(sizeX,sizeY)];
-    ground = [SKSpriteNode spriteNodeWithImageNamed:@"ground4.png"];
+    ground = [SKSpriteNode spriteNodeWithTexture:nextGroundTexture[3]];
     ground.size = CGSizeMake(ground.size.width/2, ground.size.height/4);
     ground.name = @"kGround";
     ground.position = CGPointMake(ground.size.width/2,ground.size.height/2);
@@ -66,16 +81,16 @@
     
     switch (arc4random_uniform(4)) {
         case 0 :
-            nextGround = [SKSpriteNode spriteNodeWithImageNamed:@"ground1"];
+            nextGround = [SKSpriteNode spriteNodeWithTexture:nextGroundTexture[0]];
             break;
         case 1:
-            nextGround = [SKSpriteNode spriteNodeWithImageNamed:@"ground2"];
+            nextGround = [SKSpriteNode spriteNodeWithTexture:nextGroundTexture[1]];
             break;
         case 2:
-            nextGround = [SKSpriteNode spriteNodeWithImageNamed:@"ground3"];
+            nextGround = [SKSpriteNode spriteNodeWithTexture:nextGroundTexture[2]];
             break;
         case 3:
-            nextGround = [SKSpriteNode spriteNodeWithImageNamed:@"ground4"];
+            nextGround = [SKSpriteNode spriteNodeWithTexture:nextGroundTexture[3]];
             break;
     }
     

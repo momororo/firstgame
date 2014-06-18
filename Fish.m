@@ -23,6 +23,13 @@
     return fishQuantity;
 }
 
+//魚のテクスチャを生成
++(void)initTexture{
+    
+    fishTexture = [SKTexture textureWithImageNamed:@"Fish"];
+
+}
+
 
 
 +(void)setFishPositionX:(float)positionX PositionY:(float)positionY{
@@ -38,7 +45,7 @@
     fishQuantity = arc4random_uniform(30) + 1;
     
     for(int tmp = 0 ; tmp < fishQuantity ; tmp++){
-       SKSpriteNode *fish = [SKSpriteNode spriteNodeWithImageNamed:@"Fish.png"];
+       SKSpriteNode *fish = [SKSpriteNode spriteNodeWithTexture:fishTexture];
         //出現位置を乱数で少しずらす
         fish.position = CGPointMake(positionX + arc4random_uniform(200),positionY + arc4random_uniform(50));
         

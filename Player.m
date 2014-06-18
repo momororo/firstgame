@@ -20,19 +20,8 @@
     return flyFlag;
 }
 
-//プレイヤーの初期配置
-+(void)setPlayerPositionX:(float)positionX positionY:(float)positionY{
-    //プレイキャラの設定
-    player = [SKSpriteNode spriteNodeWithImageNamed:@"pengin1.png"];
-    player.size = CGSizeMake(player.size.width/4, player.size.height/4);
-    player.name = @"kPlayer";
-    player.position = CGPointMake(positionX, positionY);
-    player.zPosition = 50;
-    [self setNormalPhysicsBody];
-    
-    //フラグ等の初期化
-    [self initPlayer];
-    
+//プレイヤーのテクスチャを生成する
++(void)initTexture{
     
     //歩行アトラスの設定
     walkPenguins = [NSMutableArray new];
@@ -51,6 +40,28 @@
     SKTexture *flyPenguin2 = [flyPenguin textureNamed:@"pengin4"];
     [flyPenguins addObject:flyPenguin1];
     [flyPenguins addObject:flyPenguin2];
+    
+    //スマッシュテクスチャの設定
+    smashPenguin = [SKTexture textureWithImageNamed:@"pengin5"];
+
+
+    
+}
+
+//プレイヤーの初期配置
++(void)setPlayerPositionX:(float)positionX positionY:(float)positionY{
+    //プレイキャラの設定
+    player = [SKSpriteNode spriteNodeWithTexture:walkPenguins[0]];
+    player.size = CGSizeMake(player.size.width/4, player.size.height/4);
+    player.name = @"kPlayer";
+    player.position = CGPointMake(positionX, positionY);
+    player.zPosition = 50;
+    [self setNormalPhysicsBody];
+    
+    //フラグ等の初期化
+    [self initPlayer];
+    
+    
     
     //効果音の初期設定
     jumpSE = [SKAction playSoundFileNamed:@"jump.wav" waitForCompletion:NO];
@@ -121,10 +132,7 @@
         
         //突進処理
         player.physicsBody.velocity = CGVectorMake(0, -300);
-        
-        SKTexture *pengin5 = [SKTexture textureWithImageNamed:@"pengin5"];
-        SKAction *smashPengin = [SKAction animateWithTextures:@[pengin5] timePerFrame:0.1];
-        [player runAction:[SKAction repeatActionForever:smashPengin]];
+        [player runAction:[SKAction repeatActionForever:[SKAction animateWithTextures:@[smashPenguin] timePerFrame:0.1]]];
         
         smashFlag = NO;
         

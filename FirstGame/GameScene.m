@@ -106,6 +106,7 @@ BOOL fishAdd;
         [self addChild:[Sensor getSensor]];
         
         //地面の設定
+        [Ground initGroundTexture];
         [Ground setGroundSizeX:ground.size.width sizeY:ground.size.height];
         [self addChild:[Ground getGround]];
         
@@ -114,8 +115,12 @@ BOOL fishAdd;
         
         
         //プレイキャラの設定
+        [Player initTexture];
         [Player setPlayerPositionX:CGRectGetMidX(self.frame)/2 positionY:100];
         [self addChild:[Player getPlayer]];
+        
+        //魚の設定
+        [Fish initTexture];
 
 
         

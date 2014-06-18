@@ -29,6 +29,8 @@ BOOL flyFlag;
 NSMutableArray *walkPenguins;
 //飛行モーションのアトラス
 NSMutableArray *flyPenguins;
+//スマッシュのテクスチャ
+SKTexture *smashPenguin;
 
 
 
@@ -64,6 +66,8 @@ SKAction *jumpSE;
 +(BOOL)getFlyFlag;
 //プレイヤーの初期化
 +(void)initPlayer;
+//プレイヤーのテクスチャーを作成
++(void)initTexture;
 
 
 @end

@@ -14,6 +14,8 @@
 SKSpriteNode *ground;
 //ネクストグラウンド(配列)
 NSMutableArray *nextGrounds;
+//グラウンドのアトラス
+NSMutableArray *nextGroundTexture;
 
 
 @interface Ground : NSObject
@@ -34,5 +36,8 @@ NSMutableArray *nextGrounds;
 +(void)initGounds;
 //アクションを終えたネクストグラウンドの削除
 +(void)removeOldNextGround;
+//グラウンドのアトラスを生成
++(void)initGroundTexture;
+
 
 @end
