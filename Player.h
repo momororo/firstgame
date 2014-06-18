@@ -25,6 +25,11 @@ BOOL smashFlag;
 int flyPoint;
 //flyフラグ
 BOOL flyFlag;
+//歩行モーションのアトラス
+NSMutableArray *walkPenguins;
+//飛行モーションのアトラス
+NSMutableArray *flyPenguins;
+
 
 
 //ジャンプ音
@@ -59,5 +64,6 @@ SKAction *jumpSE;
 +(BOOL)getFlyFlag;
 //プレイヤーの初期化
 +(void)initPlayer;
+
 
 @end

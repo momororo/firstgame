@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0454A58819374B07002403B5 /* jump.wav in Resources */ = {isa = PBXBuildFile; fileRef = 0454A58719374B07002403B5 /* jump.wav */; };
+		049CEE0A1951C82E00949E29 /* flyPenguin.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 049CEE081951C82E00949E29 /* flyPenguin.atlas */; };
+		049CEE0B1951C82E00949E29 /* walkPenguin.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 049CEE091951C82E00949E29 /* walkPenguin.atlas */; };
 		04B85443193C73DE00F000A8 /* ObjectBitMask.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B85442193C73DE00F000A8 /* ObjectBitMask.m */; };
 		04B85446193C73F500F000A8 /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B85445193C73F500F000A8 /* Player.m */; };
 		04B85449193C80A600F000A8 /* Ground.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B85448193C80A600F000A8 /* Ground.m */; };
@@ -55,10 +57,6 @@
 		A4A1BA9B192B43E400805339 /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = A4A1BA9A192B43E400805339 /* GameScene.m */; };
 		A4A1BAA4192B44D300805339 /* SceneManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A4A1BAA3192B44D300805339 /* SceneManager.m */; };
 		A4A1BAA7192B44E800805339 /* GameView.m in Sources */ = {isa = PBXBuildFile; fileRef = A4A1BAA6192B44E800805339 /* GameView.m */; };
-		A4AB062319376463001FFB69 /* pengin2.png in Resources */ = {isa = PBXBuildFile; fileRef = A4AB062219376463001FFB69 /* pengin2.png */; };
-		A4AB0625193769B2001FFB69 /* pengin1.png in Resources */ = {isa = PBXBuildFile; fileRef = A4AB0624193769B2001FFB69 /* pengin1.png */; };
-		A4AB063619387568001FFB69 /* pengin3.png in Resources */ = {isa = PBXBuildFile; fileRef = A4AB063419387568001FFB69 /* pengin3.png */; };
-		A4AB063719387568001FFB69 /* pengin4.png in Resources */ = {isa = PBXBuildFile; fileRef = A4AB063519387568001FFB69 /* pengin4.png */; };
 		A4AB063B1939AC4A001FFB69 /* pengin5.png in Resources */ = {isa = PBXBuildFile; fileRef = A4AB063A1939AC4A001FFB69 /* pengin5.png */; };
 		A4D7F4EC1939F489005225B6 /* Smoke.sks in Resources */ = {isa = PBXBuildFile; fileRef = A4D7F4EB1939F489005225B6 /* Smoke.sks */; };
 		A4D7F4EF1939F4BE005225B6 /* Fire.sks in Resources */ = {isa = PBXBuildFile; fileRef = A4D7F4ED1939F4BE005225B6 /* Fire.sks */; };
@@ -79,6 +77,8 @@
 
 /* Begin PBXFileReference section */
 		0454A58719374B07002403B5 /* jump.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = jump.wav; sourceTree = "<group>"; };
+		049CEE081951C82E00949E29 /* flyPenguin.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = flyPenguin.atlas; sourceTree = "<group>"; };
+		049CEE091951C82E00949E29 /* walkPenguin.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = walkPenguin.atlas; sourceTree = "<group>"; };
 		04B85441193C73DE00F000A8 /* ObjectBitMask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ObjectBitMask.h; path = ../ObjectBitMask.h; sourceTree = "<group>"; };
 		04B85442193C73DE00F000A8 /* ObjectBitMask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ObjectBitMask.m; path = ../ObjectBitMask.m; sourceTree = "<group>"; };
 		04B85444193C73F500F000A8 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Player.h; path = ../Player.h; sourceTree = "<group>"; };
@@ -144,10 +144,6 @@
 		A4A1BAA3192B44D300805339 /* SceneManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneManager.m; sourceTree = "<group>"; };
 		A4A1BAA5192B44E800805339 /* GameView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameView.h; sourceTree = "<group>"; };
 		A4A1BAA6192B44E800805339 /* GameView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameView.m; sourceTree = "<group>"; };
-		A4AB062219376463001FFB69 /* pengin2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pengin2.png; sourceTree = "<group>"; };
-		A4AB0624193769B2001FFB69 /* pengin1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pengin1.png; sourceTree = "<group>"; };
-		A4AB063419387568001FFB69 /* pengin3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pengin3.png; sourceTree = "<group>"; };
-		A4AB063519387568001FFB69 /* pengin4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pengin4.png; sourceTree = "<group>"; };
 		A4AB063A1939AC4A001FFB69 /* pengin5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pengin5.png; sourceTree = "<group>"; };
 		A4D7F4EB1939F489005225B6 /* Smoke.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Smoke.sks; sourceTree = "<group>"; };
 		A4D7F4ED1939F4BE005225B6 /* Fire.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Fire.sks; sourceTree = "<group>"; };
@@ -255,6 +251,8 @@
 		A4A1BA66192B43BB00805339 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				049CEE081951C82E00949E29 /* flyPenguin.atlas */,
+				049CEE091951C82E00949E29 /* walkPenguin.atlas */,
 				0454A58719374B07002403B5 /* jump.wav */,
 				A471A28B1942FB28002E1EAD /* attackedWall.mp3 */,
 				A4A104EB194B33AE003182DD /* backmusic.mp3 */,
@@ -271,10 +269,6 @@
 				A4A104C0194983DB003182DD /* ground2.png */,
 				A4A104C1194983DB003182DD /* ground3.png */,
 				A4A104C2194983DB003182DD /* ground4.png */,
-				A4AB0624193769B2001FFB69 /* pengin1.png */,
-				A4AB062219376463001FFB69 /* pengin2.png */,
-				A4AB063419387568001FFB69 /* pengin3.png */,
-				A4AB063519387568001FFB69 /* pengin4.png */,
 				A4AB063A1939AC4A001FFB69 /* pengin5.png */,
 				A4A104C71949CD75003182DD /* cloud3.png */,
 				A4A104C81949CD75003182DD /* cloud2.png */,
@@ -387,10 +381,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				049CEE0A1951C82E00949E29 /* flyPenguin.atlas in Resources */,
 				A4A104CB1949CD75003182DD /* cloud3.png in Resources */,
 				A4D7F4EC1939F489005225B6 /* Smoke.sks in Resources */,
 				A471A28C1942FB28002E1EAD /* attackedWall.mp3 in Resources */,
-				A4AB063719387568001FFB69 /* pengin4.png in Resources */,
 				A4A104C4194983DB003182DD /* ground2.png in Resources */,
 				A4A104CC1949CD75003182DD /* cloud2.png in Resources */,
 				A4A1049E19472BCF003182DD /* hyouzan.png in Resources */,
@@ -403,13 +397,11 @@
 				A4A1BA6A192B43BB00805339 /* InfoPlist.strings in Resources */,
 				A4D7F4F01939F4BE005225B6 /* spark.png in Resources */,
 				A4A104DA1949E4EC003182DD /* umi.png in Resources */,
+				049CEE0B1951C82E00949E29 /* walkPenguin.atlas in Resources */,
 				A4A104EA194B2C1F003182DD /* nami.png in Resources */,
-				A4AB062319376463001FFB69 /* pengin2.png in Resources */,
-				A4AB063619387568001FFB69 /* pengin3.png in Resources */,
 				A4A1BA7D192B43BB00805339 /* Images.xcassets in Resources */,
 				A4D7F4EF1939F4BE005225B6 /* Fire.sks in Resources */,
 				A4F633FC1930785B00187BED /* mario.png in Resources */,
-				A4AB0625193769B2001FFB69 /* pengin1.png in Resources */,
 				A4A104EC194B33AE003182DD /* backmusic.mp3 in Resources */,
 				A4A104C5194983DB003182DD /* ground3.png in Resources */,
 				A4A104F1194B37DC003182DD /* gameover.mp3 in Resources */,

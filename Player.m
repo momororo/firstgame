@@ -33,6 +33,25 @@
     //フラグ等の初期化
     [self initPlayer];
     
+    
+    //歩行アトラスの設定
+    walkPenguins = [NSMutableArray new];
+    SKTextureAtlas *walkPenguin =[SKTextureAtlas atlasNamed:@"walkPenguin"];
+    SKTexture *walkPenguin1 = [walkPenguin textureNamed:@"pengin1"];
+    SKTexture *walkPenguin2 = [walkPenguin textureNamed:@"pengin2"];
+    [walkPenguins addObject:walkPenguin1];
+    [walkPenguins addObject:walkPenguin2];
+    
+    
+    
+    //飛行アトラスの設定
+    flyPenguins = [NSMutableArray new];
+    SKTextureAtlas *flyPenguin =[SKTextureAtlas atlasNamed:@"flyPenguin"];
+    SKTexture *flyPenguin1 = [flyPenguin textureNamed:@"pengin3"];
+    SKTexture *flyPenguin2 = [flyPenguin textureNamed:@"pengin4"];
+    [flyPenguins addObject:flyPenguin1];
+    [flyPenguins addObject:flyPenguin2];
+    
     //効果音の初期設定
     jumpSE = [SKAction playSoundFileNamed:@"jump.wav" waitForCompletion:NO];
 
@@ -45,9 +64,7 @@
     if(jumpFlag == NO){
 
     //歩行モーション
-    SKTexture *pengin1 = [SKTexture textureWithImageNamed:@"pengin1"];
-    SKTexture *pengin2 = [SKTexture textureWithImageNamed:@"pengin2"];
-    SKAction *walkPengin = [SKAction animateWithTextures:@[pengin1,pengin2] timePerFrame:0.1];
+    SKAction *walkPengin = [SKAction animateWithTextures:@[walkPenguins[0],walkPenguins[1]] timePerFrame:0.1];
     [player runAction:[SKAction repeatActionForever:walkPengin]];
     
     //ジャンプ可能フラグをオンに
@@ -68,9 +85,7 @@
         player.physicsBody.velocity = CGVectorMake(0, 640);
         
         //ジャンプモーション
-        SKTexture *pengin3 = [SKTexture textureWithImageNamed:@"pengin3"];
-        SKTexture *pengin4 = [SKTexture textureWithImageNamed:@"pengin4"];
-        SKAction *jumpPengin = [SKAction animateWithTextures:@[pengin3,pengin4] timePerFrame:0.1];
+        SKAction *jumpPengin = [SKAction animateWithTextures:@[flyPenguins[0],flyPenguins[1]] timePerFrame:0.1];
         [player runAction:[SKAction repeatActionForever:jumpPengin]];
         
         [player runAction:jumpSE];
@@ -131,9 +146,7 @@
         
         player.physicsBody.velocity = CGVectorMake(0, 500);
         
-        SKTexture *pengin3 = [SKTexture textureWithImageNamed:@"pengin3"];
-        SKTexture *pengin4 = [SKTexture textureWithImageNamed:@"pengin4"];
-        SKAction *jumpPengin = [SKAction animateWithTextures:@[pengin3,pengin4] timePerFrame:0.1];
+        SKAction *jumpPengin = [SKAction animateWithTextures:@[flyPenguins[0],flyPenguins[1]] timePerFrame:0.1];
         [player runAction:[SKAction repeatActionForever:jumpPengin]];
         
     }

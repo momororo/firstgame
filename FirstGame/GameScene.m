@@ -210,14 +210,14 @@ BOOL fishAdd;
 //オブジェクト同士が衝突した場合に動く処理
 - (void)didBeginContact:(SKPhysicsContact *)contact
 {
-    
+ 
     //スタートラベルがある時は処理を飛ばす
     if([self childNodeWithName:@"kStartLabel"] != nil){
         return;
     }
     
     
-    
+ 
 	/**********プレイヤーと地面の衝突を検知**********/
     if([ObjectBitMask playerAndGround:contact]){
         
@@ -235,6 +235,7 @@ BOOL fishAdd;
         }
         
     }
+     
     
 	/**********プレイヤーと地面の衝突を検知終了**********/
 
@@ -256,6 +257,7 @@ BOOL fishAdd;
         }
         
     }
+     
     
     /**********地面と飛行キャラクターの衝突を検知終了**********/
 
@@ -291,6 +293,7 @@ BOOL fishAdd;
         fishPoint = fishPoint + 10;
         return;
     }
+   
     
 }
 
@@ -480,7 +483,7 @@ BOOL fishAdd;
         
     }
     
-    
+  
     //アクションを終えたオブジェクトを削除していく
     [Ground removeOldNextGround];
     [Wall removeOldWall];
@@ -505,6 +508,7 @@ BOOL fishAdd;
     if (fishAdd == NO) {
         [Fish removeFish];
     }
+   
 
 
 }
