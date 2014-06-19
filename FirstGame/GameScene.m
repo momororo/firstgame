@@ -117,6 +117,7 @@ BOOL fishAdd;
         
         //壁の設定(初期化)
         [Wall initWalls];
+        [Wall initTexture];
         
         
         //プレイキャラの設定

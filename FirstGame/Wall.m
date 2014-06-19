@@ -16,13 +16,17 @@
     
 }
 
++(void)initTexture{
+    wallTexture = [SKTexture textureWithImageNamed:@"hyouzan"];
+}
+
 +(void)setWallFromNextGround:(SKSpriteNode *) nextGround{
 
     if(walls == nil){
         walls = [NSMutableArray new];
     }
     
-    SKSpriteNode *wall = [SKSpriteNode spriteNodeWithImageNamed:@"hyouzan"];
+    SKSpriteNode *wall = [SKSpriteNode spriteNodeWithTexture:wallTexture];
     wall.size = CGSizeMake(wall.frame.size.width/2,wall.frame.size.height/2);
     
     randam = arc4random_uniform(nextGround.size.width/2);

@@ -17,11 +17,15 @@ SKAction *bombSE;
 int randam;
 //newGroundの幅(位置調整)
 int nextGroundWidth;
+//壁のテクスチャ
+SKTexture *wallTexture;
 
 @interface Wall : NSObject
 
 //壁のノードを返す
 +(SKSpriteNode *)getWall;
+//initテキスチャ
++(void)initTexture;
 //壁の生成を行う
 +(void)setWallFromNextGround:(SKSpriteNode *) nextGround;
 //壁の移動を行う
