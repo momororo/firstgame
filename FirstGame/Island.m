@@ -22,16 +22,24 @@
     
 }
 
++(void)initTexture{
+    islandsTexture = [NSMutableArray new];
+    SKTexture *island1 = [SKTexture textureWithImageNamed:@"Island1.png"];
+    SKTexture *island2 = [SKTexture textureWithImageNamed:@"Island2.png"];
+    [islandsTexture addObject:island1];
+    [islandsTexture addObject:island2];
+}
+
 
 +(void)setIslandInitFrame:(CGRect)frame{
     
     
     islands = [NSMutableArray new];
     
-    SKSpriteNode *island1 = [SKSpriteNode spriteNodeWithImageNamed:@"Island1.png"];
+    SKSpriteNode *island1 = [SKSpriteNode spriteNodeWithTexture:islandsTexture[0]];
     island1.position = CGPointMake(CGRectGetMidX(frame)/2,sea.size.height);
     [islands addObject:island1];
-    SKSpriteNode *island2 = [SKSpriteNode spriteNodeWithImageNamed:@"Island2.png"];
+    SKSpriteNode *island2 = [SKSpriteNode spriteNodeWithTexture:islandsTexture[1]];
     island2.position = CGPointMake(CGRectGetMidX(frame)*3/2,sea.size.height);
     [islands addObject:island2];
 
@@ -47,12 +55,12 @@
     SKSpriteNode *island;
     
     if (arc4random_uniform(2) == 0) {
-        island = [SKSpriteNode spriteNodeWithImageNamed:@"Island1.png"];
+        island = [SKSpriteNode spriteNodeWithTexture:islandsTexture[0]];
         island.position = CGPointMake(CGRectGetMaxX(frame) + island.size.width / 2 ,sea.size.height);
         
     }else{
         
-        island = [SKSpriteNode spriteNodeWithImageNamed:@"Island2.png"];
+        island = [SKSpriteNode spriteNodeWithTexture:islandsTexture[1]];
         island.position = CGPointMake(CGRectGetMaxX(frame) + island.size.width / 2,sea.size.height);
    
     }

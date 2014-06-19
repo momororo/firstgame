@@ -12,6 +12,8 @@
 
 //雲の配列
 NSMutableArray *clouds;
+//雲のテクスチャ配列
+NSMutableArray *cloudsTexture;
 
 @interface Cloud : NSObject
 
@@ -19,6 +21,8 @@ NSMutableArray *clouds;
 +(NSMutableArray *)getCloudInit;
 //雲のノードを返す
 +(SKSpriteNode *)getClouds;
+//テクスチャinit
++(void)initTexture;
 //初期設定時使用
 +(void)setCloudInitFrame:(CGRect)frame;
 //雲の配置
@@ -29,5 +33,6 @@ NSMutableArray *clouds;
 +(void)moveCloud;
 //不要な雲の削除
 +(BOOL)removeCloud;
+
 
 @end

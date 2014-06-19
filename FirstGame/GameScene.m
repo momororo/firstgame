@@ -57,10 +57,13 @@ BOOL fishAdd;
         /* Setup your scene here */
         
         //メイン画面
-        SKSpriteNode *haikei = [SKSpriteNode spriteNodeWithImageNamed:@"haikei.png"];
+       SKSpriteNode *haikei = [SKSpriteNode spriteNodeWithImageNamed:@"haikei.png"];
         haikei.size = CGSizeMake(haikei.size.width, haikei.size.height);
         haikei.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame) + 10);
         [self addChild:haikei];
+  
+
+ 
         
         startLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
         
@@ -89,12 +92,14 @@ BOOL fishAdd;
         [self addChild:[Sea getSea]];
         
         //背景の島
+        [Island initTexture];
         [Island setIslandInitFrame:self.frame];
         NSMutableArray *islands = [Island getIslandInit];
         [self addChild:islands[0]];
         [self addChild:islands[1]];
         
         //背景の雲
+        [Cloud initTexture];
         [Cloud setCloudInitFrame:self.frame];
         NSMutableArray *clouds = [Cloud getCloudInit];
         [self addChild:clouds[0]];

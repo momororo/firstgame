@@ -12,12 +12,16 @@
 
 //島の配列
 NSMutableArray *islands;
+//島のテクスチャ配列
+NSMutableArray *islandsTexture;
 
 
 @interface Island : NSObject
 
 //初期設定時使用
 +(NSMutableArray *)getIslandInit;
+//テクスチャinit
++(void)initTexture;
 //島のノードを返す
 +(SKSpriteNode *)getIslands;
 //初期設定時使用

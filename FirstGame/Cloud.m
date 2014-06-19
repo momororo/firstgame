@@ -20,16 +20,30 @@
     
 }
 
++(void)initTexture{
+    cloudsTexture = [NSMutableArray new];
+    
+    SKTexture *cloud1 = [SKTexture textureWithImageNamed:@"Cloud1.png"];
+    SKTexture *cloud2 = [SKTexture textureWithImageNamed:@"Cloud2.png"];
+    SKTexture *cloud3 = [SKTexture textureWithImageNamed:@"Cloud3.png"];
+    SKTexture *cloud4 = [SKTexture textureWithImageNamed:@"Cloud4.png"];
+    [cloudsTexture addObject:cloud1];
+    [cloudsTexture addObject:cloud2];
+    [cloudsTexture addObject:cloud3];
+    [cloudsTexture addObject:cloud4];
+    
+}
+
 
 +(void)setCloudInitFrame:(CGRect)frame{
     
     
     clouds = [NSMutableArray new];
     
-    SKSpriteNode *cloud1 = [SKSpriteNode spriteNodeWithImageNamed:@"Cloud1.png"];
+    SKSpriteNode *cloud1 = [SKSpriteNode spriteNodeWithTexture:cloudsTexture[0]];
     cloud1.position = CGPointMake(CGRectGetMidX(frame)/2,arc4random_uniform(150)+150);
     [clouds addObject:cloud1];
-    SKSpriteNode *cloud2 = [SKSpriteNode spriteNodeWithImageNamed:@"Cloud2.png"];
+    SKSpriteNode *cloud2 = [SKSpriteNode spriteNodeWithTexture:cloudsTexture[1]];
     cloud2.position = CGPointMake(CGRectGetMidX(frame)*3/2,arc4random_uniform(150)+150);
     [clouds addObject:cloud2];
     
@@ -46,20 +60,20 @@
     
     switch(arc4random_uniform(4)) {
         case 0:
-            cloud = [SKSpriteNode spriteNodeWithImageNamed:@"Cloud1.png"];
+            cloud = [SKSpriteNode spriteNodeWithTexture:cloudsTexture[0]];
             cloud.position = CGPointMake(CGRectGetMaxX(frame) + cloud.size.width / 2 ,arc4random_uniform(150)+150);
             break;
             
         case 1:
-            cloud = [SKSpriteNode spriteNodeWithImageNamed:@"Cloud2.png"];
+            cloud = [SKSpriteNode spriteNodeWithTexture:cloudsTexture[1]];
             cloud.position = CGPointMake(CGRectGetMaxX(frame) + cloud.size.width / 2,arc4random_uniform(150)+150);
             break;
         case 2:
-            cloud = [SKSpriteNode spriteNodeWithImageNamed:@"Cloud3.png"];
+            cloud = [SKSpriteNode spriteNodeWithTexture:cloudsTexture[2]];
             cloud.position = CGPointMake(CGRectGetMaxX(frame) + cloud.size.width / 2,arc4random_uniform(150)+150);
             break;
         case 3:
-            cloud = [SKSpriteNode spriteNodeWithImageNamed:@"Cloud4.png"];
+            cloud = [SKSpriteNode spriteNodeWithTexture:cloudsTexture[3]];
             cloud.position = CGPointMake(CGRectGetMaxX(frame) + cloud.size.width / 2,arc4random_uniform(150)+150);
             break;
     }
