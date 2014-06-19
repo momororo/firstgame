@@ -81,7 +81,7 @@
     
     for(int tmp = 0; tmp < fishQuantity;tmp++){
         SKSpriteNode *fish = fishes[fishes.count - tmp - 1];
-        fish.physicsBody.velocity = CGVectorMake(-1000,0);
+        fish.physicsBody.velocity = CGVectorMake(-1000,arc4random_uniform(200)+800);
         [fish.physicsBody applyTorque:0.04];      //回転
     }
     

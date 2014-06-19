@@ -52,7 +52,7 @@
 +(void)setPlayerPositionX:(float)positionX positionY:(float)positionY{
     //プレイキャラの設定
     player = [SKSpriteNode spriteNodeWithTexture:walkPenguins[0]];
-    player.size = CGSizeMake(player.size.width/4, player.size.height/4);
+    player.size = CGSizeMake(player.size.width/5, player.size.height/5);
     player.name = @"kPlayer";
     player.position = CGPointMake(positionX, positionY);
     player.zPosition = 50;
@@ -131,7 +131,7 @@
     if (jumpFlag == NO && smashFlag == YES) {
         
         //突進処理
-        player.physicsBody.velocity = CGVectorMake(0, -300);
+        player.physicsBody.velocity = CGVectorMake(0, -500);
         [player runAction:[SKAction repeatActionForever:[SKAction animateWithTextures:@[smashPenguin] timePerFrame:0.1]]];
         
         smashFlag = NO;

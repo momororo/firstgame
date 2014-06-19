@@ -395,7 +395,7 @@ BOOL fishAdd;
         
         if([Player getFlyPoint] % 50 == 0){
             //魚の生成
-            [Fish setFishPositionX:CGRectGetMaxX(self.frame) PositionY:CGRectGetMaxY(self.frame)];
+            [Fish setFishPositionX:CGRectGetMaxX(self.frame) PositionY:CGRectGetMinY(self.frame)];
             
             //魚の追加処理開始
             fishAdd = YES;

@@ -42,7 +42,7 @@
     //ground = [SKSpriteNode spriteNodeWithColor:[SKColor brownColor]
     //                                                    size:CGSizeMake(sizeX,sizeY)];
     ground = [SKSpriteNode spriteNodeWithTexture:nextGroundTexture[3]];
-    ground.size = CGSizeMake(ground.size.width/2, ground.size.height/4);
+    ground.size = CGSizeMake(ground.size.width/4, ground.size.height/4);
     ground.name = @"kGround";
     ground.position = CGPointMake(ground.size.width/2,ground.size.height/2);
     
@@ -102,7 +102,7 @@
     nextGround.name = @"kGround";
 
     
-    nextGround.position =CGPointMake (positionX + (nextGround.size.width/2),0);
+    nextGround.position =CGPointMake (positionX + (nextGround.size.width/2),arc4random_uniform(51));
     nextGround.zPosition = 40;
     
     nextGround.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(nextGround.size.width, nextGround.size.height/2)];

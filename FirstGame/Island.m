@@ -72,11 +72,11 @@
 
 +(void)moveIslandInit{
     [islands[islands.count- 2] runAction:[SKAction sequence:@[[SKAction moveToX: -300 duration:20],[SKAction removeFromParent]]]];
-    [islands[islands.count- 1] runAction:[SKAction sequence:@[[SKAction moveToX: -300 duration:20],[SKAction removeFromParent]]]];
+    [islands[islands.count- 1] runAction:[SKAction sequence:@[[SKAction moveToX: -300 duration:30],[SKAction removeFromParent]]]];
 }
 
 +(void)moveIsland{
-    [islands[islands.count - 1] runAction:[SKAction sequence:@[[SKAction moveToX: -300 duration:20],[SKAction removeFromParent]]]];
+    [islands[islands.count - 1] runAction:[SKAction sequence:@[[SKAction moveToX: -300 duration:30],[SKAction removeFromParent]]]];
 }
 
 +(BOOL)removeIsland{
