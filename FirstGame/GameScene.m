@@ -34,6 +34,9 @@ SKLabelNode *scoreLabel;
     
 //魚を食べた時の加点
 int fishPoint;
+    
+//スコア
+float score;
 
 //飛行時間のラベル
 SKLabelNode *flyingLabel;
@@ -323,21 +326,75 @@ BOOL fishAdd;
     /**********センサーと地面が離れるのを検知**********/
     if([ObjectBitMask sensorAndGround:contact]){
         
-        //nextGroundの生成
-        [Ground setNextGroundPositionX:self.frame.size.width];
-        [self addChild:[Ground getNextGround]];
         
-        //nextGroundを基に壁を生成
-        [Wall setWallFromNextGround:[Ground getNextGround]];
-        [self addChild:[Wall getWall]];
-        
-        //nextGroundの動作
-        [Ground moveNextGroundDuration:4.0];
-        //wallの動作
-        [Wall moveWallDuration:4.0];
-        
+    //スコア200までは壁が出ず
+        if(score < 20){
+            //nextGroundの生成
+                [Ground setNextGroundPositionX:self.frame.size.width];
+                [self addChild:[Ground getNextGround]];
+                
+                
+                //nextGroundの動作
+                [Ground moveNextGroundDuration:4.0];
+            
+            return;
 
+        }
+        
+    //スコアが1000までは壁が3分の1の確率で出る
+        if(score < 1000){
+            //nextGroundの生成
+            [Ground setNextGroundPositionX:self.frame.size.width];
+            [self addChild:[Ground getNextGround]];
+            
+            
+            //nextGroundの動作
+            [Ground moveNextGroundDuration:3.5];
+            
+            
+            if(arc4random_uniform(2) == 0){
+                //nextGroundを基に壁を生成
+                [Wall setWallFromNextGround:[Ground getNextGround]];
+                [self addChild:[Wall getWall]];
+            
+                //wallの動作
+                [Wall moveWallDuration:3.5];
+            
+                return;
+            }
+        }
+
+        
+    //スコアが1000以上は常に壁が出てスコアに応じて速度アップ
+        
+        if (score >= 1000) {
+
+            //nextGroundの生成
+            [Ground setNextGroundPositionX:self.frame.size.width];
+            [self addChild:[Ground getNextGround]];
+
+            //nextGroundを基に壁を生成
+            [Wall setWallFromNextGround:[Ground getNextGround]];
+            [self addChild:[Wall getWall]];
+
+            
+            
+            //速度可変用の変数
+            float duration = 3.5 - (score / 5000) ;
+
+            //nextGroundの動作
+            [Ground moveNextGroundDuration:duration];
+
+            
+            //wallの動作
+            [Wall moveWallDuration:duration];
+                
+            return;
+            
+        }
+        
     }
+    
     
     /**********センサーと地面が離れるのを検知終了**********/
 
@@ -355,7 +412,9 @@ BOOL fishAdd;
     
 //SCOREの更新
     if(gameStart == YES){
-    scoreLabel.text = [NSString stringWithFormat:@"SCORE = %.1f",(float)[[NSDate date] timeIntervalSinceDate:startTime] * 2 + fishPoint];
+        
+    score = [[NSDate date] timeIntervalSinceDate:startTime] * 2 + fishPoint;
+    scoreLabel.text = [NSString stringWithFormat:@"SCORE = %.1f",score];
  
     }
     
