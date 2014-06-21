@@ -380,7 +380,7 @@ BOOL fishAdd;
             
             
             //速度可変用の変数
-            float duration = 3.5 - (score / 2000) ;
+            float duration = 3.35 - (score / 2500) ;
 
             //nextGroundの動作
             [Ground moveNextGroundDuration:duration];
