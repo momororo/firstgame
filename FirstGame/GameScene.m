@@ -83,7 +83,9 @@ BOOL fishAdd;
         scoreLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
         scoreLabel.text = @"SCORE = 0";
         scoreLabel.fontSize = 20;
+        scoreLabel.fontColor = [UIColor redColor];
         scoreLabel.name = @"kScoreLabel";
+        scoreLabel.zPosition = 50;
         scoreLabel.position = CGPointMake(CGRectGetMinX(self.frame), CGRectGetMaxY(self.frame)-(CGRectGetMaxY(self.frame)/10));
         scoreLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeLeft;
         scoreLabel.verticalAlignmentMode = SKLabelVerticalAlignmentModeTop;
@@ -93,6 +95,11 @@ BOOL fishAdd;
         //海
         [Sea setSeaFrame:self.frame];
         [self addChild:[Sea getSea]];
+        
+        //波
+        SKSpriteNode *nami = [SKSpriteNode spriteNodeWithImageNamed:@"nami.png"];
+        nami.position = CGPointMake(CGRectGetMidX(self.frame),sea.size.height/2);
+        [self addChild:nami];
         
         //背景の島
         [Island initTexture];
