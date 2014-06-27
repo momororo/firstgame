@@ -17,7 +17,7 @@
 
 +(void)setSensoFrame:(CGRect)frame{
     //透明のオブジェクトを生成(センサー)
-    sensor = [SKSpriteNode spriteNodeWithColor:[SKColor clearColor] size:CGSizeMake(1,frame.size.height)];
+    sensor = [SKSpriteNode spriteNodeWithColor:[SKColor clearColor] size:CGSizeMake(30,frame.size.height)];
     
     sensor.name = @"kSensor";
     sensor.position = CGPointMake(CGRectGetMidX(frame) * 1.5, CGRectGetMidY(frame));
