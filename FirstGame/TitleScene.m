@@ -29,18 +29,32 @@ float score;
 
         start = [SKSpriteNode spriteNodeWithImageNamed:@"start.png"];
         start.size = CGSizeMake(start.size.width, start.size.height);
-        start.position = CGPointMake(426, 160);
+        start.position = CGPointMake(440, 130);
         [self addChild:start];
         
         tutorial = [SKSpriteNode spriteNodeWithImageNamed:@"tutorial.png"];
         tutorial.size = CGSizeMake(tutorial.size.width, tutorial.size.height);
-        tutorial.position = CGPointMake(426, 110);
+        tutorial.position = CGPointMake(440, 90);
         [self addChild:tutorial];
         
         ranking = [SKSpriteNode spriteNodeWithImageNamed:@"ranking.png"];
         ranking.size = CGSizeMake(ranking.size.width, ranking.size.height);
-        ranking.position = CGPointMake(426, 60);
+        ranking.position = CGPointMake(440, 50);
         [self addChild:ranking];
+        
+        
+        //灯籠流し
+        
+        SKSpriteNode *penguin = [SKSpriteNode spriteNodeWithImageNamed:@"pengin6"];
+        penguin.size = CGSizeMake(penguin.size.width, penguin.size.height);
+        penguin.position = CGPointMake(CGRectGetMaxX(self.frame) + penguin.size.width, CGRectGetMidY(self.frame));
+        penguin.zPosition = 0;
+        
+        [self addChild:penguin];
+        
+        [penguin
+         runAction:[SKAction sequence:@[[SKAction moveToX: -200 duration:12.0],[SKAction removeFromParent]]]];
+        
         
         
         //点滅アクション
@@ -59,6 +73,8 @@ float score;
         score = [userDefaults floatForKey:@"score"];
         
         //スコアをどこかに表示？？
+        
+        
         
         
     }
