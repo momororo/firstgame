@@ -519,6 +519,29 @@ BOOL fishAdd;
         [[Wall getWall] removeAllActions];
         
         
+        //BGMの停止
+        [self->musicPlayer1 stop];
+        
+        //ゲームオーバー用のBGM
+        NSError *error;
+        NSURL *url2 = [[NSBundle mainBundle] URLForResource:@"gameover" withExtension:@"mp3"];
+        self->musicPlayer2 = [[AVAudioPlayer alloc] initWithContentsOfURL:url2 error:&error];
+        self->musicPlayer2.numberOfLoops = -1;
+        [musicPlayer2 prepareToPlay];
+        [self->musicPlayer2 play];
+        
+        
+    //ハイスコア登録処理
+        //ハイスコア読込
+        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        //スコアの比較
+        if(score > [userDefaults floatForKey:@"score"]){
+            //ハイスコアの場合userDefaultに設定
+            [userDefaults setFloat:score forKey:@"score"];
+            
+        }
+        
+        
         //リトライボタンの追加
         SKLabelNode *retryLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
         retryLabel.text = @"RETRY";
@@ -545,19 +568,8 @@ BOOL fishAdd;
         topLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeRight;
         
         [self addChild:topLabel];
-        
-        //SCOREを記録する処理を追記すること
-        
-        //BGMの停止
-        [self->musicPlayer1 stop];
-        
-        //ゲームオーバー用のBGM
-        NSError *error;
-        NSURL *url2 = [[NSBundle mainBundle] URLForResource:@"gameover" withExtension:@"mp3"];
-        self->musicPlayer2 = [[AVAudioPlayer alloc] initWithContentsOfURL:url2 error:&error];
-        self->musicPlayer2.numberOfLoops = -1;
-        [musicPlayer2 prepareToPlay];
-        [self->musicPlayer2 play];
+
+
 
         
         return;

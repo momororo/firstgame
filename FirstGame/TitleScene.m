@@ -14,6 +14,7 @@ SKSpriteNode *tutorial;
 SKSpriteNode *tutorial1;
 SKSpriteNode *ranking;
 SKSpriteNode *next;
+float score;
 
 @implementation TitleScene
 
@@ -53,7 +54,11 @@ SKSpriteNode *next;
         NSLog(@"%@",NSStringFromCGSize(self.frame.size));
         */
         
+        //ハイスコア読込
+        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        score = [userDefaults floatForKey:@"score"];
         
+        //スコアをどこかに表示？？
         
         
     }
