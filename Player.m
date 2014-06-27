@@ -52,7 +52,7 @@
 +(void)setPlayerPositionX:(float)positionX positionY:(float)positionY{
     //プレイキャラの設定
     player = [SKSpriteNode spriteNodeWithTexture:walkPenguins[0]];
-    player.size = CGSizeMake(player.size.width/5, player.size.height/5);
+    player.size = CGSizeMake(player.size.width/6.5, player.size.height/6.5);
     player.name = @"kPlayer";
     player.position = CGPointMake(positionX, positionY);
     player.zPosition = 50;
@@ -93,7 +93,7 @@
     if(jumpFlag == YES){
         
         //ジャンプ処理
-        player.physicsBody.velocity = CGVectorMake(0, 640);
+        player.physicsBody.velocity = CGVectorMake(0, 500);
         
         //ジャンプモーション
         SKAction *jumpPengin = [SKAction animateWithTextures:@[flyPenguins[0],flyPenguins[1]] timePerFrame:0.1];

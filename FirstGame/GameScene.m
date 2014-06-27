@@ -311,7 +311,7 @@ BOOL fishAdd;
         //魚の消滅
         [Fish removeEatenFish:[ObjectBitMask getFishFromContact:contact]];
         //魚加点
-        fishPoint = fishPoint + 10;
+        fishPoint = fishPoint + 8;
         return;
     }
    
@@ -356,16 +356,16 @@ BOOL fishAdd;
             
             
             //nextGroundの動作
-            [Ground moveNextGroundDuration:3.5];
+            [Ground moveNextGroundDuration:3.8];
             
             
-            if(arc4random_uniform(2) == 0){
+            if(arc4random_uniform(3) == 0){
                 //nextGroundを基に壁を生成
                 [Wall setWallFromNextGround:[Ground getNextGround]];
                 [self addChild:[Wall getWall]];
             
                 //wallの動作
-                [Wall moveWallDuration:3.5];
+                [Wall moveWallDuration:3.8];
             
                 return;
             }
@@ -379,27 +379,31 @@ BOOL fishAdd;
             //nextGroundの生成
             [Ground setNextGroundPositionX:self.frame.size.width];
             [self addChild:[Ground getNextGround]];
-
-            //nextGroundを基に壁を生成
-            [Wall setWallFromNextGround:[Ground getNextGround]];
-            [self addChild:[Wall getWall]];
-
             
             
             //速度可変用の変数
-            float duration = 3.35 - (score / 2500) ;
+            float duration = 3.5 - (score / 2500) ;
 
             //nextGroundの動作
             [Ground moveNextGroundDuration:duration];
+            
 
-            
-            //wallの動作
-            [Wall moveWallDuration:duration];
+            if(arc4random_uniform(2) == 0){
                 
-            return;
+                
+                //nextGroundを基に壁を生成
+                [Wall setWallFromNextGround:[Ground getNextGround]];
+                [self addChild:[Wall getWall]];
+                
+                
+                //wallの動作
+                [Wall moveWallDuration:duration];
+                
+                return;
             
-        }
+            }
         
+        }
     }
     
     

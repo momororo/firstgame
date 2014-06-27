@@ -42,12 +42,12 @@
     
     
     //乱数で生成する数を決める。0が出たらどうなるかわからないので1プラスしてます。
-    fishQuantity = arc4random_uniform(30) + 1;
+    fishQuantity = arc4random_uniform(100) + 50;
     
     for(int tmp = 0 ; tmp < fishQuantity ; tmp++){
        SKSpriteNode *fish = [SKSpriteNode spriteNodeWithTexture:fishTexture];
         //出現位置を乱数で少しずらす
-        fish.position = CGPointMake(positionX + arc4random_uniform(200),positionY + arc4random_uniform(50));
+        fish.position = CGPointMake(positionX + arc4random_uniform(300),positionY + arc4random_uniform(100));
         
         fish.name = @"kFish";
         
@@ -81,7 +81,7 @@
     
     for(int tmp = 0; tmp < fishQuantity;tmp++){
         SKSpriteNode *fish = fishes[fishes.count - tmp - 1];
-        fish.physicsBody.velocity = CGVectorMake(-1000,arc4random_uniform(200)+800);
+        fish.physicsBody.velocity = CGVectorMake(-1000,arc4random_uniform(400)+500);
         [fish.physicsBody applyTorque:0.04];      //回転
     }
     

@@ -27,14 +27,15 @@
     }
     
     SKSpriteNode *wall = [SKSpriteNode spriteNodeWithTexture:wallTexture];
-    wall.size = CGSizeMake(wall.frame.size.width/2,wall.frame.size.height/2);
+    wall.size = CGSizeMake(wall.frame.size.width/3,wall.frame.size.height/3);
     
     randam = arc4random_uniform(nextGround.size.width/2);
     
     //移動に使う変数に保存
     nextGroundWidth = nextGround.size.width;
     
-    wall.position = CGPointMake(nextGround.position.x -(randam), ((nextGround.size.height/2) + (wall.size.height/2)));
+    //端に寄り過ぎないように+ 10で調整
+    wall.position = CGPointMake(nextGround.position.x -(randam) + 10, ((nextGround.size.height/2) + (wall.size.height/2)));
     wall.zPosition = 50;
     
     wall.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(wall.size.width/3.5, wall.size.height)];

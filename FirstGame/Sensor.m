@@ -20,7 +20,7 @@
     sensor = [SKSpriteNode spriteNodeWithColor:[SKColor clearColor] size:CGSizeMake(1,frame.size.height)];
     
     sensor.name = @"kSensor";
-    sensor.position = CGPointMake(CGRectGetMidX(frame), CGRectGetMidY(frame));
+    sensor.position = CGPointMake(CGRectGetMidX(frame) * 1.5, CGRectGetMidY(frame));
     sensor.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(sensor.size.width,sensor.size.height )];
     
     sensor.physicsBody.affectedByGravity = NO;
