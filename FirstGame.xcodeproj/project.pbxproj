@@ -56,6 +56,7 @@
 		A4A1BAA7192B44E800805339 /* GameView.m in Sources */ = {isa = PBXBuildFile; fileRef = A4A1BAA6192B44E800805339 /* GameView.m */; };
 		A4A76B8F195D7EFA00C098D4 /* pengin6.png in Resources */ = {isa = PBXBuildFile; fileRef = A4A76B87195D7EFA00C098D4 /* pengin6.png */; };
 		A4A76B98195D839200C098D4 /* top.png in Resources */ = {isa = PBXBuildFile; fileRef = A4A76B97195D839200C098D4 /* top.png */; };
+		A4A76B9B195E990100C098D4 /* Emergency.m in Sources */ = {isa = PBXBuildFile; fileRef = A4A76B9A195E990100C098D4 /* Emergency.m */; };
 		A4A79FD6195C5AFD0060B266 /* start_taped.png in Resources */ = {isa = PBXBuildFile; fileRef = A4A79FD0195C5AFD0060B266 /* start_taped.png */; };
 		A4A79FD7195C5AFD0060B266 /* tutorial_taped.png in Resources */ = {isa = PBXBuildFile; fileRef = A4A79FD1195C5AFD0060B266 /* tutorial_taped.png */; };
 		A4A79FD8195C5AFD0060B266 /* start.png in Resources */ = {isa = PBXBuildFile; fileRef = A4A79FD2195C5AFD0060B266 /* start.png */; };
@@ -155,6 +156,8 @@
 		A4A1BAA6192B44E800805339 /* GameView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameView.m; sourceTree = "<group>"; };
 		A4A76B87195D7EFA00C098D4 /* pengin6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pengin6.png; path = ../../pengin6.png; sourceTree = "<group>"; };
 		A4A76B97195D839200C098D4 /* top.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = top.png; path = ../../top.png; sourceTree = "<group>"; };
+		A4A76B99195E990100C098D4 /* Emergency.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Emergency.h; sourceTree = "<group>"; };
+		A4A76B9A195E990100C098D4 /* Emergency.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Emergency.m; sourceTree = "<group>"; };
 		A4A79FD0195C5AFD0060B266 /* start_taped.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = start_taped.png; sourceTree = "<group>"; };
 		A4A79FD1195C5AFD0060B266 /* tutorial_taped.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tutorial_taped.png; sourceTree = "<group>"; };
 		A4A79FD2195C5AFD0060B266 /* start.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = start.png; sourceTree = "<group>"; };
@@ -241,6 +244,8 @@
 				A4A1048F19434F19003182DD /* Fish.m */,
 				04B85444193C73F500F000A8 /* Player.h */,
 				04B85445193C73F500F000A8 /* Player.m */,
+				A4A76B99195E990100C098D4 /* Emergency.h */,
+				A4A76B9A195E990100C098D4 /* Emergency.m */,
 				04B8544D193CA30D00F000A8 /* Sensor.h */,
 				04B8544E193CA30D00F000A8 /* Sensor.m */,
 				04B85441193C73DE00F000A8 /* ObjectBitMask.h */,
@@ -483,6 +488,7 @@
 			files = (
 				A4A1BA79192B43BB00805339 /* TitleScene.m in Sources */,
 				A4A1049019434F19003182DD /* Fish.m in Sources */,
+				A4A76B9B195E990100C098D4 /* Emergency.m in Sources */,
 				A4A1BAA7192B44E800805339 /* GameView.m in Sources */,
 				A4A1BA76192B43BB00805339 /* ViewController.m in Sources */,
 				04B8544C193C93FF00F000A8 /* Wall.m in Sources */,

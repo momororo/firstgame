@@ -221,6 +221,7 @@
     
     if(flyPoint == 0){
         flyFlag = NO;
+        smashFlag = YES;
         return YES;
     }
     

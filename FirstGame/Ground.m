@@ -99,7 +99,7 @@
 
     //床の長さ
     //nextGround.size = CGSizeMake(300 + arc4random_uniform(551),50+arc4random_uniform(101));
-    nextGround.size = CGSizeMake(nextGround.size.width/4,nextGround.size.height/4);
+    nextGround.size = CGSizeMake(nextGround.size.width/2,nextGround.size.height/4);
     nextGround.name = @"kGround";
 
     

@@ -15,6 +15,7 @@ static const uint32_t sensorCategory = 0x1 << 2;
 static const uint32_t wallCategory   = 0x1 << 3;
 static const uint32_t flyingPlayerCategory   = 0x1 << 4;
 static const uint32_t fishCategory   = 0x1 << 5;
+static const uint32_t emergencyCategory = 0x1 << 6;
 
 @interface ObjectBitMask : NSObject
 //プレイヤーと地面の衝突判定をする

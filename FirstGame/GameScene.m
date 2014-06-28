@@ -137,8 +137,14 @@ BOOL fishAdd;
         
         //魚の設定
         [Fish initTexture];
-
         
+        //プレイキャラを固定する箱の設定
+        [Emergency setEmergencyFrame:self.frame];
+        [self addChild:[Emergency getEmergency]];
+        
+        SKPhysicsJointLimit *joint = [SKPhysicsJointLimit jointWithBodyA:player.physicsBody bodyB:emergency.physicsBody anchorA:CGPointMake(player.position.x, player.position.y) anchorB:CGPointMake(emergency.position.x,emergency.position.y)];
+        
+        [self.physicsWorld addJoint:joint];
         
         //接触デリゲート
         self.physicsWorld.contactDelegate = self;
