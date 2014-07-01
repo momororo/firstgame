@@ -225,6 +225,9 @@ BOOL playerAndGroundContactFlag;
 
     //ジャンプ or スマッシュ
     [Player jumpOrSmashAction];
+    //接地フラグOFF（念のため）    
+    playerAndGroundContactFlag = NO;
+
     
 }
 
@@ -342,7 +345,6 @@ BOOL playerAndGroundContactFlag;
     /**********プレイヤーと地面が離れるのを検知**********/
     if([ObjectBitMask playerAndGround:contact]){
         //接地フラグOFF
-
 
         playerAndGroundContactFlag = NO;
         [Player setJumpFlagOff];
