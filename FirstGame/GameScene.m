@@ -247,17 +247,28 @@ BOOL playerAndGroundContactFlag;
         SKNode *ground = [ObjectBitMask getGroundFromContact:contact];
         
         //接触位置 + 2 >= 地面の上面
-        if( contact.contactPoint.y + 2 >= (ground.position.y) + ([ground calculateAccumulatedFrame].size.height/8) ){
+        if( contact.contactPoint.y + 1 >= (ground.position.y) + ([ground calculateAccumulatedFrame].size.height/8) ){
             
-            //接地フラグON
+            /**
+             *  小細工
+             *  フラグがONになっている状態でここの処理に来た場合、挙動が怪しいと思われるので。
+             *  フラグをOFFにします。
+             */
+            if(playerAndGroundContactFlag == YES){
+                playerAndGroundContactFlag = NO;
+                return;
+            }
+            
                 playerAndGroundContactFlag = YES;
 
             
             //player歩行動作
                 [Player walkAction];
                 
-                return;
+            
         }
+        
+        return;
         
     }
      
@@ -273,18 +284,16 @@ BOOL playerAndGroundContactFlag;
         SKNode *ground = [ObjectBitMask getGroundFromContact:contact];
         
         //接触位置 + 2 >= 地面の上面
-        if( contact.contactPoint.y + 2 >= (ground.position.y) + ([ground calculateAccumulatedFrame].size.height/8) ){
-            
-            //接地フラグON
-            playerAndGroundContactFlag = YES;
+        if( contact.contactPoint.y + 1 >= (ground.position.y) + ([ground calculateAccumulatedFrame].size.height/8) ){
 
             
             //player歩行動作
             [Player walkAction];
             
-            return;
+        
         }
         
+        return;
     }
      
     
@@ -333,15 +342,21 @@ BOOL playerAndGroundContactFlag;
     /**********プレイヤーと地面が離れるのを検知**********/
     if([ObjectBitMask playerAndGround:contact]){
         //接地フラグOFF
+
+
         playerAndGroundContactFlag = NO;
         [Player setJumpFlagOff];
+        return;
     }
     /**********プレイヤーと地面が離れるのを検知終了**********/
 
     /**********フライングプレイヤーと地面が離れるのを検知**********/
     if([ObjectBitMask flyingPlayerAndGround:contact]){
-        //接地フラグOFF
+
+
         playerAndGroundContactFlag = NO;
+
+        return;
     }
     /**********フライングプレイヤーと地面が離れるのを検知終了**********/
 
@@ -595,10 +610,6 @@ BOOL playerAndGroundContactFlag;
         
         [self addChild:topLabel];
 
-
-
-        
-        return;
         
     }
     
