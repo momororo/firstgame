@@ -35,6 +35,7 @@
 		A4A104EC194B33AE003182DD /* backmusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A4A104EB194B33AE003182DD /* backmusic.mp3 */; };
 		A4A104F1194B37DC003182DD /* gameover.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A4A104F0194B37DC003182DD /* gameover.mp3 */; };
 		A4A146FB19628F8800AD140E /* top.png in Resources */ = {isa = PBXBuildFile; fileRef = A4A146FA19628F8800AD140E /* top.png */; };
+		A4A146FD1962914B00AD140E /* pengin6.png in Resources */ = {isa = PBXBuildFile; fileRef = A4A146FC1962914B00AD140E /* pengin6.png */; };
 		A4A1BA5E192B43BB00805339 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4A1BA5D192B43BB00805339 /* Foundation.framework */; };
 		A4A1BA60192B43BB00805339 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4A1BA5F192B43BB00805339 /* CoreGraphics.framework */; };
 		A4A1BA62192B43BB00805339 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4A1BA61192B43BB00805339 /* UIKit.framework */; };
@@ -55,7 +56,6 @@
 		A4A1BA9B192B43E400805339 /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = A4A1BA9A192B43E400805339 /* GameScene.m */; };
 		A4A1BAA4192B44D300805339 /* SceneManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A4A1BAA3192B44D300805339 /* SceneManager.m */; };
 		A4A1BAA7192B44E800805339 /* GameView.m in Sources */ = {isa = PBXBuildFile; fileRef = A4A1BAA6192B44E800805339 /* GameView.m */; };
-		A4A76B8F195D7EFA00C098D4 /* pengin6.png in Resources */ = {isa = PBXBuildFile; fileRef = A4A76B87195D7EFA00C098D4 /* pengin6.png */; };
 		A4A76B9B195E990100C098D4 /* Emergency.m in Sources */ = {isa = PBXBuildFile; fileRef = A4A76B9A195E990100C098D4 /* Emergency.m */; };
 		A4A79FD6195C5AFD0060B266 /* start_taped.png in Resources */ = {isa = PBXBuildFile; fileRef = A4A79FD0195C5AFD0060B266 /* start_taped.png */; };
 		A4A79FD7195C5AFD0060B266 /* tutorial_taped.png in Resources */ = {isa = PBXBuildFile; fileRef = A4A79FD1195C5AFD0060B266 /* tutorial_taped.png */; };
@@ -126,6 +126,7 @@
 		A4A104EB194B33AE003182DD /* backmusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = backmusic.mp3; sourceTree = "<group>"; };
 		A4A104F0194B37DC003182DD /* gameover.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = gameover.mp3; sourceTree = "<group>"; };
 		A4A146FA19628F8800AD140E /* top.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = top.png; sourceTree = "<group>"; };
+		A4A146FC1962914B00AD140E /* pengin6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pengin6.png; sourceTree = "<group>"; };
 		A4A1BA5A192B43BB00805339 /* FirstGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FirstGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4A1BA5D192B43BB00805339 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A4A1BA5F192B43BB00805339 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -155,7 +156,6 @@
 		A4A1BAA3192B44D300805339 /* SceneManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneManager.m; sourceTree = "<group>"; };
 		A4A1BAA5192B44E800805339 /* GameView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameView.h; sourceTree = "<group>"; };
 		A4A1BAA6192B44E800805339 /* GameView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameView.m; sourceTree = "<group>"; };
-		A4A76B87195D7EFA00C098D4 /* pengin6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pengin6.png; path = ../../pengin6.png; sourceTree = "<group>"; };
 		A4A76B99195E990100C098D4 /* Emergency.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Emergency.h; sourceTree = "<group>"; };
 		A4A76B9A195E990100C098D4 /* Emergency.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Emergency.m; sourceTree = "<group>"; };
 		A4A79FD0195C5AFD0060B266 /* start_taped.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = start_taped.png; sourceTree = "<group>"; };
@@ -302,11 +302,11 @@
 				0454A58719374B07002403B5 /* jump.wav */,
 				A4A1BA6B192B43BB00805339 /* main.m */,
 				A4F633FB1930785B00187BED /* mario.png */,
+				A4A146FC1962914B00AD140E /* pengin6.png */,
 				A4A104E9194B2C1F003182DD /* nami.png */,
 				A4A79FE0195C5B180060B266 /* next.png */,
 				A4A79FDC195C5B050060B266 /* next_taped.png */,
 				A4AB063A1939AC4A001FFB69 /* pengin5.png */,
-				A4A76B87195D7EFA00C098D4 /* pengin6.png */,
 				A4A79FE1195C5B180060B266 /* previous.png */,
 				A4A79FDD195C5B050060B266 /* previous_taped.png */,
 				A4A79FD5195C5AFD0060B266 /* ranking.png */,
@@ -437,8 +437,8 @@
 				0454A58819374B07002403B5 /* jump.wav in Resources */,
 				A4A79FDA195C5AFD0060B266 /* ranking_taped.png in Resources */,
 				A4A79FE2195C5B180060B266 /* next.png in Resources */,
+				A4A146FD1962914B00AD140E /* pengin6.png in Resources */,
 				A4A104E41949EA9E003182DD /* Island2.png in Resources */,
-				A4A76B8F195D7EFA00C098D4 /* pengin6.png in Resources */,
 				A4A104CD1949CD75003182DD /* cloud1.png in Resources */,
 				A4A104CE1949CD75003182DD /* cloud4.png in Resources */,
 				A4A79FD8195C5AFD0060B266 /* start.png in Resources */,
