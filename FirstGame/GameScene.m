@@ -242,14 +242,16 @@ BOOL playerAndGroundContactFlag;
 	/**********プレイヤーと地面の衝突を検知**********/
     if([ObjectBitMask playerAndGround:contact]){
         
-        //接地フラグON
-        playerAndGroundContactFlag = YES;
 
         //地面を格納する変数
         SKNode *ground = [ObjectBitMask getGroundFromContact:contact];
         
         //接触位置 + 2 >= 地面の上面
         if( contact.contactPoint.y + 2 >= (ground.position.y) + ([ground calculateAccumulatedFrame].size.height/8) ){
+            
+            //接地フラグON
+                playerAndGroundContactFlag = YES;
+
             
             //player歩行動作
                 [Player walkAction];
@@ -438,10 +440,7 @@ BOOL playerAndGroundContactFlag;
         
     
         if([Player getPlayer].position.x < CGRectGetMidX(self.frame)/2){
-            [Player getPlayer].physicsBody.velocity = CGVectorMake(20, 0);
-            NSLog(@"吹っ飛び！！");
-            NSLog(@"%f",[Player getPlayer].position.x);
-        
+            [Player getPlayer].physicsBody.velocity = CGVectorMake(15, 0);
         }
     }
     
