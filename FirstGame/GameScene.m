@@ -275,6 +275,10 @@ BOOL playerAndGroundContactFlag;
         //接触位置 + 2 >= 地面の上面
         if( contact.contactPoint.y + 2 >= (ground.position.y) + ([ground calculateAccumulatedFrame].size.height/8) ){
             
+            //接地フラグON
+            playerAndGroundContactFlag = YES;
+
+            
             //player歩行動作
             [Player walkAction];
             
@@ -333,6 +337,13 @@ BOOL playerAndGroundContactFlag;
         [Player setJumpFlagOff];
     }
     /**********プレイヤーと地面が離れるのを検知終了**********/
+
+    /**********フライングプレイヤーと地面が離れるのを検知**********/
+    if([ObjectBitMask flyingPlayerAndGround:contact]){
+        //接地フラグOFF
+        playerAndGroundContactFlag = NO;
+    }
+    /**********フライングプレイヤーと地面が離れるのを検知終了**********/
 
     
     /**********センサーと地面が離れるのを検知**********/
