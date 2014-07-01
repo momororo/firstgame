@@ -52,6 +52,9 @@ SKEmitterNode *_particleSpark;
 //魚追加中のフラグ
 BOOL fishAdd;
     
+//プレイヤーと地面の接地フラグ
+BOOL playerAndGroundContactFlag;
+    
     
 }
 
@@ -137,14 +140,6 @@ BOOL fishAdd;
         
         //魚の設定
         [Fish initTexture];
-        
-        //プレイキャラを固定する箱の設定
-        [Emergency setEmergencyFrame:self.frame];
-        [self addChild:[Emergency getEmergency]];
-        
-        SKPhysicsJointLimit *joint = [SKPhysicsJointLimit jointWithBodyA:player.physicsBody bodyB:emergency.physicsBody anchorA:CGPointMake(player.position.x, player.position.y) anchorB:CGPointMake(emergency.position.x,emergency.position.y)];
-        
-        [self.physicsWorld addJoint:joint];
         
         //接触デリゲート
         self.physicsWorld.contactDelegate = self;
@@ -247,6 +242,8 @@ BOOL fishAdd;
 	/**********プレイヤーと地面の衝突を検知**********/
     if([ObjectBitMask playerAndGround:contact]){
         
+        //接地フラグON
+        playerAndGroundContactFlag = YES;
 
         //地面を格納する変数
         SKNode *ground = [ObjectBitMask getGroundFromContact:contact];
@@ -304,7 +301,6 @@ BOOL fishAdd;
            [Player countUpFlyPoint];
            
            return;
-
            
        }
     
@@ -330,6 +326,8 @@ BOOL fishAdd;
     
     /**********プレイヤーと地面が離れるのを検知**********/
     if([ObjectBitMask playerAndGround:contact]){
+        //接地フラグOFF
+        playerAndGroundContactFlag = NO;
         [Player setJumpFlagOff];
     }
     /**********プレイヤーと地面が離れるのを検知終了**********/
@@ -433,6 +431,18 @@ BOOL fishAdd;
     score = [[NSDate date] timeIntervalSinceDate:startTime] * 2 + fishPoint;
     scoreLabel.text = [NSString stringWithFormat:@"SCORE = %.1f",score];
  
+    }
+    
+//プレイヤーをスタート地点まで戻す処理
+    if(playerAndGroundContactFlag == YES){
+        
+    
+        if([Player getPlayer].position.x < CGRectGetMidX(self.frame)/2){
+            [Player getPlayer].physicsBody.velocity = CGVectorMake(20, 0);
+            NSLog(@"吹っ飛び！！");
+            NSLog(@"%f",[Player getPlayer].position.x);
+        
+        }
     }
     
 //FlyinFlagがYesの際に行う処理

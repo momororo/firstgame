@@ -64,6 +64,8 @@ SKAction *jumpSE;
 +(int)getFlyPoint;
 //フライフラグを返す
 +(BOOL)getFlyFlag;
+//スマッシュフラグを返す
++(BOOL)getSmashFlag;
 //プレイヤーの初期化
 +(void)initPlayer;
 //プレイヤーのテクスチャーを作成

@@ -17,9 +17,9 @@
 
 +(void)setEmergencyFrame:(CGRect)frame{
     emergency = [SKSpriteNode spriteNodeWithColor:[SKColor blackColor] size:CGSizeMake(30, 30)];
-    emergency.position = CGPointMake(300, 300);
+    emergency.position = CGPointMake(frame.size.width/3, frame.size.height/4);
     emergency.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:emergency.size];
-    emergency.physicsBody.dynamic = NO;
+    emergency.physicsBody.affectedByGravity = NO;
     
     emergency.physicsBody.categoryBitMask = emergencyCategory;
     emergency.physicsBody.collisionBitMask = 0;

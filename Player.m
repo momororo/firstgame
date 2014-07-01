@@ -20,6 +20,10 @@
     return flyFlag;
 }
 
++(BOOL)getSmashFlag{
+    return smashFlag;
+}
+
 //プレイヤーのテクスチャを生成する
 +(void)initTexture{
     
