@@ -225,8 +225,11 @@ BOOL playerAndGroundContactFlag;
 
     //ジャンプ or スマッシュ
     [Player jumpOrSmashAction];
-    //接地フラグOFF（念のため）    
+/*
+    //接地フラグOFF（念のため）
     playerAndGroundContactFlag = NO;
+    NSLog(@"フラグOFF(ジャンプ)");
+*/
 
     
 }
@@ -257,12 +260,16 @@ BOOL playerAndGroundContactFlag;
              *  フラグがONになっている状態でここの処理に来た場合、挙動が怪しいと思われるので。
              *  フラグをOFFにします。
              */
-            if(playerAndGroundContactFlag == YES){
+/*            if(playerAndGroundContactFlag == YES){
                 playerAndGroundContactFlag = NO;
+                NSLog(@"フラグOFF(小細工)");
                 return;
             }
             
                 playerAndGroundContactFlag = YES;
+                NSLog(@"フラグON(コンタクト)");
+*/
+
 
             
             //player歩行動作
@@ -344,20 +351,23 @@ BOOL playerAndGroundContactFlag;
     
     /**********プレイヤーと地面が離れるのを検知**********/
     if([ObjectBitMask playerAndGround:contact]){
+/*
         //接地フラグOFF
-
         playerAndGroundContactFlag = NO;
+        NSLog(@"フラグOFF(コンタクト)");
+*/
         [Player setJumpFlagOff];
         return;
     }
+
     /**********プレイヤーと地面が離れるのを検知終了**********/
 
     /**********フライングプレイヤーと地面が離れるのを検知**********/
     if([ObjectBitMask flyingPlayerAndGround:contact]){
 
-
+/*
         playerAndGroundContactFlag = NO;
-
+*/
         return;
     }
     /**********フライングプレイヤーと地面が離れるのを検知終了**********/
@@ -458,17 +468,24 @@ BOOL playerAndGroundContactFlag;
 //SCOREの更新
     if(gameStart == YES){
         
-    score = [[NSDate date] timeIntervalSinceDate:startTime] * 2 + fishPoint;
-    scoreLabel.text = [NSString stringWithFormat:@"SCORE = %.1f",score];
- 
+        score = [[NSDate date] timeIntervalSinceDate:startTime] * 2 + fishPoint;
+        scoreLabel.text = [NSString stringWithFormat:@"SCORE = %.1f",score];
+
     }
     
-//プレイヤーをスタート地点まで戻す処理
-    if(playerAndGroundContactFlag == YES){
-        
-    
-        if([Player getPlayer].position.x < CGRectGetMidX(self.frame)/2){
-            [Player getPlayer].physicsBody.velocity = CGVectorMake(15, 0);
+//プレイヤーをスタート地点まで戻す処理（糞処理）
+    NSArray *array = [[Player getPlayer].physicsBody allContactedBodies];
+    if(array.count != 0){
+        for(SKPhysicsBody *body in array){
+
+            if(body.categoryBitMask == groundCategory){
+                if([Player getPlayer].position.x < CGRectGetMidX(self.frame)/2){
+                    if( [Player getPlayer].position.y + 1 >= (body.node.position.y) + ([body.node calculateAccumulatedFrame].size.height/8) ){
+
+                        [Player getPlayer].physicsBody.velocity = CGVectorMake(15, 0);
+                    }
+                }
+            }
         }
     }
     
