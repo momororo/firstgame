@@ -65,21 +65,16 @@ BOOL playerAndGroundContactFlag;
         //メイン画面
        SKSpriteNode *haikei = [SKSpriteNode spriteNodeWithImageNamed:@"haikei.png"];
         haikei.size = CGSizeMake(haikei.size.width, haikei.size.height);
-        haikei.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame) + 10);
+        haikei.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
         [self addChild:haikei];
-  
 
- 
-        
         startLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-        
         startLabel.text = @"GAME START";
         startLabel.fontSize = 30;
         startLabel.name = @"kStartLabel";
         startLabel.position = CGPointMake(CGRectGetMidX(self.frame),
                                        CGRectGetMidY(self.frame));
         [self addChild:startLabel];
-
         
         //スコアラベル
         fishPoint = 0;
@@ -93,17 +88,11 @@ BOOL playerAndGroundContactFlag;
         scoreLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeLeft;
         scoreLabel.verticalAlignmentMode = SKLabelVerticalAlignmentModeTop;
         [self addChild:scoreLabel];
-
         
         //海
         [Sea setSeaFrame:self.frame];
         [self addChild:[Sea getSea]];
-        
-        //波
-        SKSpriteNode *nami = [SKSpriteNode spriteNodeWithImageNamed:@"nami.png"];
-        nami.position = CGPointMake(CGRectGetMidX(self.frame),sea.size.height/2);
-        [self addChild:nami];
-        
+    
         //背景の島
         [Island initTexture];
         [Island setIslandInitFrame:self.frame];
@@ -118,7 +107,6 @@ BOOL playerAndGroundContactFlag;
         [self addChild:clouds[0]];
         [self addChild:clouds[1]];
         
-        
         //透明のオブジェクトを生成(センサー)
         [Sensor setSensoFrame:self.frame];
         [self addChild:[Sensor getSensor]];
@@ -131,7 +119,6 @@ BOOL playerAndGroundContactFlag;
         //壁の設定(初期化)
         [Wall initWalls];
         [Wall initTexture];
-        
         
         //プレイキャラの設定
         [Player initTexture];

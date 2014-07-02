@@ -16,7 +16,7 @@
     
 }
 +(void)setSeaFrame:(CGRect)frame{
-    SKTexture *seaTexture = [SKTexture textureWithImageNamed:@"umi.png"];
+    SKTexture *seaTexture = [SKTexture textureWithImageNamed:@"sea.png"];
      sea = [SKSpriteNode spriteNodeWithTexture:seaTexture];
      sea.position = CGPointMake(CGRectGetMidX(frame),sea.frame.size.height/2);
 
