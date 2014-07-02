@@ -9,14 +9,30 @@
 #import <Foundation/Foundation.h>
 #import <SpriteKit/SpriteKit.h>
 
-//海のノード
-SKSpriteNode *sea;
+//海の波の配列
+NSMutableArray *seas;
+//海の波のテクスチャ配列
+NSMutableArray *seasTexture;
+
 
 @interface Sea : NSObject
 
+//初期設定時使用
++(NSMutableArray *)getSeaInit;
+//テクスチャinit
++(void)initTexture;
 //海のノードを返す
-+(SKSpriteNode *)getSea;
-//海の生成
++(SKSpriteNode *)getSeas;
+//初期設定時使用
++(void)setSeasInitFrame:(CGRect)frame;
+//海の配置
 +(void)setSeaFrame:(CGRect)frame;
+//初期設定時使用
++(void)moveSeaInit;
+//海が動く
++(void)moveSea;
+//不要な海の削除
++(BOOL)removeSea;
+
 
 @end

@@ -59,13 +59,13 @@
     if (arc4random_uniform(2) == 0) {
         island = [SKSpriteNode spriteNodeWithTexture:islandsTexture[0]];
         island.size = CGSizeMake(island.size.width*1.2, island.size.height*1.2);
-        island.position = CGPointMake(CGRectGetMaxX(frame) + island.size.width / 2 ,sea.size.height+arc4random_uniform(50));
+        island.position = CGPointMake(CGRectGetMaxX(frame) + island.size.width / 2 ,CGRectGetMidY(frame)/2+arc4random_uniform(50));
         
     }else{
         
         island = [SKSpriteNode spriteNodeWithTexture:islandsTexture[1]];
         island.size = CGSizeMake(island.size.width*1.2, island.size.height*1.2);
-        island.position = CGPointMake(CGRectGetMaxX(frame) + island.size.width / 2,sea.size.height+arc4random_uniform(50));
+        island.position = CGPointMake(CGRectGetMaxX(frame) + island.size.width / 2,CGRectGetMidY(frame)/2+arc4random_uniform(50));
    
     }
     

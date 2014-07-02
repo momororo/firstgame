@@ -90,8 +90,11 @@ BOOL playerAndGroundContactFlag;
         [self addChild:scoreLabel];
         
         //海
-        [Sea setSeaFrame:self.frame];
-        [self addChild:[Sea getSea]];
+        [Sea initTexture];
+        [Sea setSeasInitFrame:self.frame];
+        NSMutableArray *seas = [Sea getSeaInit];
+        [self addChild:seas[0]];
+        [self addChild:seas[1]];
     
         //背景の島
         [Island initTexture];
@@ -154,6 +157,7 @@ BOOL playerAndGroundContactFlag;
             [Ground moveGroundToX:(-300 - (self.frame.size.width / 2)) duration:3.0];
             [Island moveIslandInit];
             [Cloud moveCloudInit];
+            [Sea moveSeaInit];
 
             //スタートラベルの削除
             [startLabel removeFromParent];
@@ -637,6 +641,13 @@ BOOL playerAndGroundContactFlag;
         [Cloud setCloudFrame:self.frame];
         [self addChild:[Cloud getClouds]];
         [Cloud moveCloud];
+    }
+    
+    if ([Sea removeSea] == YES) {
+        //背景画像の更新
+        [Sea setSeaFrame:self.frame];
+        [self addChild:[Sea getSeas]];
+        [Sea moveSea];
     }
     
     
