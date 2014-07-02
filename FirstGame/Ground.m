@@ -44,7 +44,7 @@
     ground = [SKSpriteNode spriteNodeWithTexture:nextGroundTexture[3]];
     ground.size = CGSizeMake(ground.size.width/2, ground.size.height/2);
     ground.name = @"kGround";
-    ground.position = CGPointMake(ground.size.width/2,ground.size.height/2);
+    ground.position = CGPointMake(ground.size.width/2,ground.size.height/4);
     
     //端の判定を甘くするように+10で調整
     ground.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(ground.size.width + 10, ground.size.height/2)];
@@ -99,7 +99,7 @@
 
     //床の長さ
     //nextGround.size = CGSizeMake(300 + arc4random_uniform(551),50+arc4random_uniform(101));
-    nextGround.size = CGSizeMake(nextGround.size.width/2,nextGround.size.height/4);
+    nextGround.size = CGSizeMake(nextGround.size.width/2,nextGround.size.height/2);
     nextGround.name = @"kGround";
 
     

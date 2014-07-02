@@ -37,9 +37,11 @@
     islands = [NSMutableArray new];
     
     SKSpriteNode *island1 = [SKSpriteNode spriteNodeWithTexture:islandsTexture[0]];
+    island1.size = CGSizeMake(island1.size.width*1.2, island1.size.height*1.2);
     island1.position = CGPointMake(CGRectGetMidX(frame)/2,CGRectGetMidY(frame)-40);
     [islands addObject:island1];
     SKSpriteNode *island2 = [SKSpriteNode spriteNodeWithTexture:islandsTexture[1]];
+    island2.size = CGSizeMake(island2.size.width*1.2, island2.size.height*1.2);
     island2.position = CGPointMake(CGRectGetMidX(frame)*3/2,CGRectGetMidY(frame)-40);
     [islands addObject:island2];
 
@@ -56,11 +58,13 @@
     
     if (arc4random_uniform(2) == 0) {
         island = [SKSpriteNode spriteNodeWithTexture:islandsTexture[0]];
+        island.size = CGSizeMake(island.size.width*1.2, island.size.height*1.2);
         island.position = CGPointMake(CGRectGetMaxX(frame) + island.size.width / 2 ,sea.size.height+arc4random_uniform(50));
         
     }else{
         
         island = [SKSpriteNode spriteNodeWithTexture:islandsTexture[1]];
+        island.size = CGSizeMake(island.size.width*1.2, island.size.height*1.2);
         island.position = CGPointMake(CGRectGetMaxX(frame) + island.size.width / 2,sea.size.height+arc4random_uniform(50));
    
     }
