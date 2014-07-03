@@ -473,15 +473,20 @@ BOOL playerAndGroundContactFlag;
 
     }
     
+    
 //プレイヤーをスタート地点まで戻す処理（糞処理）
     NSArray *array = [[Player getPlayer].physicsBody allContactedBodies];
+    //プレイヤーと接触しているオブジェクトが0かどうか確認
     if(array.count != 0){
+        //プレイヤーと接触しているオブジェクト群をループ
         for(SKPhysicsBody *body in array){
-
+            //地面かどうか判定
             if(body.categoryBitMask == groundCategory){
+                //スタート地点のx座標とズレがあるか判定
                 if([Player getPlayer].position.x < CGRectGetMidX(self.frame)/2){
                     if( [Player getPlayer].position.y + 1 >= (body.node.position.y) + ([body.node calculateAccumulatedFrame].size.height/8) ){
-
+                        
+                        //スタート地点まで押し戻す
                         [Player getPlayer].physicsBody.velocity = CGVectorMake(15, 0);
                     }
                 }
@@ -673,6 +678,7 @@ BOOL playerAndGroundContactFlag;
         _particleFire.numParticlesToEmit = 50;
         [self addChild:_particleFire];
     }else{
+        
         [_particleFire resetSimulation];
     }
     _particleFire.position = point;

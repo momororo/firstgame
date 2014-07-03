@@ -9,14 +9,24 @@
 #import "TitleScene.h"
 #import "GameView.h"
 
+
+//スタートボタン
 SKSpriteNode *start;
+//チュートリアルボタン
 SKSpriteNode *tutorial;
+//ランキングボタン
 SKSpriteNode *ranking;
+//チュートリアルのネクストボタン
 SKSpriteNode *next;
+//チュートリアルのバックボタン
 SKSpriteNode *previous;
+//チュートリアルの解説テキスト枠
 SKLabelNode  *tutorialLabel;
+//チュートリアルの背景
 SKSpriteNode *tutorialBackGround;
+//チュートリアルの画像
 SKSpriteNode *tutorialImage;
+//ハイスコア
 float score;
 //チュートリアルフラグ
 bool tutorialFlag;
