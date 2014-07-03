@@ -65,21 +65,16 @@ BOOL playerAndGroundContactFlag;
         //メイン画面
        SKSpriteNode *haikei = [SKSpriteNode spriteNodeWithImageNamed:@"haikei.png"];
         haikei.size = CGSizeMake(haikei.size.width, haikei.size.height);
-        haikei.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame) + 10);
+        haikei.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
         [self addChild:haikei];
-  
 
- 
-        
         startLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-        
         startLabel.text = @"GAME START";
         startLabel.fontSize = 30;
         startLabel.name = @"kStartLabel";
         startLabel.position = CGPointMake(CGRectGetMidX(self.frame),
                                        CGRectGetMidY(self.frame));
         [self addChild:startLabel];
-
         
         //スコアラベル
         fishPoint = 0;
@@ -93,17 +88,14 @@ BOOL playerAndGroundContactFlag;
         scoreLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeLeft;
         scoreLabel.verticalAlignmentMode = SKLabelVerticalAlignmentModeTop;
         [self addChild:scoreLabel];
-
         
         //海
-        [Sea setSeaFrame:self.frame];
-        [self addChild:[Sea getSea]];
-        
-        //波
-        SKSpriteNode *nami = [SKSpriteNode spriteNodeWithImageNamed:@"nami.png"];
-        nami.position = CGPointMake(CGRectGetMidX(self.frame),sea.size.height/2);
-        [self addChild:nami];
-        
+        [Sea initTexture];
+        [Sea setSeasInitFrame:self.frame];
+        NSMutableArray *seas = [Sea getSeaInit];
+        [self addChild:seas[0]];
+        [self addChild:seas[1]];
+    
         //背景の島
         [Island initTexture];
         [Island setIslandInitFrame:self.frame];
@@ -118,7 +110,6 @@ BOOL playerAndGroundContactFlag;
         [self addChild:clouds[0]];
         [self addChild:clouds[1]];
         
-        
         //透明のオブジェクトを生成(センサー)
         [Sensor setSensoFrame:self.frame];
         [self addChild:[Sensor getSensor]];
@@ -131,7 +122,6 @@ BOOL playerAndGroundContactFlag;
         //壁の設定(初期化)
         [Wall initWalls];
         [Wall initTexture];
-        
         
         //プレイキャラの設定
         [Player initTexture];
@@ -167,6 +157,7 @@ BOOL playerAndGroundContactFlag;
             [Ground moveGroundToX:(-300 - (self.frame.size.width / 2)) duration:3.0];
             [Island moveIslandInit];
             [Cloud moveCloudInit];
+            [Sea moveSeaInit];
 
             //スタートラベルの削除
             [startLabel removeFromParent];
@@ -655,6 +646,13 @@ BOOL playerAndGroundContactFlag;
         [Cloud setCloudFrame:self.frame];
         [self addChild:[Cloud getClouds]];
         [Cloud moveCloud];
+    }
+    
+    if ([Sea removeSea] == YES) {
+        //背景画像の更新
+        [Sea setSeaFrame:self.frame];
+        [self addChild:[Sea getSeas]];
+        [Sea moveSea];
     }
     
     
