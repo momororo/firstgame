@@ -56,7 +56,7 @@
 +(void)moveWallDuration:(float)duration{
         SKSpriteNode *wall = walls[walls.count-1];
         [wall
-         runAction:[SKAction sequence:@[[SKAction moveToX: -800 + (nextGroundWidth/2) - randam duration:duration],[SKAction removeFromParent]]]];
+         runAction:[SKAction sequence:@[[SKAction moveToX: -1500 + (nextGroundWidth/2) - randam duration:duration],[SKAction removeFromParent]]]];
     
 }
 

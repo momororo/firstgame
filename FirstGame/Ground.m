@@ -11,10 +11,6 @@
 @implementation Ground
 
 
-//グラウンドのNodeを返す
-+(SKSpriteNode *)getGround{
-    return ground;
-}
 
 +(SKSpriteNode *)getNextGround{
     return nextGrounds[nextGrounds.count-1];
@@ -32,16 +28,19 @@
     [nextGroundTexture addObject:ground2];
     [nextGroundTexture addObject:ground3];
     [nextGroundTexture addObject:ground4];
+    
+    //配列の初期化
+    nextGrounds = [NSMutableArray new];
 
 }
 
 //グラウンドの初期設定
-+(void)setGroundSizeX:(float)sizeX sizeY:(float)sizeY{
++(void)setGroundFrame:(CGRect)frame{
 
     
     //ground = [SKSpriteNode spriteNodeWithColor:[SKColor brownColor]
     //                                                    size:CGSizeMake(sizeX,sizeY)];
-    ground = [SKSpriteNode spriteNodeWithTexture:nextGroundTexture[3]];
+    SKSpriteNode *ground = [SKSpriteNode spriteNodeWithTexture:nextGroundTexture[3]];
     ground.size = CGSizeMake(ground.size.width/2, ground.size.height/2);
     ground.name = @"kGround";
     ground.position = CGPointMake(ground.size.width/2,ground.size.height/4);
@@ -55,8 +54,8 @@
     ground.physicsBody.collisionBitMask = 0;
     ground.physicsBody.contactTestBitMask = 0;
     
-    //ネクストグラウンドの初期化
-    [self initGounds];
+    [nextGrounds addObject:ground];
+    
 
     
 }
@@ -64,7 +63,7 @@
 //グラウンドの動作を設定
 +(void)moveGroundToX:(float)x duration:(float)duration{
 
-    [ground runAction:[SKAction repeatActionForever:
+    [nextGrounds[0] runAction:[SKAction repeatActionForever:
                         [SKAction sequence:@[[SKAction moveToX:x duration:duration],
                                              [SKAction removeFromParent]]]]];
 
@@ -126,15 +125,10 @@
 +(void)moveNextGroundDuration:(float)duration{
     SKSpriteNode *nextGround = nextGrounds[nextGrounds.count-1];
     [nextGround
-     runAction:[SKAction sequence:@[[SKAction moveToX: -800 + (nextGround.size.width/2)duration:duration],[SKAction removeFromParent]]]];
+     runAction:[SKAction sequence:@[[SKAction moveToX: -1500 + (nextGround.size.width/2)duration:duration],[SKAction removeFromParent]]]];
 }
 
 
-//グラウンドクラスの初期化
-//グラウンド配列のみ
-+(void)initGounds{
-    nextGrounds = nil;
-}
 
 //アクションを終えたネクストグラウンドの削除
 +(void)removeOldNextGround{
@@ -149,5 +143,27 @@
     }
     
 }
+
+//壁の位置が規定のx座標を下回っているか判定する
++(BOOL)judgeXpointer:(float)xPointer{
+    
+    SKSpriteNode *ground = nextGrounds[nextGrounds.count-1];
+    
+
+
+    
+  
+    if((ground.position.x + ground.size.width/2)  <=  xPointer){
+
+        NSLog(@"床の座標は%f",(ground.position.x + ground.size.width / 2));
+        NSLog(@"判定の座標は%f",(xPointer));
+        return YES;
+        
+    }
+    
+    return NO;
+    
+}
+
 
 @end

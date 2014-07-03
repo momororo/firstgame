@@ -36,4 +36,5 @@ SKTexture *wallTexture;
 +(void)removeOldWall;
 //攻撃を受けた壁の削除
 +(void)removeAttackedWall:(SKNode *)AttackedWall;
+
 @end

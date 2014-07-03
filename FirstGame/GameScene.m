@@ -116,8 +116,8 @@ BOOL playerAndGroundContactFlag;
         
         //地面の設定
         [Ground initGroundTexture];
-        [Ground setGroundSizeX:ground.size.width sizeY:ground.size.height];
-        [self addChild:[Ground getGround]];
+        [Ground setGroundFrame:self.frame];
+        [self addChild:[Ground getNextGround]];
         
         //壁の設定(初期化)
         [Wall initWalls];
@@ -154,7 +154,7 @@ BOOL playerAndGroundContactFlag;
         if ([startLabel containsPoint:location]) {
             
             //スタートボタンがタップされたら、地面が移動する
-            [Ground moveGroundToX:(-300 - (self.frame.size.width / 2)) duration:3.0];
+            [Ground moveGroundToX:(-1500 - (self.frame.size.width / 2)) duration:5.0];
             [Island moveIslandInit];
             [Cloud moveCloudInit];
             [Sea moveSeaInit];
@@ -363,87 +363,6 @@ BOOL playerAndGroundContactFlag;
     }
     /**********フライングプレイヤーと地面が離れるのを検知終了**********/
 
-    
-    /**********センサーと地面が離れるのを検知**********/
-    if([ObjectBitMask sensorAndGround:contact]){
-        
-        
-    //スコア200までは壁が出ず
-        if(score < 20){
-            //nextGroundの生成
-                [Ground setNextGroundPositionX:self.frame.size.width];
-                [self addChild:[Ground getNextGround]];
-                
-                
-                //nextGroundの動作
-                [Ground moveNextGroundDuration:4.0];
-            
-            return;
-
-        }
-        
-    //スコアが1000までは壁が3分の1の確率で出る
-        if(score < 1000){
-            //nextGroundの生成
-            [Ground setNextGroundPositionX:self.frame.size.width];
-            [self addChild:[Ground getNextGround]];
-            
-            
-            //nextGroundの動作
-            [Ground moveNextGroundDuration:3.8];
-            
-            
-            if(arc4random_uniform(3) == 0){
-                //nextGroundを基に壁を生成
-                [Wall setWallFromNextGround:[Ground getNextGround]];
-                [self addChild:[Wall getWall]];
-            
-                //wallの動作
-                [Wall moveWallDuration:3.8];
-            
-                return;
-            }
-        }
-
-        
-    //スコアが1000以上は常に壁が出てスコアに応じて速度アップ
-        
-        if (score >= 1000) {
-
-            //nextGroundの生成
-            [Ground setNextGroundPositionX:self.frame.size.width];
-            [self addChild:[Ground getNextGround]];
-            
-            
-            //速度可変用の変数
-            float duration = 3.5 - (score / 2500) ;
- 
-
-            //nextGroundの動作
-            [Ground moveNextGroundDuration:duration];
-            
-
-            if(arc4random_uniform(2) == 0){
-                
-                
-                //nextGroundを基に壁を生成
-                [Wall setWallFromNextGround:[Ground getNextGround]];
-                [self addChild:[Wall getWall]];
-                
-                
-                //wallの動作
-                [Wall moveWallDuration:duration];
-                
-                return;
-            
-            }
-        
-        }
-    }
-    
-    
-    /**********センサーと地面が離れるのを検知終了**********/
-
 
     
 }
@@ -484,6 +403,89 @@ BOOL playerAndGroundContactFlag;
             }
         }
     }
+
+    
+//壁の生成
+    //壁が規定のx座標から下回っているか判定する
+    if([Ground judgeXpointer:(CGRectGetMidX(self.frame) * 1.5)]){
+        
+            //スコア200までは壁が出ず
+            if(score < 20){
+                //nextGroundの生成
+                [Ground setNextGroundPositionX:self.frame.size.width];
+                [self addChild:[Ground getNextGround]];
+                
+                
+                //nextGroundの動作
+                [Ground moveNextGroundDuration:6.0];
+                
+                return;
+                
+            }
+            
+            //スコアが1000までは壁が3分の1の確率で出る
+            if(score < 1000){
+                
+                //nextGroundの生成
+                [Ground setNextGroundPositionX:self.frame.size.width + arc4random_uniform(10)];
+                [self addChild:[Ground getNextGround]];
+                
+                //速度の設定
+                int duration = 5.3;
+                
+                //nextGroundの動作
+                [Ground moveNextGroundDuration:duration];
+                
+                
+                if(arc4random_uniform(3) == 0){
+                    //nextGroundを基に壁を生成
+                    [Wall setWallFromNextGround:[Ground getNextGround]];
+                    [self addChild:[Wall getWall]];
+                    
+                    //wallの動作
+                    [Wall moveWallDuration:duration];
+                    
+                    return;
+                }
+            }
+            
+            
+            //スコアが1000以上は常に壁が出てスコアに応じて速度アップ
+            
+            if (score >= 1000) {
+                
+                //nextGroundの生成
+                [Ground setNextGroundPositionX:self.frame.size.width + arc4random_uniform(15)];
+                [self addChild:[Ground getNextGround]];
+                
+                
+                //速度可変用の変数
+                float duration = 5.0 - (score / 3500) ;
+                
+                
+                //nextGroundの動作
+                [Ground moveNextGroundDuration:duration];
+                
+                
+                if(arc4random_uniform(2) == 0){
+                    
+                    
+                    //nextGroundを基に壁を生成
+                    [Wall setWallFromNextGround:[Ground getNextGround]];
+                    [self addChild:[Wall getWall]];
+                    
+                    
+                    //wallの動作
+                    [Wall moveWallDuration:duration];
+                    
+                    return;
+                    
+                }
+                
+            }
+        }
+        
+    
     
 //FlyinFlagがYesの際に行う処理
     if([Player getFlyFlag]  == YES){
