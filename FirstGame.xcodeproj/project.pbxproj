@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		0454A58819374B07002403B5 /* jump.wav in Resources */ = {isa = PBXBuildFile; fileRef = 0454A58719374B07002403B5 /* jump.wav */; };
-		049CEE0A1951C82E00949E29 /* flyPenguin.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 049CEE081951C82E00949E29 /* flyPenguin.atlas */; };
-		049CEE0B1951C82E00949E29 /* walkPenguin.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 049CEE091951C82E00949E29 /* walkPenguin.atlas */; };
 		049CEE0D1951D12B00949E29 /* ground.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 049CEE0C1951D12B00949E29 /* ground.atlas */; };
 		04B85443193C73DE00F000A8 /* ObjectBitMask.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B85442193C73DE00F000A8 /* ObjectBitMask.m */; };
 		04B85446193C73F500F000A8 /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B85445193C73F500F000A8 /* Player.m */; };
@@ -17,6 +15,8 @@
 		04B8544C193C93FF00F000A8 /* Wall.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B8544B193C93FF00F000A8 /* Wall.m */; };
 		04B8544F193CA30D00F000A8 /* Sensor.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B8544E193CA30D00F000A8 /* Sensor.m */; };
 		04B85452193CAB9400F000A8 /* Sea.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B85451193CAB9400F000A8 /* Sea.m */; };
+		A410877719659CCD00E32324 /* walkPenguin.atlas in Resources */ = {isa = PBXBuildFile; fileRef = A410877619659CCD00E32324 /* walkPenguin.atlas */; };
+		A410877B19659F4C00E32324 /* flyPenguin.atlas in Resources */ = {isa = PBXBuildFile; fileRef = A410877A19659F4C00E32324 /* flyPenguin.atlas */; };
 		A471A28C1942FB28002E1EAD /* attackedWall.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A471A28B1942FB28002E1EAD /* attackedWall.mp3 */; };
 		A471A29119430B16002E1EAD /* Fish.png in Resources */ = {isa = PBXBuildFile; fileRef = A471A29019430B16002E1EAD /* Fish.png */; };
 		A4A1049019434F19003182DD /* Fish.m in Sources */ = {isa = PBXBuildFile; fileRef = A4A1048F19434F19003182DD /* Fish.m */; };
@@ -88,8 +88,6 @@
 
 /* Begin PBXFileReference section */
 		0454A58719374B07002403B5 /* jump.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = jump.wav; sourceTree = "<group>"; };
-		049CEE081951C82E00949E29 /* flyPenguin.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = flyPenguin.atlas; sourceTree = "<group>"; };
-		049CEE091951C82E00949E29 /* walkPenguin.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = walkPenguin.atlas; sourceTree = "<group>"; };
 		049CEE0C1951D12B00949E29 /* ground.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = ground.atlas; sourceTree = "<group>"; };
 		04B85441193C73DE00F000A8 /* ObjectBitMask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ObjectBitMask.h; path = ../ObjectBitMask.h; sourceTree = "<group>"; };
 		04B85442193C73DE00F000A8 /* ObjectBitMask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ObjectBitMask.m; path = ../ObjectBitMask.m; sourceTree = "<group>"; };
@@ -103,6 +101,8 @@
 		04B8544E193CA30D00F000A8 /* Sensor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Sensor.m; sourceTree = "<group>"; };
 		04B85450193CAB9400F000A8 /* Sea.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sea.h; sourceTree = "<group>"; };
 		04B85451193CAB9400F000A8 /* Sea.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Sea.m; sourceTree = "<group>"; };
+		A410877619659CCD00E32324 /* walkPenguin.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = walkPenguin.atlas; sourceTree = "<group>"; };
+		A410877A19659F4C00E32324 /* flyPenguin.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = flyPenguin.atlas; sourceTree = "<group>"; };
 		A471A28B1942FB28002E1EAD /* attackedWall.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = attackedWall.mp3; sourceTree = "<group>"; };
 		A471A29019430B16002E1EAD /* Fish.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Fish.png; sourceTree = "<group>"; };
 		A4A1048E19434F19003182DD /* Fish.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Fish.h; path = ../Fish.h; sourceTree = "<group>"; };
@@ -284,7 +284,8 @@
 				A4A1BA67192B43BB00805339 /* FirstGame-Info.plist */,
 				A4A1BA6D192B43BB00805339 /* FirstGame-Prefix.pch */,
 				A471A29019430B16002E1EAD /* Fish.png */,
-				049CEE081951C82E00949E29 /* flyPenguin.atlas */,
+				A410877A19659F4C00E32324 /* flyPenguin.atlas */,
+				A410877619659CCD00E32324 /* walkPenguin.atlas */,
 				A4A104F0194B37DC003182DD /* gameover.mp3 */,
 				049CEE0C1951D12B00949E29 /* ground.atlas */,
 				A4A1049D19472BCF003182DD /* hyouzan.png */,
@@ -315,7 +316,6 @@
 				A4F0A0FA195C67520042ACED /* tutorial1.png */,
 				A4F0A0FC195C6BDE0042ACED /* tutorial2.png */,
 				A4A79FD1195C5AFD0060B266 /* tutorial_taped.png */,
-				049CEE091951C82E00949E29 /* walkPenguin.atlas */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -418,7 +418,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A4A146FB19628F8800AD140E /* top.png in Resources */,
-				049CEE0A1951C82E00949E29 /* flyPenguin.atlas in Resources */,
 				A4A104CB1949CD75003182DD /* cloud3.png in Resources */,
 				A4A147051964090700AD140E /* sea.png in Resources */,
 				A4A1470C1964410D00AD140E /* island1.png in Resources */,
@@ -434,6 +433,7 @@
 				A4A146FD1962914B00AD140E /* pengin6.png in Resources */,
 				A4A104CD1949CD75003182DD /* cloud1.png in Resources */,
 				A4A147031963FCB700AD140E /* haikei.png in Resources */,
+				A410877719659CCD00E32324 /* walkPenguin.atlas in Resources */,
 				A4A104CE1949CD75003182DD /* cloud4.png in Resources */,
 				A4A79FD8195C5AFD0060B266 /* start.png in Resources */,
 				A4A147011963FC9E00AD140E /* image.png in Resources */,
@@ -442,12 +442,12 @@
 				A4A1BA6A192B43BB00805339 /* InfoPlist.strings in Resources */,
 				A4F0A0FD195C6BDE0042ACED /* tutorial2.png in Resources */,
 				A4D7F4F01939F4BE005225B6 /* spark.png in Resources */,
-				049CEE0B1951C82E00949E29 /* walkPenguin.atlas in Resources */,
 				A4A79FD7195C5AFD0060B266 /* tutorial_taped.png in Resources */,
 				A4A1BA7D192B43BB00805339 /* Images.xcassets in Resources */,
 				A4A79FD9195C5AFD0060B266 /* tutorial.png in Resources */,
 				A4A79FD6195C5AFD0060B266 /* start_taped.png in Resources */,
 				A4D7F4EF1939F4BE005225B6 /* Fire.sks in Resources */,
+				A410877B19659F4C00E32324 /* flyPenguin.atlas in Resources */,
 				049CEE0D1951D12B00949E29 /* ground.atlas in Resources */,
 				A4F633FC1930785B00187BED /* mario.png in Resources */,
 				A4A104EC194B33AE003182DD /* backmusic.mp3 in Resources */,

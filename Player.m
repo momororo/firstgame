@@ -56,7 +56,7 @@
 +(void)setPlayerPositionX:(float)positionX positionY:(float)positionY{
     //プレイキャラの設定
     player = [SKSpriteNode spriteNodeWithTexture:walkPenguins[0]];
-    player.size = CGSizeMake(player.size.width/6.5, player.size.height/6.5);
+    player.size = CGSizeMake(player.size.width/6, player.size.height/6);
     player.name = @"kPlayer";
     player.position = CGPointMake(positionX, positionY);
     player.zPosition = 50;
