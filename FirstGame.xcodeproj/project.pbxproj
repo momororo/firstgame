@@ -17,6 +17,7 @@
 		04B85452193CAB9400F000A8 /* Sea.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B85451193CAB9400F000A8 /* Sea.m */; };
 		A410877719659CCD00E32324 /* walkPenguin.atlas in Resources */ = {isa = PBXBuildFile; fileRef = A410877619659CCD00E32324 /* walkPenguin.atlas */; };
 		A410877B19659F4C00E32324 /* flyPenguin.atlas in Resources */ = {isa = PBXBuildFile; fileRef = A410877A19659F4C00E32324 /* flyPenguin.atlas */; };
+		A410877D1966A8A200E32324 /* flyPoint.png in Resources */ = {isa = PBXBuildFile; fileRef = A410877C1966A8A200E32324 /* flyPoint.png */; };
 		A471A28C1942FB28002E1EAD /* attackedWall.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A471A28B1942FB28002E1EAD /* attackedWall.mp3 */; };
 		A471A29119430B16002E1EAD /* Fish.png in Resources */ = {isa = PBXBuildFile; fileRef = A471A29019430B16002E1EAD /* Fish.png */; };
 		A4A1049019434F19003182DD /* Fish.m in Sources */ = {isa = PBXBuildFile; fileRef = A4A1048F19434F19003182DD /* Fish.m */; };
@@ -103,6 +104,7 @@
 		04B85451193CAB9400F000A8 /* Sea.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Sea.m; sourceTree = "<group>"; };
 		A410877619659CCD00E32324 /* walkPenguin.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = walkPenguin.atlas; sourceTree = "<group>"; };
 		A410877A19659F4C00E32324 /* flyPenguin.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = flyPenguin.atlas; sourceTree = "<group>"; };
+		A410877C1966A8A200E32324 /* flyPoint.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flyPoint.png; sourceTree = "<group>"; };
 		A471A28B1942FB28002E1EAD /* attackedWall.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = attackedWall.mp3; sourceTree = "<group>"; };
 		A471A29019430B16002E1EAD /* Fish.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Fish.png; sourceTree = "<group>"; };
 		A4A1048E19434F19003182DD /* Fish.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Fish.h; path = ../Fish.h; sourceTree = "<group>"; };
@@ -289,6 +291,7 @@
 				A4A104F0194B37DC003182DD /* gameover.mp3 */,
 				049CEE0C1951D12B00949E29 /* ground.atlas */,
 				A4A1049D19472BCF003182DD /* hyouzan.png */,
+				A410877C1966A8A200E32324 /* flyPoint.png */,
 				A4A147021963FCB700AD140E /* haikei.png */,
 				A4A1470A1964410D00AD140E /* island1.png */,
 				A4A1470B1964410D00AD140E /* island2.png */,
@@ -419,6 +422,7 @@
 			files = (
 				A4A146FB19628F8800AD140E /* top.png in Resources */,
 				A4A104CB1949CD75003182DD /* cloud3.png in Resources */,
+				A410877D1966A8A200E32324 /* flyPoint.png in Resources */,
 				A4A147051964090700AD140E /* sea.png in Resources */,
 				A4A1470C1964410D00AD140E /* island1.png in Resources */,
 				A4D7F4EC1939F489005225B6 /* Smoke.sks in Resources */,
