@@ -67,6 +67,9 @@ int flyingCountTime;
 //フライング開始のフラグ
 BOOL flyingStartFlag;
     
+//エンド画面のノード
+SKSpriteNode *endNode;
+    
     
 }
 
@@ -204,10 +207,22 @@ BOOL flyingStartFlag;
     
     
     //GameOverラベルがノードにあるときだけ入る処理
-    if([self childNodeWithName:@"kGameOver"]){
+    if([self childNodeWithName:@"kEndNode"]){
+        
+        /**
+         *  エンドノード内でのポジションを再取得する
+         *  selfからlocationを取得するとself内でのポジションが取得される。
+         *  endNodeからlocationを取得するとendNode内でのポジションが取得される
+         *  エンドノード内のノードがタッチされたか判定するには
+         *  セルフのポジションを取得してendNode内がタッチされたか判定した後
+         *  endNode内でのポジションを取得し、Retryボタンのポジションと合致するか判定する。
+         *
+         */
+        CGPoint location = [touch locationInNode:endNode];
+
         
         //
-            if ([[self childNodeWithName:@"kRetryLabel"] containsPoint:location]) {
+            if ([[endNode childNodeWithName:@"kRetryLabel"] containsPoint:location]) {
                 //ゲームシーン画面に飛ぶ
                 if ([_delegate respondsToSelector:@selector(sceneEscape:identifier:)]) {
                     [_delegate sceneEscape:self identifier:@"retry"];
@@ -216,7 +231,7 @@ BOOL flyingStartFlag;
                 }
             }
            
-           if ([[self childNodeWithName:@"kTopLabel"] containsPoint:location]) {
+           if ([[endNode childNodeWithName:@"kTopLabel"] containsPoint:location]) {
                //ゲームシーン画面に飛ぶ
                if ([_delegate respondsToSelector:@selector(sceneEscape:identifier:)]) {
                 [_delegate sceneEscape:self identifier:@"top"];
@@ -656,10 +671,11 @@ BOOL flyingStartFlag;
         
         //ゲームオーバー
         
-        SKSpriteNode *endNode = [SKSpriteNode spriteNodeWithImageNamed:@"gameOver.png"];
+        endNode = [SKSpriteNode spriteNodeWithImageNamed:@"gameOver.png"];
         endNode.size = CGSizeMake(endNode.size.width/2, endNode.size.height/2);
         endNode.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidX(self.frame)/4);
         endNode.zPosition = 50;
+        endNode.name = @"kEndNode";
         
         [self addChild:endNode];
         
@@ -672,7 +688,7 @@ BOOL flyingStartFlag;
                                         CGRectGetMidY(self.frame));
         
         //ラベル追加
-        [self addChild:endLabel];
+        [endNode addChild:endLabel];
         
         //キャラクターの削除
         [[Player getPlayer] removeFromParent];
@@ -715,16 +731,25 @@ BOOL flyingStartFlag;
         }
         
         
+        /**
+         *  デバッグ中
+         *  selfの子ノードの子ノードについては、
+         *  定数でポジショニングしても大丈夫
+         *  =selfの子ノードをポジショニングする際は、selfのサイズから相対的に位置を決定する必要あり
+         */
+        
         //リトライボタンの追加
         SKLabelNode *retryLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
         retryLabel.text = @"RETRY";
         retryLabel.fontSize = 20;
         retryLabel.name = @"kRetryLabel";
         //位置調整がうまくいかず。。。。
-        retryLabel.position = CGPointMake(CGRectGetMinX(self.frame),
-                                          CGRectGetMinY(self.frame));
-        retryLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeLeft;
-        [self addChild:retryLabel];
+        retryLabel.position = CGPointMake(-70,
+                                          70);
+        retryLabel.verticalAlignmentMode = SKLabelVerticalAlignmentModeTop;
+        retryLabel.zPosition = 100;
+        
+        [endNode addChild:retryLabel];
         
         
         
@@ -740,7 +765,7 @@ BOOL flyingStartFlag;
                                         CGRectGetMinY(self.frame));
         topLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeRight;
         
-        [self addChild:topLabel];
+        [endNode addChild:topLabel];
 
         
     }
