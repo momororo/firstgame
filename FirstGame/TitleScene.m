@@ -191,28 +191,28 @@ int tutorialPage;
     
     //イメージ枠の追加
     tutorialBackGround = [SKSpriteNode spriteNodeWithImageNamed:@"image.png"];
-    tutorialBackGround.size = CGSizeMake(tutorialBackGround.size.width*9/10, tutorialBackGround.size.height*3/4);
-    tutorialBackGround.position = CGPointMake(CGRectGetMidX(self.frame)+10, CGRectGetMidY(self.frame)+40);
+    tutorialBackGround.size = CGSizeMake(tutorialBackGround.size.width/1.5, tutorialBackGround.size.height/1.5);
+    tutorialBackGround.position = CGPointMake(CGRectGetMidX(self.frame), 50);
     [self addChild:tutorialBackGround];
     
     
     //テキスト枠の追加
-    tutorialLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+    tutorialLabel = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
     tutorialLabel.fontSize = 18;
     tutorialLabel.fontColor = [SKColor blackColor];
-    tutorialLabel.position = CGPointMake(CGRectGetMidX(self.frame),CGRectGetMidY(self.frame)-35);
+    tutorialLabel.position = CGPointMake(CGRectGetMidX(self.frame),CGRectGetMidY(self.frame)-25);
     [self addChild:tutorialLabel];
 
     //ネクストボタンの追加
     next = [SKSpriteNode spriteNodeWithImageNamed:@"next.png"];
-    next.size = CGSizeMake(next.size.width, next.size.height);
-    next.position = CGPointMake(CGRectGetMaxX(self.frame)*3/4+20, CGRectGetMidY(self.frame)+40);
+    next.size = CGSizeMake(next.size.width/2, next.size.height/2);
+    next.position = CGPointMake(CGRectGetMaxX(self.frame)*3/4-30, CGRectGetMidY(self.frame)+40);
     [self addChild:next];
     
     //バックボタンの追加
     previous = [SKSpriteNode spriteNodeWithImageNamed:@"previous.png"];
-    previous.size = CGSizeMake(next.size.width, next.size.height);
-    previous.position = CGPointMake(CGRectGetMaxX(self.frame)*1/4-20, CGRectGetMidY(self.frame)+40);
+    previous.size = CGSizeMake(next.size.width/2, next.size.height/2);
+    previous.position = CGPointMake(CGRectGetMaxX(self.frame)*1/4+30, CGRectGetMidY(self.frame)+40);
     [self addChild:previous];
 
     //1ページ目を作成
@@ -254,9 +254,9 @@ int tutorialPage;
     
     [tutorialImage removeFromParent];
     tutorialImage = nil;
-    tutorialImage = [SKSpriteNode spriteNodeWithImageNamed:@"tutorial1.png"];
-    tutorialImage.size = CGSizeMake(tutorialImage.size.width/2, tutorialImage.size.height/2);
-    tutorialImage.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)+45);
+    tutorialImage = [SKSpriteNode spriteNodeWithImageNamed:@"tutorial1.jpg"];
+    tutorialImage.size = CGSizeMake(tutorialImage.size.width/6, tutorialImage.size.height/6);
+    tutorialImage.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)+50);
     [self addChild:tutorialImage];
 
     //テキストの差し替え
