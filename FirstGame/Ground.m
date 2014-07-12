@@ -155,8 +155,6 @@
   
     if((ground.position.x + ground.size.width/2)  <=  xPointer){
 
-        NSLog(@"床の座標は%f",(ground.position.x + ground.size.width / 2));
-        NSLog(@"判定の座標は%f",(xPointer));
         return YES;
         
     }

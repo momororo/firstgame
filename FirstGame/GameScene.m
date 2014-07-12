@@ -55,6 +55,18 @@ BOOL fishAdd;
 //プレイヤーと地面の接地フラグ
 BOOL playerAndGroundContactFlag;
     
+//フライポイントの配列
+NSMutableArray *flyPoints;
+    
+//フライング開始時間
+NSDate *flyingStartDate;
+    
+//フライング時間のフラグ
+int flyingCountTime;
+    
+//フライング開始のフラグ
+BOOL flyingStartFlag;
+    
     
 }
 
@@ -130,6 +142,9 @@ BOOL playerAndGroundContactFlag;
         
         //魚の設定
         [Fish initTexture];
+        
+        //フライングのスタートフラグをNOにしておく
+        flyingStartFlag = NO;
         
         //接触デリゲート
         self.physicsWorld.contactDelegate = self;
@@ -316,6 +331,46 @@ BOOL playerAndGroundContactFlag;
            //カウントアップ
            [Player countUpFlyPoint];
            
+        //フライポイントの配列に追加
+           //配列が未作成か確認
+           if(flyPoints == nil){
+               flyPoints = [NSMutableArray new];
+           }
+           
+           //ノードを作成
+           SKSpriteNode *flyPoint = [SKSpriteNode spriteNodeWithImageNamed:@"flyPoint"];
+           flyPoint.size          = CGSizeMake(flyPoint.size.width/3.5 ,
+                                               flyPoint.size.height/3.5);
+
+           flyPoint.zPosition     = 100;
+           
+           //ポジションを配列の個数を基準に決定
+           if(flyPoints.count == 0){
+               //配列に何もないので初期位置を設定
+               flyPoint.position = CGPointMake(CGRectGetMinX(self.frame) + self.frame.size.width/20,
+                                               CGRectGetMinY(self.frame) + self.frame.size.height/18);
+           }else{
+               //一つ前のフライポイントを基準にして位置を決定
+               SKSpriteNode *preFlyPoint = flyPoints[flyPoints.count - 1];
+               flyPoint.position      = CGPointMake(preFlyPoint.position.x + (preFlyPoint.size.width),
+                                        preFlyPoint.position.y);
+           }
+           
+           //ノードに追加
+           [self addChild:flyPoint];
+           
+           //配列に追加
+           [flyPoints addObject:flyPoint];
+           
+           //配列が5つになった際にフラグをYESにしておく
+           if(flyPoints.count == 5){
+               flyingStartFlag = YES;
+           }
+
+           
+           
+           
+           
            return;
            
        }
@@ -397,7 +452,7 @@ BOOL playerAndGroundContactFlag;
                     if( [Player getPlayer].position.y + 1 >= (body.node.position.y) + ([body.node calculateAccumulatedFrame].size.height/8) ){
                         
                         //スタート地点まで押し戻す
-                        [Player getPlayer].physicsBody.velocity = CGVectorMake(15, 0);
+                        [Player getPlayer].physicsBody.velocity = CGVectorMake(35, 0);
                     }
                 }
             }
@@ -491,58 +546,102 @@ BOOL playerAndGroundContactFlag;
     if([Player getFlyFlag]  == YES){
         
         //フライングラベルを生成
-        if([Player getFlyPoint] == 500){
+        if(flyingStartFlag == YES){
             
             //フライングスタートのラベルを生成
             startFlyingLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
             startFlyingLabel.text = [NSString stringWithFormat:@"I can fly!!"];
             startFlyingLabel.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
             [self addChild:startFlyingLabel];
-            
-            //飛行時間の表示
+
+
+            //飛行時間の表示ラベル
             flyingLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-            flyingLabel.text = [NSString stringWithFormat:@"%d",[Player getFlyPoint]];
-            flyingLabel.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)/2);
             [self addChild:flyingLabel];
-        }
-        
-        //フライングスタートラベルの削除
-        if([Player getFlyPoint] == 400){
-            [startFlyingLabel removeFromParent];
-        }
-        
-        //飛行時間のカウントダウン
-        [Player countDownFlyPoint];
-        
-        //時間の更新
-        flyingLabel.text = [NSString stringWithFormat:@"%d",[Player getFlyPoint]];
-        
-        if([Player getFlyFlag] == NO){
-            [flyingLabel removeFromParent];
-        }
-        
-        if([Player getFlyPoint] % 50 == 0){
-            //魚の生成
-            [Fish setFishPositionX:CGRectGetMaxX(self.frame) PositionY:CGRectGetMinY(self.frame)];
+
             
-            //魚の追加処理開始
-            fishAdd = YES;
+            //フライング開始時間の設定
+            flyingStartDate = [NSDate date];
+            
+            //フライング時間のフラグの設定
+            flyingCountTime = 2.0;
+            
+            //フライングスタートのフラグをNOにする
+            flyingStartFlag = NO;
+            
 
-            //魚の配列をget
-            NSMutableArray * fishes = [Fish getFishes];
-            //魚の数量をget
-            int fishQuantity = [Fish getFishQuantity];
-            //魚の配列をノードに追加する
-            for(int tmp = 0;tmp < fishQuantity ; tmp++){
-                [self addChild:fishes[fishes.count - tmp - 1]];
-
+        }
+        
+        //時間の差分を取得
+        NSDate *now = [NSDate date];
+        float currentTime = [now timeIntervalSinceDate:flyingStartDate];
+        
+        //フライング時間のカウントアップと、条件に応じた処理を行う
+        if(flyingCountTime <= currentTime){
+            
+            
+            //2秒に一回ペンギンを出す
+                if(flyingCountTime % 2 == 0){
+                    
+                    
+                    //魚の生成
+                    [Fish setFishPositionX:CGRectGetMaxX(self.frame) PositionY:CGRectGetMinY(self.frame)];
+                    
+                    //魚の追加処理開始
+                    fishAdd = YES;
+                    
+                    //魚の配列をget
+                    NSMutableArray * fishes = [Fish getFishes];
+                    
+                    //魚の数量をget
+                    int fishQuantity = [Fish getFishQuantity];
+                    
+                        //魚の配列をノードに追加する
+                        for(int tmp = 0;tmp < fishQuantity ; tmp++){
+                            [self addChild:fishes[fishes.count - tmp - 1]];
+                            
+                        }
+                    
+                    
+                    //魚を動かす
+                    [Fish moveFish];
+                    
+                    //魚の追加処理終了
+                    fishAdd = NO;
+                    
+                    //フライングポイントのラベルの削除
+                    SKSpriteNode *point = flyPoints[flyPoints.count - 1];
+                    [point removeFromParent];
+                    [flyPoints removeObjectAtIndex:flyPoints.count - 1];
+                    
+                    //フライングポイントのカウントダウン
+                    [Player countDownFlyPoint];
+                    
+                }
+            
+            //２秒後にスタートラベルを削除する
+            if(flyingCountTime == 2){
+                [startFlyingLabel removeFromParent];
             }
             
-            //魚を動かす
-            [Fish moveFish];
+            //5秒以降はカウントダウン
+            if(flyingCountTime >= 5){
+                //飛行時間の表示
+                flyingLabel.text = [NSString stringWithFormat:@"%d",( 10 - flyingCountTime)];
+                flyingLabel.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)/2);
+                
+            }
             
-            //魚の追加処理終了
-            fishAdd = NO;
+            
+            //フライング時間のフラグをカウントアップ
+            flyingCountTime++;
+
+            
+            if(flyingCountTime == 11){
+                [flyingLabel removeFromParent];
+                
+            }
+            
         }
         
         
@@ -550,7 +649,7 @@ BOOL playerAndGroundContactFlag;
 
     
 //プレイヤーが画面外に落ちた時にゲームオーバーとする処理
-    if([self convertPoint:[Player getPlayerPosition] toNode:self].y < -(self.size.height) ||[self convertPoint:[Player getPlayerPosition] toNode:self].x < (-(self.size.width)/2)){
+    if([self convertPoint:[Player getPlayerPosition] toNode:self].y < -(self.size.height) ||[self convertPoint:[Player getPlayerPosition] toNode:self].x < (-(self.size.width)/9)){
 
         //ゲームスタートのフラグをオフにする
         gameStart = NO;
@@ -587,6 +686,15 @@ BOOL playerAndGroundContactFlag;
         self->musicPlayer2.numberOfLoops = -1;
         [musicPlayer2 prepareToPlay];
         [self->musicPlayer2 play];
+        
+        //フライングポイントの削除
+        for (int count = 0 ; count < flyPoints.count ;){
+            SKSpriteNode *flyPoint = flyPoints[count];
+            [flyPoint removeFromParent];
+            [flyPoints removeObjectAtIndex:0];
+        }
+        //配列の初期化(念のため)
+        flyPoints = nil;
         
         
     //ハイスコア登録処理

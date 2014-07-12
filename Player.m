@@ -206,10 +206,10 @@
     
     //飛んでいないときのみカウントアップ
     if(flyFlag == NO){
-        flyPoint = flyPoint + 100;
+        flyPoint = flyPoint + 1;
     }
 
-    if (flyPoint == 500) {
+    if (flyPoint == 5) {
         flyFlag = YES;
         jumpFlag = NO;
         smashFlag = NO;
