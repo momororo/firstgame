@@ -26,8 +26,9 @@ SKLabelNode  *tutorialLabel;
 SKSpriteNode *tutorialBackGround;
 //チュートリアルの画像
 SKSpriteNode *tutorialImage;
-//ハイスコア
-float score;
+//看板の画像
+SKSpriteNode *kanban;
+
 //チュートリアルフラグ
 bool tutorialFlag;
 //チュートリアルのページ
@@ -59,6 +60,42 @@ int tutorialPage;
         ranking.position = CGPointMake(440, 50);
         [self addChild:ranking];
         
+        //ハイスコア用の看板
+        kanban = [SKSpriteNode spriteNodeWithImageNamed:@"kanban"];
+        kanban.size = CGSizeMake(kanban.size.width/4.5, kanban.size.height/4.5);
+        kanban.position = CGPointMake(self.frame.size.width-(self.frame.size.width/6),self.frame.size.height-(self.frame.size.height/5));
+        [self addChild:kanban];
+        
+        //ハイスコアのラベルを看板に
+        SKLabelNode *scoreLabel;
+        scoreLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+        scoreLabel.text = @"High Score";
+        scoreLabel.fontSize = 20;
+        scoreLabel.fontColor = [UIColor blackColor];
+        scoreLabel.position = CGPointMake(kanban.position.x, kanban.position.y);
+        scoreLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeCenter;
+        scoreLabel.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
+        [self addChild:scoreLabel];
+    
+        
+        
+    //ハイスコア数値のラベルを看板に
+        
+        //ハイスコア読込
+        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        float score = [userDefaults floatForKey:@"score"];
+        
+        SKLabelNode *scoreLabelValue;
+        scoreLabelValue = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+        scoreLabelValue.text = [NSString stringWithFormat:@"%.1f",score];
+        scoreLabelValue.fontSize = 20;
+        scoreLabelValue.fontColor = [UIColor blackColor];
+        scoreLabelValue.position = CGPointMake(kanban.position.x, kanban.position.y - (kanban.size.height/3));
+        scoreLabelValue.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeCenter;
+        scoreLabelValue.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
+        [self addChild:scoreLabelValue];
+
+        
         
         //灯籠流し
         
@@ -84,10 +121,6 @@ int tutorialPage;
         
         NSLog(@"%@",NSStringFromCGSize(self.frame.size));
         */
-        
-        //ハイスコア読込
-        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-        score = [userDefaults floatForKey:@"score"];
         
         //スコアをどこかに表示？？
         
