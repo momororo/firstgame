@@ -656,6 +656,13 @@ BOOL flyingStartFlag;
         
         //ゲームオーバー
         
+        SKSpriteNode *endNode = [SKSpriteNode spriteNodeWithImageNamed:@"gameOver.png"];
+        endNode.size = CGSizeMake(endNode.size.width/2, endNode.size.height/2);
+        endNode.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidX(self.frame)/4);
+        endNode.zPosition = 50;
+        
+        [self addChild:endNode];
+        
         SKLabelNode *endLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
         
         endLabel.text = @"GAME OVER";
