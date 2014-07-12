@@ -22,6 +22,7 @@
 		A41996F019700D66006980F7 /* image.png in Resources */ = {isa = PBXBuildFile; fileRef = A41996EF19700D66006980F7 /* image.png */; };
 		A41996F4197010A9006980F7 /* top.png in Resources */ = {isa = PBXBuildFile; fileRef = A41996F3197010A9006980F7 /* top.png */; };
 		A41996F619711913006980F7 /* tutorial1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A41996F519711913006980F7 /* tutorial1.jpg */; };
+		A41996F819713F25006980F7 /* kanban.png in Resources */ = {isa = PBXBuildFile; fileRef = A41996F719713F25006980F7 /* kanban.png */; };
 		A471A28C1942FB28002E1EAD /* attackedWall.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A471A28B1942FB28002E1EAD /* attackedWall.mp3 */; };
 		A471A29119430B16002E1EAD /* Fish.png in Resources */ = {isa = PBXBuildFile; fileRef = A471A29019430B16002E1EAD /* Fish.png */; };
 		A4A1049019434F19003182DD /* Fish.m in Sources */ = {isa = PBXBuildFile; fileRef = A4A1048F19434F19003182DD /* Fish.m */; };
@@ -109,6 +110,7 @@
 		A41996EF19700D66006980F7 /* image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image.png; sourceTree = "<group>"; };
 		A41996F3197010A9006980F7 /* top.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = top.png; sourceTree = "<group>"; };
 		A41996F519711913006980F7 /* tutorial1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = tutorial1.jpg; sourceTree = "<group>"; };
+		A41996F719713F25006980F7 /* kanban.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kanban.png; sourceTree = "<group>"; };
 		A471A28B1942FB28002E1EAD /* attackedWall.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = attackedWall.mp3; sourceTree = "<group>"; };
 		A471A29019430B16002E1EAD /* Fish.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Fish.png; sourceTree = "<group>"; };
 		A4A1048E19434F19003182DD /* Fish.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Fish.h; path = ../Fish.h; sourceTree = "<group>"; };
@@ -277,6 +279,7 @@
 			children = (
 				A471A28B1942FB28002E1EAD /* attackedWall.mp3 */,
 				A4A104EB194B33AE003182DD /* backmusic.mp3 */,
+				A41996F719713F25006980F7 /* kanban.png */,
 				A4A104C91949CD75003182DD /* cloud1.png */,
 				A4A104C81949CD75003182DD /* cloud2.png */,
 				A4A104C71949CD75003182DD /* cloud3.png */,
@@ -424,6 +427,7 @@
 				A4A104CB1949CD75003182DD /* cloud3.png in Resources */,
 				A410877D1966A8A200E32324 /* flyPoint.png in Resources */,
 				A4A147051964090700AD140E /* sea.png in Resources */,
+				A41996F819713F25006980F7 /* kanban.png in Resources */,
 				A4A1470C1964410D00AD140E /* island1.png in Resources */,
 				A4D7F4EC1939F489005225B6 /* Smoke.sks in Resources */,
 				A471A28C1942FB28002E1EAD /* attackedWall.mp3 in Resources */,
