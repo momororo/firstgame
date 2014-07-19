@@ -28,8 +28,8 @@
  
 
 -(void)setUpGameView{
-    self.showsFPS = YES;
-    self.showsNodeCount = YES;
+    //self.showsFPS = YES;
+    //self.showsNodeCount = YES;
     [self switchingTitleScene];
 }
 

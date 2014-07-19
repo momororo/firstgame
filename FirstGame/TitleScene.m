@@ -39,45 +39,73 @@ int tutorialPage;
 -(id)initWithSize:(CGSize)size {    
     if (self = [super initWithSize:size]) {
         /* Setup your scene here */
-        
+                
+        //背景画像の設定
         SKSpriteNode *top = [SKSpriteNode spriteNodeWithImageNamed:@"top.png"];
         top.size = CGSizeMake(self.frame.size.width, self.frame.size.height);
         top.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
         [self addChild:top];
-
+        
+        //スタートボタンの設定
         start = [SKSpriteNode spriteNodeWithImageNamed:@"start.png"];
-        start.size = CGSizeMake(start.size.width, start.size.height);
-        start.position = CGPointMake(440, 130);
+        start.size = CGSizeMake(start.size.width/3, start.size.height/3);
+        start.position = CGPointMake(CGRectGetMaxX(self.frame)-start.size.width/2, CGRectGetMidY(self.frame));
+        start.zPosition = 10;
         [self addChild:start];
         
+        //遊び方ボタンの設定
         tutorial = [SKSpriteNode spriteNodeWithImageNamed:@"tutorial.png"];
-        tutorial.size = CGSizeMake(tutorial.size.width, tutorial.size.height);
-        tutorial.position = CGPointMake(440, 90);
+        tutorial.size = CGSizeMake(tutorial.size.width/3, tutorial.size.height/3);
+        tutorial.position = CGPointMake(CGRectGetMaxX(self.frame)*4/5,CGRectGetMaxY(self.frame)-tutorial.size.height/1.5);
+        tutorial.zPosition = 10;
         [self addChild:tutorial];
         
+        //ランキングボタンの設定
         ranking = [SKSpriteNode spriteNodeWithImageNamed:@"ranking.png"];
-        ranking.size = CGSizeMake(ranking.size.width, ranking.size.height);
-        ranking.position = CGPointMake(440, 50);
+        ranking.size = CGSizeMake(ranking.size.width/3, ranking.size.height/3);
+        ranking.position = CGPointMake(CGRectGetMaxX(self.frame)-ranking.size.width/2 ,ranking.size.height);
+        ranking.zPosition = 10;
         [self addChild:ranking];
         
         //ハイスコア用の看板
-        kanban = [SKSpriteNode spriteNodeWithImageNamed:@"kanban"];
+     /*   kanban = [SKSpriteNode spriteNodeWithImageNamed:@"kanban"];
         kanban.size = CGSizeMake(kanban.size.width/4.5, kanban.size.height/4.5);
         kanban.position = CGPointMake(self.frame.size.width-(self.frame.size.width/6),self.frame.size.height-(self.frame.size.height/5));
         [self addChild:kanban];
+       */
         
-        //ハイスコアのラベルを看板に
+        //ハイスコアのラベルの影
         SKLabelNode *scoreLabel;
-        scoreLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+        scoreLabel = [SKLabelNode labelNodeWithFontNamed:@"Impact"];
         scoreLabel.text = @"High Score";
-        scoreLabel.fontSize = 20;
-        scoreLabel.fontColor = [UIColor blackColor];
-        scoreLabel.position = CGPointMake(kanban.position.x, kanban.position.y);
+        scoreLabel.fontSize = 28;
+        scoreLabel.fontColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.8];
+        scoreLabel.position = CGPointMake(CGRectGetMaxX(self.frame)/7,CGRectGetMidY(self.frame)*3/5);
         scoreLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeCenter;
         scoreLabel.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
         [self addChild:scoreLabel];
-    
         
+        //ハイスコアのラベル(青)
+        SKLabelNode *scoreLabel1;
+        scoreLabel1 = [SKLabelNode labelNodeWithFontNamed:@"Impact"];
+        scoreLabel1.text = @"High Score";
+        scoreLabel1.fontSize = 28;
+        scoreLabel1.zPosition = 10;
+        scoreLabel1.fontColor = [UIColor colorWithRed:0.1 green:0.4 blue:1 alpha:1];
+        scoreLabel1.position = CGPointMake(-2,2);
+        scoreLabel1.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeCenter;
+        scoreLabel1.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
+        [scoreLabel addChild:scoreLabel1];
+        
+        //ハイスコアラベルのアンダーライン
+        SKSpriteNode *line1 = [SKSpriteNode spriteNodeWithColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.8] size:CGSizeMake(CGRectGetMidX(self.frame)*2/3, CGRectGetMidY(self.frame)/40)];
+        line1.position = CGPointMake(0, -10);
+        [scoreLabel addChild:line1];
+        
+        SKSpriteNode *line2 = [SKSpriteNode spriteNodeWithColor:[UIColor yellowColor] size:CGSizeMake(CGRectGetMidX(self.frame)*2/3, CGRectGetMidY(self.frame)/80)];
+        line2.position = CGPointMake(-3, -9);
+        [scoreLabel addChild:line2];
+    
         
     //ハイスコア数値のラベルを看板に
         
@@ -86,19 +114,20 @@ int tutorialPage;
         float score = [userDefaults floatForKey:@"score"];
         
         SKLabelNode *scoreLabelValue;
-        scoreLabelValue = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-        scoreLabelValue.text = [NSString stringWithFormat:@"%.1f",score];
-        scoreLabelValue.fontSize = 20;
+        scoreLabelValue = [SKLabelNode labelNodeWithFontNamed:@"Impact"];
+        scoreLabelValue.text = [NSString stringWithFormat:@"%.1fpt",score];
+        scoreLabelValue.fontSize = 28;
         scoreLabelValue.fontColor = [UIColor blackColor];
-        scoreLabelValue.position = CGPointMake(kanban.position.x, kanban.position.y - (kanban.size.height/3));
+        scoreLabelValue.position = CGPointMake(CGRectGetMaxX(self.frame)/6,CGRectGetMidY(self.frame)*2/5);
         scoreLabelValue.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeCenter;
         scoreLabelValue.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
         [self addChild:scoreLabelValue];
-
+        
+        
         
         
         //灯籠流し
-        
+    /*
         SKSpriteNode *penguin = [SKSpriteNode spriteNodeWithImageNamed:@"pengin6"];
         penguin.size = CGSizeMake(penguin.size.width, penguin.size.height);
         penguin.position = CGPointMake(CGRectGetMaxX(self.frame) + penguin.size.width, CGRectGetMidY(self.frame));
@@ -108,7 +137,7 @@ int tutorialPage;
         
         [penguin
          runAction:[SKAction sequence:@[[SKAction moveToX: -200 duration:12.0],[SKAction removeFromParent]]]];
-        
+      */  
         
         
         //点滅アクション
@@ -223,7 +252,7 @@ int tutorialPage;
 -(void)showTutorial{
     
     //イメージ枠の追加
-    tutorialBackGround = [SKSpriteNode spriteNodeWithImageNamed:@"image.png"];
+  /*  tutorialBackGround = [SKSpriteNode spriteNodeWithImageNamed:@"image.png"];
     tutorialBackGround.size = CGSizeMake(tutorialBackGround.size.width/1.5, tutorialBackGround.size.height/1.5);
     tutorialBackGround.position = CGPointMake(CGRectGetMidX(self.frame), 50);
     [self addChild:tutorialBackGround];
@@ -238,13 +267,13 @@ int tutorialPage;
 
     //ネクストボタンの追加
     next = [SKSpriteNode spriteNodeWithImageNamed:@"next.png"];
-    next.size = CGSizeMake(next.size.width/2, next.size.height/2);
-    next.position = CGPointMake(CGRectGetMaxX(self.frame)*3/4-30, CGRectGetMidY(self.frame)+40);
+    next.size = CGSizeMake(next.size.width, next.size.height);
+    next.position = CGPointMake(CGRectGetMaxX(self.frame)*3/4-20, CGRectGetMidY(self.frame)+40);
     [self addChild:next];
     
     //バックボタンの追加
     previous = [SKSpriteNode spriteNodeWithImageNamed:@"previous.png"];
-    previous.size = CGSizeMake(next.size.width/2, next.size.height/2);
+    previous.size = CGSizeMake(previous.size.width, previous.size.height);
     previous.position = CGPointMake(CGRectGetMaxX(self.frame)*1/4+30, CGRectGetMidY(self.frame)+40);
     [self addChild:previous];
 
@@ -253,7 +282,7 @@ int tutorialPage;
 
     
     //チュートリアルフラグをONに変更
-    tutorialFlag = YES;
+    tutorialFlag = YES;*/
 }
 
 //チュートリアルページの削除メソッド

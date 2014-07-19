@@ -24,8 +24,8 @@
 
 +(void)initTexture{
     islandsTexture = [NSMutableArray new];
-    SKTexture *island1 = [SKTexture textureWithImageNamed:@"Island1.png"];
-    SKTexture *island2 = [SKTexture textureWithImageNamed:@"Island2.png"];
+    SKTexture *island1 = [SKTexture textureWithImageNamed:@"island1.png"];
+    SKTexture *island2 = [SKTexture textureWithImageNamed:@"island2.png"];
     [islandsTexture addObject:island1];
     [islandsTexture addObject:island2];
 }
@@ -37,12 +37,12 @@
     islands = [NSMutableArray new];
     
     SKSpriteNode *island1 = [SKSpriteNode spriteNodeWithTexture:islandsTexture[0]];
-    island1.size = CGSizeMake(island1.size.width*1.2, island1.size.height*1.2);
-    island1.position = CGPointMake(CGRectGetMidX(frame)/2,CGRectGetMidY(frame)-40);
+    island1.size = CGSizeMake(island1.size.width, island1.size.height);
+    island1.position = CGPointMake(CGRectGetMidX(frame)/2,CGRectGetMidY(frame));
     [islands addObject:island1];
     SKSpriteNode *island2 = [SKSpriteNode spriteNodeWithTexture:islandsTexture[1]];
-    island2.size = CGSizeMake(island2.size.width*1.2, island2.size.height*1.2);
-    island2.position = CGPointMake(CGRectGetMidX(frame)*3/2,CGRectGetMidY(frame)-40);
+    island2.size = CGSizeMake(island2.size.width, island2.size.height);
+    island2.position = CGPointMake(CGRectGetMidX(frame)*3/2,CGRectGetMidY(frame));
     [islands addObject:island2];
 
 }

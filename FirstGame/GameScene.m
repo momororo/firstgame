@@ -29,7 +29,10 @@ NSDate *startTime;
 //スタートのラベル
 SKLabelNode *startLabel;
     
-//スコアのラベル
+//スコアノード
+SKSpriteNode *scoreNode;
+    
+//スコアラベル
 SKLabelNode *scoreLabel;
     
 //魚を食べた時の加点
@@ -69,14 +72,16 @@ BOOL flyingStartFlag;
     
 //エンド画面のノード
 SKSpriteNode *endNode;
-    
+
+//飛行時間のノード
+SKSpriteNode *flyingNode;
     
 }
 
 -(id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
         /* Setup your scene here */
-        
+    
         //メイン画面
        SKSpriteNode *haikei = [SKSpriteNode spriteNodeWithImageNamed:@"haikei.png"];
         haikei.size = CGSizeMake(haikei.size.width, haikei.size.height);
@@ -91,18 +96,40 @@ SKSpriteNode *endNode;
                                        CGRectGetMidY(self.frame));
         [self addChild:startLabel];
         
-        //スコアラベル
+        //スコア表示看板
+        scoreNode = [SKSpriteNode spriteNodeWithImageNamed:@"score.png"];
+        scoreNode.size = CGSizeMake(self.frame.size.width, scoreNode.size.height);
+        //scoreNode.position = CGPointMake(CGRectGetMaxX(self.frame)-(scoreNode.size.width/2), scoreNode.size.height/3);
+        scoreNode.position = CGPointMake(CGRectGetMidX(self.frame),CGRectGetMaxY(self.frame)*7/8);
+        scoreNode.zPosition = 50;
+        
+        [self addChild:scoreNode];
+        
+        //スコア(点数)ラベル
         fishPoint = 0;
-        scoreLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-        scoreLabel.text = @"SCORE = 0";
-        scoreLabel.fontSize = 20;
-        scoreLabel.fontColor = [UIColor redColor];
+        scoreLabel = [SKLabelNode labelNodeWithFontNamed:@"Impact"];
+        scoreLabel.text = @"0";
+        scoreLabel.fontSize = 30;
+        scoreLabel.fontColor = [UIColor blackColor];
         scoreLabel.name = @"kScoreLabel";
-        scoreLabel.zPosition = 50;
-        scoreLabel.position = CGPointMake(CGRectGetMinX(self.frame), CGRectGetMaxY(self.frame)-(CGRectGetMaxY(self.frame)/10));
-        scoreLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeLeft;
-        scoreLabel.verticalAlignmentMode = SKLabelVerticalAlignmentModeTop;
-        [self addChild:scoreLabel];
+        //scoreLabel.zPosition = 50;
+        scoreLabel.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
+        scoreLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeRight;
+        scoreLabel.position = CGPointMake(200,0);
+        [scoreNode addChild:scoreLabel];
+        
+        //スコアのPT表示専用ラベル
+        SKLabelNode *ptLabel = [SKLabelNode labelNodeWithFontNamed:@"Impact"];
+        ptLabel.text = @"PT";
+        ptLabel.fontSize = 30;
+        ptLabel.fontColor = [UIColor blackColor];
+        ptLabel.position = CGPointMake(240,0);
+        ptLabel.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
+        [scoreNode addChild:ptLabel];
+        
+        
+        
+        
         
         //海
         [Sea initTexture];
@@ -362,7 +389,7 @@ SKSpriteNode *endNode;
            //ポジションを配列の個数を基準に決定
            if(flyPoints.count == 0){
                //配列に何もないので初期位置を設定
-               flyPoint.position = CGPointMake(CGRectGetMinX(self.frame) + self.frame.size.width/20,
+               flyPoint.position = CGPointMake(CGRectGetMaxX(self.frame)/20,
                                                CGRectGetMinY(self.frame) + self.frame.size.height/18);
            }else{
                //一つ前のフライポイントを基準にして位置を決定
@@ -449,7 +476,9 @@ SKSpriteNode *endNode;
     if(gameStart == YES){
         
         score = [[NSDate date] timeIntervalSinceDate:startTime] * 2 + fishPoint;
-        scoreLabel.text = [NSString stringWithFormat:@"SCORE = %.1f",score];
+        //元の文↓
+        //scoreLabel.text = [NSString stringWithFormat:@"SCORE = %.1f",score];
+        scoreLabel.text = [NSString stringWithFormat:@"%.1f",score];
 
     }
     
@@ -568,11 +597,18 @@ SKSpriteNode *endNode;
             startFlyingLabel.text = [NSString stringWithFormat:@"I can fly!!"];
             startFlyingLabel.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
             [self addChild:startFlyingLabel];
+            
+            //飛行時間表示のノード
+            flyingNode = [SKSpriteNode spriteNodeWithImageNamed:@"raptime.png"];
+            flyingNode.size = CGSizeMake(flyingNode.size.width/2, flyingNode.size.height/2);
+            flyingNode.position = CGPointMake(CGRectGetMidX(self.frame), -(flyingNode.size.height/2));
+            flyingNode.zPosition = 50;
+            [self addChild:flyingNode];
 
 
             //飛行時間の表示ラベル
             flyingLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-            [self addChild:flyingLabel];
+            [flyingNode addChild:flyingLabel];
 
             
             //フライング開始時間の設定
@@ -641,9 +677,14 @@ SKSpriteNode *endNode;
             
             //5秒以降はカウントダウン
             if(flyingCountTime >= 5){
+                
+                //飛行時間表示のノードを下から出現させる
+                SKAction *flyingNodeAction = [SKAction moveToY:CGRectGetMidY(self.frame)/6 duration:1];
+                [flyingNode runAction:flyingNodeAction];
+                                                  
                 //飛行時間の表示
                 flyingLabel.text = [NSString stringWithFormat:@"%d",( 10 - flyingCountTime)];
-                flyingLabel.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)/2);
+                flyingLabel.position = CGPointMake(0,35);
                 
             }
             
@@ -653,8 +694,13 @@ SKSpriteNode *endNode;
 
             
             if(flyingCountTime == 11){
+                SKAction *flyingNodeAction = [SKAction moveToY:-(flyingNode.size.height/2) duration:1];
+                [flyingNode runAction:flyingNodeAction];
                 [flyingLabel removeFromParent];
-                
+                if (flyingNode.position.y ==  -(flyingNode.size.height/2)) {
+                    [flyingNode removeFromParent];
+                }
+
             }
             
         }
@@ -673,19 +719,21 @@ SKSpriteNode *endNode;
         
         endNode = [SKSpriteNode spriteNodeWithImageNamed:@"gameOver.png"];
         endNode.size = CGSizeMake(endNode.size.width/2, endNode.size.height/2);
-        endNode.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidX(self.frame)/4);
+        endNode.position = CGPointMake(CGRectGetMidX(self.frame), -(endNode.size.height/2));
         endNode.zPosition = 50;
         endNode.name = @"kEndNode";
         
         [self addChild:endNode];
+        
+        SKAction *endAction = [SKAction moveToY:CGRectGetMidY(self.frame)/2 duration:2];
+        [endNode runAction:endAction];
         
         SKLabelNode *endLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
         
         endLabel.text = @"GAME OVER";
         endLabel.fontSize = 30;
         endLabel.name = @"kGameOver";
-        endLabel.position = CGPointMake(CGRectGetMidX(self.frame),
-                                        CGRectGetMidY(self.frame));
+        endLabel.position = CGPointMake(5,165);
         
         //ラベル追加
         [endNode addChild:endLabel];
@@ -697,6 +745,9 @@ SKSpriteNode *endNode;
         //アクションを削除
         [[Ground getNextGround] removeAllActions];
         [[Wall getWall] removeAllActions];
+        
+        //スコアの削除
+        [scoreNode removeFromParent];
         
         
         //BGMの停止
@@ -728,6 +779,17 @@ SKSpriteNode *endNode;
             //ハイスコアの場合userDefaultに設定
             [userDefaults setFloat:score forKey:@"score"];
             
+            SKLabelNode *newRecord = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+            newRecord.text = @"New record!!";
+            newRecord.fontSize = 18;
+            newRecord.fontColor = [SKColor redColor];
+            newRecord.position = CGPointMake(0, 125);
+            [endNode addChild:newRecord];
+            
+            NSArray *tenmetu = @[[SKAction fadeAlphaTo:0.0 duration:1], [SKAction fadeAlphaTo:1.0 duration:0.75]];
+            SKAction *action = [SKAction repeatActionForever:[SKAction sequence:tenmetu]];
+            [newRecord runAction:action];
+            
         }
         
         
@@ -744,8 +806,7 @@ SKSpriteNode *endNode;
         retryLabel.fontSize = 20;
         retryLabel.name = @"kRetryLabel";
         //位置調整がうまくいかず。。。。
-        retryLabel.position = CGPointMake(-70,
-                                          70);
+        retryLabel.position = CGPointMake(-85,57);
         retryLabel.verticalAlignmentMode = SKLabelVerticalAlignmentModeTop;
         retryLabel.zPosition = 100;
         
@@ -761,11 +822,21 @@ SKSpriteNode *endNode;
         topLabel.fontSize = 20;
         topLabel.name = @"kTopLabel";
         //位置調整がうまくいかず。。。。
-        topLabel.position = CGPointMake(CGRectGetMaxX(self.frame),
-                                        CGRectGetMinY(self.frame));
-        topLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeRight;
+        topLabel.position = CGPointMake(110,
+                                        57);
+        topLabel.verticalAlignmentMode = SKLabelVerticalAlignmentModeTop;
         
         [endNode addChild:topLabel];
+        
+        //スコアの表示
+        SKLabelNode *rastScore = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+        
+        rastScore.text = [NSString stringWithFormat:@"Score... %.1f pt",score];
+        rastScore.fontSize = 30;
+        rastScore.position = CGPointMake(0,125);
+        rastScore.verticalAlignmentMode = SKLabelVerticalAlignmentModeTop;
+        
+        [endNode addChild:rastScore];
 
         
     }
