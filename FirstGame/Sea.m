@@ -62,12 +62,12 @@
 
 
 +(void)moveSeaInit{
-    [seas [seas.count - 2]runAction:[SKAction sequence:@[[SKAction moveToY:-50 duration:5]]]];
-    [seas [seas.count - 1]runAction:[SKAction sequence:@[[SKAction moveToY:-50 duration:10]]]];
+    [seas [seas.count - 2]runAction:[SKAction sequence:@[[SKAction moveToY:-50 duration:5],[SKAction removeFromParent]]]];
+    [seas [seas.count - 1]runAction:[SKAction sequence:@[[SKAction moveToY:-50 duration:10],[SKAction removeFromParent]]]];
 }
 
 +(void)moveSea{
-    [seas [seas.count - 1] runAction:[SKAction sequence:@[[SKAction moveToY:-50 duration:10]]]];
+    [seas [seas.count - 1] runAction:[SKAction sequence:@[[SKAction moveToY:-50 duration:10],[SKAction removeFromParent]]]];
 }
 
 +(BOOL)removeSea{

@@ -77,6 +77,33 @@
             cloud.position = CGPointMake(CGRectGetMaxX(frame) + cloud.size.width / 2,arc4random_uniform(100)+200);
             break;
     }
+    
+    //出現する位置(ｙ軸)によって、ノードの大きさを変更
+    
+    //基準より280〜320の位置にノードがある時
+    if (280 < cloud.position.y && cloud.position.y <= 320){
+        cloud.size = CGSizeMake(cloud.size.width/2, cloud.size.height/2);
+        
+        //基準より261〜280の位置にノードがある時
+    }else if(260 < cloud.position.y && cloud.position.y <= 280){
+        cloud.size = CGSizeMake(cloud.size.width/1.8, cloud.size.height/1.8);
+        
+        //基準より241〜260の位置にノードがある時
+    }else if(240 < cloud.position.y && cloud.position.y <= 260){
+        cloud.size = CGSizeMake(cloud.size.width/1.6, cloud.size.height/1.6);
+        
+        //基準より221〜240の位置にノードがある時
+    }else if(220 < cloud.position.y && cloud.position.y <= 240){
+        cloud.size = CGSizeMake(cloud.size.width/1.4, cloud.size.height/1.4);
+        
+        //基準より201〜220の位置にノードがある時
+    }else if(200 < cloud.position.y && cloud.position.y <=220){
+        cloud.size = CGSizeMake(cloud.size.width/1.2, cloud.size.height/1.2);
+        //基準より200の位置にノードがある時
+    }else if(cloud.position.y == 200){
+        cloud.size = CGSizeMake(cloud.size.width, cloud.size.height);
+    }
+    
     [clouds addObject:cloud];
 }
 

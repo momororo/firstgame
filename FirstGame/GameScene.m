@@ -144,6 +144,7 @@ SKSpriteNode *flyingNode;
         NSMutableArray *islands = [Island getIslandInit];
         [self addChild:islands[0]];
         [self addChild:islands[1]];
+        [self addChild:islands[2]];
         
         //背景の雲
         [Cloud initTexture];
@@ -745,6 +746,7 @@ SKSpriteNode *flyingNode;
         //アクションを削除
         [[Ground getNextGround] removeAllActions];
         [[Wall getWall] removeAllActions];
+        [[Island getIslands] removeAllActions];
         
         //スコアの削除
         [scoreNode removeFromParent];
