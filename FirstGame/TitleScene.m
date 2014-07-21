@@ -50,29 +50,19 @@ int tutorialPage;
         start = [SKSpriteNode spriteNodeWithImageNamed:@"start.png"];
         start.size = CGSizeMake(start.size.width/3, start.size.height/3);
         start.position = CGPointMake(CGRectGetMaxX(self.frame)-start.size.width/2, CGRectGetMidY(self.frame));
-        start.zPosition = 10;
         [self addChild:start];
         
         //遊び方ボタンの設定
         tutorial = [SKSpriteNode spriteNodeWithImageNamed:@"tutorial.png"];
         tutorial.size = CGSizeMake(tutorial.size.width/3, tutorial.size.height/3);
         tutorial.position = CGPointMake(CGRectGetMaxX(self.frame)*4/5,CGRectGetMaxY(self.frame)-tutorial.size.height/1.5);
-        tutorial.zPosition = 10;
         [self addChild:tutorial];
         
         //ランキングボタンの設定
         ranking = [SKSpriteNode spriteNodeWithImageNamed:@"ranking.png"];
         ranking.size = CGSizeMake(ranking.size.width/3, ranking.size.height/3);
         ranking.position = CGPointMake(CGRectGetMaxX(self.frame)-ranking.size.width/2 ,ranking.size.height);
-        ranking.zPosition = 10;
         [self addChild:ranking];
-        
-        //ハイスコア用の看板
-     /*   kanban = [SKSpriteNode spriteNodeWithImageNamed:@"kanban"];
-        kanban.size = CGSizeMake(kanban.size.width/4.5, kanban.size.height/4.5);
-        kanban.position = CGPointMake(self.frame.size.width-(self.frame.size.width/6),self.frame.size.height-(self.frame.size.height/5));
-        [self addChild:kanban];
-       */
         
         //ハイスコアのラベルの影
         SKLabelNode *scoreLabel;
@@ -90,7 +80,6 @@ int tutorialPage;
         scoreLabel1 = [SKLabelNode labelNodeWithFontNamed:@"Impact"];
         scoreLabel1.text = @"High Score";
         scoreLabel1.fontSize = 28;
-        scoreLabel1.zPosition = 10;
         scoreLabel1.fontColor = [UIColor colorWithRed:0.1 green:0.4 blue:1 alpha:1];
         scoreLabel1.position = CGPointMake(-2,2);
         scoreLabel1.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeCenter;
@@ -123,9 +112,6 @@ int tutorialPage;
         scoreLabelValue.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
         [self addChild:scoreLabelValue];
         
-        
-        
-        
         //灯籠流し
     /*
         SKSpriteNode *penguin = [SKSpriteNode spriteNodeWithImageNamed:@"pengin6"];
@@ -137,26 +123,12 @@ int tutorialPage;
         
         [penguin
          runAction:[SKAction sequence:@[[SKAction moveToX: -200 duration:12.0],[SKAction removeFromParent]]]];
-      */  
-        
-        
-        //点滅アクション
-       /* SKLabelNode *start = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-        start.fontSize = 20;
-        start.text = @"タップでスタート！";
-        start.position = CGPointMake(CGRectGetMidX(self.frame),CGRectGetMidY(self.frame));
-        [self addChild:start];
-        
-        
-        NSLog(@"%@",NSStringFromCGSize(self.frame.size));
-        */
-        
+      */
         //スコアをどこかに表示？？
+        
         
         //チュートリアルのページを0にする
         tutorialPage = 0;
-        
-        
         
         
     }
@@ -184,7 +156,7 @@ int tutorialPage;
         }
     }
     
-    /**
+    /*
      *  チュートリアルの作成ページ
      *  チュートリアルのフラグNOでかつページが0ページの時に処理が行われる
      */
@@ -198,63 +170,86 @@ int tutorialPage;
         }
     }
     
-    //ネクストボタンの動き
-    if ([next containsPoint:location]) {
+    
+    //チュートリアルのイメージ枠が表示された時に行える処理
+    if ([self childNodeWithName:@"kTutorialBackGround"]) {
+        CGPoint location = [touch locationInNode:tutorialBackGround];
         
-        if(tutorialFlag == YES){
-
-            //1ページ目から2ページに変更
-            if (tutorialPage == 1) {
+        
+        //ネクストボタンの動き
+        if ([[tutorialBackGround childNodeWithName:@"kNext"] containsPoint:location]) {
+            
+            if(tutorialFlag == YES){
                 
-                [self showSecondPage];
-                return;
+                //1ページ目から2ページに変更
+                if (tutorialPage == 1) {
+                    
+                    [self showSecondPage];
+                    return;
+                    
+                }
                 
+                //2ページ目から3ページに変更(未実装)
             }
             
-            //2ページ目から3ページに変更(未実装)
         }
         
+        //バックボタンの動き
+        if([[tutorialBackGround childNodeWithName:@"kPrevious"] containsPoint:location]){
+            
+            if(tutorialFlag == YES){
+                
+                //1ページ目からの変更は処理を行わない
+                if(tutorialPage == 1){
+                    //処理なし
+                    return;
+                }
+                
+                //2ページ目から1ページに変更
+                if(tutorialPage == 2){
+                    [self showFirstPage];
+                    return;
+                }
+        
+            }
+        
+        }
     }
     
-    //バックボタンの動き
-    if([previous containsPoint:location]){
-        
+    //チュートリアルのイメージ枠を消去
+    if (![tutorialBackGround containsPoint:location]) {
         if(tutorialFlag == YES){
-            
-            //1ページ目からの変更は処理を行わない
-            if(tutorialPage == 1){
-                //処理なし
-                return;
-            }
-            
-            //2ページ目から1ページに変更
-            if(tutorialPage == 2){
-                [self showFirstPage];
-                return;
-            }
-            
+            //チュートリアルのノードを破棄する
+            [self hiddenTutorial];
+            return;
             
         }
-        
     }
+    
     
     
     //チュートリアルがONであり、どこにも該当しない場合はチュートリアル画面を消す
+    /*
+     * ネクスト・バックボタンを子ノードとしてチュートリアル画面に追加した際に、
+     * チュートリアル画面以外をタップすると、画面が消える仕様がいいかなと思いついたため、
+     * 新しい仕様実装テストのためコメント化しましたー。
     if(tutorialFlag == YES){
         //チュートリアルのノードを破棄する
         [self hiddenTutorial];
         return;
         
-    }
+    }*/
 }
 
 //チュートリアルの作成メソッド
 -(void)showTutorial{
     
     //イメージ枠の追加
-  /*  tutorialBackGround = [SKSpriteNode spriteNodeWithImageNamed:@"image.png"];
-    tutorialBackGround.size = CGSizeMake(tutorialBackGround.size.width/1.5, tutorialBackGround.size.height/1.5);
-    tutorialBackGround.position = CGPointMake(CGRectGetMidX(self.frame), 50);
+    tutorialBackGround = [SKSpriteNode spriteNodeWithImageNamed:@"image.png"];
+    tutorialBackGround.name = @"kTutorialBackGround";
+    tutorialBackGround.size = CGSizeMake(tutorialBackGround.size.width/1.2, tutorialBackGround.size.height/1.2);
+    tutorialBackGround.position = CGPointMake(CGRectGetMidX(self.frame),CGRectGetMidY(self.frame)/2);
+    tutorialBackGround.zPosition = 10;
     [self addChild:tutorialBackGround];
     
     
@@ -262,42 +257,44 @@ int tutorialPage;
     tutorialLabel = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
     tutorialLabel.fontSize = 18;
     tutorialLabel.fontColor = [SKColor blackColor];
-    tutorialLabel.position = CGPointMake(CGRectGetMidX(self.frame),CGRectGetMidY(self.frame)-25);
-    [self addChild:tutorialLabel];
+    tutorialLabel.position = CGPointMake(0,-20);
+    [tutorialBackGround addChild:tutorialLabel];
 
     //ネクストボタンの追加
     next = [SKSpriteNode spriteNodeWithImageNamed:@"next.png"];
+    next.name = @"kNext";
     next.size = CGSizeMake(next.size.width, next.size.height);
-    next.position = CGPointMake(CGRectGetMaxX(self.frame)*3/4-20, CGRectGetMidY(self.frame)+40);
-    [self addChild:next];
+    next.position = CGPointMake(155,70);
+    [tutorialBackGround addChild:next];
     
     //バックボタンの追加
     previous = [SKSpriteNode spriteNodeWithImageNamed:@"previous.png"];
+    previous.name = @"kPrevious";
     previous.size = CGSizeMake(previous.size.width, previous.size.height);
-    previous.position = CGPointMake(CGRectGetMaxX(self.frame)*1/4+30, CGRectGetMidY(self.frame)+40);
-    [self addChild:previous];
+    previous.position = CGPointMake(-155,70);
+    [tutorialBackGround addChild:previous];
 
     //1ページ目を作成
     [self showFirstPage];
 
     
     //チュートリアルフラグをONに変更
-    tutorialFlag = YES;*/
+    tutorialFlag = YES;
 }
 
 //チュートリアルページの削除メソッド
 -(void)hiddenTutorial{
     
     [tutorialBackGround removeFromParent];
-    [tutorialLabel removeFromParent];
+   /* [tutorialLabel removeFromParent];
     [next removeFromParent];
     [previous removeFromParent];
-    [tutorialImage removeFromParent];
+    [tutorialImage removeFromParent];*/
     tutorialBackGround = nil;
-    tutorialLabel = nil;
+    /*tutorialLabel = nil;
     next = nil;
     previous = nil;
-    tutorialImage= nil;
+    tutorialImage= nil;*/
 
     //チュートリアルのフラグをNOにする
     tutorialFlag = NO;
@@ -317,9 +314,9 @@ int tutorialPage;
     [tutorialImage removeFromParent];
     tutorialImage = nil;
     tutorialImage = [SKSpriteNode spriteNodeWithImageNamed:@"tutorial1.jpg"];
-    tutorialImage.size = CGSizeMake(tutorialImage.size.width/6, tutorialImage.size.height/6);
-    tutorialImage.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)+50);
-    [self addChild:tutorialImage];
+    tutorialImage.size = CGSizeMake(tutorialImage.size.width/4.5, tutorialImage.size.height/4.5);
+    tutorialImage.position = CGPointMake(0, 70);
+    [tutorialBackGround addChild:tutorialImage];
 
     //テキストの差し替え
     tutorialLabel.text = @"画面をタップすると・・・";
@@ -339,9 +336,9 @@ int tutorialPage;
     [tutorialImage removeFromParent];
     tutorialImage = nil;
     tutorialImage = [SKSpriteNode spriteNodeWithImageNamed:@"tutorial2.png"];
-    tutorialImage.size = CGSizeMake(tutorialImage.size.width/2, tutorialImage.size.height/2);
-    tutorialImage.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)+45);
-    [self addChild:tutorialImage];
+    tutorialImage.size = CGSizeMake(tutorialImage.size.width, tutorialImage.size.height);
+    tutorialImage.position = CGPointMake(0, 70);
+    [tutorialBackGround addChild:tutorialImage];
 
     
     //テキストの差し替え
