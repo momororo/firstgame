@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0414C0FD197E424800349AB0 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0414C0FC197E424800349AB0 /* GameKit.framework */; };
 		0454A58819374B07002403B5 /* jump.wav in Resources */ = {isa = PBXBuildFile; fileRef = 0454A58719374B07002403B5 /* jump.wav */; };
 		049CEE0D1951D12B00949E29 /* ground.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 049CEE0C1951D12B00949E29 /* ground.atlas */; };
 		04B85443193C73DE00F000A8 /* ObjectBitMask.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B85442193C73DE00F000A8 /* ObjectBitMask.m */; };
@@ -91,6 +92,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0414C0FC197E424800349AB0 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		0454A58719374B07002403B5 /* jump.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = jump.wav; sourceTree = "<group>"; };
 		049CEE0C1951D12B00949E29 /* ground.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = ground.atlas; sourceTree = "<group>"; };
 		04B85441193C73DE00F000A8 /* ObjectBitMask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ObjectBitMask.h; path = ../ObjectBitMask.h; sourceTree = "<group>"; };
@@ -191,6 +193,7 @@
 				A4A1BA62192B43BB00805339 /* UIKit.framework in Frameworks */,
 				A4A1BA64192B43BB00805339 /* SpriteKit.framework in Frameworks */,
 				A4A1BA5E192B43BB00805339 /* Foundation.framework in Frameworks */,
+				0414C0FD197E424800349AB0 /* GameKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -229,6 +232,7 @@
 		A4A1BA5C192B43BB00805339 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0414C0FC197E424800349AB0 /* GameKit.framework */,
 				A4A1BA5D192B43BB00805339 /* Foundation.framework */,
 				A4A1BA5F192B43BB00805339 /* CoreGraphics.framework */,
 				A4A1BA61192B43BB00805339 /* UIKit.framework */,
@@ -399,6 +403,11 @@
 				TargetAttributes = {
 					A4A1BA59192B43BB00805339 = {
 						DevelopmentTeam = DQ67LBWH5G;
+						SystemCapabilities = {
+							com.apple.GameCenter = {
+								enabled = 1;
+							};
+						};
 					};
 					A4A1BA81192B43BB00805339 = {
 						TestTargetID = A4A1BA59192B43BB00805339;

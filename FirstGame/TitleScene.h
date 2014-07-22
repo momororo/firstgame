@@ -7,6 +7,7 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
+#import <GameKit/GameKit.h>
 
 @interface TitleScene : SKScene
 @property (weak, nonatomic)id delegate;

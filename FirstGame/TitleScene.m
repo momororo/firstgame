@@ -156,6 +156,13 @@ int tutorialPage;
         }
     }
     
+    //ランキング
+    if([ranking containsPoint:location]){
+
+        return;
+        
+    }
+    
     /*
      *  チュートリアルの作成ページ
      *  チュートリアルのフラグNOでかつページが0ページの時に処理が行われる
@@ -355,5 +362,29 @@ int tutorialPage;
 -(void)update:(CFTimeInterval)currentTime {
     /* Called before each frame is rendered */
 }
+
+
+/**
+ * ランキングボタンタップ時の処理
+ * リーダーボードを表示
+ */
+- (void)showRanking{
+    GKGameCenterViewController *gcView = [GKGameCenterViewController new];
+    if (gcView != nil)
+    {
+        gcView.gameCenterDelegate = self;
+        gcView.viewState = GKGameCenterViewControllerStateLeaderboards;
+        [self.view addSubview:(UIView *)gcView];
+    }
+}
+
+/**
+ * リーダーボードで完了タップ時の処理
+ * 前の画面に戻る
+ */
+- (void)gameCenterViewControllerDidFinish:(GKGameCenterViewController *)gameCenterViewController
+{
+}
+
 
 @end

@@ -49,14 +49,15 @@
     [SceneManager sceneCange:self New:scene Duration:0.5];
 }
 
-//結果
+
 
 #pragma mark - sceneEscapeProtocol
 
 //デリゲートメソッド
 -(void)sceneEscape:(SKScene *)scene identifier:(NSString *)identifier{
     if ([scene isKindOfClass:[TitleScene class]]) {
-
+        
+        
         [self switchingGameScene];
         
     }else if ([scene isKindOfClass:[GameScene class]]){
