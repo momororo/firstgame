@@ -24,9 +24,9 @@
 
 +(void)initTexture{
     islandsTexture = [NSMutableArray new];
-    SKTexture *island1 = [SKTexture textureWithImageNamed:@"Island1.png"];
-    SKTexture *island2 = [SKTexture textureWithImageNamed:@"Island2.png"];
-    SKTexture *island3 = [SKTexture textureWithImageNamed:@"Island3.png"];
+    SKTexture *island1 = [SKTexture textureWithImageNamed:@"island1.png"];
+    SKTexture *island2 = [SKTexture textureWithImageNamed:@"island2.png"];
+    SKTexture *island3 = [SKTexture textureWithImageNamed:@"island3.png"];
     [islandsTexture addObject:island1];
     [islandsTexture addObject:island2];
     [islandsTexture addObject:island3];
