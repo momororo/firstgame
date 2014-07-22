@@ -422,7 +422,7 @@ GKLocalPlayer *localPlayer;
     
 }
 
-// Leader Board表示
+// Leader Boardの表示
 -(void)showGameCenter {
     
     GKGameCenterViewController *gameCenterController = [[GKGameCenterViewController alloc] init];
