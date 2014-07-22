@@ -254,7 +254,7 @@ int tutorialPage;
     
     
     //テキスト枠の追加
-    tutorialLabel = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
+    tutorialLabel = [SKLabelNode labelNodeWithFontNamed:@"SetoFont-SP"];
     tutorialLabel.fontSize = 18;
     tutorialLabel.fontColor = [SKColor blackColor];
     tutorialLabel.position = CGPointMake(0,-20);

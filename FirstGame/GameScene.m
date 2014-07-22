@@ -127,10 +127,6 @@ SKSpriteNode *flyingNode;
         ptLabel.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
         [scoreNode addChild:ptLabel];
         
-        
-        
-        
-        
         //海
         [Sea initTexture];
         [Sea setSeasInitFrame:self.frame];
@@ -750,6 +746,11 @@ SKSpriteNode *flyingNode;
         
         //スコアの削除
         [scoreNode removeFromParent];
+        
+        //フライングモードをカウントするノードがあった場合、削除する
+        if (flyingNode) {
+            [flyingNode removeFromParent];
+        }
         
         
         //BGMの停止
