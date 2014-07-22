@@ -19,7 +19,7 @@
     
     
     //ゲームセンターの認証
-    [self authenticateLocalPlayer];
+    //[self authenticateLocalPlayer];
     
     _gameView = (GameView *)self.view;
      //Present the scene.
@@ -31,6 +31,7 @@
  * GameCenterにログインしているか確認処理
  * ログインしていなければログイン画面を表示
  */
+/*
 - (void)authenticateLocalPlayer
 {
     GKLocalPlayer* player = [GKLocalPlayer localPlayer];
@@ -44,7 +45,7 @@
     };
 }
 
-
+*/
 - (BOOL)shouldAutorotate
 {
     return YES;

@@ -9,7 +9,7 @@
 #import <SpriteKit/SpriteKit.h>
 #import <GameKit/GameKit.h>
 
-@interface TitleScene : SKScene
+@interface TitleScene : SKScene <GKGameCenterControllerDelegate>
 @property (weak, nonatomic)id delegate;
 
 @end

@@ -34,7 +34,13 @@ bool tutorialFlag;
 //チュートリアルのページ
 int tutorialPage;
 
-@implementation TitleScene
+@implementation TitleScene{
+
+//BOOL touch;
+
+GKLocalPlayer *localPlayer;
+    
+}
 
 -(id)initWithSize:(CGSize)size {    
     if (self = [super initWithSize:size]) {
@@ -130,6 +136,9 @@ int tutorialPage;
         //チュートリアルのページを0にする
         tutorialPage = 0;
         
+        //GameCenter認証
+        [self authenticateLocalPlayer];
+        
         
     }
     return self;
@@ -158,9 +167,11 @@ int tutorialPage;
     
     //ランキング
     if([ranking containsPoint:location]){
-
-        return;
         
+        // Leader Board表示
+        [self showGameCenter];
+        
+        //return;
     }
     
     /*
@@ -363,11 +374,75 @@ int tutorialPage;
     /* Called before each frame is rendered */
 }
 
+//GameCenter認証
+-(void)authenticateLocalPlayer{
+    __weak typeof (self) weakSelf = self;
+    
+    localPlayer = [GKLocalPlayer localPlayer];
+    __weak GKLocalPlayer *weakPlayer = localPlayer;
+    
+    weakPlayer.authenticateHandler = ^(UIViewController *viewController, NSError *error)
+    {
+        if (viewController != nil) // LOGIN
+        {
+            [weakSelf showAuthenticationDialogWhenReasonable:viewController];
+        }
+        else if (weakPlayer.isAuthenticated) // LOGIN済
+        {
+            [weakSelf authenticatedPlayer:weakPlayer];
+        }
+        else
+        {
+            [weakSelf disableGameCenter];
+        }
+    };
+    
+}
+
+// GameCenter認証画面
+-(void)showAuthenticationDialogWhenReasonable:(UIViewController *)controller
+{
+    [[[[[UIApplication sharedApplication] delegate] window] rootViewController] presentViewController:controller animated:YES completion:nil];
+}
+
+// GameCenter認証OK
+-(void)authenticatedPlayer:(GKLocalPlayer *)player
+{
+    player = localPlayer;
+}
+
+// GameCenter認証NG
+-(void)disableGameCenter
+{
+    
+}
+
+// Leader Board表示
+-(void)showGameCenter {
+    
+    GKGameCenterViewController *gameCenterController = [[GKGameCenterViewController alloc] init];
+    if (gameCenterController != nil)
+    {
+        gameCenterController.gameCenterDelegate = self;
+        gameCenterController.viewState = GKGameCenterViewControllerStateLeaderboards;
+        UIViewController *vc = self.view.window.rootViewController;
+        [vc presentViewController: gameCenterController animated: YES completion:nil];
+    }
+    
+}
+
+// Leader Boardが閉じたとき呼ばれる
+- (void)gameCenterViewControllerDidFinish:(GKGameCenterViewController *)gameCenterViewController {
+    [[[[[UIApplication sharedApplication] delegate] window] rootViewController] dismissViewControllerAnimated:YES completion:nil];
+}
+
+
 
 /**
  * ランキングボタンタップ時の処理
  * リーダーボードを表示
  */
+/*
 - (void)showRanking{
     GKGameCenterViewController *gcView = [GKGameCenterViewController new];
     if (gcView != nil)
@@ -377,14 +452,15 @@ int tutorialPage;
         [self.view addSubview:(UIView *)gcView];
     }
 }
-
+*/
 /**
  * リーダーボードで完了タップ時の処理
  * 前の画面に戻る
  */
+/*
 - (void)gameCenterViewControllerDidFinish:(GKGameCenterViewController *)gameCenterViewController
 {
 }
-
+*/
 
 @end

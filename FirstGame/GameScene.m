@@ -782,6 +782,7 @@ SKSpriteNode *flyingNode;
             //ハイスコアの場合userDefaultに設定
             [userDefaults setFloat:score forKey:@"score"];
             
+            //ハイスコアの場合、新記録と表示する
             SKLabelNode *newRecord = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
             newRecord.text = @"New record!!";
             newRecord.fontSize = 18;
@@ -792,7 +793,7 @@ SKSpriteNode *flyingNode;
             NSArray *tenmetu = @[[SKAction fadeAlphaTo:0.0 duration:1], [SKAction fadeAlphaTo:1.0 duration:0.75]];
             SKAction *action = [SKAction repeatActionForever:[SKAction sequence:tenmetu]];
             [newRecord runAction:action];
-            
+
         }
         
         
