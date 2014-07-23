@@ -137,6 +137,16 @@ GKLocalPlayer *localPlayer;
         //チュートリアルのページを0にする
         tutorialPage = 0;
         
+        //BGMの再生
+        NSError *error;
+        NSURL *url1 = [[NSBundle mainBundle] URLForResource:@"titlemusic" withExtension:@"mp3"];
+        self.musicPlayer1 = [[AVAudioPlayer alloc] initWithContentsOfURL:url1 error:&error];
+        self.musicPlayer1.numberOfLoops = -1;
+        [self.musicPlayer1 prepareToPlay];
+        [self.musicPlayer1 play];
+        
+        
+        
         //GameCenter認証
         [self authenticateLocalPlayer];
         
@@ -155,10 +165,12 @@ GKLocalPlayer *localPlayer;
     if ([start containsPoint:location]) {
         //チュートリアル表示時は反応しない
         if(tutorialFlag == NO){
-            //タップされた画像に変更
-            start = [SKSpriteNode spriteNodeWithImageNamed:@"start_taped.png"];
+            
             if ([_delegate respondsToSelector:@selector(sceneEscape:identifier:)]) {
                 [_delegate sceneEscape:self identifier:nil];
+                
+                //BGMの停止
+                [self.musicPlayer1 stop];
                 
                 return;
                 

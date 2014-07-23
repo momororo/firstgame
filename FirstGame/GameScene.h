@@ -18,6 +18,7 @@
 #import "Emergency.h"
 #import <GameKit/GameKit.h>
 #import "NADView.h"
+#import <AVFoundation/AVFoundation.h>
 
 
 #define     kPlayer     @"Player"
@@ -26,8 +27,11 @@
 #define     kFish       @"Fish"
 
 
-@interface GameScene : SKScene <SKPhysicsContactDelegate,GKGameCenterControllerDelegate,NADViewDelegate>
+@interface GameScene : SKScene <SKPhysicsContactDelegate,/*GKGameCenterControllerDelegate,*/NADViewDelegate>
 
 @property (weak,nonatomic)id delegate;
 @property (nonatomic,retain) NADView *nadView;
+@property (nonatomic, strong) AVAudioPlayer *musicPlayer1;
+@property (nonatomic, strong) AVAudioPlayer *musicPlayer2;
+
 @end

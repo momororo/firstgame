@@ -9,15 +9,12 @@
 #import "GameScene.h"
 #import "GameView.h"
 
-@import AVFoundation;
-
-
-
 @implementation GameScene{
-//@property (nonatomic, strong) AVAudioPlayer * musicPlayer1;
 
-AVAudioPlayer * musicPlayer1;
-    AVAudioPlayer * musicPlayer2;
+
+//AVAudioPlayer * musicPlayer1;
+
+//AVAudioPlayer * musicPlayer2;
 
     
 //ゲームスタートのフラグ
@@ -238,10 +235,10 @@ SKSpriteNode *flyingNode;
             //BGM再生
             NSError *error;
             NSURL *url1 = [[NSBundle mainBundle] URLForResource:@"backmusic" withExtension:@"mp3"];
-            self->musicPlayer1 = [[AVAudioPlayer alloc] initWithContentsOfURL:url1 error:&error];
-            self->musicPlayer1.numberOfLoops = -1;
-            [musicPlayer1 prepareToPlay];
-            [self->musicPlayer1 play];
+            self.musicPlayer1 = [[AVAudioPlayer alloc] initWithContentsOfURL:url1 error:&error];
+            self.musicPlayer1.numberOfLoops = -1;
+            [_musicPlayer1 prepareToPlay];
+            [self.musicPlayer1 play];
         
             return;
         }
@@ -269,7 +266,7 @@ SKSpriteNode *flyingNode;
                 //ゲームシーン画面に飛ぶ
                 if ([_delegate respondsToSelector:@selector(sceneEscape:identifier:)]) {
                     [_delegate sceneEscape:self identifier:@"retry"];
-                    [self->musicPlayer2 stop];
+                    [self.musicPlayer2 stop];
 
                 }
             }
@@ -286,7 +283,7 @@ SKSpriteNode *flyingNode;
                    
                    
                 [_delegate sceneEscape:self identifier:@"top"];
-                   [self->musicPlayer2 stop];
+                   [self.musicPlayer2 stop];
                }
            }
         return;
@@ -781,15 +778,15 @@ SKSpriteNode *flyingNode;
         
         
         //BGMの停止
-        [self->musicPlayer1 stop];
+        [self.musicPlayer1 stop];
         
         //ゲームオーバー用のBGM
         NSError *error;
         NSURL *url2 = [[NSBundle mainBundle] URLForResource:@"gameover" withExtension:@"mp3"];
-        self->musicPlayer2 = [[AVAudioPlayer alloc] initWithContentsOfURL:url2 error:&error];
-        self->musicPlayer2.numberOfLoops = -1;
-        [musicPlayer2 prepareToPlay];
-        [self->musicPlayer2 play];
+        self.musicPlayer2 = [[AVAudioPlayer alloc] initWithContentsOfURL:url2 error:&error];
+        self.musicPlayer2.numberOfLoops = -1;
+        [_musicPlayer2 prepareToPlay];
+        [self.musicPlayer2 play];
         
         //フライングポイントの削除
         for (int count = 0 ; count < flyPoints.count ;){
@@ -822,7 +819,7 @@ SKSpriteNode *flyingNode;
             [newRecord runAction:action];
             
             //ハイスコアをゲームセンターに送信
-            [self sendScore:score];
+            //[self sendScore:score];
 
         }
         
@@ -946,25 +943,25 @@ SKSpriteNode *flyingNode;
 /**
  *  Game Center用メソッド
  */
-
+/*
 -(void)sendScore:(float)highScore{
     
     if ([GKLocalPlayer localPlayer].isAuthenticated) {
         GKScore* sendScore = [[GKScore alloc] initWithLeaderboardIdentifier:@"FirstPenguin_test"];
         sendScore.value = highScore * 10;
         [GKScore reportScores:@[sendScore] withCompletionHandler:^(NSError *error) {
-            if (error) {
+            if (error) {*/
                 // エラーの場合
                 /**
                  *  何もせず終了
                  */
-                NSLog(@"失敗");
+                /*NSLog(@"失敗");
             }
             NSLog(@"成功してるはず");
         }];
     }
 }
-
+*/
 /**
  *  nend デリゲートメソッド
  */
