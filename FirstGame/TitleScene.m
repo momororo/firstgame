@@ -430,17 +430,17 @@ GKLocalPlayer *localPlayer;
     float score = [userDefaults floatForKey:@"score"];
     
     if ([GKLocalPlayer localPlayer].isAuthenticated) {
-        GKScore *scoreReporter = [[GKScore alloc] initWithLeaderboardIdentifier:@"FirstPenguin_test"];
-        scoreReporter.value = score * 10;
-        NSArray *scores = @[scoreReporter];
-        [GKScore reportScores:scores withCompletionHandler:^(NSError *error) {
+        GKScore* sendScore = [[GKScore alloc] initWithLeaderboardIdentifier:@"FirstPenguin_test"];
+        sendScore.value = score * 10;
+        [GKScore reportScores:@[sendScore] withCompletionHandler:^(NSError *error) {
             if (error) {
                 // エラーの場合
-                NSLog(@"エラーです");
-            }else{
-                NSLog(@"成功");
-                NSLog(@"%0.1f",score);
+                /**
+                 *  何もせず終了
+                 */
+                NSLog(@"失敗");
             }
+            NSLog(@"成功してるはず");
         }];
     }
     

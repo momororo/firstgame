@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		040623B0197F84DD001AE896 /* libNendAd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04062388197F84DD001AE896 /* libNendAd.a */; };
+		040623B1197F84DD001AE896 /* NADView_readme.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0406238D197F84DD001AE896 /* NADView_readme.txt */; };
+		040623C9197F8547001AE896 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 040623C8197F8547001AE896 /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		040623CB197F8551001AE896 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 040623CA197F8551001AE896 /* Security.framework */; };
+		040623CD197F855A001AE896 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 040623CC197F855A001AE896 /* ImageIO.framework */; };
 		0414C0FD197E424800349AB0 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0414C0FC197E424800349AB0 /* GameKit.framework */; };
 		0454A58819374B07002403B5 /* jump.wav in Resources */ = {isa = PBXBuildFile; fileRef = 0454A58719374B07002403B5 /* jump.wav */; };
 		049CEE0D1951D12B00949E29 /* ground.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 049CEE0C1951D12B00949E29 /* ground.atlas */; };
@@ -92,6 +97,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		04062388197F84DD001AE896 /* libNendAd.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libNendAd.a; sourceTree = "<group>"; };
+		04062389197F84DD001AE896 /* NADIconArrayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NADIconArrayView.h; sourceTree = "<group>"; };
+		0406238A197F84DD001AE896 /* NADIconLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NADIconLoader.h; sourceTree = "<group>"; };
+		0406238B197F84DD001AE896 /* NADIconView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NADIconView.h; sourceTree = "<group>"; };
+		0406238C197F84DD001AE896 /* NADView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NADView.h; sourceTree = "<group>"; };
+		0406238D197F84DD001AE896 /* NADView_readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NADView_readme.txt; sourceTree = "<group>"; };
+		040623C8197F8547001AE896 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		040623CA197F8551001AE896 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		040623CC197F855A001AE896 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		0414C0FC197E424800349AB0 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		0454A58719374B07002403B5 /* jump.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = jump.wav; sourceTree = "<group>"; };
 		049CEE0C1951D12B00949E29 /* ground.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = ground.atlas; sourceTree = "<group>"; };
@@ -189,11 +203,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				040623CD197F855A001AE896 /* ImageIO.framework in Frameworks */,
+				040623CB197F8551001AE896 /* Security.framework in Frameworks */,
+				040623C9197F8547001AE896 /* AdSupport.framework in Frameworks */,
 				A4A1BA60192B43BB00805339 /* CoreGraphics.framework in Frameworks */,
 				A4A1BA62192B43BB00805339 /* UIKit.framework in Frameworks */,
 				A4A1BA64192B43BB00805339 /* SpriteKit.framework in Frameworks */,
 				A4A1BA5E192B43BB00805339 /* Foundation.framework in Frameworks */,
 				0414C0FD197E424800349AB0 /* GameKit.framework in Frameworks */,
+				040623B0197F84DD001AE896 /* libNendAd.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -210,9 +228,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		04062387197F84DD001AE896 /* NendAd */ = {
+			isa = PBXGroup;
+			children = (
+				04062388197F84DD001AE896 /* libNendAd.a */,
+				04062389197F84DD001AE896 /* NADIconArrayView.h */,
+				0406238A197F84DD001AE896 /* NADIconLoader.h */,
+				0406238B197F84DD001AE896 /* NADIconView.h */,
+				0406238C197F84DD001AE896 /* NADView.h */,
+				0406238D197F84DD001AE896 /* NADView_readme.txt */,
+			);
+			name = NendAd;
+			path = Nend/NendAd;
+			sourceTree = "<group>";
+		};
 		A4A1BA51192B43BB00805339 = {
 			isa = PBXGroup;
 			children = (
+				04062387197F84DD001AE896 /* NendAd */,
 				A4A1BA65192B43BB00805339 /* FirstGame */,
 				A4A1BA89192B43BB00805339 /* FirstGameTests */,
 				A4A1BA5C192B43BB00805339 /* Frameworks */,
@@ -232,6 +265,9 @@
 		A4A1BA5C192B43BB00805339 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				040623CC197F855A001AE896 /* ImageIO.framework */,
+				040623CA197F8551001AE896 /* Security.framework */,
+				040623C8197F8547001AE896 /* AdSupport.framework */,
 				0414C0FC197E424800349AB0 /* GameKit.framework */,
 				A4A1BA5D192B43BB00805339 /* Foundation.framework */,
 				A4A1BA5F192B43BB00805339 /* CoreGraphics.framework */,
@@ -444,6 +480,7 @@
 				A410877D1966A8A200E32324 /* flyPoint.png in Resources */,
 				A4A147051964090700AD140E /* sea.png in Resources */,
 				A41996F819713F25006980F7 /* kanban.png in Resources */,
+				040623B1197F84DD001AE896 /* NADView_readme.txt in Resources */,
 				A4A2DC801976DD080081792D /* score.png in Resources */,
 				A4D7F4EC1939F489005225B6 /* Smoke.sks in Resources */,
 				A471A28C1942FB28002E1EAD /* attackedWall.mp3 in Resources */,
@@ -647,6 +684,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FirstGame/FirstPenguin-Prefix.pch";
 				INFOPLIST_FILE = "FirstGame/FirstPenguin-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Nend/NendAd",
+				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = FirstPenguin;
 				PROVISIONING_PROFILE = "";
@@ -666,6 +707,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FirstGame/FirstPenguin-Prefix.pch";
 				INFOPLIST_FILE = "FirstGame/FirstPenguin-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Nend/NendAd",
+				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = FirstPenguin;
 				PROVISIONING_PROFILE = "";

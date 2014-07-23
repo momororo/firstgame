@@ -177,6 +177,25 @@ SKSpriteNode *flyingNode;
         self.physicsWorld.contactDelegate = self;
         
         
+        
+        /**
+         *  nend
+         */
+        //nadViewの生成
+        self.nadView = [[NADView alloc]initWithFrame:CGRectMake(0, 0, 320, 50)];
+        
+        //ログ出力の設定
+        self.nadView.isOutputLog = NO;
+        
+        //setapiKey
+        [self.nadView setNendApiKey:@"729d726062b8ed26a2191936a39237d18f1c7883"];
+        [self.nadView setNendSpotID:@"207219"];
+        [self.nadView setDelegate:self];
+        [self.nadView load];
+        
+        //広告の表示(デリゲートメソッドで表示するように変更してます。)
+        //[self.view addSubview:self.nadView];
+        
     }
     
     return self;
@@ -258,6 +277,14 @@ SKSpriteNode *flyingNode;
            if ([[endNode childNodeWithName:@"kTopLabel"] containsPoint:location]) {
                //ゲームシーン画面に飛ぶ
                if ([_delegate respondsToSelector:@selector(sceneEscape:identifier:)]) {
+    
+                   /**
+                    *  nend終了
+                    */
+                   [self.nadView setDelegate:nil];
+                   self.nadView = nil;
+                   
+                   
                 [_delegate sceneEscape:self identifier:@"top"];
                    [self->musicPlayer2 stop];
                }
@@ -936,6 +963,21 @@ SKSpriteNode *flyingNode;
             NSLog(@"成功してるはず");
         }];
     }
+}
+
+/**
+ *  nend デリゲートメソッド
+ */
+//広告受信成功後、viewに追加
+-(void)nadViewDidFinishLoad:(NADView *)adView{
+    //デバッグ用、後で消す
+    NSLog(@"成功");
+    [self.view addSubview:adView];
+}
+
+//広告受信失敗(あとで消す)
+-(void)nadViewDidFailToReceiveAd:(NADView *)adView{
+    NSLog(@"失敗！");
 }
 
 

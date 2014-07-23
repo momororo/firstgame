@@ -17,6 +17,7 @@
 #import "Cloud.h"
 #import "Emergency.h"
 #import <GameKit/GameKit.h>
+#import "NADView.h"
 
 
 #define     kPlayer     @"Player"
@@ -25,7 +26,8 @@
 #define     kFish       @"Fish"
 
 
-@interface GameScene : SKScene <SKPhysicsContactDelegate,GKGameCenterControllerDelegate>
+@interface GameScene : SKScene <SKPhysicsContactDelegate,GKGameCenterControllerDelegate,NADViewDelegate>
 
 @property (weak,nonatomic)id delegate;
+@property (nonatomic,retain) NADView *nadView;
 @end
