@@ -30,7 +30,7 @@
 @interface GameScene : SKScene <SKPhysicsContactDelegate,/*GKGameCenterControllerDelegate,*/NADViewDelegate>
 
 @property (weak,nonatomic)id delegate;
-@property (nonatomic,retain) NADView *nadView;
+@property (nonatomic, retain) NADView *nadView;
 @property (nonatomic, strong) AVAudioPlayer *musicPlayer1;
 @property (nonatomic, strong) AVAudioPlayer *musicPlayer2;
 
