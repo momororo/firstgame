@@ -66,6 +66,7 @@ GKLocalPlayer *localPlayer;
         
         //ランキングボタンの設定
         ranking = [SKSpriteNode spriteNodeWithImageNamed:@"ranking.png"];
+        ranking.name = @"kRanking";
         ranking.size = CGSizeMake(ranking.size.width/3, ranking.size.height/3);
         ranking.position = CGPointMake(CGRectGetMaxX(self.frame)-ranking.size.width/2 ,ranking.size.height);
         [self addChild:ranking];
@@ -167,7 +168,7 @@ GKLocalPlayer *localPlayer;
     
     //ランキング
     if([ranking containsPoint:location]){
-        
+       
         // Leader Board表示
         [self showGameCenter];
         
@@ -423,13 +424,32 @@ GKLocalPlayer *localPlayer;
 }
 
 // Leader Boardの表示
--(void)showGameCenter {
+-(void)showGameCenter{
     
-    GKGameCenterViewController *gameCenterController = [[GKGameCenterViewController alloc] init];
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    float score = [userDefaults floatForKey:@"score"];
+    
+    if ([GKLocalPlayer localPlayer].isAuthenticated) {
+        GKScore *scoreReporter = [[GKScore alloc] initWithLeaderboardIdentifier:@"FirstPenguin"];
+        scoreReporter.value = score;
+        NSArray *scores = @[scoreReporter];
+        [GKScore reportScores:scores withCompletionHandler:^(NSError *error) {
+            if (error) {
+                // エラーの場合
+                NSLog(@"エラーです");
+            }else{
+                NSLog(@"成功");
+                NSLog(@"%0.1f",score);
+            }
+        }];
+    }
+    
+    GKGameCenterViewController* gameCenterController = [[GKGameCenterViewController alloc] init];
     if (gameCenterController != nil)
     {
         gameCenterController.gameCenterDelegate = self;
         gameCenterController.viewState = GKGameCenterViewControllerStateLeaderboards;
+        
         UIViewController *vc = self.view.window.rootViewController;
         [vc presentViewController: gameCenterController animated: YES completion:nil];
     }
