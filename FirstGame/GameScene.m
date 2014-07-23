@@ -793,6 +793,9 @@ SKSpriteNode *flyingNode;
             NSArray *tenmetu = @[[SKAction fadeAlphaTo:0.0 duration:1], [SKAction fadeAlphaTo:1.0 duration:0.75]];
             SKAction *action = [SKAction repeatActionForever:[SKAction sequence:tenmetu]];
             [newRecord runAction:action];
+            
+            //ハイスコアをゲームセンターに送信
+            [self sendScore:score];
 
         }
         
@@ -910,6 +913,29 @@ SKSpriteNode *flyingNode;
         [_particleSpark resetSimulation];
     }
     _particleSpark.position = point;
+}
+
+
+/**
+ *  Game Center用メソッド
+ */
+
+-(void)sendScore:(float)highScore{
+    
+    if ([GKLocalPlayer localPlayer].isAuthenticated) {
+        GKScore* sendScore = [[GKScore alloc] initWithLeaderboardIdentifier:@"FirstPenguin_test"];
+        sendScore.value = highScore * 10;
+        [GKScore reportScores:@[sendScore] withCompletionHandler:^(NSError *error) {
+            if (error) {
+                // エラーの場合
+                /**
+                 *  何もせず終了
+                 */
+                NSLog(@"失敗");
+            }
+            NSLog(@"成功してるはず");
+        }];
+    }
 }
 
 

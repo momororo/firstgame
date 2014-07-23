@@ -430,8 +430,8 @@ GKLocalPlayer *localPlayer;
     float score = [userDefaults floatForKey:@"score"];
     
     if ([GKLocalPlayer localPlayer].isAuthenticated) {
-        GKScore *scoreReporter = [[GKScore alloc] initWithLeaderboardIdentifier:@"FirstPenguin"];
-        scoreReporter.value = score;
+        GKScore *scoreReporter = [[GKScore alloc] initWithLeaderboardIdentifier:@"FirstPenguin_test"];
+        scoreReporter.value = score * 10;
         NSArray *scores = @[scoreReporter];
         [GKScore reportScores:scores withCompletionHandler:^(NSError *error) {
             if (error) {

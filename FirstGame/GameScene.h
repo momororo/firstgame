@@ -16,6 +16,7 @@
 #import "Island.h"
 #import "Cloud.h"
 #import "Emergency.h"
+#import <GameKit/GameKit.h>
 
 
 #define     kPlayer     @"Player"
@@ -24,7 +25,7 @@
 #define     kFish       @"Fish"
 
 
-@interface GameScene : SKScene <SKPhysicsContactDelegate>
+@interface GameScene : SKScene <SKPhysicsContactDelegate,GKGameCenterControllerDelegate>
 
 @property (weak,nonatomic)id delegate;
 @end
