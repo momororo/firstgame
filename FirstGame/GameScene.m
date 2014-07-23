@@ -272,14 +272,17 @@ SKSpriteNode *flyingNode;
             }
            
            if ([[endNode childNodeWithName:@"kTopLabel"] containsPoint:location]) {
+               
+               
+               /**
+                *  nend終了(viewから削除するときは加えてremoveFromSuperViewも唱えよう)
+                */
+               [self.nadView setDelegate:nil];
+               [self.nadView removeFromSuperview];
+               self.nadView = nil;
+
                //ゲームシーン画面に飛ぶ
                if ([_delegate respondsToSelector:@selector(sceneEscape:identifier:)]) {
-    
-                   /**
-                    *  nend終了
-                    */
-                   [self.nadView setDelegate:nil];
-                   self.nadView = nil;
                    
                    
                 [_delegate sceneEscape:self identifier:@"top"];
