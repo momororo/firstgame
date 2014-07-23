@@ -97,7 +97,7 @@ SKSpriteNode *flyingNode;
         scoreNode = [SKSpriteNode spriteNodeWithImageNamed:@"score.png"];
         scoreNode.size = CGSizeMake(self.frame.size.width, scoreNode.size.height);
         //scoreNode.position = CGPointMake(CGRectGetMaxX(self.frame)-(scoreNode.size.width/2), scoreNode.size.height/3);
-        scoreNode.position = CGPointMake(CGRectGetMidX(self.frame),CGRectGetMaxY(self.frame)*7/8);
+        scoreNode.position = CGPointMake(CGRectGetMidX(self.frame),CGRectGetMaxY(self.frame)*11/12);
         scoreNode.zPosition = 50;
         
         [self addChild:scoreNode];
