@@ -628,6 +628,8 @@ SKSpriteNode *flyingNode;
             
             //フライングスタートのラベルを生成
             startFlyingLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+            startFlyingLabel.fontColor = [SKColor blackColor];
+            startFlyingLabel.zPosition = 50;
             startFlyingLabel.text = [NSString stringWithFormat:@"I can fly!!"];
             startFlyingLabel.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
             [self addChild:startFlyingLabel];
@@ -642,6 +644,7 @@ SKSpriteNode *flyingNode;
 
             //飛行時間の表示ラベル
             flyingLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+            flyingLabel.fontColor = [SKColor blackColor];
             [flyingNode addChild:flyingLabel];
 
             
@@ -766,6 +769,7 @@ SKSpriteNode *flyingNode;
         
         endLabel.text = @"GAME OVER";
         endLabel.fontSize = 30;
+        endLabel.fontColor = [SKColor blackColor];
         endLabel.name = @"kGameOver";
         endLabel.position = CGPointMake(5,165);
         
@@ -848,6 +852,7 @@ SKSpriteNode *flyingNode;
         SKLabelNode *retryLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
         retryLabel.text = @"RETRY";
         retryLabel.fontSize = 20;
+        retryLabel.fontColor = [SKColor blackColor];
         retryLabel.name = @"kRetryLabel";
         //位置調整がうまくいかず。。。。
         retryLabel.position = CGPointMake(-85,57);
@@ -864,6 +869,7 @@ SKSpriteNode *flyingNode;
         
         topLabel.text = @"TOP";
         topLabel.fontSize = 20;
+        topLabel.fontColor = [SKColor blackColor];
         topLabel.name = @"kTopLabel";
         //位置調整がうまくいかず。。。。
         topLabel.position = CGPointMake(110,
@@ -877,11 +883,11 @@ SKSpriteNode *flyingNode;
         
         rastScore.text = [NSString stringWithFormat:@"Score... %.1f pt",score];
         rastScore.fontSize = 30;
+        rastScore.fontColor = [SKColor blackColor];
         rastScore.position = CGPointMake(0,125);
         rastScore.verticalAlignmentMode = SKLabelVerticalAlignmentModeTop;
         
         [endNode addChild:rastScore];
-
         
     }
     
