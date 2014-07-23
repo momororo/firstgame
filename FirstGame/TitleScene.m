@@ -151,7 +151,28 @@ GKLocalPlayer *localPlayer;
         [self authenticateLocalPlayer];
         
         
+        //ログ出力の設定
+        self.nadView.isOutputLog = NO;
+        
+
+        
+        
     }
+    
+    /**
+     *  nend
+     */
+    //nadViewの生成
+    self.nadView = [[NADView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.frame) - 50 , 320, 50)];
+    
+    //setapiKey
+    [self.nadView setNendApiKey:@"729d726062b8ed26a2191936a39237d18f1c7883"];
+    [self.nadView setNendSpotID:@"207219"];
+    [self.nadView setDelegate:self];
+    [self.nadView load];
+
+    
+    
     return self;
 }
 
@@ -165,6 +186,13 @@ GKLocalPlayer *localPlayer;
     if ([start containsPoint:location]) {
         //チュートリアル表示時は反応しない
         if(tutorialFlag == NO){
+            
+            /**
+             *  nend終了(viewから削除するときは加えてremoveFromSuperViewも唱えよう)
+             */
+            [self.nadView setDelegate:nil];
+            [self.nadView removeFromSuperview];
+            self.nadView = nil;
             
             if ([_delegate respondsToSelector:@selector(sceneEscape:identifier:)]) {
                 [_delegate sceneEscape:self identifier:nil];
@@ -180,11 +208,14 @@ GKLocalPlayer *localPlayer;
     
     //ランキング
     if([ranking containsPoint:location]){
-       
+        
+
         // Leader Board表示
         [self showGameCenter];
         
-        //return;
+        return;
+         
+
     }
     
     /*
@@ -471,6 +502,18 @@ GKLocalPlayer *localPlayer;
 // Leader Boardが閉じたとき呼ばれる
 - (void)gameCenterViewControllerDidFinish:(GKGameCenterViewController *)gameCenterViewController {
     [[[[[UIApplication sharedApplication] delegate] window] rootViewController] dismissViewControllerAnimated:YES completion:nil];
+}
+
+//広告受信成功後、viewに追加
+-(void)nadViewDidFinishLoad:(NADView *)adView{
+    //デバッグ用、後で消す
+    NSLog(@"成功");
+    [self.view addSubview:adView];
+}
+
+//広告受信失敗(あとで消す)
+-(void)nadViewDidFailToReceiveAd:(NADView *)adView{
+    NSLog(@"失敗！");
 }
 
 
