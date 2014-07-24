@@ -92,10 +92,13 @@ MrdIconCell *iconCell4;
         haikei.size = CGSizeMake(haikei.size.width, haikei.size.height);
         haikei.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
         [self addChild:haikei];
-
+        
+        //スタートラベル
         startLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
         startLabel.text = @"GAME START";
         startLabel.fontSize = 30;
+        startLabel.zPosition = 50;
+        startLabel.fontColor = [SKColor blackColor];
         startLabel.name = @"kStartLabel";
         startLabel.position = CGPointMake(CGRectGetMidX(self.frame),
                                        CGRectGetMidY(self.frame));
@@ -206,9 +209,9 @@ MrdIconCell *iconCell4;
         
         
         //アイコン1つめ
-        CGRect frame1 = CGRectMake(50, 50, 75, 75);
+        CGRect frame1 = CGRectMake(25, 185, 75, 75);
         iconCell1 = [[MrdIconCell alloc]initWithFrame:frame1];
-        
+        iconCell1.titleTextColor =[UIColor blackColor];
         
         //アイコンの設定項目(必要なら他のアイコンにもコピペして使ってね)
         /*
@@ -220,16 +223,19 @@ MrdIconCell *iconCell4;
         */
         
         //アイコン2つめ
-        CGRect frame2 = CGRectMake(125, 50, 75, 75);
+        CGRect frame2 = CGRectMake(105, 225, 75, 75);
         iconCell2 = [[MrdIconCell alloc]initWithFrame:frame2];
+        iconCell2.titleTextColor =[UIColor blackColor];
         
         //アイコン3つめ
-        CGRect frame3 = CGRectMake(200, 50, 75, 75);
+        CGRect frame3 = CGRectMake(405, 225, 75, 75);
         iconCell3 = [[MrdIconCell alloc]initWithFrame:frame3];
+        iconCell3.titleTextColor =[UIColor blackColor];
         
         //アイコン4つめ
-        CGRect frame4 = CGRectMake(275, 50, 75, 75);
+        CGRect frame4 = CGRectMake(485, 185, 75, 75);
         iconCell4 = [[MrdIconCell alloc]initWithFrame:frame4];
+        iconCell4.titleTextColor =[UIColor blackColor];
         
         //アイコンの追加
         [iconLoader addIconCell:iconCell1];
@@ -240,14 +246,7 @@ MrdIconCell *iconCell4;
         //広告取得開始(先行して広告を取得しておく)
         iconLoader.refreshInterval = 10;
         [iconLoader startLoadWithMediaCode:@"ast01828uclvqv3b6osf"];
-        
-        
-        
-        
     
-        
-        
-        
     }
     
     return self;
@@ -340,8 +339,12 @@ MrdIconCell *iconCell4;
                 
                 //ゲームシーン画面に飛ぶ
                 if ([_delegate respondsToSelector:@selector(sceneEscape:identifier:)]) {
-                    [_delegate sceneEscape:self identifier:@"retry"];
+                    
+                    //ゲームオーバーBGMを止める
                     [self.musicPlayer2 stop];
+                    
+                    [_delegate sceneEscape:self identifier:@"retry"];
+                    
 
                 }
             }
@@ -370,9 +373,10 @@ MrdIconCell *iconCell4;
                //ゲームシーン画面に飛ぶ
                if ([_delegate respondsToSelector:@selector(sceneEscape:identifier:)]) {
                    
-                   
-                [_delegate sceneEscape:self identifier:@"top"];
+                   //ゲームオーバーBGMを止める
                    [self.musicPlayer2 stop];
+                   [_delegate sceneEscape:self identifier:@"top"];
+                
                }
            }
         return;
@@ -965,11 +969,23 @@ MrdIconCell *iconCell4;
         
         [endNode addChild:rastScore];
         
+        //灯籠流し
+        SKSpriteNode *penguin = [SKSpriteNode spriteNodeWithImageNamed:@"pengin6"];
+        penguin.size = CGSizeMake(penguin.size.width/2, penguin.size.height*2/3);
+        penguin.position = CGPointMake(CGRectGetMaxX(self.frame) + penguin.size.width*4, CGRectGetMidY(self.frame)*2/3);
+        penguin.zPosition = 0;
+        
+        [self addChild:penguin];
+        
+        [penguin runAction:[SKAction sequence:@[[SKAction moveToX: -200 duration:30],[SKAction removeFromParent]]]];
+        
         //アスタの表示
         [self.view addSubview:iconCell1];
         [self.view addSubview:iconCell2];
         [self.view addSubview:iconCell3];
         [self.view addSubview:iconCell4];
+        
+        
         
         
     }
