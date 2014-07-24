@@ -73,6 +73,14 @@ SKSpriteNode *endNode;
 //飛行時間のノード
 SKSpriteNode *flyingNode;
     
+//アスタ関係
+MrdIconLoader *iconLoader;
+MrdIconCell *iconCell1;
+MrdIconCell *iconCell2;
+MrdIconCell *iconCell3;
+MrdIconCell *iconCell4;
+    
+    
 }
 
 -(id)initWithSize:(CGSize)size {
@@ -190,8 +198,55 @@ SKSpriteNode *flyingNode;
         [self.nadView setDelegate:self];
         [self.nadView load];
         
-        //広告の表示(デリゲートメソッドで表示するように変更してます。)
-        //[self.view addSubview:self.nadView];
+
+        /**
+         *  アスタ
+         */
+        iconLoader = [[MrdIconLoader alloc]init];
+        
+        
+        //アイコン1つめ
+        CGRect frame1 = CGRectMake(50, 50, 75, 75);
+        iconCell1 = [[MrdIconCell alloc]initWithFrame:frame1];
+        
+        
+        //アイコンの設定項目(必要なら他のアイコンにもコピペして使ってね)
+        /*
+        iconCell1.iconFrame = CGRectMake(0, 0, 0, 0);
+        iconCell1.titleFrame = CGRectMake(0, 0, 0, 0);//タイトルいらないなら"CGRectNull"
+        iconCell1.titleTextColor = ;
+        iconCell1.titleShadowColor = ;
+        iconCell1.titleFont = ;
+        */
+        
+        //アイコン2つめ
+        CGRect frame2 = CGRectMake(125, 50, 75, 75);
+        iconCell2 = [[MrdIconCell alloc]initWithFrame:frame2];
+        
+        //アイコン3つめ
+        CGRect frame3 = CGRectMake(200, 50, 75, 75);
+        iconCell3 = [[MrdIconCell alloc]initWithFrame:frame3];
+        
+        //アイコン4つめ
+        CGRect frame4 = CGRectMake(275, 50, 75, 75);
+        iconCell4 = [[MrdIconCell alloc]initWithFrame:frame4];
+        
+        //アイコンの追加
+        [iconLoader addIconCell:iconCell1];
+        [iconLoader addIconCell:iconCell2];
+        [iconLoader addIconCell:iconCell3];
+        [iconLoader addIconCell:iconCell4];
+
+        //広告取得開始(先行して広告を取得しておく)
+        iconLoader.refreshInterval = 10;
+        [iconLoader startLoadWithMediaCode:@"ast01828uclvqv3b6osf"];
+        
+        
+        
+        
+    
+        
+        
         
     }
     
@@ -271,6 +326,16 @@ SKSpriteNode *flyingNode;
                 [self.nadView removeFromSuperview];
                 self.nadView = nil;
                 
+                
+                //アスタ終了
+                [iconLoader removeIconCell:iconCell1];
+                [iconLoader removeIconCell:iconCell2];
+                [iconLoader removeIconCell:iconCell3];
+                [iconLoader removeIconCell:iconCell4];
+                [iconCell1 removeFromSuperview];
+                [iconCell2 removeFromSuperview];
+                [iconCell3 removeFromSuperview];
+                [iconCell4 removeFromSuperview];
 
                 
                 //ゲームシーン画面に飛ぶ
@@ -290,6 +355,17 @@ SKSpriteNode *flyingNode;
                [self.nadView setDelegate:nil];
                [self.nadView removeFromSuperview];
                self.nadView = nil;
+               
+               //アスタ終了
+               [iconLoader removeIconCell:iconCell1];
+               [iconLoader removeIconCell:iconCell2];
+               [iconLoader removeIconCell:iconCell3];
+               [iconLoader removeIconCell:iconCell4];
+               [iconCell1 removeFromSuperview];
+               [iconCell2 removeFromSuperview];
+               [iconCell3 removeFromSuperview];
+               [iconCell4 removeFromSuperview];
+
 
                //ゲームシーン画面に飛ぶ
                if ([_delegate respondsToSelector:@selector(sceneEscape:identifier:)]) {
@@ -888,6 +964,13 @@ SKSpriteNode *flyingNode;
         rastScore.verticalAlignmentMode = SKLabelVerticalAlignmentModeTop;
         
         [endNode addChild:rastScore];
+        
+        //アスタの表示
+        [self.view addSubview:iconCell1];
+        [self.view addSubview:iconCell2];
+        [self.view addSubview:iconCell3];
+        [self.view addSubview:iconCell4];
+        
         
     }
     

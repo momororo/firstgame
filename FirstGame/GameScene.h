@@ -19,6 +19,7 @@
 #import <GameKit/GameKit.h>
 #import "NADView.h"
 #import <AVFoundation/AVFoundation.h>
+#import <MrdIconSDK/MrdIconSDK.h>
 
 
 #define     kPlayer     @"Player"

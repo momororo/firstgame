@@ -13,6 +13,7 @@
 		040623CB197F8551001AE896 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 040623CA197F8551001AE896 /* Security.framework */; };
 		040623CD197F855A001AE896 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 040623CC197F855A001AE896 /* ImageIO.framework */; };
 		0414C0FD197E424800349AB0 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0414C0FC197E424800349AB0 /* GameKit.framework */; };
+		044865931980982000F6724E /* MrdIconSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 044865921980982000F6724E /* MrdIconSDK.framework */; };
 		0454A58819374B07002403B5 /* jump.wav in Resources */ = {isa = PBXBuildFile; fileRef = 0454A58719374B07002403B5 /* jump.wav */; };
 		049CEE0D1951D12B00949E29 /* ground.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 049CEE0C1951D12B00949E29 /* ground.atlas */; };
 		04B85443193C73DE00F000A8 /* ObjectBitMask.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B85442193C73DE00F000A8 /* ObjectBitMask.m */; };
@@ -108,6 +109,7 @@
 		040623CA197F8551001AE896 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		040623CC197F855A001AE896 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		0414C0FC197E424800349AB0 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		044865921980982000F6724E /* MrdIconSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MrdIconSDK.framework; sourceTree = "<group>"; };
 		0454A58719374B07002403B5 /* jump.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = jump.wav; sourceTree = "<group>"; };
 		049CEE0C1951D12B00949E29 /* ground.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = ground.atlas; sourceTree = "<group>"; };
 		04B85441193C73DE00F000A8 /* ObjectBitMask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ObjectBitMask.h; path = ../ObjectBitMask.h; sourceTree = "<group>"; };
@@ -213,6 +215,7 @@
 				A4A1BA64192B43BB00805339 /* SpriteKit.framework in Frameworks */,
 				A4A1BA5E192B43BB00805339 /* Foundation.framework in Frameworks */,
 				0414C0FD197E424800349AB0 /* GameKit.framework in Frameworks */,
+				044865931980982000F6724E /* MrdIconSDK.framework in Frameworks */,
 				040623B0197F84DD001AE896 /* libNendAd.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -247,6 +250,7 @@
 		A4A1BA51192B43BB00805339 = {
 			isa = PBXGroup;
 			children = (
+				044865921980982000F6724E /* MrdIconSDK.framework */,
 				04062387197F84DD001AE896 /* NendAd */,
 				A4A1BA65192B43BB00805339 /* FirstGame */,
 				A4A1BA89192B43BB00805339 /* FirstGameTests */,
@@ -685,6 +689,10 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FirstGame/FirstPenguin-Prefix.pch";
 				INFOPLIST_FILE = "FirstGame/FirstPenguin-Info.plist";
@@ -708,6 +716,10 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FirstGame/FirstPenguin-Prefix.pch";
 				INFOPLIST_FILE = "FirstGame/FirstPenguin-Info.plist";
