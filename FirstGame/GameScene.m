@@ -243,10 +243,6 @@ MrdIconCell *iconCell4;
         [iconLoader addIconCell:iconCell3];
         [iconLoader addIconCell:iconCell4];
 
-        //広告取得開始(先行して広告を取得しておく)
-        iconLoader.refreshInterval = 10;
-        [iconLoader startLoadWithMediaCode:@"ast01828uclvqv3b6osf"];
-    
     }
     
     return self;
@@ -978,6 +974,11 @@ MrdIconCell *iconCell4;
         [self addChild:penguin];
         
         [penguin runAction:[SKAction sequence:@[[SKAction moveToX: -200 duration:30],[SKAction removeFromParent]]]];
+        
+        //広告取得開始
+        iconLoader.refreshInterval = 10;
+        [iconLoader startLoadWithMediaCode:@"ast01828uclvqv3b6osf"];
+
         
         //アスタの表示
         [self.view addSubview:iconCell1];
