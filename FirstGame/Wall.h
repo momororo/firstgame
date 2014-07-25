@@ -28,6 +28,12 @@ SKTexture *wallTexture;
 +(void)initTexture;
 //壁の生成を行う
 +(void)setWallFromNextGround:(SKSpriteNode *) nextGround;
+
+
+//壁の生成を行う
++(void)set2WallFromNextGround:(SKSpriteNode *) nextGround;
+
+
 //壁の移動を行う
 +(void)moveWallDuration:(float)duration;
 //壁の初期化

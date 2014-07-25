@@ -262,7 +262,7 @@ MrdIconCell *iconCell4;
         if ([startLabel containsPoint:location]) {
             
             //スタートボタンがタップされたら、地面が移動する
-            [Ground moveGroundToX:(-1500 - (self.frame.size.width / 2)) duration:5.0];
+            [Ground moveGroundToX:(-1500 - (self.frame.size.width / 2)) duration:5.7];
             [Island moveIslandInit];
             [Cloud moveCloudInit];
             [Sea moveSeaInit];
@@ -618,32 +618,33 @@ MrdIconCell *iconCell4;
     //壁が規定のx座標から下回っているか判定する
     if([Ground judgeXpointer:(CGRectGetMidX(self.frame) * 1.5)]){
         
-            //スコア200までは壁が出ず
+            //スコア20までは壁が出ず
             if(score < 20){
                 //nextGroundの生成
                 [Ground setNextGroundPositionX:self.frame.size.width];
                 [self addChild:[Ground getNextGround]];
                 
-                
                 //nextGroundの動作
-                [Ground moveNextGroundDuration:6.0];
+                [Ground moveNextGroundDuration:5.7];
                 
                 return;
                 
             }
             
             //スコアが1000までは壁が3分の1の確率で出る
-            if(score < 1000){
+            if(score >=20 && score < 1000){
                 
                 //nextGroundの生成
                 [Ground setNextGroundPositionX:self.frame.size.width + arc4random_uniform(10)];
                 [self addChild:[Ground getNextGround]];
                 
                 //速度の設定
-                int duration = 5.3;
+                float duration = 5.5;
                 
                 //nextGroundの動作
-                [Ground moveNextGroundDuration:duration];
+                [Ground moveNextGroundDuration: duration];
+                
+                NSLog(@"1000:%f",duration);
                 
                 
                 if(arc4random_uniform(3) == 0){
@@ -669,7 +670,11 @@ MrdIconCell *iconCell4;
                 
                 
                 //速度可変用の変数
-                float duration = 5.0 - (score / 3500) ;
+                float duration = 5.3 - (score / 3500) ;
+                
+                if (score >= 11000){
+                    duration = 2.0;
+                }
                 
                 
                 //nextGroundの動作
@@ -679,10 +684,18 @@ MrdIconCell *iconCell4;
                 if(arc4random_uniform(2) == 0){
                     
                     
-                    //nextGroundを基に壁を生成
-                    [Wall setWallFromNextGround:[Ground getNextGround]];
-                    [self addChild:[Wall getWall]];
+                    if (score < 5000) {
+                        //nextGroundを基に壁を生成
+                        [Wall setWallFromNextGround:[Ground getNextGround]];
+                        [self addChild:[Wall getWall]];
+                        
+                    }else{
                     
+                        //nextGroundを基に壁を生成
+                        [Wall set2WallFromNextGround:[Ground getNextGround]];
+                        [self addChild:[Wall getWall]];
+
+                    }
                     
                     //wallの動作
                     [Wall moveWallDuration:duration];
