@@ -68,7 +68,8 @@
     
     
     //効果音の初期設定
-    jumpSE = [SKAction playSoundFileNamed:@"jump.wav" waitForCompletion:NO];
+    jumpSE = [SKAction playSoundFileNamed:@"jump.mp3" waitForCompletion:NO];
+    
 
     
 }
@@ -103,8 +104,8 @@
         SKAction *jumpPengin = [SKAction animateWithTextures:@[flyPenguins[0],flyPenguins[1]] timePerFrame:0.1];
         [player runAction:[SKAction repeatActionForever:jumpPengin]];
         
+        //ジャンプ音の再生
         [player runAction:jumpSE];
-        
         
         //スマッシュフラグがオフのとき
         if(flyFlag == NO){
@@ -137,7 +138,7 @@
         //突進処理
         player.physicsBody.velocity = CGVectorMake(0, -500);
         [player runAction:[SKAction repeatActionForever:[SKAction animateWithTextures:@[smashPenguin] timePerFrame:0.1]]];
-        
+            
         smashFlag = NO;
         
         //突進用のビットマスクに変更
