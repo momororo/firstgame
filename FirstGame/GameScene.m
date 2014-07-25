@@ -644,9 +644,6 @@ MrdIconCell *iconCell4;
                 //nextGroundの動作
                 [Ground moveNextGroundDuration: duration];
                 
-                NSLog(@"1000:%f",duration);
-                
-                
                 if(arc4random_uniform(3) == 0){
                     //nextGroundを基に壁を生成
                     [Wall setWallFromNextGround:[Ground getNextGround]];
