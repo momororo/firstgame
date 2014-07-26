@@ -58,7 +58,7 @@
         //カテゴリー(魚)
         fish.physicsBody.categoryBitMask = fishCategory;
         //ヒットテストするオブジェクト(プレイヤー)
-        fish.physicsBody.contactTestBitMask = playerCategory;
+        fish.physicsBody.contactTestBitMask = playerCategory | flyingPlayerCategory;
         //接触できるオブジェク
         fish.physicsBody.collisionBitMask = 0;
         

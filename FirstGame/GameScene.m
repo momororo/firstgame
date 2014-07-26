@@ -538,7 +538,6 @@ MrdIconCell *iconCell4;
         fishPoint = fishPoint + 8;
         return;
     }
-   
     
 }
 
