@@ -77,7 +77,6 @@
     
     wall.position = CGPointMake(nextGround.position.x - (randam), ((nextGround.size.height)/2 + (wall.size.height/2)));
     wall.zPosition = 50;
-    
     wall.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(wall.size.width/3.5, wall.size.height)];
     wall.physicsBody.restitution = 0;
     

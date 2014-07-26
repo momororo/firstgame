@@ -452,7 +452,7 @@ MrdIconCell *iconCell4;
         SKNode *ground = [ObjectBitMask getGroundFromContact:contact];
         
         //接触位置 + 2 >= 地面の上面
-        if( contact.contactPoint.y + 1 >= (ground.position.y) + ([ground calculateAccumulatedFrame].size.height/8) ){
+        if( contact.contactPoint.y + 2 >= (ground.position.y) + ([ground calculateAccumulatedFrame].size.height/8) ){
 
             
             //player歩行動作
@@ -724,7 +724,7 @@ MrdIconCell *iconCell4;
             flyingNode = [SKSpriteNode spriteNodeWithImageNamed:@"raptime.png"];
             flyingNode.size = CGSizeMake(flyingNode.size.width/2, flyingNode.size.height/2);
             flyingNode.position = CGPointMake(CGRectGetMidX(self.frame), -(flyingNode.size.height/2));
-            flyingNode.zPosition = 50;
+            flyingNode.zPosition = 100;
             [self addChild:flyingNode];
 
 
