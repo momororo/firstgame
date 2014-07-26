@@ -59,7 +59,7 @@
         fish.physicsBody.categoryBitMask = fishCategory;
         //ヒットテストするオブジェクト(プレイヤー)
         fish.physicsBody.contactTestBitMask = playerCategory | flyingPlayerCategory;
-        //接触できるオブジェク
+        //接触できるオブジェクト
         fish.physicsBody.collisionBitMask = 0;
         
         //配列に追加
