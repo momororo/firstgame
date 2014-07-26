@@ -409,9 +409,14 @@ MrdIconCell *iconCell4;
 
         //地面を格納する変数
         SKNode *ground = [ObjectBitMask getGroundFromContact:contact];
+
+        
+          /*  NSLog(@"接触位置　%f　：　地面の高さ　%f",contact.contactPoint.y, (ground.position.y + [ground calculateAccumulatedFrame].size.height/4));
+        NSLog(@"グラポジ：%f　グラウンドサイズ/4：%f",ground.position.y,([ground calculateAccumulatedFrame].size.height/4));
+*/
         
         //接触位置 + 2 >= 地面の上面
-        if( contact.contactPoint.y + 1 >= (ground.position.y) + ([ground calculateAccumulatedFrame].size.height/8) ){
+        if( contact.contactPoint.y + 2 >= ((ground.position.y) + ([ground calculateAccumulatedFrame].size.height/4)) ){
             
             /**
              *  小細工
@@ -428,7 +433,7 @@ MrdIconCell *iconCell4;
                 NSLog(@"フラグON(コンタクト)");
 */
 
-
+            
             
             //player歩行動作
                 [Player walkAction];
@@ -450,13 +455,19 @@ MrdIconCell *iconCell4;
         
         //地面を格納する変数
         SKNode *ground = [ObjectBitMask getGroundFromContact:contact];
+        /*
+        NSLog(@"接触位置　%f　：地面の位置　%f",contact.contactPoint.y , ((ground.position.y) + ([ground calculateAccumulatedFrame].size.height/4)));
         
+        NSLog(@"グラポジ：%f　グラウンドサイズ/4：%f",ground.position.y,([ground calculateAccumulatedFrame].size.height/4));
+        */
         //接触位置 + 2 >= 地面の上面
-        if( contact.contactPoint.y + 2 >= (ground.position.y) + ([ground calculateAccumulatedFrame].size.height/8) ){
+        if( contact.contactPoint.y + 2 >= ((ground.position.y) + ([ground calculateAccumulatedFrame].size.height/4)) ){
 
             
             //player歩行動作
             [Player walkAction];
+            
+
             
         
         }
