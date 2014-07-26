@@ -26,6 +26,8 @@ SKLabelNode  *tutorialLabel;
 SKSpriteNode *tutorialBackGround;
 //チュートリアルの画像
 SKSpriteNode *tutorialImage;
+SKSpriteNode *tutorialImage2;
+SKSpriteNode *tutorialImage3;
 //看板の画像
 SKSpriteNode *kanban;
 
@@ -251,7 +253,19 @@ GKLocalPlayer *localPlayer;
                     
                 }
                 
-                //2ページ目から3ページに変更(未実装)
+                //2ページ目から3ページに変更
+                
+                if (tutorialPage == 2) {
+                    [self showThirdPage];
+                    return;
+                }
+                
+                //2ページ目から3ページに変更
+                if (tutorialPage == 3) {
+                    [self showFourthPage];
+                    return;
+                }
+                
             }
             
         }
@@ -270,6 +284,18 @@ GKLocalPlayer *localPlayer;
                 //2ページ目から1ページに変更
                 if(tutorialPage == 2){
                     [self showFirstPage];
+                    return;
+                }
+                
+                //3ページ目から2ページ目に変更
+                if(tutorialPage == 3){
+                    [self showSecondPage];
+                    return;
+                }
+                
+                //4ページ目から3ページ目に変更
+                if(tutorialPage == 4){
+                    [self showThirdPage];
                     return;
                 }
         
@@ -310,7 +336,7 @@ GKLocalPlayer *localPlayer;
     tutorialBackGround = [SKSpriteNode spriteNodeWithImageNamed:@"image.png"];
     tutorialBackGround.name = @"kTutorialBackGround";
     tutorialBackGround.size = CGSizeMake(tutorialBackGround.size.width/1.2, tutorialBackGround.size.height/1.2);
-    tutorialBackGround.position = CGPointMake(CGRectGetMidX(self.frame),CGRectGetMidY(self.frame)/2);
+    tutorialBackGround.position = CGPointMake(CGRectGetMidX(self.frame),CGRectGetMidY(self.frame)/1.3);
     tutorialBackGround.zPosition = 10;
     [self addChild:tutorialBackGround];
     
@@ -374,6 +400,8 @@ GKLocalPlayer *localPlayer;
 -(void)showFirstPage{
     
     [tutorialImage removeFromParent];
+    [previous setHidden:YES];
+    
     tutorialImage = nil;
     tutorialImage = [SKSpriteNode spriteNodeWithImageNamed:@"tutorial1.jpg"];
     tutorialImage.size = CGSizeMake(tutorialImage.size.width/4.5, tutorialImage.size.height/4.5);
@@ -381,7 +409,7 @@ GKLocalPlayer *localPlayer;
     [tutorialBackGround addChild:tutorialImage];
 
     //テキストの差し替え
-    tutorialLabel.text = @"画面をタップすると・・・";
+    tutorialLabel.text = @"画面タップでジャンプ！！";
     
     //ページを1に変更
     tutorialPage = 1;
@@ -393,18 +421,22 @@ GKLocalPlayer *localPlayer;
 //2ページ目の作成メソッド
 
 -(void)showSecondPage{
+    
+    [previous setHidden:NO];
 
     //画像の差し替え
+    [tutorialImage3 removeFromParent];
+    [tutorialImage2 removeFromParent];
     [tutorialImage removeFromParent];
     tutorialImage = nil;
-    tutorialImage = [SKSpriteNode spriteNodeWithImageNamed:@"tutorial2.png"];
-    tutorialImage.size = CGSizeMake(tutorialImage.size.width, tutorialImage.size.height);
+    tutorialImage = [SKSpriteNode spriteNodeWithImageNamed:@"tutorial2.jpg"];
+    tutorialImage.size = CGSizeMake(tutorialImage.size.width/4.5, tutorialImage.size.height/4.5);
     tutorialImage.position = CGPointMake(0, 70);
     [tutorialBackGround addChild:tutorialImage];
 
     
     //テキストの差し替え
-    tutorialLabel.text =@"ジャンプします！";
+    tutorialLabel.text =@"ジャンプ中、タップでスマッシュ！！";
     
     //ページを2に変更
     tutorialPage = 2;
@@ -412,6 +444,81 @@ GKLocalPlayer *localPlayer;
     return;
 
 }
+
+//3ページ目の作成メソッド
+
+-(void)showThirdPage{
+    
+    [next setHidden:NO];
+    
+    //画像の差し替え
+    [tutorialImage removeFromParent];
+    tutorialImage = nil;
+    tutorialImage = [SKSpriteNode spriteNodeWithImageNamed:@"tutorial3_1.jpg"];
+    tutorialImage.size = CGSizeMake(tutorialImage.size.width/4.5, tutorialImage.size.height/4.5);
+    tutorialImage.position = CGPointMake(-80, 70);
+    [tutorialBackGround addChild:tutorialImage];
+    
+    tutorialImage2 = [SKSpriteNode spriteNodeWithImageNamed:@"tutorial3_2.jpg"];
+    tutorialImage2.size = CGSizeMake(tutorialImage2.size.width/4, tutorialImage2.size.height/4);
+    tutorialImage2.position = CGPointMake(80, 70);
+    [tutorialBackGround addChild:tutorialImage2];
+    
+    tutorialImage3 = [SKSpriteNode spriteNodeWithImageNamed:@"yajirusi.png"];
+    tutorialImage3.size = CGSizeMake(tutorialImage3.size.width/10, tutorialImage3.size.width/10);
+    tutorialImage3.position = CGPointMake(0, 70);
+    [tutorialBackGround addChild:tutorialImage3];
+    
+    
+    
+    //テキストの差し替え
+    tutorialLabel.text =@"スマッシュで氷のカベをこわせ！！";
+    
+    //ページを2に変更
+    tutorialPage = 3;
+    
+    return;
+    
+}
+
+//4ページ目作成
+
+-(void)showFourthPage{
+    
+    [next setHidden:YES];
+    
+    //画像の差し替え
+    [tutorialImage removeFromParent];
+    [tutorialImage2 removeFromParent];
+    [tutorialImage3 removeFromParent];
+    
+    tutorialImage = nil;
+    tutorialImage = [SKSpriteNode spriteNodeWithImageNamed:@"tutorial4.PNG"];
+    tutorialImage.size = CGSizeMake(tutorialImage.size.width/4.5, tutorialImage.size.height/4.5);
+    tutorialImage.position = CGPointMake(0, 70);
+    [tutorialBackGround addChild:tutorialImage];
+    
+    //テキストの差し替え
+    tutorialLabel.text =@"氷のカベを５つこわすと･･･空が飛べる！！";
+    
+    //ページを2に変更
+    tutorialPage = 4;
+    
+    return;
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 -(void)update:(CFTimeInterval)currentTime {
