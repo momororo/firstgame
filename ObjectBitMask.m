@@ -70,11 +70,18 @@
     
 }
 
-//プレイヤーと魚か判定する
+//プレイヤー(スマッシュ状態のプレイヤーも含む)と魚か判定する
 +(BOOL)playerAndFish:(SKPhysicsContact *)contact{
+    //プレイヤーと魚の判定
     if((playerCategory == contact.bodyA.categoryBitMask || playerCategory == contact.bodyB.categoryBitMask) && (fishCategory == contact.bodyA.categoryBitMask || fishCategory == contact.bodyB.categoryBitMask)){
         return YES;
     }
+    
+    //スマッシュプレイヤーと魚の判定
+    if((flyingPlayerCategory == contact.bodyA.categoryBitMask || flyingPlayerCategory == contact.bodyB.categoryBitMask) && (fishCategory == contact.bodyA.categoryBitMask || fishCategory == contact.bodyB.categoryBitMask)){
+        return YES;
+    }
+
     
     return NO;
 }
