@@ -92,37 +92,6 @@
     
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 +(void)moveWallDuration:(float)duration{
         SKSpriteNode *wall = walls[walls.count-1];
         [wall

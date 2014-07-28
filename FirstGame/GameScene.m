@@ -106,7 +106,6 @@ MrdIconCell *iconCell4;
         //スコア表示看板
         scoreNode = [SKSpriteNode spriteNodeWithImageNamed:@"score.png"];
         scoreNode.size = CGSizeMake(self.frame.size.width, scoreNode.size.height);
-        //scoreNode.position = CGPointMake(CGRectGetMaxX(self.frame)-(scoreNode.size.width/2), scoreNode.size.height/3);
         scoreNode.position = CGPointMake(CGRectGetMidX(self.frame),CGRectGetMaxY(self.frame)*11/12);
         scoreNode.zPosition = 50;
         
@@ -119,7 +118,6 @@ MrdIconCell *iconCell4;
         scoreLabel.fontSize = 30;
         scoreLabel.fontColor = [UIColor blackColor];
         scoreLabel.name = @"kScoreLabel";
-        //scoreLabel.zPosition = 50;
         scoreLabel.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
         scoreLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeRight;
         scoreLabel.position = CGPointMake(200,0);
@@ -212,15 +210,6 @@ MrdIconCell *iconCell4;
         iconCell1 = [[MrdIconCell alloc]initWithFrame:frame1];
         iconCell1.titleTextColor =[UIColor blackColor];
         
-        //アイコンの設定項目(必要なら他のアイコンにもコピペして使ってね)
-        /*
-        iconCell1.iconFrame = CGRectMake(0, 0, 0, 0);
-        iconCell1.titleFrame = CGRectMake(0, 0, 0, 0);//タイトルいらないなら"CGRectNull"
-        iconCell1.titleTextColor = ;
-        iconCell1.titleShadowColor = ;
-        iconCell1.titleFont = ;
-        */
-        
         //アイコン2つめ
         CGRect frame2 = CGRectMake(105, 225, 75, 75);
         iconCell2 = [[MrdIconCell alloc]initWithFrame:frame2];
@@ -310,7 +299,6 @@ MrdIconCell *iconCell4;
         CGPoint location = [touch locationInNode:endNode];
 
         
-        //
             if ([[endNode childNodeWithName:@"kRetryLabel"] containsPoint:location]) {
                 
                 /**
@@ -382,11 +370,6 @@ MrdIconCell *iconCell4;
 
     //ジャンプ or スマッシュ
     [Player jumpOrSmashAction];
-/*
-    //接地フラグOFF（念のため）
-    playerAndGroundContactFlag = NO;
-    NSLog(@"フラグOFF(ジャンプ)");
-*/
 
     
 }
@@ -409,29 +392,8 @@ MrdIconCell *iconCell4;
         //地面を格納する変数
         SKNode *ground = [ObjectBitMask getGroundFromContact:contact];
 
-        
-          /*  NSLog(@"接触位置　%f　：　地面の高さ　%f",contact.contactPoint.y, (ground.position.y + [ground calculateAccumulatedFrame].size.height/4));
-        NSLog(@"グラポジ：%f　グラウンドサイズ/4：%f",ground.position.y,([ground calculateAccumulatedFrame].size.height/4));
-*/
-        
         //接触位置 + 2 >= 地面の上面
         if( contact.contactPoint.y + 2 >= ((ground.position.y) + ([ground calculateAccumulatedFrame].size.height/4)) ){
-            
-            /**
-             *  小細工
-             *  フラグがONになっている状態でここの処理に来た場合、挙動が怪しいと思われるので。
-             *  フラグをOFFにします。
-             */
-/*            if(playerAndGroundContactFlag == YES){
-                playerAndGroundContactFlag = NO;
-                NSLog(@"フラグOFF(小細工)");
-                return;
-            }
-            
-                playerAndGroundContactFlag = YES;
-                NSLog(@"フラグON(コンタクト)");
-*/
-
             
             
             //player歩行動作
@@ -454,11 +416,7 @@ MrdIconCell *iconCell4;
         
         //地面を格納する変数
         SKNode *ground = [ObjectBitMask getGroundFromContact:contact];
-        /*
-        NSLog(@"接触位置　%f　：地面の位置　%f",contact.contactPoint.y , ((ground.position.y) + ([ground calculateAccumulatedFrame].size.height/4)));
-        
-        NSLog(@"グラポジ：%f　グラウンドサイズ/4：%f",ground.position.y,([ground calculateAccumulatedFrame].size.height/4));
-        */
+
         //接触位置 + 2 >= 地面の上面
         if( contact.contactPoint.y + 2 >= ((ground.position.y) + ([ground calculateAccumulatedFrame].size.height/4)) ){
 
@@ -561,11 +519,7 @@ MrdIconCell *iconCell4;
     
     /**********プレイヤーと地面が離れるのを検知**********/
     if([ObjectBitMask playerAndGround:contact]){
-/*
-        //接地フラグOFF
-        playerAndGroundContactFlag = NO;
-        NSLog(@"フラグOFF(コンタクト)");
-*/
+
         if([Player getStatus] == walkStatus){
             [Player setPlayerStatusToEnd];
         }
@@ -578,9 +532,6 @@ MrdIconCell *iconCell4;
     /**********フライングプレイヤーと地面が離れるのを検知**********/
     if([ObjectBitMask flyingPlayerAndGround:contact]){
 
-/*
-        playerAndGroundContactFlag = NO;
-*/
         return;
     }
     /**********フライングプレイヤーと地面が離れるのを検知終了**********/
@@ -1058,19 +1009,6 @@ MrdIconCell *iconCell4;
 
 
 /***************** パーティクルの設定 *******************/
-//炎パーティクルの作成
--(void)makeFireParticle:(CGPoint)point{
-    if (_particleFire == nil) {
-        NSString *path = [[NSBundle mainBundle]pathForResource:@"Fire" ofType:@"sks"];
-        _particleFire = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
-        _particleFire.numParticlesToEmit = 50;
-        [self addChild:_particleFire];
-    }else{
-        
-        [_particleFire resetSimulation];
-    }
-    _particleFire.position = point;
-}
 
 //スパークパーティクルの作成
 -(void)makeSparkParticle:(CGPoint)point{
@@ -1087,42 +1025,11 @@ MrdIconCell *iconCell4;
 
 
 /**
- *  Game Center用メソッド
- */
-/*
--(void)sendScore:(float)highScore{
-    
-    if ([GKLocalPlayer localPlayer].isAuthenticated) {
-        GKScore* sendScore = [[GKScore alloc] initWithLeaderboardIdentifier:@"FirstPenguin_test"];
-        sendScore.value = highScore * 10;
-        [GKScore reportScores:@[sendScore] withCompletionHandler:^(NSError *error) {
-            if (error) {*/
-                // エラーの場合
-                /**
-                 *  何もせず終了
-                 */
-                /*NSLog(@"失敗");
-            }
-            NSLog(@"成功してるはず");
-        }];
-    }
-}
-*/
-/**
  *  nend デリゲートメソッド
  */
 //広告受信成功後、viewに追加
 -(void)nadViewDidFinishLoad:(NADView *)adView{
-    //デバッグ用、後で消す
-    NSLog(@"成功");
     [self.view addSubview:adView];
 }
-
-//広告受信失敗(あとで消す)
--(void)nadViewDidFailToReceiveAd:(NADView *)adView{
-    NSLog(@"失敗！");
-}
-
-
 
 @end

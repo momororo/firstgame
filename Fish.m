@@ -8,8 +8,6 @@
 
 #import "Fish.h"
 
-//SKTexture *_fishTexture;
-
 @implementation Fish
 
 //魚のノードを返す
@@ -65,11 +63,6 @@
         //配列に追加
         [fishes addObject:fish];
         
-/*
-        //下方向に回転させて発射
-        fish.physicsBody.velocity = CGVectorMake(-800,500);
-        [fish.physicsBody applyTorque:0.04];      //回転
-*/
         
     }
 

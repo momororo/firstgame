@@ -20,7 +20,6 @@
 		04B85446193C73F500F000A8 /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B85445193C73F500F000A8 /* Player.m */; };
 		04B85449193C80A600F000A8 /* Ground.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B85448193C80A600F000A8 /* Ground.m */; };
 		04B8544C193C93FF00F000A8 /* Wall.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B8544B193C93FF00F000A8 /* Wall.m */; };
-		04B8544F193CA30D00F000A8 /* Sensor.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B8544E193CA30D00F000A8 /* Sensor.m */; };
 		04B85452193CAB9400F000A8 /* Sea.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B85451193CAB9400F000A8 /* Sea.m */; };
 		A410877719659CCD00E32324 /* walkPenguin.atlas in Resources */ = {isa = PBXBuildFile; fileRef = A410877619659CCD00E32324 /* walkPenguin.atlas */; };
 		A410877B19659F4C00E32324 /* flyPenguin.atlas in Resources */ = {isa = PBXBuildFile; fileRef = A410877A19659F4C00E32324 /* flyPenguin.atlas */; };
@@ -127,8 +126,6 @@
 		04B85448193C80A600F000A8 /* Ground.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ground.m; sourceTree = "<group>"; };
 		04B8544A193C93FF00F000A8 /* Wall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Wall.h; sourceTree = "<group>"; };
 		04B8544B193C93FF00F000A8 /* Wall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Wall.m; sourceTree = "<group>"; };
-		04B8544D193CA30D00F000A8 /* Sensor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sensor.h; sourceTree = "<group>"; };
-		04B8544E193CA30D00F000A8 /* Sensor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Sensor.m; sourceTree = "<group>"; };
 		04B85450193CAB9400F000A8 /* Sea.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sea.h; sourceTree = "<group>"; };
 		04B85451193CAB9400F000A8 /* Sea.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Sea.m; sourceTree = "<group>"; };
 		A410877619659CCD00E32324 /* walkPenguin.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = walkPenguin.atlas; sourceTree = "<group>"; };
@@ -307,8 +304,6 @@
 				A4A1048F19434F19003182DD /* Fish.m */,
 				04B85444193C73F500F000A8 /* Player.h */,
 				04B85445193C73F500F000A8 /* Player.m */,
-				04B8544D193CA30D00F000A8 /* Sensor.h */,
-				04B8544E193CA30D00F000A8 /* Sensor.m */,
 				04B85441193C73DE00F000A8 /* ObjectBitMask.h */,
 				04B85442193C73DE00F000A8 /* ObjectBitMask.m */,
 				A4A1BA6E192B43BB00805339 /* AppDelegate.h */,
@@ -582,7 +577,6 @@
 				04B8544C193C93FF00F000A8 /* Wall.m in Sources */,
 				A4A1BA9B192B43E400805339 /* GameScene.m in Sources */,
 				A4A104DD1949E549003182DD /* Island.m in Sources */,
-				04B8544F193CA30D00F000A8 /* Sensor.m in Sources */,
 				04B85443193C73DE00F000A8 /* ObjectBitMask.m in Sources */,
 				A4A104E8194B252F003182DD /* Cloud.m in Sources */,
 				A4A1BA70192B43BB00805339 /* AppDelegate.m in Sources */,

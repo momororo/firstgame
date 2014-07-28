@@ -121,20 +121,6 @@ GKLocalPlayer *localPlayer;
         scoreLabelValue.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
         [self addChild:scoreLabelValue];
         
-        //灯籠流し
-    /*
-        SKSpriteNode *penguin = [SKSpriteNode spriteNodeWithImageNamed:@"pengin6"];
-        penguin.size = CGSizeMake(penguin.size.width, penguin.size.height);
-        penguin.position = CGPointMake(CGRectGetMaxX(self.frame) + penguin.size.width, CGRectGetMidY(self.frame));
-        penguin.zPosition = 0;
-        
-        [self addChild:penguin];
-        
-        [penguin
-         runAction:[SKAction sequence:@[[SKAction moveToX: -200 duration:12.0],[SKAction removeFromParent]]]];
-      */
-        //スコアをどこかに表示？？
-        
         
         //チュートリアルのページを0にする
         tutorialPage = 0;
@@ -313,21 +299,9 @@ GKLocalPlayer *localPlayer;
             
         }
     }
-    
-    
-    
-    //チュートリアルがONであり、どこにも該当しない場合はチュートリアル画面を消す
-    /*
-     * ネクスト・バックボタンを子ノードとしてチュートリアル画面に追加した際に、
-     * チュートリアル画面以外をタップすると、画面が消える仕様がいいかなと思いついたため、
-     * 新しい仕様実装テストのためコメント化しましたー。
-    if(tutorialFlag == YES){
-        //チュートリアルのノードを破棄する
-        [self hiddenTutorial];
-        return;
-        
-    }*/
 }
+    
+    
 
 //チュートリアルの作成メソッド
 -(void)showTutorial{
@@ -374,15 +348,7 @@ GKLocalPlayer *localPlayer;
 -(void)hiddenTutorial{
     
     [tutorialBackGround removeFromParent];
-   /* [tutorialLabel removeFromParent];
-    [next removeFromParent];
-    [previous removeFromParent];
-    [tutorialImage removeFromParent];*/
     tutorialBackGround = nil;
-    /*tutorialLabel = nil;
-    next = nil;
-    previous = nil;
-    tutorialImage= nil;*/
 
     //チュートリアルのフラグをNOにする
     tutorialFlag = NO;
@@ -588,9 +554,7 @@ GKLocalPlayer *localPlayer;
                 /**
                  *  何もせず終了
                  */
-                NSLog(@"失敗");
             }
-            NSLog(@"成功してるはず");
         }];
     }
     
@@ -614,40 +578,12 @@ GKLocalPlayer *localPlayer;
 //広告受信成功後、viewに追加
 -(void)nadViewDidFinishLoad:(NADView *)adView{
     //デバッグ用、後で消す
-    NSLog(@"成功");
     [self.view addSubview:adView];
 }
 
 //広告受信失敗(あとで消す)
 -(void)nadViewDidFailToReceiveAd:(NADView *)adView{
-    NSLog(@"失敗！");
 }
 
-
-
-/**
- * ランキングボタンタップ時の処理
- * リーダーボードを表示
- */
-/*
-- (void)showRanking{
-    GKGameCenterViewController *gcView = [GKGameCenterViewController new];
-    if (gcView != nil)
-    {
-        gcView.gameCenterDelegate = self;
-        gcView.viewState = GKGameCenterViewControllerStateLeaderboards;
-        [self.view addSubview:(UIView *)gcView];
-    }
-}
-*/
-/**
- * リーダーボードで完了タップ時の処理
- * 前の画面に戻る
- */
-/*
-- (void)gameCenterViewControllerDidFinish:(GKGameCenterViewController *)gameCenterViewController
-{
-}
-*/
 
 @end

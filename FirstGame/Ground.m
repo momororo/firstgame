@@ -38,8 +38,6 @@
 +(void)setGroundFrame:(CGRect)frame{
 
     
-    //ground = [SKSpriteNode spriteNodeWithColor:[SKColor brownColor]
-    //                                                    size:CGSizeMake(sizeX,sizeY)];
     SKSpriteNode *ground = [SKSpriteNode spriteNodeWithTexture:nextGroundTexture[3]];
     ground.size = CGSizeMake(ground.size.width/2, ground.size.height/2);
     ground.name = @"kGround";
@@ -97,7 +95,6 @@
     
 
     //床の長さ
-    //nextGround.size = CGSizeMake(300 + arc4random_uniform(551),50+arc4random_uniform(101));
     nextGround.size = CGSizeMake(nextGround.size.width/2,nextGround.size.height/2);
     nextGround.name = @"kGround";
 

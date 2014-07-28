@@ -17,35 +17,12 @@
 {
     [super viewDidLoad];
     
-    
-    //ゲームセンターの認証
-    //[self authenticateLocalPlayer];
-    
     _gameView = (GameView *)self.view;
      //Present the scene.
     
 
 }
 
-/**
- * GameCenterにログインしているか確認処理
- * ログインしていなければログイン画面を表示
- */
-/*
-- (void)authenticateLocalPlayer
-{
-    GKLocalPlayer* player = [GKLocalPlayer localPlayer];
-    player.authenticateHandler = ^(UIViewController* ui, NSError* error )
-    {
-        if( nil != ui )
-        {
-            [self presentViewController:ui animated:YES completion:nil];
-        }
-        
-    };
-}
-
-*/
 - (BOOL)shouldAutorotate
 {
     return YES;

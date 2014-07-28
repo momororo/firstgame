@@ -28,7 +28,7 @@
 #define     kFish       @"Fish"
 
 
-@interface GameScene : SKScene <SKPhysicsContactDelegate,/*GKGameCenterControllerDelegate,*/NADViewDelegate>
+@interface GameScene : SKScene <SKPhysicsContactDelegate,NADViewDelegate>
 
 @property (weak,nonatomic)id delegate;
 @property (nonatomic, retain) NADView *nadView;
