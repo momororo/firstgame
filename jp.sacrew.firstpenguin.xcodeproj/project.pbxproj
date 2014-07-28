@@ -160,15 +160,15 @@
 		A4A104EB194B33AE003182DD /* backmusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = backmusic.mp3; sourceTree = "<group>"; };
 		A4A104F0194B37DC003182DD /* gameover.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = gameover.mp3; sourceTree = "<group>"; };
 		A4A147041964090700AD140E /* sea.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sea.png; sourceTree = "<group>"; };
-		A4A1BA5A192B43BB00805339 /* FirstPenguin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FirstPenguin.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A4A1BA5A192B43BB00805339 /* jp.sacrew.firstpenguin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = jp.sacrew.firstpenguin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4A1BA5D192B43BB00805339 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A4A1BA5F192B43BB00805339 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		A4A1BA61192B43BB00805339 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A4A1BA63192B43BB00805339 /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
-		A4A1BA67192B43BB00805339 /* FirstPenguin-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FirstPenguin-Info.plist"; sourceTree = "<group>"; };
+		A4A1BA67192B43BB00805339 /* jp.sacrew.firstpenguin-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "jp.sacrew.firstpenguin-Info.plist"; sourceTree = "<group>"; };
 		A4A1BA69192B43BB00805339 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A4A1BA6B192B43BB00805339 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		A4A1BA6D192B43BB00805339 /* FirstPenguin-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FirstPenguin-Prefix.pch"; sourceTree = "<group>"; };
+		A4A1BA6D192B43BB00805339 /* jp.sacrew.firstpenguin-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "jp.sacrew.firstpenguin-Prefix.pch"; sourceTree = "<group>"; };
 		A4A1BA6E192B43BB00805339 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		A4A1BA6F192B43BB00805339 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		A4A1BA72192B43BB00805339 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -177,9 +177,9 @@
 		A4A1BA77192B43BB00805339 /* TitleScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TitleScene.h; sourceTree = "<group>"; };
 		A4A1BA78192B43BB00805339 /* TitleScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TitleScene.m; sourceTree = "<group>"; };
 		A4A1BA7C192B43BB00805339 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		A4A1BA82192B43BB00805339 /* FirstPenguinTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FirstPenguinTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A4A1BA82192B43BB00805339 /* jp.sacrew.firstpenguinTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = jp.sacrew.firstpenguinTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4A1BA83192B43BB00805339 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		A4A1BA8B192B43BB00805339 /* FirstPenguinTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FirstPenguinTests-Info.plist"; sourceTree = "<group>"; };
+		A4A1BA8B192B43BB00805339 /* jp.sacrew.firstpenguinTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "jp.sacrew.firstpenguinTests-Info.plist"; sourceTree = "<group>"; };
 		A4A1BA8D192B43BB00805339 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A4A1BA8F192B43BB00805339 /* FirstGameTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstGameTests.m; sourceTree = "<group>"; };
 		A4A1BA99192B43E400805339 /* GameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
@@ -273,8 +273,8 @@
 		A4A1BA5B192B43BB00805339 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A4A1BA5A192B43BB00805339 /* FirstPenguin.app */,
-				A4A1BA82192B43BB00805339 /* FirstPenguinTests.xctest */,
+				A4A1BA5A192B43BB00805339 /* jp.sacrew.firstpenguin.app */,
+				A4A1BA82192B43BB00805339 /* jp.sacrew.firstpenguinTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -360,8 +360,8 @@
 				A4A147041964090700AD140E /* sea.png */,
 				A4D7F4ED1939F4BE005225B6 /* Fire.sks */,
 				A49D6936197E0C4F00D211E7 /* sp-setofont.ttf */,
-				A4A1BA67192B43BB00805339 /* FirstPenguin-Info.plist */,
-				A4A1BA6D192B43BB00805339 /* FirstPenguin-Prefix.pch */,
+				A4A1BA67192B43BB00805339 /* jp.sacrew.firstpenguin-Info.plist */,
+				A4A1BA6D192B43BB00805339 /* jp.sacrew.firstpenguin-Prefix.pch */,
 				A471A29019430B16002E1EAD /* Fish.png */,
 				A410877A19659F4C00E32324 /* flyPenguin.atlas */,
 				A410877619659CCD00E32324 /* walkPenguin.atlas */,
@@ -407,7 +407,7 @@
 		A4A1BA8A192B43BB00805339 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				A4A1BA8B192B43BB00805339 /* FirstPenguinTests-Info.plist */,
+				A4A1BA8B192B43BB00805339 /* jp.sacrew.firstpenguinTests-Info.plist */,
 				A4A1BA8C192B43BB00805339 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
@@ -416,9 +416,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		A4A1BA59192B43BB00805339 /* FirstPenguin */ = {
+		A4A1BA59192B43BB00805339 /* jp.sacrew.firstpenguin */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A4A1BA93192B43BB00805339 /* Build configuration list for PBXNativeTarget "FirstPenguin" */;
+			buildConfigurationList = A4A1BA93192B43BB00805339 /* Build configuration list for PBXNativeTarget "jp.sacrew.firstpenguin" */;
 			buildPhases = (
 				A4A1BA56192B43BB00805339 /* Sources */,
 				A4A1BA57192B43BB00805339 /* Frameworks */,
@@ -428,14 +428,14 @@
 			);
 			dependencies = (
 			);
-			name = FirstPenguin;
+			name = jp.sacrew.firstpenguin;
 			productName = FirstGame;
-			productReference = A4A1BA5A192B43BB00805339 /* FirstPenguin.app */;
+			productReference = A4A1BA5A192B43BB00805339 /* jp.sacrew.firstpenguin.app */;
 			productType = "com.apple.product-type.application";
 		};
-		A4A1BA81192B43BB00805339 /* FirstPenguinTests */ = {
+		A4A1BA81192B43BB00805339 /* jp.sacrew.firstpenguinTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A4A1BA96192B43BB00805339 /* Build configuration list for PBXNativeTarget "FirstPenguinTests" */;
+			buildConfigurationList = A4A1BA96192B43BB00805339 /* Build configuration list for PBXNativeTarget "jp.sacrew.firstpenguinTests" */;
 			buildPhases = (
 				A4A1BA7E192B43BB00805339 /* Sources */,
 				A4A1BA7F192B43BB00805339 /* Frameworks */,
@@ -446,9 +446,9 @@
 			dependencies = (
 				A4A1BA88192B43BB00805339 /* PBXTargetDependency */,
 			);
-			name = FirstPenguinTests;
+			name = jp.sacrew.firstpenguinTests;
 			productName = FirstGameTests;
-			productReference = A4A1BA82192B43BB00805339 /* FirstPenguinTests.xctest */;
+			productReference = A4A1BA82192B43BB00805339 /* jp.sacrew.firstpenguinTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -473,7 +473,7 @@
 					};
 				};
 			};
-			buildConfigurationList = A4A1BA55192B43BB00805339 /* Build configuration list for PBXProject "FirstPenguin" */;
+			buildConfigurationList = A4A1BA55192B43BB00805339 /* Build configuration list for PBXProject "jp.sacrew.firstpenguin" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -486,8 +486,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				A4A1BA59192B43BB00805339 /* FirstPenguin */,
-				A4A1BA81192B43BB00805339 /* FirstPenguinTests */,
+				A4A1BA59192B43BB00805339 /* jp.sacrew.firstpenguin */,
+				A4A1BA81192B43BB00805339 /* jp.sacrew.firstpenguinTests */,
 			);
 		};
 /* End PBXProject section */
@@ -601,7 +601,7 @@
 /* Begin PBXTargetDependency section */
 		A4A1BA88192B43BB00805339 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = A4A1BA59192B43BB00805339 /* FirstPenguin */;
+			target = A4A1BA59192B43BB00805339 /* jp.sacrew.firstpenguin */;
 			targetProxy = A4A1BA87192B43BB00805339 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -716,14 +716,14 @@
 					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "FirstGame/FirstPenguin-Prefix.pch";
-				INFOPLIST_FILE = "FirstGame/FirstPenguin-Info.plist";
+				GCC_PREFIX_HEADER = "FirstGame/jp.sacrew.firstpenguin-Prefix.pch";
+				INFOPLIST_FILE = "FirstGame/jp.sacrew.firstpenguin-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Nend/NendAd",
 				);
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_NAME = FirstPenguin;
+				PRODUCT_NAME = jp.sacrew.firstpenguin;
 				PROVISIONING_PROFILE = "";
 				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -743,14 +743,14 @@
 					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "FirstGame/FirstPenguin-Prefix.pch";
-				INFOPLIST_FILE = "FirstGame/FirstPenguin-Info.plist";
+				GCC_PREFIX_HEADER = "FirstGame/jp.sacrew.firstpenguin-Prefix.pch";
+				INFOPLIST_FILE = "FirstGame/jp.sacrew.firstpenguin-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Nend/NendAd",
 				);
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_NAME = FirstPenguin;
+				PRODUCT_NAME = jp.sacrew.firstpenguin;
 				PROVISIONING_PROFILE = "";
 				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -773,8 +773,8 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "FirstGameTests/FirstPenguinTests-Info.plist";
-				PRODUCT_NAME = FirstPenguinTests;
+				INFOPLIST_FILE = "FirstGameTests/jp.sacrew.firstpenguinTests-Info.plist";
+				PRODUCT_NAME = jp.sacrew.firstpenguinTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -791,8 +791,8 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FirstGame/FirstGame-Prefix.pch";
-				INFOPLIST_FILE = "FirstGameTests/FirstPenguinTests-Info.plist";
-				PRODUCT_NAME = FirstPenguinTests;
+				INFOPLIST_FILE = "FirstGameTests/jp.sacrew.firstpenguinTests-Info.plist";
+				PRODUCT_NAME = jp.sacrew.firstpenguinTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -801,7 +801,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		A4A1BA55192B43BB00805339 /* Build configuration list for PBXProject "FirstPenguin" */ = {
+		A4A1BA55192B43BB00805339 /* Build configuration list for PBXProject "jp.sacrew.firstpenguin" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A4A1BA91192B43BB00805339 /* Debug */,
@@ -810,7 +810,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A4A1BA93192B43BB00805339 /* Build configuration list for PBXNativeTarget "FirstPenguin" */ = {
+		A4A1BA93192B43BB00805339 /* Build configuration list for PBXNativeTarget "jp.sacrew.firstpenguin" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A4A1BA94192B43BB00805339 /* Debug */,
@@ -819,7 +819,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A4A1BA96192B43BB00805339 /* Build configuration list for PBXNativeTarget "FirstPenguinTests" */ = {
+		A4A1BA96192B43BB00805339 /* Build configuration list for PBXNativeTarget "jp.sacrew.firstpenguinTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A4A1BA97192B43BB00805339 /* Debug */,

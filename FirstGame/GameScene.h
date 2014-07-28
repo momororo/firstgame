@@ -10,7 +10,6 @@
 #import "Player.h"
 #import "Ground.h"
 #import "Wall.h"
-#import "Sensor.h"
 #import "Sea.h"
 #import "Fish.h"
 #import "Island.h"

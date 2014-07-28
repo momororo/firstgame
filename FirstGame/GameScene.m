@@ -154,9 +154,6 @@ MrdIconCell *iconCell4;
         [self addChild:clouds[0]];
         [self addChild:clouds[1]];
         
-        //透明のオブジェクトを生成(センサー)
-        [Sensor setSensoFrame:self.frame];
-        [self addChild:[Sensor getSensor]];
         
         //地面の設定
         [Ground initGroundTexture];
@@ -999,10 +996,8 @@ MrdIconCell *iconCell4;
     if (fishAdd == NO) {
         [Fish removeFish];
     }
-    
-    NSLog(@"%d",[Player getStatus]);
-   
 
+    
 
 }
 
