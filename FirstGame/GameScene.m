@@ -564,7 +564,10 @@ MrdIconCell *iconCell4;
         playerAndGroundContactFlag = NO;
         NSLog(@"フラグOFF(コンタクト)");
 */
-        [Player setJumpFlagOff];
+        if([Player getStatus] == walkStatus){
+            [Player setPlayerStatusToEnd];
+        }
+        
         return;
     }
 
@@ -1043,6 +1046,8 @@ MrdIconCell *iconCell4;
     if (fishAdd == NO) {
         [Fish removeFish];
     }
+    
+    NSLog(@"%d",[Player getStatus]);
    
 
 

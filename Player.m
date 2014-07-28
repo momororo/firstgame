@@ -15,14 +15,11 @@
     return player;
 }
 
-//フライングフラグを返す
-+(BOOL)getFlyFlag{
-    return flyFlag;
+//ステータスを返す
++(BOOL)getStatus{
+    return playerStatus;
 }
 
-+(BOOL)getSmashFlag{
-    return smashFlag;
-}
 
 //プレイヤーのテクスチャを生成する
 +(void)initTexture{
@@ -77,14 +74,14 @@
 //歩行動作
 +(void)walkAction{
     
-    if(jumpFlag == NO){
+    if(playerStatus != walkStatus){
 
     //歩行モーション
     SKAction *walkPengin = [SKAction animateWithTextures:@[walkPenguins[0],walkPenguins[1]] timePerFrame:0.1];
     [player runAction:[SKAction repeatActionForever:walkPengin]];
     
-    //ジャンプ可能フラグをオンに
-        jumpFlag = YES;
+        
+    playerStatus = walkStatus;
         
     //PhysicsBodyを通常時に
         [self setNormalPhysicsBody];
@@ -94,8 +91,10 @@
 
 //ジャンプ(スマッシュ)アクション(フラグで分岐)
 +(void)jumpOrSmashAction{
+
     
-    if(jumpFlag == YES){
+    //ジャンプ処理(ステータス歩行時に処理、ステータスはジャンプ状態に)
+    if(playerStatus == walkStatus){
         
         //ジャンプ処理
         player.physicsBody.velocity = CGVectorMake(0, 500);
@@ -107,52 +106,39 @@
         //ジャンプ音の再生
         [player runAction:jumpSE];
         
-        //スマッシュフラグがオフのとき
-        if(flyFlag == NO){
-        //ジャンプ可能フラグをNOにする
-            jumpFlag = NO;
-        //突進可能フラグをYESにする
-            smashFlag = YES;
-            
+        //ステータスをジャンプステータスに
+        playerStatus = jumpStatus;
+        
+        //フライフラグがYESの場合はフライステータスに
+        if (flyFlag == YES) {
+            playerStatus =flyStatus;
+        }
+        
         return;
 
-        }
-        
-        //スマッシュフラグがオンのとき
-        //フライング時はスマッシュできないようにフラグを調整する。
-        if(smashFlag == YES){
-            //ジャンプ可能フラグをNOにする
-            jumpFlag = NO;
-            //突進可能フラグをNOにする
-            smashFlag = NO;
-            
-            return;
-        }
-        
-        
-        
     }
+        
     
-    if (jumpFlag == NO && smashFlag == YES) {
+    //スマッシュ処理(ステータスジャンプ時に処理、ステータスはスマッシュ状態に)
+    if (playerStatus == jumpStatus) {
+        
         
         //突進処理
         player.physicsBody.velocity = CGVectorMake(0, -500);
         [player runAction:[SKAction repeatActionForever:[SKAction animateWithTextures:@[smashPenguin] timePerFrame:0.1]]];
-            
-        smashFlag = NO;
         
         //突進用のビットマスクに変更
         [self setSmashPhysicsBody];
         
-        //炎のパーティクルを出す
-        //処理が重いため保留
-        //[self makeFireParticle:sprite.position];
+       
+        //ステータスをスマッシュステータスに
+        playerStatus = smashStatus;
         
         return;
     }
     
     //フライングモード
-    if(flyFlag == YES && jumpFlag == NO && smashFlag == NO){
+    if(playerStatus == flyStatus){
         //氷を壊すことがあるので都度都度通常状態に戻す
         //この処理をvelocity設定の後に行うと、velocityが初期化され、飛べなくなる。
         [self setNormalPhysicsBody];
@@ -161,6 +147,16 @@
         
         SKAction *jumpPengin = [SKAction animateWithTextures:@[flyPenguins[0],flyPenguins[1]] timePerFrame:0.1];
         [player runAction:[SKAction repeatActionForever:jumpPengin]];
+        
+
+        if(flyFlag == NO){
+
+            //ステータスをジャンプステータスに
+            playerStatus = jumpStatus;
+            
+            return;
+        }
+
         
     }
 
@@ -197,23 +193,14 @@
     return player.position;
 }
 
-//ジャンプフラグをオフにする
-+(void)setJumpFlagOff{
-    jumpFlag = NO;
-}
-
 //フライポイントをカウントアップにする
 +(void)countUpFlyPoint{
     
-    //飛んでいないときのみカウントアップ
-    if(flyFlag == NO){
-        flyPoint = flyPoint + 1;
-    }
+    flyPoint++;
 
     if (flyPoint == 5) {
+        playerStatus = flyStatus;
         flyFlag = YES;
-        jumpFlag = NO;
-        smashFlag = NO;
     }
     
 }
@@ -223,14 +210,27 @@
     
     flyPoint--;
     
-    
     if(flyPoint == 0){
+
         flyFlag = NO;
-        smashFlag = YES;
+        
         return YES;
     }
-    
+
     return NO;
+}
+
+//フライングモード終了時の処理
+-(void)endFlyingModeOnGround:(BOOL) onGround {
+    
+    //地面に接地している場合は、ウォークモードに
+    if(onGround == YES){
+        
+        playerStatus = walkStatus;
+    }else{
+        playerStatus = jumpStatus;
+    }
+    
 }
 
 //フライポイントを返す
@@ -240,15 +240,20 @@
 }
 
 //フライフラグを返す
-+(BOOL)getFlylag{
++(BOOL)getFlyFlag{
     return flyFlag;
 }
+
+//プレイヤーのステータスをエンドに
++(void)setPlayerStatusToEnd{
+    playerStatus = endStatus;
+}
+
 
 //プレイヤーの初期化
 +(void)initPlayer{
     
-    jumpFlag = NO;
-    smashFlag = NO;
+    playerStatus = endStatus;
     flyPoint = NO;
     flyFlag = 0;
 }

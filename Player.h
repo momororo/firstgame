@@ -17,10 +17,6 @@ SKSpriteNode *player;
 SKPhysicsBody *normalPhysicsBody;
 //スマッシュ時のphysicsBody
 SKPhysicsBody *smashPhyicsBody;
-//ジャンプフラグ
-BOOL jumpFlag;
-//スマッシュフラグ
-BOOL smashFlag;
 //flyポイント
 int flyPoint;
 //flyフラグ
@@ -31,6 +27,16 @@ NSMutableArray *walkPenguins;
 NSMutableArray *flyPenguins;
 //スマッシュのテクスチャ
 SKTexture *smashPenguin;
+
+//プレイヤーステータスフラグ
+int playerStatus;
+static const int walkStatus = 0;
+static const int jumpStatus = 1;
+static const int smashStatus = 2;
+static const int flyStatus = 3;
+static const int endStatus = 9;
+
+
 
 
 
@@ -54,22 +60,22 @@ SKAction *jumpSE;
 +(void)setSmashPhysicsBody;
 //プレイヤーの位置情報を取得する
 +(CGPoint)getPlayerPosition;
-//ジャンプフラグをオフに(床からジャンプしなかった場合の処理)
-+(void)setJumpFlagOff;
 //フライトポイントを100ずつ足し算
 +(void)countUpFlyPoint;
 //フライポイントの減算を行う(0になった場合はYESを返す)
 +(BOOL)countDownFlyPoint;
 //フライポイントを返す
 +(int)getFlyPoint;
-//フライフラグを返す
+//プレイヤーのステータスを返す
++(BOOL)getStatus;
+//フライングフラグを返す
 +(BOOL)getFlyFlag;
-//スマッシュフラグを返す
-+(BOOL)getSmashFlag;
 //プレイヤーの初期化
 +(void)initPlayer;
 //プレイヤーのテクスチャーを作成
 +(void)initTexture;
+//プレイヤーのステータスをエンドに
++(void)setPlayerStatusToEnd;
 
 
 @end
