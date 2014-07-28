@@ -27,7 +27,7 @@
 +(void)initTexture{
     
     fishTexture = [SKTexture textureWithImageNamed:@"Fish"];
-
+    
 }
 
 
@@ -64,8 +64,6 @@
         
         //配列に追加
         [fishes addObject:fish];
-        
-
         
 /*
         //下方向に回転させて発射

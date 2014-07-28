@@ -33,6 +33,10 @@
 		A42F367D1983AD7D003B2FD4 /* tutorial3_2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A42F36791983AD7D003B2FD4 /* tutorial3_2.jpg */; };
 		A42F367F1983B3A8003B2FD4 /* yajirusi.png in Resources */ = {isa = PBXBuildFile; fileRef = A42F367E1983B3A8003B2FD4 /* yajirusi.png */; };
 		A42F36811983B5AB003B2FD4 /* tutorial4.PNG in Resources */ = {isa = PBXBuildFile; fileRef = A42F36801983B5AB003B2FD4 /* tutorial4.PNG */; };
+		A42F36851986135E003B2FD4 /* eating.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A42F36841986135E003B2FD4 /* eating.mp3 */; };
+		A42F368B19861AF7003B2FD4 /* flymode.wav in Resources */ = {isa = PBXBuildFile; fileRef = A42F368A19861AF7003B2FD4 /* flymode.wav */; };
+		A42F368D19861EA2003B2FD4 /* tetsuya.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A42F368C19861EA2003B2FD4 /* tetsuya.mp3 */; };
+		A42F368F19862128003B2FD4 /* tetsuya2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A42F368E19862128003B2FD4 /* tetsuya2.mp3 */; };
 		A4455085197F95F2000A02F4 /* titlemusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A4455084197F95F2000A02F4 /* titlemusic.mp3 */; };
 		A471A28C1942FB28002E1EAD /* attackedWall.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A471A28B1942FB28002E1EAD /* attackedWall.mp3 */; };
 		A471A29119430B16002E1EAD /* Fish.png in Resources */ = {isa = PBXBuildFile; fileRef = A471A29019430B16002E1EAD /* Fish.png */; };
@@ -140,6 +144,10 @@
 		A42F36791983AD7D003B2FD4 /* tutorial3_2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = tutorial3_2.jpg; sourceTree = "<group>"; };
 		A42F367E1983B3A8003B2FD4 /* yajirusi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yajirusi.png; sourceTree = "<group>"; };
 		A42F36801983B5AB003B2FD4 /* tutorial4.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tutorial4.PNG; sourceTree = "<group>"; };
+		A42F36841986135E003B2FD4 /* eating.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = eating.mp3; sourceTree = "<group>"; };
+		A42F368A19861AF7003B2FD4 /* flymode.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = flymode.wav; sourceTree = "<group>"; };
+		A42F368C19861EA2003B2FD4 /* tetsuya.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = tetsuya.mp3; sourceTree = "<group>"; };
+		A42F368E19862128003B2FD4 /* tetsuya2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = tetsuya2.mp3; sourceTree = "<group>"; };
 		A4455084197F95F2000A02F4 /* titlemusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = titlemusic.mp3; sourceTree = "<group>"; };
 		A471A28B1942FB28002E1EAD /* attackedWall.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = attackedWall.mp3; sourceTree = "<group>"; };
 		A471A29019430B16002E1EAD /* Fish.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Fish.png; sourceTree = "<group>"; };
@@ -343,6 +351,10 @@
 				A42F36771983AD7D003B2FD4 /* tutorial2.jpg */,
 				A42F36781983AD7D003B2FD4 /* tutorial1.jpg */,
 				A42F36791983AD7D003B2FD4 /* tutorial3_2.jpg */,
+				A42F368E19862128003B2FD4 /* tetsuya2.mp3 */,
+				A42F368C19861EA2003B2FD4 /* tetsuya.mp3 */,
+				A42F368A19861AF7003B2FD4 /* flymode.wav */,
+				A42F36841986135E003B2FD4 /* eating.mp3 */,
 				A471A28B1942FB28002E1EAD /* attackedWall.mp3 */,
 				A4A104EB194B33AE003182DD /* backmusic.mp3 */,
 				A4A104F0194B37DC003182DD /* gameover.mp3 */,
@@ -496,6 +508,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A42F36851986135E003B2FD4 /* eating.mp3 in Resources */,
 				A49D6937197E0CE200D211E7 /* sp-setofont.ttf in Resources */,
 				A4A2DC93197963900081792D /* Impact.ttf in Resources */,
 				A4A104CB1949CD75003182DD /* cloud3.png in Resources */,
@@ -511,6 +524,7 @@
 				A4A104CC1949CD75003182DD /* cloud2.png in Resources */,
 				A4A1049E19472BCF003182DD /* hyouzan.png in Resources */,
 				A4A79FE3195C5B180060B266 /* previous.png in Resources */,
+				A42F368D19861EA2003B2FD4 /* tetsuya.mp3 in Resources */,
 				0454A58819374B07002403B5 /* jump.wav in Resources */,
 				A4A2DC8A197933C70081792D /* top.png in Resources */,
 				A4A2DC8C197934100081792D /* tutorial.png in Resources */,
@@ -524,6 +538,8 @@
 				A4A104CE1949CD75003182DD /* cloud4.png in Resources */,
 				A48DBF39197E196900A94B47 /* pengin5.png in Resources */,
 				A4A79FDE195C5B050060B266 /* next_taped.png in Resources */,
+				A42F368B19861AF7003B2FD4 /* flymode.wav in Resources */,
+				A42F368F19862128003B2FD4 /* tetsuya2.mp3 in Resources */,
 				A4A1BA6A192B43BB00805339 /* InfoPlist.strings in Resources */,
 				A4A29C0E197169F600B1393A /* raptime.png in Resources */,
 				A4D7F4F01939F4BE005225B6 /* spark.png in Resources */,

@@ -15,6 +15,9 @@
 //AVAudioPlayer * musicPlayer1;
 
 //AVAudioPlayer * musicPlayer2;
+    
+SKAction *tetsuya2;
+
 
     
 //ゲームスタートのフラグ
@@ -547,6 +550,9 @@ MrdIconCell *iconCell4;
         [Fish removeEatenFish:[ObjectBitMask getFishFromContact:contact]];
         //魚加点
         fishPoint = fishPoint + 8;
+        
+        [player runAction:eatSE];
+        
         return;
     }
     
@@ -756,6 +762,8 @@ MrdIconCell *iconCell4;
             //フライングスタートのフラグをNOにする
             flyingStartFlag = NO;
             
+            [player runAction:flymodeSE];
+            
 
         }
         
@@ -766,11 +774,19 @@ MrdIconCell *iconCell4;
         //フライング時間のカウントアップと、条件に応じた処理を行う
         if(flyingCountTime <= currentTime){
             
+            //マグロといったら哲也でしょ！！
+            if(flyingCountTime % 2 == 1){
+                
+                tetsuya2 = [SKAction playSoundFileNamed:@"tetsuya2.mp3" waitForCompletion:NO];
+                
+                [self runAction:tetsuya2];
+                
+            }
             
-            //2秒に一回ペンギンを出す
+            
+            //2秒に一回魚を出す
                 if(flyingCountTime % 2 == 0){
-                    
-                    
+    
                     //魚の生成
                     [Fish setFishPositionX:CGRectGetMaxX(self.frame) PositionY:CGRectGetMinY(self.frame)];
                     

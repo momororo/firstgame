@@ -42,6 +42,8 @@ static const int endStatus = 9;
 
 //ジャンプ音
 SKAction *jumpSE;
+SKAction *eatSE;
+SKAction *flymodeSE;
 
 
 @interface Player : NSObject
