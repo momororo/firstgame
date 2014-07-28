@@ -546,7 +546,7 @@ GKLocalPlayer *localPlayer;
     float score = [userDefaults floatForKey:@"score"];
     
     if ([GKLocalPlayer localPlayer].isAuthenticated) {
-        GKScore* sendScore = [[GKScore alloc] initWithLeaderboardIdentifier:@"FirstPenguin_test"];
+        GKScore* sendScore = [[GKScore alloc] initWithLeaderboardIdentifier:@"FirstPenguin"];
         sendScore.value = score * 10;
         [GKScore reportScores:@[sendScore] withCompletionHandler:^(NSError *error) {
             if (error) {
