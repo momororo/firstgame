@@ -66,9 +66,7 @@
     
     //効果音の初期設定
     jumpSE = [SKAction playSoundFileNamed:@"jump.mp3" waitForCompletion:NO];
-    //eatSE = [SKAction playSoundFileNamed:@"eating.mp3" waitForCompletion:NO];
-    eatSE = [SKAction playSoundFileNamed:@"tetsuya.mp3" waitForCompletion:NO];
-
+    eatSE = [SKAction playSoundFileNamed:@"eating.mp3" waitForCompletion:NO];
     flymodeSE = [SKAction playSoundFileNamed:@"flymode.wav"waitForCompletion:YES];
     
 }

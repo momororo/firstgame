@@ -16,10 +16,6 @@
 
 //AVAudioPlayer * musicPlayer2;
     
-SKAction *tetsuya2;
-
-
-    
 //ゲームスタートのフラグ
 BOOL gameStart;
 
@@ -773,16 +769,6 @@ MrdIconCell *iconCell4;
         
         //フライング時間のカウントアップと、条件に応じた処理を行う
         if(flyingCountTime <= currentTime){
-            
-            //マグロといったら哲也でしょ！！
-            if(flyingCountTime % 2 == 1){
-                
-                tetsuya2 = [SKAction playSoundFileNamed:@"tetsuya2.mp3" waitForCompletion:NO];
-                
-                [self runAction:tetsuya2];
-                
-            }
-            
             
             //2秒に一回魚を出す
                 if(flyingCountTime % 2 == 0){
