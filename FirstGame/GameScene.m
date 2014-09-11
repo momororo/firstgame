@@ -235,17 +235,13 @@ MrdIconCell *iconCell4;
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     
+    
+    
     //ゲームスタートが押されたらボタンを消去する
-    
-    UITouch *touch = [touches anyObject];
-    CGPoint location = [touch locationInNode:self];
-    
-    
     
     //スタートラベルがノードにあるときだけ入る処理
     if([self childNodeWithName:@"kStartLabel"]){
-        if ([startLabel containsPoint:location]) {
-            
+        
             //スタートボタンがタップされたら、地面が移動する
             [Ground moveGroundToX:(-1500 - (self.frame.size.width / 2)) duration:5.7];
             [Island moveIslandInit];
@@ -275,10 +271,10 @@ MrdIconCell *iconCell4;
             [_musicPlayer1 prepareToPlay];
             [self.musicPlayer1 play];
         
-            return;
-        }
         return;
     }
+    
+    UITouch *touch = [touches anyObject];
     
     
     //GameOverラベルがノードにあるときだけ入る処理
