@@ -120,6 +120,7 @@
 		049CEE0C1951D12B00949E29 /* ground.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = ground.atlas; sourceTree = "<group>"; };
 		04B4389B1A496D79002576ED /* FirstPenguin-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FirstPenguin-Prefix.pch"; sourceTree = "<group>"; };
 		04B4389C1A496DBD002576ED /* FirstPenguin-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "FirstPenguin-Info.plist"; sourceTree = "<group>"; };
+		04B438AC1A4996A8002576ED /* NADInterstitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NADInterstitial.h; sourceTree = "<group>"; };
 		04B85441193C73DE00F000A8 /* ObjectBitMask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ObjectBitMask.h; path = ../ObjectBitMask.h; sourceTree = "<group>"; };
 		04B85442193C73DE00F000A8 /* ObjectBitMask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ObjectBitMask.m; path = ../ObjectBitMask.m; sourceTree = "<group>"; };
 		04B85444193C73F500F000A8 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Player.h; path = ../Player.h; sourceTree = "<group>"; };
@@ -248,6 +249,7 @@
 			isa = PBXGroup;
 			children = (
 				04062388197F84DD001AE896 /* libNendAd.a */,
+				04B438AC1A4996A8002576ED /* NADInterstitial.h */,
 				04062389197F84DD001AE896 /* NADIconArrayView.h */,
 				0406238A197F84DD001AE896 /* NADIconLoader.h */,
 				0406238B197F84DD001AE896 /* NADIconView.h */,
@@ -774,6 +776,10 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "FirstGameTests/FirstPenguinTests-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Nend/NendAd",
+				);
 				PRODUCT_NAME = FirstPenguinTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
@@ -792,6 +798,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FirstGame/FirstPenguin-Prefix.pch";
 				INFOPLIST_FILE = "FirstGameTests/FirstPenguinTests-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Nend/NendAd",
+				);
 				PRODUCT_NAME = FirstPenguinTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;

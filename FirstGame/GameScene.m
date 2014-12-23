@@ -8,7 +8,7 @@
 
 #import "GameScene.h"
 #import "GameView.h"
-#import "AppDelegate.h"
+
 
 @implementation GameScene{
 
@@ -200,6 +200,13 @@ GKLocalPlayer *localPlayer;
         [self.nadView setDelegate:self];
         [self.nadView load];
         
+        //広告をロード
+        //本番用
+//        [[NADInterstitial sharedInstance] loadAdWithApiKey:@"9c110db001741831ba51c640c498b300ae8fb630" spotId:@"289022"];
+        //テスト用
+        [[NADInterstitial sharedInstance] loadAdWithApiKey:@"308c2499c75c4a192f03c02b2fcebd16dcb45cc9" spotId:@"213208"];
+
+        
 
         /**
          *  アスタ
@@ -232,7 +239,8 @@ GKLocalPlayer *localPlayer;
         [iconLoader addIconCell:iconCell2];
         [iconLoader addIconCell:iconCell3];
         [iconLoader addIconCell:iconCell4];
-
+        
+        
     }
     
     return self;
@@ -802,6 +810,11 @@ GKLocalPlayer *localPlayer;
         //ゲームスタートのフラグをオフにする
         gameStart = NO;
         
+        //広告取得開始
+        iconLoader.refreshInterval = 10;
+        [iconLoader startLoadWithMediaCode:@"ast01828uclvqv3b6osf"];
+
+        
         //ゲームオーバー
         
         endNode = [SKSpriteNode spriteNodeWithImageNamed:@"gameOver.png"];
@@ -812,8 +825,14 @@ GKLocalPlayer *localPlayer;
         
         [self addChild:endNode];
         
-        SKAction *endAction = [SKAction moveToY:CGRectGetMidY(self.frame)/2 duration:2];
-        [endNode runAction:endAction];
+        SKAction *endAction = [SKAction moveToY:CGRectGetMidY(self.frame)/2 duration:2 ];
+        SKAction *sequence = [SKAction sequence:@[endAction]];
+        [endNode runAction:sequence completion:^{
+           
+            //インタースティシャル
+            [[NADInterstitial sharedInstance] showAd];
+            
+        }];
         
         SKLabelNode *endLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
         
@@ -949,9 +968,6 @@ GKLocalPlayer *localPlayer;
         
         [penguin runAction:[SKAction sequence:@[[SKAction moveToX: -200 duration:30],[SKAction removeFromParent]]]];
         
-        //広告取得開始
-        iconLoader.refreshInterval = 10;
-        [iconLoader startLoadWithMediaCode:@"ast01828uclvqv3b6osf"];
 
         
         //アスタの表示

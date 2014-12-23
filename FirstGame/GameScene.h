@@ -18,6 +18,8 @@
 #import "NADView.h"
 #import <AVFoundation/AVFoundation.h>
 #import <MrdIconSDK/MrdIconSDK.h>
+#import "NADInterstitial.h"
+
 
 
 #define     kPlayer     @"Player"
