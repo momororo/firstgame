@@ -154,9 +154,6 @@ MrdIconCell *iconCell4;
         [self addChild:clouds[0]];
         [self addChild:clouds[1]];
         
-        //透明のオブジェクトを生成(センサー)
-        [Sensor setSensoFrame:self.frame];
-        [self addChild:[Sensor getSensor]];
         
         //地面の設定
         [Ground initGroundTexture];
@@ -321,12 +318,12 @@ MrdIconCell *iconCell4;
 
                 
                 //ゲームシーン画面に飛ぶ
-                if ([_delegate respondsToSelector:@selector(sceneEscape:identifier:)]) {
+                if ([self.delegate respondsToSelector:@selector(sceneEscape:identifier:)]) {
                     
                     //ゲームオーバーBGMを止める
                     [self.musicPlayer2 stop];
                     
-                    [_delegate sceneEscape:self identifier:@"retry"];
+                    [self.delegate sceneEscape:self identifier:@"retry"];
                     
 
                 }
@@ -354,11 +351,11 @@ MrdIconCell *iconCell4;
 
 
                //ゲームシーン画面に飛ぶ
-               if ([_delegate respondsToSelector:@selector(sceneEscape:identifier:)]) {
+               if ([self.delegate respondsToSelector:@selector(sceneEscape:identifier:)]) {
                    
                    //ゲームオーバーBGMを止める
                    [self.musicPlayer2 stop];
-                   [_delegate sceneEscape:self identifier:@"top"];
+                   [self.delegate sceneEscape:self identifier:@"top"];
                 
                }
            }

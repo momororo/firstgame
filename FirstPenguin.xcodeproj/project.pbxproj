@@ -118,6 +118,8 @@
 		044865921980982000F6724E /* MrdIconSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MrdIconSDK.framework; sourceTree = "<group>"; };
 		0454A58719374B07002403B5 /* jump.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = jump.wav; sourceTree = "<group>"; };
 		049CEE0C1951D12B00949E29 /* ground.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = ground.atlas; sourceTree = "<group>"; };
+		04B4389B1A496D79002576ED /* FirstPenguin-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FirstPenguin-Prefix.pch"; sourceTree = "<group>"; };
+		04B4389C1A496DBD002576ED /* FirstPenguin-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "FirstPenguin-Info.plist"; sourceTree = "<group>"; };
 		04B85441193C73DE00F000A8 /* ObjectBitMask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ObjectBitMask.h; path = ../ObjectBitMask.h; sourceTree = "<group>"; };
 		04B85442193C73DE00F000A8 /* ObjectBitMask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ObjectBitMask.m; path = ../ObjectBitMask.m; sourceTree = "<group>"; };
 		04B85444193C73F500F000A8 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Player.h; path = ../Player.h; sourceTree = "<group>"; };
@@ -165,10 +167,8 @@
 		A4A1BA5F192B43BB00805339 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		A4A1BA61192B43BB00805339 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A4A1BA63192B43BB00805339 /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
-		A4A1BA67192B43BB00805339 /* FirstPenguin-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FirstPenguin-Info.plist"; sourceTree = "<group>"; };
 		A4A1BA69192B43BB00805339 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A4A1BA6B192B43BB00805339 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		A4A1BA6D192B43BB00805339 /* FirstPenguin-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FirstPenguin-Prefix.pch"; sourceTree = "<group>"; };
 		A4A1BA6E192B43BB00805339 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		A4A1BA6F192B43BB00805339 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		A4A1BA72192B43BB00805339 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -348,11 +348,13 @@
 				A4A104EB194B33AE003182DD /* backmusic.mp3 */,
 				A4A104F0194B37DC003182DD /* gameover.mp3 */,
 				A4455084197F95F2000A02F4 /* titlemusic.mp3 */,
+				04B4389B1A496D79002576ED /* FirstPenguin-Prefix.pch */,
 				A41996F719713F25006980F7 /* kanban.png */,
 				A4A2DC7F1976DD080081792D /* score.png */,
 				A4A8D343197E984200A1EA5A /* island1.png */,
 				A4A8D344197E984200A1EA5A /* island2.png */,
 				A4A8D347197E984900A1EA5A /* island3.png */,
+				04B4389C1A496DBD002576ED /* FirstPenguin-Info.plist */,
 				A4A104C91949CD75003182DD /* cloud1.png */,
 				A4A104C81949CD75003182DD /* cloud2.png */,
 				A4A104C71949CD75003182DD /* cloud3.png */,
@@ -360,8 +362,6 @@
 				A4A147041964090700AD140E /* sea.png */,
 				A4D7F4ED1939F4BE005225B6 /* Fire.sks */,
 				A49D6936197E0C4F00D211E7 /* sp-setofont.ttf */,
-				A4A1BA67192B43BB00805339 /* FirstPenguin-Info.plist */,
-				A4A1BA6D192B43BB00805339 /* FirstPenguin-Prefix.pch */,
 				A471A29019430B16002E1EAD /* Fish.png */,
 				A410877A19659F4C00E32324 /* flyPenguin.atlas */,
 				A410877619659CCD00E32324 /* walkPenguin.atlas */,
@@ -761,14 +761,14 @@
 		A4A1BA97192B43BB00805339 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/FirstGame.app/FirstGame";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/FirstPenguin.app/FirstPenguin";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "FirstGame/FirstGame-Prefix.pch";
+				GCC_PREFIX_HEADER = "FirstGame/FirstPenguin-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -783,14 +783,14 @@
 		A4A1BA98192B43BB00805339 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/FirstGame.app/FirstGame";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/FirstPenguin.app/FirstPenguin";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "FirstGame/FirstGame-Prefix.pch";
+				GCC_PREFIX_HEADER = "FirstGame/FirstPenguin-Prefix.pch";
 				INFOPLIST_FILE = "FirstGameTests/FirstPenguinTests-Info.plist";
 				PRODUCT_NAME = FirstPenguinTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";

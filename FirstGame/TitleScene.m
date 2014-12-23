@@ -182,8 +182,8 @@ GKLocalPlayer *localPlayer;
             [self.nadView removeFromSuperview];
             self.nadView = nil;
             
-            if ([_delegate respondsToSelector:@selector(sceneEscape:identifier:)]) {
-                [_delegate sceneEscape:self identifier:nil];
+            if ([self.delegate respondsToSelector:@selector(sceneEscape:identifier:)]) {
+                [self.delegate sceneEscape:self identifier:nil];
                 
                 //BGMの停止
                 [self.musicPlayer1 stop];
