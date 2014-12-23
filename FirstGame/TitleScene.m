@@ -8,6 +8,7 @@
 
 #import "TitleScene.h"
 #import "GameView.h"
+#import "AppDelegate.h"
 
 
 //スタートボタン
@@ -508,14 +509,19 @@ GKLocalPlayer *localPlayer;
         if (viewController != nil) // LOGIN
         {
             [weakSelf showAuthenticationDialogWhenReasonable:viewController];
+            NSLog(@"ログイン試行");
         }
         else if (weakPlayer.isAuthenticated) // LOGIN済
         {
             [weakSelf authenticatedPlayer:weakPlayer];
+            NSLog(@"ログイン成功");
+
         }
         else
         {
             [weakSelf disableGameCenter];
+            NSLog(@"ログイン失敗");
+
         }
     };
     
@@ -531,6 +537,8 @@ GKLocalPlayer *localPlayer;
 -(void)authenticatedPlayer:(GKLocalPlayer *)player
 {
     player = localPlayer;
+    AppDelegate *appDelegete = [[UIApplication sharedApplication] delegate];
+    appDelegete.localPlayer = localPlayer;
 }
 
 // GameCenter認証NG
@@ -542,21 +550,6 @@ GKLocalPlayer *localPlayer;
 // Leader Boardの表示
 -(void)showGameCenter{
     
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    float score = [userDefaults floatForKey:@"score"];
-    
-    if ([GKLocalPlayer localPlayer].isAuthenticated) {
-        GKScore* sendScore = [[GKScore alloc] initWithLeaderboardIdentifier:@"FirstPenguin"];
-        sendScore.value = score * 10;
-        [GKScore reportScores:@[sendScore] withCompletionHandler:^(NSError *error) {
-            if (error) {
-                // エラーの場合
-                /**
-                 *  何もせず終了
-                 */
-            }
-        }];
-    }
     
     GKGameCenterViewController* gameCenterController = [[GKGameCenterViewController alloc] init];
     if (gameCenterController != nil)

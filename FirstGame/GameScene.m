@@ -8,6 +8,7 @@
 
 #import "GameScene.h"
 #import "GameView.h"
+#import "AppDelegate.h"
 
 @implementation GameScene{
 
@@ -79,6 +80,10 @@ MrdIconCell *iconCell2;
 MrdIconCell *iconCell3;
 MrdIconCell *iconCell4;
     
+    
+GKLocalPlayer *localPlayer;
+        
+
     
 }
 
@@ -881,7 +886,7 @@ MrdIconCell *iconCell4;
             [newRecord runAction:action];
             
             //ハイスコアをゲームセンターに送信
-            //[self sendScore:score];
+            [self authenticateLocalPlayer];
 
         }
         
@@ -998,6 +1003,56 @@ MrdIconCell *iconCell4;
 
 
 }
+
+//GameCenter認証と送信
+-(void)authenticateLocalPlayer{
+    
+    
+    if ([GKLocalPlayer localPlayer].isAuthenticated) {
+        GKScore* sendScore = [[GKScore alloc] initWithLeaderboardIdentifier:@"FirstPenguin_test"];
+        sendScore.value = score * 10;
+        [GKScore reportScores:@[sendScore] withCompletionHandler:^(NSError *error) {
+            
+            if (error) {
+                // エラーの場合
+                
+                NSLog(@"スコア送信に失敗");
+            }else{
+                NSLog(@"成功！");
+            }
+            
+        }];
+    }
+
+    
+    //アプデータに残していたweakPlayer、、、いる！？
+/*    AppDelegate *appDelegete = [[UIApplication sharedApplication] delegate];
+    __weak GKLocalPlayer *weakPlayer = appDelegete.localPlayer;
+    
+    if(weakPlayer != nil){
+        
+        if ([GKLocalPlayer localPlayer].isAuthenticated) {
+            GKScore* sendScore = [[GKScore alloc] initWithLeaderboardIdentifier:@"FirstPenguin_test"];
+            sendScore.value = score * 10;
+            [GKScore reportScores:@[sendScore] withCompletionHandler:^(NSError *error) {
+                
+                if (error) {
+                    // エラーの場合
+                    
+                    NSLog(@"スコア送信に失敗");
+                }else{
+                    NSLog(@"成功！");
+                }
+                
+            }];
+
+        
+        }
+    }
+ */
+        
+}
+
 
 
 
