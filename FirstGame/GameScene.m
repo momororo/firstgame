@@ -1025,32 +1025,6 @@ GKLocalPlayer *localPlayer;
     }
 
     
-    //アプデータに残していたweakPlayer、、、いる！？
-/*    AppDelegate *appDelegete = [[UIApplication sharedApplication] delegate];
-    __weak GKLocalPlayer *weakPlayer = appDelegete.localPlayer;
-    
-    if(weakPlayer != nil){
-        
-        if ([GKLocalPlayer localPlayer].isAuthenticated) {
-            GKScore* sendScore = [[GKScore alloc] initWithLeaderboardIdentifier:@"FirstPenguin_test"];
-            sendScore.value = score * 10;
-            [GKScore reportScores:@[sendScore] withCompletionHandler:^(NSError *error) {
-                
-                if (error) {
-                    // エラーの場合
-                    
-                    NSLog(@"スコア送信に失敗");
-                }else{
-                    NSLog(@"成功！");
-                }
-                
-            }];
-
-        
-        }
-    }
- */
-        
 }
 
 

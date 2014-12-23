@@ -8,7 +8,6 @@
 
 #import "TitleScene.h"
 #import "GameView.h"
-#import "AppDelegate.h"
 
 
 //スタートボタン
@@ -537,8 +536,6 @@ GKLocalPlayer *localPlayer;
 -(void)authenticatedPlayer:(GKLocalPlayer *)player
 {
     player = localPlayer;
-    AppDelegate *appDelegete = [[UIApplication sharedApplication] delegate];
-    appDelegete.localPlayer = localPlayer;
 }
 
 // GameCenter認証NG
@@ -551,9 +548,34 @@ GKLocalPlayer *localPlayer;
 -(void)showGameCenter{
     
     
+    
+    
     GKGameCenterViewController* gameCenterController = [[GKGameCenterViewController alloc] init];
     if (gameCenterController != nil)
     {
+        
+        //スコア送信もしておく
+        if ([GKLocalPlayer localPlayer].isAuthenticated) {
+            GKScore* sendScore = [[GKScore alloc] initWithLeaderboardIdentifier:@"FirstPenguin_test"];
+            //ハイスコア読込
+            NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+            float score = [userDefaults floatForKey:@"score"];
+
+            sendScore.value = score * 10;
+            [GKScore reportScores:@[sendScore] withCompletionHandler:^(NSError *error) {
+                
+                if (error) {
+                    // エラーの場合
+                    
+                    NSLog(@"スコア送信に失敗");
+                }else{
+                    NSLog(@"成功！");
+                }
+                
+            }];
+        }
+
+        
         gameCenterController.gameCenterDelegate = self;
         gameCenterController.viewState = GKGameCenterViewControllerStateLeaderboards;
         
