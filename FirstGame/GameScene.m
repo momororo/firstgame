@@ -244,8 +244,7 @@ MrdIconCell *iconCell4;
     
     //スタートラベルがノードにあるときだけ入る処理
     if([self childNodeWithName:@"kStartLabel"]){
-        if ([startLabel containsPoint:location]) {
-            
+        
             //スタートボタンがタップされたら、地面が移動する
             [Ground moveGroundToX:(-1500 - (self.frame.size.width / 2)) duration:5.7];
             [Island moveIslandInit];
@@ -275,8 +274,6 @@ MrdIconCell *iconCell4;
             [_musicPlayer1 prepareToPlay];
             [self.musicPlayer1 play];
         
-            return;
-        }
         return;
     }
     
