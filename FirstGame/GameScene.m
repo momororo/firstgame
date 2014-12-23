@@ -238,7 +238,6 @@ MrdIconCell *iconCell4;
     //ゲームスタートが押されたらボタンを消去する
     
     UITouch *touch = [touches anyObject];
-    CGPoint location = [touch locationInNode:self];
     
     
     
